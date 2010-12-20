@@ -17,11 +17,12 @@
 package android.widget;
 
 /**
- * Extended {@link Adapter} that is the bridge between a {@link ListView}
- * and the data that backs the list. Frequently that data comes from a Cursor,
- * but that is not
- * required. The ListView can display any data provided that it is wrapped in a
- * ListAdapter.
+ * 扩展自 {@link Adapter}。是在 {@link ListView} 与数据之间的一座桥梁。
+ * 大多数情况，数据来自于游标，但不是必须的。列表视图可以显示经过
+ * ListAdapter 封包的任何数据。
+ * 
+ * @author translate by 德罗德
+ * @author convert by cnmahj
  */
 public interface ListAdapter extends Adapter {
 

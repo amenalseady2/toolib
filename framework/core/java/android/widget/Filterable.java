@@ -17,11 +17,12 @@
 package android.widget;
 
 /**
- * <p>Defines a filterable behavior. A filterable class can have its data
- * constrained by a filter. Filterable classes are usually
- * {@link android.widget.Adapter} implementations.</p>
+ * <p>定义一个可过滤的行为。一个可过滤的类可以通过一个过滤器筛选它的数据。
+ * 过滤类通常由{@link android.widget.Adapter 适配器}实现。</p>
  *
  * @see android.widget.Filter
+ * @author translate by 德罗德
+ * @author convert by cnmahj
  */
 public interface Filterable {
     /**

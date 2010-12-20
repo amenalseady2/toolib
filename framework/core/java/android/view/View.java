@@ -3373,15 +3373,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * This method is the last chance for the focused view and its ancestors to
-     * respond to an arrow key. This is called when the focused view did not
-     * consume the key internally, nor could the view system find a new view in
-     * the requested direction to give focus to.
+     * 对于具有焦点的视图及其祖先，该方法是处理箭头事件最后的机会。
+     * 当具有焦点的视图内部没有处理键盘事件，
+     * 视图系统也无法在指定的方向上找到可以赋予焦点的新的视图时调用该方法。
      *
-     * @param focused The currently focused view.
-     * @param direction The direction focus wants to move. One of FOCUS_UP,
-     *        FOCUS_DOWN, FOCUS_LEFT, and FOCUS_RIGHT.
-     * @return True if the this view consumed this unhandled move.
+     * @param focused 当前具有焦点的视图。
+     * @param direction 焦点移动的方向：FOCUS_UP、FOCUS_DOWN、FOCUS_LEFT 或 FOCUS_RIGHT。
+     * @return 如果视图处理了该未处理的移动，返回真。
      */
     public boolean dispatchUnhandledMove(View focused, int direction) {
         return false;
@@ -8781,11 +8779,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     public interface OnLongClickListener {
         /**
-         * Called when a view has been clicked and held.
+         * 当按下视图并保持时调用的回调函数。
          *
-         * @param v The view that was clicked and held.
+         * @param v 按下并保持的视图。
          *
-         * return True if the callback consumed the long click, false otherwise
+         * return 如果回调函数处理了长按事件，返回真；否则返回假。
          */
         boolean onLongClick(View v);
     }
