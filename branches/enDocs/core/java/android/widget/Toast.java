@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,9 +46,6 @@ import android.view.WindowManagerImpl;
  * <p>
  * The easiest way to use this class is to call one of the static methods that constructs
  * everything you need and returns a new Toast object.
- *
- * @author translate by cnmahj/jiahuibin（Android中文翻译组）
- * @author convert by cnmahj
  */ 
 public class Toast {
     static final String TAG = "Toast";

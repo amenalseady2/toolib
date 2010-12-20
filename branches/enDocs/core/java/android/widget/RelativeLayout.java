@@ -54,9 +54,6 @@ import java.util.ArrayList;
  * {@link #ALIGN_PARENT_BOTTOM}.
  * </p>
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-relativelayout.html">Relative
- * Layout tutorial</a>.</p>
- *
  * <p>
  * Also see {@link android.widget.RelativeLayout.LayoutParams RelativeLayout.LayoutParams} for
  * layout attributes

@@ -16,6 +16,8 @@
 
 package android.net;
 
+import java.net.InetAddress;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +25,6 @@ import android.content.IntentFilter;
 import android.os.RemoteException;
 import android.os.Handler;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.TelephonyIntents;
@@ -310,6 +311,9 @@ public class MobileDataStateTracker extends NetworkStateTracker {
         case TelephonyManager.NETWORK_TYPE_EVDO_A:
             networkTypeStr = "evdo";
             break;
+        case TelephonyManager.NETWORK_TYPE_EVDO_B:
+            networkTypeStr = "evdo";
+            break;
         }
         return "net.tcp.buffersize." + networkTypeStr;
     }
@@ -457,17 +461,16 @@ public class MobileDataStateTracker extends NetworkStateTracker {
      * Ensure that a network route exists to deliver traffic to the specified
      * host via the mobile data network.
      * @param hostAddress the IP address of the host to which the route is desired,
-     * in network byte order.
      * @return {@code true} on success, {@code false} on failure
      */
     @Override
-    public boolean requestRouteToHost(int hostAddress) {
+    public boolean requestRouteToHost(InetAddress hostAddress) {
         if (DBG) {
-            Log.d(TAG, "Requested host route to " + Integer.toHexString(hostAddress) +
+            Log.d(TAG, "Requested host route to " + hostAddress.getHostAddress() +
                     " for " + mApnType + "(" + mInterfaceName + ")");
         }
-        if (mInterfaceName != null && hostAddress != -1) {
-            return NetworkUtils.addHostRoute(mInterfaceName, hostAddress) == 0;
+        if (mInterfaceName != null) {
+            return NetworkUtils.addHostRoute(mInterfaceName, hostAddress, null);
         } else {
             return false;
         }

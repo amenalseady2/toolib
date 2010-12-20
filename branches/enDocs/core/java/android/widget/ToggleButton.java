@@ -26,9 +26,6 @@ import android.util.AttributeSet;
 /**
  * Displays checked/unchecked states as a button
  * with a "light" indicator and by default accompanied with the text "ON" or "OFF".
- *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
- * tutorial</a>.</p>
  * 
  * @attr ref android.R.styleable#ToggleButton_textOn
  * @attr ref android.R.styleable#ToggleButton_textOff

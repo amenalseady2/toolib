@@ -35,9 +35,6 @@ import android.util.AttributeSet;
 /**
  * EditText is a thin veneer over TextView that configures itself
  * to be editable.
- *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
- * tutorial</a>.</p>
  * <p>
  * <b>XML attributes</b>
  * <p>
