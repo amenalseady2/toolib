@@ -35,12 +35,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * A view for selecting a month / year / day based on a calendar like layout.
+ * 用于选择年月日的类日历布局视图。
+ * <p>参见 <a href="{@docRoot}resources/tutorials/views/hello-datepicker.html">
+ * 日期拾取器教程</a>。</p>
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-datepicker.html">Date Picker
- * tutorial</a>.</p>
- *
- * For a dialog using this view, see {@link android.app.DatePickerDialog}.
+ * 使用此时图的对话框，参见 {@link android.app.DatePickerDialog}。
+ * @author translate by 农民伯伯
+ * @author review by cnmahj
+ * @author convert by cnmahj
  */
 @Widget
 public class DatePicker extends FrameLayout {
@@ -63,16 +65,15 @@ public class DatePicker extends FrameLayout {
     private int mYear;
 
     /**
-     * The callback used to indicate the user changes the date.
+     * 表明用户变更了日期的回调函数。
      */
     public interface OnDateChangedListener {
 
         /**
-         * @param view The view associated with this listener.
-         * @param year The year that was set.
-         * @param monthOfYear The month that was set (0-11) for compatibility
-         *  with {@link java.util.Calendar}.
-         * @param dayOfMonth The day of the month that was set.
+         * @param view 与监听器关联的视图。
+         * @param year 用户设置的年。
+         * @param monthOfYear 用户设置的月份(0-11)，与 {@link java.util.Calendar} 兼容。
+         * @param dayOfMonth 用户设置的日期。
          */
         void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth);
     }
@@ -310,7 +311,7 @@ public class DatePicker extends FrameLayout {
 
 
     /**
-     * Override so we are in complete control of save / restore for this widget.
+     * 重写使我们能够完全控制该小部件的保存或恢复。
      */
     @Override
     protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
@@ -331,14 +332,15 @@ public class DatePicker extends FrameLayout {
         mYear = ss.getYear();
         mMonth = ss.getMonth();
         mDay = ss.getDay();
+        updateSpinners();
     }
 
     /**
-     * Initialize the state.
-     * @param year The initial year.
-     * @param monthOfYear The initial month.
-     * @param dayOfMonth The initial day of the month.
-     * @param onDateChangedListener How user is notified date is changed by user, can be null.
+     * 状态初始化。
+     * @param year 初始年。
+     * @param monthOfYear 初始月。
+     * @param dayOfMonth 初始日。
+     * @param onDateChangedListener 日期改变时通知用户的事件监听器，可以为空(null)。
      */
     public void init(int year, int monthOfYear, int dayOfMonth,
             OnDateChangedListener onDateChangedListener) {

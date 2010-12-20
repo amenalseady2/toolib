@@ -63,6 +63,7 @@ import java.util.ArrayList;
  * @attr ref android.R.styleable#ViewGroup_alwaysDrawnWithCache
  * @attr ref android.R.styleable#ViewGroup_addStatesFromChildren
  * @attr ref android.R.styleable#ViewGroup_descendantFocusability
+ * @author translate by cnmahj
  */
 public abstract class ViewGroup extends View implements ViewParent, ViewManager {
     private static final boolean DBG = false;
@@ -204,7 +205,8 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     public static final int FOCUS_BEFORE_DESCENDANTS = 0x20000;
 
     /**
-     * This view will get focus only if none of its descendants want it.
+     * 只有当没有子节点可以获得焦点时，该视图获得焦点。
+     * @author translate by cnmahj
      */
     public static final int FOCUS_AFTER_DESCENDANTS = 0x40000;
 
@@ -254,8 +256,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     public static final int PERSISTENT_ALL_CACHES = 0x3;
 
     /**
-     * We clip to padding when FLAG_CLIP_TO_PADDING and FLAG_PADDING_NOT_NULL
-     * are set at the same time.
+     * 当 FLAG_CLIP_TO_PADDING 和 FLAG_PADDING_NOT_NULL
+     * 同时设置时，绘图将剪切掉在内边距区域内的图像。
+     * @author translate by cnmahj
      */
     protected static final int CLIP_TO_PADDING_MASK = FLAG_CLIP_TO_PADDING | FLAG_PADDING_NOT_NULL;
 
@@ -549,9 +552,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Returns true if this view has or contains focus
+     * 如果该视图或其包含的视图具有焦点则返回真。
      *
-     * @return true if this view has or contains focus
+     * @return 如果该视图或其包含的视图具有焦点则返回真。
      */
     @Override
     public boolean hasFocus() {
@@ -1846,11 +1849,11 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Adds a child view with the specified layout parameters.
+     * 用指定的布局参数添加一个子视图。
      *
-     * @param child the child view to add
-     * @param index the position at which to add the child
-     * @param params the layout parameters to set on the child
+     * @param child 添加的子视图。
+     * @param index 添加的子视图的索引。
+     * @param params 为子视图指定得布局参数。
      */
     public void addView(View child, int index, LayoutParams params) {
         if (DBG) {
@@ -1909,10 +1912,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Register a callback to be invoked when a child is added to or removed
-     * from this view.
+     * 注册当从视图中添加或移除子视图时发生的回调函数。
      *
-     * @param listener the callback to invoke on hierarchy change
+     * @param listener 层次结构变更时执行的回调函数。
      */
     public void setOnHierarchyChangeListener(OnHierarchyChangeListener listener) {
         mOnHierarchyChangeListener = listener;
@@ -2100,14 +2102,12 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Subclasses should override this method to set layout animation
-     * parameters on the supplied child.
+     * 子类应该重写该方法，以设置为子视图提供的布局动画参数。
      *
-     * @param child the child to associate with animation parameters
-     * @param params the child's layout parameters which hold the animation
-     *        parameters
-     * @param index the index of the child in the view group
-     * @param count the number of children in the view group
+     * @param child 与布局动画参数关联的子视图。
+     * @param params 保存了动画参数的子视图布局参数。
+     * @param index 视图组中的子视图索引。
+     * @param count 视图组中的子视图数。
      */
     protected void attachLayoutAnimationParameters(View child,
             LayoutParams params, int index, int count) {
@@ -2669,10 +2669,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
             int l, int t, int r, int b);
 
     /**
-     * Indicates whether the view group has the ability to animate its children
-     * after the first layout.
+     * 指示视图组是否能够在首次布局后为其子视图提供动画效果的显示。
      *
-     * @return true if the children can be animated, false otherwise
+     * @return 如果子视图可以使用动画效果则返回真，否则返回假。
      */
     protected boolean canAnimate() {
         return mLayoutAnimationController != null;
@@ -2893,41 +2892,34 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Returns a new set of layout parameters based on the supplied attributes set.
+     * 返回一组基于提供的属性集合的布局参数集合。
      *
-     * @param attrs the attributes to build the layout parameters from
+     * @param attrs 用于生成布局参数的属性集。
      *
-     * @return an instance of {@link android.view.ViewGroup.LayoutParams} or one
-     *         of its descendants
+     * @return {@link android.view.ViewGroup.LayoutParams} 或其子类的实例。
      */
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams(getContext(), attrs);
     }
 
     /**
-     * Returns a safe set of layout parameters based on the supplied layout params.
-     * When a ViewGroup is passed a View whose layout params do not pass the test of
-     * {@link #checkLayoutParams(android.view.ViewGroup.LayoutParams)}, this method
-     * is invoked. This method should return a new set of layout params suitable for
-     * this ViewGroup, possibly by copying the appropriate attributes from the
-     * specified set of layout params.
+     * 基于提供的布局参数返回一组安全的布局参数集合。当传入 ViewGroup 的视图的参数没有通过
+     * {@link #checkLayoutParams(android.view.ViewGroup.LayoutParams)} 的检测时，调用该方法。
+     * 该方法会返回适合 ViewGroup 的新的布局参数，可能从指定的布局参数中复制适当的属性。
      *
-     * @param p The layout parameters to convert into a suitable set of layout parameters
-     *          for this ViewGroup.
+     * @param p 要转换为适合于 ViewGroup 的布局参数的集合。
      *
-     * @return an instance of {@link android.view.ViewGroup.LayoutParams} or one
-     *         of its descendants
+     * @return {@link android.view.ViewGroup.LayoutParams} 或其子类的实例。
      */
     protected LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         return p;
     }
 
     /**
-     * Returns a set of default layout parameters. These parameters are requested
-     * when the View passed to {@link #addView(View)} has no layout parameters
-     * already set. If null is returned, an exception is thrown from addView.
+     * 返回默认布局参数集合。当使用没有设置布局参数的视图调用 {@link #addView(View)}
+     * 时，这些参数是必须的。如果返回空，addView 方法会抛出异常。
      *
-     * @return a set of default layout parameters or null
+     * @return 默认布局参数集合或空。
      */
     protected LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -3594,10 +3586,10 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         }
 
         /**
-         * Returns a String representation of this set of layout parameters.
+         * Returns 字符串形式的布局参数集合。
          *
-         * @param output the String to prepend to the internal representation
-         * @return a String with the following format: output +
+         * @param output 内部表现形式的前导字符串。
+         * @return 下面格式的字符串：output +
          *         "ViewGroup.LayoutParams={ width=WIDTH, height=HEIGHT }"
          *
          * @hide

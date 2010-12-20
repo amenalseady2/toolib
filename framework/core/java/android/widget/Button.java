@@ -26,9 +26,8 @@ import android.widget.RemoteViews.RemoteView;
 
 /**
  * <p>
- * <code>Button</code> represents a push-button widget. Push-buttons can be
- * pressed, or clicked, by the user to perform an action. A typical use of a
- * push-button in an activity would be the following:
+ * <code>Button</code> 代表按钮小部件。用户通过按下按钮，或者点击按钮来执行一个动作。
+ * 以下是一个按钮在活动中典型的应用：
  * </p>
  *
  * <pre class="prettyprint">
@@ -48,15 +47,14 @@ import android.widget.RemoteViews.RemoteView;
  * }
  * </pre>
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
- * tutorial</a>.</p>
- *
- * <p><strong>XML attributes</strong></p>
+ * <p><strong>XML 属性</strong></p>
  * <p> 
- * See {@link android.R.styleable#Button Button Attributes}, 
- * {@link android.R.styleable#TextView TextView Attributes},  
- * {@link android.R.styleable#View View Attributes}
+ * 参见 {@link android.R.styleable#Button Button 属性}、
+ * {@link android.R.styleable#TextView TextView 属性} 和
+ * {@link android.R.styleable#View View 属性}。
  * </p>
+ * @author translate by 农民伯伯
+ * @author convert by cnmahj
  */
 @RemoteView
 public class Button extends TextView {
