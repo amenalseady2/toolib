@@ -41,9 +41,6 @@ import android.util.AttributeSet;
  *     }
  * }
  * </pre>
- *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
- * tutorial</a>.</p>
  *  
  * <p><strong>XML attributes</strong></p> 
  * <p>

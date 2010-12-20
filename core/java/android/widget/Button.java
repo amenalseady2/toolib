@@ -48,9 +48,6 @@ import android.widget.RemoteViews.RemoteView;
  * }
  * </pre>
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
- * tutorial</a>.</p>
- *
  * <p><strong>XML attributes</strong></p>
  * <p> 
  * See {@link android.R.styleable#Button Button Attributes}, 

@@ -117,9 +117,6 @@ import junit.framework.Assert;
  * href="{@docRoot}guide/topics/manifest/manifest-element.html">{@code &lt;manifest&gt;}</a>
  * element.</p>
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-webview.html">Web View
- * tutorial</a>.</p>
- *
  * <h3>Basic usage</h3>
  *
  * <p>By default, a WebView provides no browser-like widgets, does not
@@ -239,14 +236,14 @@ import junit.framework.Assert;
  *
  * <h3>Building web pages to support different screen densities</h3>
  *
- * <p>A screen's density is based on it's screen resolution and physical size. A screen with low
- * density has fewer available pixels per inch, where a screen with high density
- * has more -- sometimes significantly more -- pixels per inch. The density of a
+ * <p>The screen density of a device is based on the screen resolution. A screen with low density
+ * has fewer available pixels per inch, where a screen with high density
+ * has more - sometimes significantly more - pixels per inch. The density of a
  * screen is important because, other things being equal, a UI element (such as a button) whose
  * height and width are defined in terms of screen pixels will appear larger on the lower density
- * screen and smaller on the higher density screen. For simplicity, Android collapses all
- * actual screen densities into three generalized densities:high, medium, and low. </p>
- *
+ * screen and smaller on the higher density screen.
+ * For simplicity, Android collapses all actual screen densities into three generalized densities:
+ * high, medium, and low.</p>
  * <p>By default, WebView scales a web page so that it is drawn at a size that matches the default
  * appearance on a medium density screen. So, it applies 1.5x scaling on a high density screen
  * (because its pixels are smaller) and 0.75x scaling on a low density screen (because its pixels
@@ -310,6 +307,10 @@ public class WebView extends AbsoluteLayout
     static private final boolean AUTO_REDRAW_HACK = false;
     // true means redraw the screen all-the-time. Only with AUTO_REDRAW_HACK
     private boolean mAutoRedraw;
+
+    // Reference to the AlertDialog displayed by InvokeListBox.
+    // It's used to dismiss the dialog in destroy if not done before.
+    private AlertDialog mListBoxDialog = null;
 
     static final String LOGTAG = "webview";
 
@@ -1235,6 +1236,10 @@ public class WebView extends AbsoluteLayout
      */
     public void destroy() {
         clearTextEntry(false);
+        if (mListBoxDialog != null) {
+            mListBoxDialog.dismiss();
+            mListBoxDialog = null;
+        }
         if (mWebViewCore != null) {
             // Set the handlers to null before destroying WebViewCore so no
             // more messages will be posted.
@@ -1383,16 +1388,23 @@ public class WebView extends AbsoluteLayout
         final File temp = new File(dest.getPath() + ".writing");
         new Thread(new Runnable() {
             public void run() {
+                FileOutputStream out = null;
                 try {
-                    FileOutputStream out = new FileOutputStream(temp);
+                    out = new FileOutputStream(temp);
                     p.writeToStream(out);
-                    out.close();
                     // Writing the picture succeeded, rename the temporary file
                     // to the destination.
                     temp.renameTo(dest);
                 } catch (Exception e) {
                     // too late to do anything about it.
                 } finally {
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (Exception e) {
+                            // Can't do anything about that
+                        }
+                    }
                     temp.delete();
                 }
             }
@@ -1445,20 +1457,23 @@ public class WebView extends AbsoluteLayout
             final Bundle copy = new Bundle(b);
             new Thread(new Runnable() {
                 public void run() {
-                    final Picture p = Picture.createFromStream(in);
-                    if (p != null) {
-                        // Post a runnable on the main thread to update the
-                        // history picture fields.
-                        mPrivateHandler.post(new Runnable() {
-                            public void run() {
-                                restoreHistoryPictureFields(p, copy);
-                            }
-                        });
-                    }
                     try {
-                        in.close();
-                    } catch (Exception e) {
-                        // Nothing we can do now.
+                        final Picture p = Picture.createFromStream(in);
+                        if (p != null) {
+                            // Post a runnable on the main thread to update the
+                            // history picture fields.
+                            mPrivateHandler.post(new Runnable() {
+                                public void run() {
+                                    restoreHistoryPictureFields(p, copy);
+                                }
+                            });
+                        }
+                    } finally {
+                        try {
+                            in.close();
+                        } catch (Exception e) {
+                            // Nothing we can do now.
+                        }
                     }
                 }
             }).start();
@@ -3822,6 +3837,16 @@ public class WebView extends AbsoluteLayout
             } else if (!nativeCursorWantsKeyEvents() && !mShiftIsPressed) {
                 setUpSelectXY();
             }
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
+            pageUp(false);
+            return true;
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
+            pageDown(false);
+            return true;
         }
 
         if (keyCode >= KeyEvent.KEYCODE_DPAD_UP
@@ -7055,7 +7080,7 @@ public class WebView extends AbsoluteLayout
                                 EventHub.SINGLE_LISTBOX_CHOICE, -2, 0);
                 }});
             }
-            final AlertDialog dialog = b.create();
+            mListBoxDialog = b.create();
             listView.setAdapter(adapter);
             listView.setFocusableInTouchMode(true);
             // There is a bug (1250103) where the checks in a ListView with
@@ -7077,7 +7102,8 @@ public class WebView extends AbsoluteLayout
                             int position, long id) {
                         mWebViewCore.sendMessage(
                                 EventHub.SINGLE_LISTBOX_CHOICE, (int)id, 0);
-                        dialog.dismiss();
+                        mListBoxDialog.dismiss();
+                        mListBoxDialog = null;
                     }
                 });
                 if (mSelection != -1) {
@@ -7089,13 +7115,14 @@ public class WebView extends AbsoluteLayout
                     adapter.registerDataSetObserver(observer);
                 }
             }
-            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            mListBoxDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 public void onCancel(DialogInterface dialog) {
                     mWebViewCore.sendMessage(
                                 EventHub.SINGLE_LISTBOX_CHOICE, -2, 0);
+                    mListBoxDialog = null;
                 }
             });
-            dialog.show();
+            mListBoxDialog.show();
         }
     }
 

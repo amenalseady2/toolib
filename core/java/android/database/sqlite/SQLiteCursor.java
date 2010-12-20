@@ -36,6 +36,9 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * A Cursor implementation that exposes results from a query on a
  * {@link SQLiteDatabase}.
+ *
+ * SQLiteCursor is not internally synchronized so code using a SQLiteCursor from multiple
+ * threads should perform its own synchronization when using the SQLiteCursor.
  */
 public class SQLiteCursor extends AbstractWindowedCursor {
     static final String TAG = "Cursor";
@@ -128,11 +131,11 @@ public class SQLiteCursor extends AbstractWindowedCursor {
             // the cursor's state doesn't change
             while (true) {
                 mLock.lock();
-                if (mCursorState != mThreadState) {
-                    mLock.unlock();
-                    break;
-                }
                 try {
+                    if (mCursorState != mThreadState) {
+                        break;
+                    }
+
                     int count = mQuery.fillWindow(cw, mMaxRead, mCount);
                     // return -1 means not finished
                     if (count != 0) {
@@ -214,9 +217,8 @@ public class SQLiteCursor extends AbstractWindowedCursor {
         mColumnNameMap = null;
         mQuery = query;
 
+        db.lock();
         try {
-            db.lock();
-
             // Setup the list of columns
             int columnCount = mQuery.columnCountLocked();
             mColumns = new String[columnCount];
