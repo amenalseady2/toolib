@@ -33,7 +33,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 /**
@@ -275,7 +274,7 @@ public abstract class DialogPreference extends Preference implements
     protected void showDialog(Bundle state) {
         Context context = getContext();
 
-        mWhichButtonClicked = DialogInterface.BUTTON2;
+        mWhichButtonClicked = DialogInterface.BUTTON_NEGATIVE;
         
         mBuilder = new AlertDialog.Builder(context)
             .setTitle(mDialogTitle)
@@ -323,7 +322,7 @@ public abstract class DialogPreference extends Preference implements
     private void requestInputMethod(Dialog dialog) {
         Window window = dialog.getWindow();
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE |
-                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     /**

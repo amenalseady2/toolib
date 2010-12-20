@@ -29,14 +29,12 @@ import android.view.ViewGroup;
 
 
 /**
- * A view that displays one child at a time and lets the user pick among them.
- * The items in the Spinner come from the {@link Adapter} associated with
- * this view.
- *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-spinner.html">Spinner
- * tutorial</a>.</p>
+ * 下拉列表（Spinner）是一个每次只能选择所有项中一项的部件。
+ * 它的项目来自于与之相关联的 {@link Adapter}。
  * 
  * @attr ref android.R.styleable#Spinner_prompt
+ * @author translate by 思考的狼（Android中文翻译组）
+ * @author convert by cnmahj
  */
 @Widget
 public class Spinner extends AbsSpinner implements OnClickListener {
@@ -92,10 +90,9 @@ public class Spinner extends AbsSpinner implements OnClickListener {
     }
 
     /**
-     * <p>A spinner does not support item click events. Calling this method
-     * will raise an exception.</p>
+     * <p>Spinner 不支持条目的点击事件，调用此方法将引发异常。</p>
      *
-     * @param l this listener will be ignored
+     * @param l 这个监听器将被忽略。
      */
     @Override
     public void setOnItemClickListener(OnItemClickListener l) {
@@ -105,7 +102,7 @@ public class Spinner extends AbsSpinner implements OnClickListener {
     /**
      * @see android.view.View#onLayout(boolean,int,int,int,int)
      *
-     * Creates and positions all views
+     * 创建并设置每个视图的布局
      *
      */
     @Override
@@ -270,23 +267,23 @@ public class Spinner extends AbsSpinner implements OnClickListener {
     }
 
     /**
-     * Sets the prompt to display when the dialog is shown.
-     * @param prompt the prompt to set
+     * 设置对话框弹出的时候显示的提示（译者注：设置弹出视图上的标题）
+     * @param prompt 设置的提示
      */
     public void setPrompt(CharSequence prompt) {
         mPrompt = prompt;
     }
 
     /**
-     * Sets the prompt to display when the dialog is shown.
-     * @param promptId the resource ID of the prompt to display when the dialog is shown
+     * 设置对话框弹出的时候显示的提示（译者注：设置弹出视图上的标题）
+     * @param promptId 用于对话框提示的资源 ID。
      */
     public void setPromptId(int promptId) {
         mPrompt = getContext().getText(promptId);
     }
 
     /**
-     * @return The prompt to display when the dialog is shown
+     * @return 对话框弹出的时候显示的提示（译者注：获得弹出视图上的标题）
      */
     public CharSequence getPrompt() {
         return mPrompt;

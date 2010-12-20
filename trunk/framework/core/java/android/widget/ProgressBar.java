@@ -646,9 +646,9 @@ public class ProgressBar extends View {
     }
 
     /**
-     * <p>Set the range of the progress bar to 0...<tt>max</tt>.</p>
+     * <p>将进度条的范围设置为 0…<code>max</code>。</p>
      *
-     * @param max the upper range of this progress bar
+     * @param max 进度条范围的最大值
      *
      * @see #getMax()
      * @see #setProgress(int) 
@@ -946,5 +946,21 @@ public class ProgressBar extends View {
         
         setProgress(ss.progress);
         setSecondaryProgress(ss.secondaryProgress);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (mIndeterminate) {
+            startAnimation();
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mIndeterminate) {
+            stopAnimation();
+        }
     }
 }

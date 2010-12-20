@@ -1,4 +1,4 @@
-/*
+/* 
  * Copyright (C) 2008 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,8 +28,11 @@ import com.android.internal.R;
 
 
 /**
- * The {@code ZoomControls} class displays a simple set of controls used for zooming and
- * provides callbacks to register for events. */
+ * {@code ZoomControls} 显示一组简单的控件集合用于缩放，并可以注册事件发生时执行的回调函数。
+ * @author translate by jiahuibin（Android中文翻译组）
+ * @author translate by cnmahj
+ * @author convert by cnmahj
+ */
 @Widget
 public class ZoomControls extends LinearLayout {
 
@@ -61,9 +64,9 @@ public class ZoomControls extends LinearLayout {
         mZoomOut.setOnClickListener(listener);
     }
     
-    /*
-     * Sets how fast you get zoom events when the user holds down the
-     * zoom in/out buttons.
+    /**
+     * 设置当用户按住缩放按钮不放时，发生缩放事件的时间间隔(毫秒)。
+     * @param speed 时间间隔(毫秒)
      */
     public void setZoomSpeed(long speed) {
         mZoomIn.setZoomSpeed(speed);

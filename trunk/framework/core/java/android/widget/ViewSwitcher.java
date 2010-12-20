@@ -56,7 +56,7 @@ public class ViewSwitcher extends ViewAnimator {
     /**
      * {@inheritDoc}
      *
-     * @throws IllegalStateException if this switcher already contains two children
+     * @throws IllegalStateException 当切换器中已经包含两个视图时。
      */
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {

@@ -1169,7 +1169,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Subclasses must override this method to layout their children.
+     * 子类必须重写此方法，以为其子视图布局。
      */
     protected void layoutChildren() {
     }
@@ -2960,20 +2960,18 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Returns the number of header views in the list. Header views are special views
-     * at the top of the list that should not be recycled during a layout.
+     * 返回列表中的列表头视图数量。列表头视图是显示于列表顶部、在布局时不能再利用的特殊视图。
      *
-     * @return The number of header views, 0 in the default implementation.
+     * @return 列表中的列表头视图数量；缺省实现时，其数量为 0。
      */
     int getHeaderViewsCount() {
         return 0;
     }
 
     /**
-     * Returns the number of footer views in the list. Footer views are special views
-     * at the bottom of the list that should not be recycled during a layout.
+     * 返回列表中的列表尾视图数量。列表尾视图是显示于列表底部、在布局时不能再利用的特殊视图。
      *
-     * @return The number of footer views, 0 in the default implementation.
+     * @return 列表中的列表尾视图数量；缺省实现时，其数量为 0。
      */
     int getFooterViewsCount() {
         return 0;
@@ -3688,10 +3686,10 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * When set to a non-zero value, the cache color hint indicates that this list is always drawn
-     * on top of a solid, single-color, opaque background
+     * 当color的值不为0时，此值表示的颜色将提示使用者，列表正在一片单色不透明的背景上被画出。
+     * 当 color 的值非零时，示意该列表使用实心、单色不透明的背景，可以缓存背景色。
      *
-     * @param color The background color
+     * @param color 背景色。
      */
     public void setCacheColorHint(int color) {
         if (color != mCacheColorHint) {

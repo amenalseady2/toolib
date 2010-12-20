@@ -37,12 +37,10 @@ import android.widget.RemoteViews.RemoteView;
  * {@link android.widget.LinearLayout.LayoutParams LinearLayout.LayoutParams}.
  * The default orientation is horizontal.
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-linearlayout.html">Linear Layout
- * tutorial</a>.</p>
- *
  * <p>
  * Also see {@link LinearLayout.LayoutParams android.widget.LinearLayout.LayoutParams}
  * for layout attributes </p>
+ * @author translate by cnmahj
  */
 @RemoteView
 public class LinearLayout extends ViewGroup {
@@ -1325,12 +1323,11 @@ public class LinearLayout extends ViewGroup {
     }
 
     /**
-     * Returns a set of layout parameters with a width of
-     * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
-     * and a height of {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
-     * when the layout's orientation is {@link #VERTICAL}. When the orientation is
-     * {@link #HORIZONTAL}, the width is set to {@link LayoutParams#WRAP_CONTENT}
-     * and the height to {@link LayoutParams#WRAP_CONTENT}.
+     * 返回一组包含宽度和高度的布局参数的集合。当视图为纵向布局 （{@link #VERTICAL}）
+     * 时，返回的宽度为 {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}、
+     * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。
+     * 当视图为横向布局（{@link #HORIZONTAL}）时，宽度为 {@link LayoutParams#WRAP_CONTENT}、
+     * 高度为 {@link LayoutParams#WRAP_CONTENT}。
      */
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
