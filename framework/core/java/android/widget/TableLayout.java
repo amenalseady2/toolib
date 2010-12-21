@@ -291,14 +291,12 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>Makes the given column stretchable or not. When stretchable, a column
-     * takes up as much as available space as possible in its row.</p>
+     * <p>设置指定列是否可拉伸。可拉伸时，列会尽可能多的占用行中的可用空间。</p>
      *
-     * <p>Calling this method requests a layout operation.</p>
+     * <p>调用该方法会请求布局操作。</p>
      *
-     * @param columnIndex the index of the column
-     * @param isStretchable true if the column must be stretchable,
-     *                      false otherwise. Default is false.
+     * @param columnIndex 列的索引。
+     * @param isStretchable 如果列可以拉伸，设为真；否则设为假。默认是假。
      *
      * @attr ref android.R.styleable#TableLayout_stretchColumns
      */
@@ -308,24 +306,22 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>Returns whether the specified column is stretchable or not.</p>
+     * <p>返回指定的列是否可拉伸。</p>
      *
-     * @param columnIndex the index of the column
-     * @return true if the column is stretchable, false otherwise
+     * @param columnIndex 列的索引。
+     * @return 如果列可以拉伸，返回真；否则返回假。
      */
     public boolean isColumnStretchable(int columnIndex) {
         return mStretchAllColumns || mStretchableColumns.get(columnIndex);
     }
 
     /**
-     * <p>Makes the given column shrinkable or not. When a row is too wide, the
-     * table can reclaim extra space from shrinkable columns.</p>
+     * <p>设置指定列是否可收缩。当行太宽时，表格可以收缩该列以提供更多空间。</p>
      *
-     * <p>Calling this method requests a layout operation.</p>
+     * <p>调用该方法会请求布局操作。</p>
      *
-     * @param columnIndex the index of the column
-     * @param isShrinkable true if the column must be shrinkable,
-     *                     false otherwise. Default is false.
+     * @param columnIndex 列的索引。
+     * @param isShrinkable 如果列可以拉伸，设为真；否则设为假。默认是假。
      *
      * @attr ref android.R.styleable#TableLayout_shrinkColumns
      */
@@ -335,10 +331,10 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>Returns whether the specified column is shrinkable or not.</p>
+     * <p>返回指定的列是否可收缩。</p>
      *
-     * @param columnIndex the index of the column
-     * @return true if the column is shrinkable, false otherwise. Default is false.
+     * @param columnIndex 列的索引。
+     * @return 如果列可以收缩，返回真；否则返回假。
      */
     public boolean isColumnShrinkable(int columnIndex) {
         return mShrinkAllColumns || mShrinkableColumns.get(columnIndex);
@@ -619,9 +615,9 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * Returns a set of layout parameters with a width of
-     * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT},
-     * and a height of {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.
+     * 返回宽度为 {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}，
+     * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
+     * 的布局参数集合。
      */
     @Override
     protected LinearLayout.LayoutParams generateDefaultLayoutParams() {
@@ -645,9 +641,8 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>This set of layout parameters enforces the width of each child to be
-     * {@link #MATCH_PARENT} and the height of each child to be
-     * {@link #WRAP_CONTENT}, but only if the height is not specified.</p>
+     * <p>该类强制将子视图的宽度设为 {@link #MATCH_PARENT}，
+     * 将没有设置高度的子视图的高度设为 {@link #WRAP_CONTENT}。</p>
      */
     @SuppressWarnings({"UnusedDeclaration"})
     public static class LayoutParams extends LinearLayout.LayoutParams {
@@ -673,9 +668,8 @@ public class TableLayout extends LinearLayout {
         }
 
         /**
-         * <p>Sets the child width to
-         * {@link android.view.ViewGroup.LayoutParams} and the child height to
-         * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.</p>
+         * <p>将子视图的宽度设为 {@link android.view.ViewGroup.LayoutParams}，
+         * 高度设为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。</p>
          */
         public LayoutParams() {
             super(MATCH_PARENT, WRAP_CONTENT);
@@ -696,15 +690,13 @@ public class TableLayout extends LinearLayout {
         }
 
         /**
-         * <p>Fixes the row's width to
-         * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}; the row's
-         * height is fixed to
-         * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT} if no layout
-         * height is specified.</p>
+         * <p>如果没有指定布局高度，则修改行的宽度为
+         * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}；
+         * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。</p>
          *
-         * @param a the styled attributes set
-         * @param widthAttr the width attribute to fetch
-         * @param heightAttr the height attribute to fetch
+         * @param a 特定风格的属性集合。
+         * @param widthAttr 查询宽度属性用的索引。
+         * @param heightAttr 查询高度属性用的索引。
          */
         @Override
         protected void setBaseAttributes(TypedArray a,
