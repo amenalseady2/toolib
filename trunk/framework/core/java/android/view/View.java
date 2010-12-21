@@ -8043,9 +8043,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Call this when something has changed which has invalidated the
-     * layout of this view. This will schedule a layout pass of the view
-     * tree.
+     * 当某些变更导致视图的布局失效时调用该方法。该方法按照视图树的顺序调用。
      */
     public void requestLayout() {
         if (ViewDebug.TRACE_HIERARCHY) {
