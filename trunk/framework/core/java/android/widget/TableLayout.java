@@ -28,14 +28,11 @@ import android.view.ViewGroup;
 import java.util.regex.Pattern;
 
 /**
- * <p>A layout that arranges its children into rows and columns.
- * A TableLayout consists of a number of {@link android.widget.TableRow} objects,
- * each defining a row (actually, you can have other children, which will be
- * explained below). TableLayout containers do not display border lines for
- * their rows, columns, or cells. Each row has zero or more cells; each cell can
- * hold one {@link android.view.View View} object. The table has as many columns
- * as the row with the most cells. A table can leave cells empty. Cells can span
- * columns, as they can in HTML.</p>
+ * <p>按照行列来组织子视图的布局。TableLayout 包含一系列的 {@link android.widget.TableRow}
+ * 对象，用于定义行（实际上你也可以使用其它子对象，将在后面进行解释）。
+ * TableLayout 不为它的行、列和单元格显示表格线。每个行可以包含0个以上（包括0）的单元格；
+ * 每个单元格可以设置一个{@link android.view.View 视图}对象。与行包含很多单元格一样，
+ * 表格包含很多列。表格的单元格可以为空。单元格可以象 HTML 那样跨列。</p>
  *
  * <p>The width of a column is defined by the row with the widest cell in that
  * column. However, a TableLayout can specify certain columns as shrinkable or
@@ -67,6 +64,7 @@ import java.util.regex.Pattern;
  * <p>Although the typical child of a TableLayout is a TableRow, you can
  * actually use any View subclass as a direct child of TableLayout. The View
  * will be displayed as a single row that spans all the table columns.</p>
+ * @author translate by cnmahj
  */
 public class TableLayout extends LinearLayout {
     private int[] mMaxWidths;

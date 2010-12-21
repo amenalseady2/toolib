@@ -2132,30 +2132,28 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Removes a view during layout. This is useful if in your onLayout() method,
-     * you need to remove more views.
+     * 在布局期间移除视图。用于在 onLayout() 方法中移除指定的视图。
      *
-     * @param view the view to remove from the group
+     * @param view 要从视图组中移除的视图。
      */
     public void removeViewInLayout(View view) {
         removeViewInternal(view);
     }
 
     /**
-     * Removes a range of views during layout. This is useful if in your onLayout() method,
-     * you need to remove more views.
+     * 在布局期间移除指定索引范围的视图。用于在 onLayout() 方法中移除指定的视图。
      *
-     * @param start the index of the first view to remove from the group
-     * @param count the number of views to remove from the group
+     * @param start 要移除的视图索引范围的起始位置。
+     * @param count 要移除的视图个数。
      */
     public void removeViewsInLayout(int start, int count) {
         removeViewsInternal(start, count);
     }
 
     /**
-     * Removes the view at the specified position in the group.
+     * 移除视图组中指定位置的视图。
      *
-     * @param index the position in the group of the view to remove
+     * @param index 要移除的视图在视图组中的位置。
      */
     public void removeViewAt(int index) {
         removeViewInternal(index, getChildAt(index));
@@ -2164,10 +2162,10 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Removes the specified range of views from the group.
+     * 从视图组中移除指定索引范围的视图。
      *
-     * @param start the first position in the group of the range of views to remove
-     * @param count the number of views to remove
+     * @param start 要移除的视图索引范围的起始位置。
+     * @param count 要移除的视图个数。
      */
     public void removeViews(int start, int count) {
         removeViewsInternal(start, count);
@@ -2247,8 +2245,7 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Call this method to remove all child views from the
-     * ViewGroup.
+     * 调用此方法可以从视图组中移除所有视图。
      */
     public void removeAllViews() {
         removeAllViewsInLayout();
