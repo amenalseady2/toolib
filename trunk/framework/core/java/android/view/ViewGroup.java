@@ -1794,10 +1794,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Adds a child view. If no layout parameters are already set on the child, the
-     * default parameters for this ViewGroup are set on the child.
+     * 添加子视图。如果子视图没有设置布局参数，则使用视图组的布局参数为该视图布局。
      *
-     * @param child the child view to add
+     * @param child 添加的子视图。
      *
      * @see #generateDefaultLayoutParams()
      */
@@ -1806,11 +1805,10 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Adds a child view. If no layout parameters are already set on the child, the
-     * default parameters for this ViewGroup are set on the child.
+     * 添加子视图。如果子视图没有设置布局参数，则使用视图组的布局参数为该视图布局。
      *
-     * @param child the child view to add
-     * @param index the position at which to add the child
+     * @param child 添加的子视图。
+     * @param index 子视图加入的位置索引。
      *
      * @see #generateDefaultLayoutParams()
      */
@@ -1826,10 +1824,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Adds a child view with this ViewGroup's default layout parameters and the
-     * specified width and height.
+     * 以指定的宽度和高度，以及视图组的默认布局参数添加子视图。
      *
-     * @param child the child view to add
+     * @param child 添加的子视图。
      */
     public void addView(View child, int width, int height) {
         final LayoutParams params = generateDefaultLayoutParams();
@@ -1839,10 +1836,10 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Adds a child view with the specified layout parameters.
+     * 使用指定的布局参数添加子视图。
      *
-     * @param child the child view to add
-     * @param params the layout parameters to set on the child
+     * @param child 添加的子视图。
+     * @param params 设置到子视图上的布局参数。
      */
     public void addView(View child, LayoutParams params) {
         addView(child, -1, params);
