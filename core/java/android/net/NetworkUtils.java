@@ -194,4 +194,19 @@ public class NetworkUtils {
         }
         return addRoute(interfaceName, dstStr, prefixLength, gwStr) == 0;
     }
+
+    public static int v4StringToInt(String str) {
+        int result = 0;
+        String[] array = str.split("\\.");
+        if (array.length != 4) return 0;
+        try {
+            result = Integer.parseInt(array[3]);
+            result = (result << 8) + Integer.parseInt(array[2]);
+            result = (result << 8) + Integer.parseInt(array[1]);
+            result = (result << 8) + Integer.parseInt(array[0]);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+        return result;
+    }
 }
