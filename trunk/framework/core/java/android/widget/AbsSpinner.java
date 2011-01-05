@@ -30,12 +30,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * spinner小部件的抽象基类。SDK 用户可能不需要使用该类。
+ * An abstract base class for spinner widgets. SDK users will probably not
+ * need to use this class.
  * 
  * @attr ref android.R.styleable#AbsSpinner_entries
- * @author translate by 思考的狼
- * @author translate by cnmahj
- * @author convert by cnmahj
  */
 public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     SpinnerAdapter mAdapter;
@@ -93,9 +91,10 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
 
     /**
-     * 该适配器为 Spinner 提供后端数据。
-     * 他还提供了基于选中条目的相对位置来改变 spinner 条目的方法。
-     * @param adapter 用于 Spinner 的 SpinnerAdapter。
+     * The Adapter is used to provide the data which backs this Spinner.
+     * It also provides methods to transform spinner items based on their position
+     * relative to the selected item.
+     * @param adapter The SpinnerAdapter to use for this Spinner
      */
     @Override
     public void setAdapter(SpinnerAdapter adapter) {
@@ -156,8 +155,10 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     /** 
      * @see android.view.View#measure(int, int)
      * 
-     * 计算 Spinner 的尺寸。宽度来自于 widthMeasureSpec 属性，当 Spinnner
-     * 没有设置宽度时，返回 UNSPECIFIED；高度是在选中条目高度加上内边距。
+     * Figure out the dimensions of this Spinner. The width comes from
+     * the widthMeasureSpec as Spinnners can't have their width set to
+     * UNSPECIFIED. The height is based on the height of the selected item
+     * plus padding. 
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -259,7 +260,7 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
 
     /**
-     * 直接跳到数据适配器中指定条目。
+     * Jump directly to a specific item in the adapter data.
      */
     public void setSelection(int position, boolean animate) {
         // Animate only if requested position is already on screen somewhere
@@ -305,7 +306,8 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
    
     /**
-     * 重写以防止调整自身布局时出现的无用布局请求。
+     * Override to prevent spamming ourselves with layout requests
+     * as we place views
      * 
      * @see android.view.View#requestLayout()
      */
@@ -327,11 +329,12 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
 
     /**
-     * 将一个坐标点变换为列表的索引。
+     * Maps a point to a position in the list.
      * 
-     * @param x 本地坐标系的 X。
-     * @param y 本地坐标系的 Y。
-     * @return 指定点所在条目的索引。如果这个点不在任何条目上则返回 {@link #INVALID_POSITION}。
+     * @param x X in local coordinate
+     * @param y Y in local coordinate
+     * @return The position of the item which contains the specified point, or
+     *         {@link #INVALID_POSITION} if the point does not intersect an item.
      */
     public int pointToPosition(int x, int y) {
         Rect frame = mTouchFrame;

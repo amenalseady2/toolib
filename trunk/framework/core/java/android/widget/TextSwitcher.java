@@ -23,31 +23,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * 专用的 {@link android.widget.ViewSwitcher}，仅包含 {@link android.widget.TextView}
- * 类型的元素。
+ * Specialized {@link android.widget.ViewSwitcher} that contains
+ * only children of type {@link android.widget.TextView}.
  *
- * TextSwitcher 用于使屏幕上的标签文本产生动画效果。
- * 当调用 {@link #setText(CharSequence)} 时，
- * TextSwitcher 使用动画形式隐藏当前的文本并显示新的文本。
- *
- * @author translate by madgoat（Android中文翻译组）
- * @author convert by cnmahj
+ * A TextSwitcher is useful to animate a label on screen. Whenever
+ * {@link #setText(CharSequence)} is called, TextSwitcher animates the current text
+ * out and animates the new text in. 
  */
 public class TextSwitcher extends ViewSwitcher {
     /**
-     * 创建空的 TextSwitcher。
+     * Creates a new empty TextSwitcher.
      *
-     * @param context 应用程序上下文。
+     * @param context the application's environment
      */
     public TextSwitcher(Context context) {
         super(context);
     }
 
     /**
-     * 通过给出的应用程序上下文和指定的属性集合来创建空的 TextSwitcher。
+     * Creates a new empty TextSwitcher for the given context and with the
+     * specified set attributes.
      *
-     * @param context 应用程序上下文。
-     * @param attrs 属性集合。
+     * @param context the application environment
+     * @param attrs a collection of attributes
      */
     public TextSwitcher(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -56,7 +54,8 @@ public class TextSwitcher extends ViewSwitcher {
     /**
      * {@inheritDoc}
      *
-     * @throws IllegalArgumentException 当子视图不是 {@link android.widget.TextView} 的实例时。
+     * @throws IllegalArgumentException if child is not an instance of
+     *         {@link android.widget.TextView}
      */
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
@@ -69,10 +68,10 @@ public class TextSwitcher extends ViewSwitcher {
     }
 
     /**
-     * 设置下一个视图的文本内容并切换到下一视图。
-     * 可用于以动画形式隐藏当前的文本并显示新的文本。
+     * Sets the text of the next view and switches to the next view. This can
+     * be used to animate the old text out and animate the next text in.
      *
-     * @param text 要显示的新的文本
+     * @param text the new text to display
      */
     public void setText(CharSequence text) {
         final TextView t = (TextView) getNextView();
@@ -81,9 +80,10 @@ public class TextSwitcher extends ViewSwitcher {
     }
 
     /**
-     * 设置当前显示的文本视图的文字内容。该操作不会显示动画。
+     * Sets the text of the text view that is currently showing.  This does
+     * not perform the animations.
      *
-     * @param text 要显示的新的文本
+     * @param text the new text to display
      */
     public void setCurrentText(CharSequence text) {
         ((TextView)getCurrentView()).setText(text);

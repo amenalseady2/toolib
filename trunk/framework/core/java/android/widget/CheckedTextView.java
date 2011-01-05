@@ -29,13 +29,11 @@ import android.view.accessibility.AccessibilityEvent;
 
 
 /**
- * 对 TextView 的扩展，支持 {@link android.widget.Checkable} 接口。
- * 对于将 {@link android.widget.ListView#setChoiceMode(int) setChoiceMode}
- * 设置为 {@link android.widget.ListView#CHOICE_MODE_NONE CHOICE_MODE_NONE}
- * 以外的值的 {@link android.widget.ListView ListView} 是非常有用的。
- * @author translate by 小易
- * @author review by cnmahj
- * @author convert by cnmahj
+ * An extension to TextView that supports the {@link android.widget.Checkable} interface.
+ * This is useful when used in a {@link android.widget.ListView ListView} where the it's 
+ * {@link android.widget.ListView#setChoiceMode(int) setChoiceMode} has been set to
+ * something other than {@link android.widget.ListView#CHOICE_MODE_NONE CHOICE_MODE_NONE}.
+ *
  */
 public class CheckedTextView extends TextView implements Checkable {
     private boolean mChecked;
@@ -83,9 +81,9 @@ public class CheckedTextView extends TextView implements Checkable {
     }
 
     /**
-     * <p>改变文本视图的选中状态。</p>	
+     * <p>Changes the checked state of this text view.</p>
      *
-     * @param checked 选中文本返回 true，未选中返回 false。
+     * @param checked true to check the text, false to uncheck it
      */
     public void setChecked(boolean checked) {
         if (mChecked != checked) {
@@ -96,10 +94,10 @@ public class CheckedTextView extends TextView implements Checkable {
 
 
     /**
-     * 将指定的资源 ID 对应的可绘制对象设置为选中标记。
-     * 当 {@link #isChecked()} 为 true 时绘制该标记。
+     * Set the checkmark to a given Drawable, identified by its resourece id. This will be drawn
+     * when {@link #isChecked()} is true.
      * 
-     * @param resid 作为选中标记的可绘制对象的资源 ID。
+     * @param resid The Drawable to use for the checkmark.
      */
     public void setCheckMarkDrawable(int resid) {
         if (resid != 0 && resid == mCheckMarkResource) {
@@ -116,9 +114,9 @@ public class CheckedTextView extends TextView implements Checkable {
     }
 
     /**
-     * 将指定的可绘制对象设置为选中标记。
-     * 当 {@link #isChecked()} 为 true 时绘制该标记。
-     * @param d 作为选中标记的可绘制对象。
+     * Set the checkmark to a given Drawable. This will be drawn when {@link #isChecked()} is true.
+     *
+     * @param d The Drawable to use for the checkmark.
      */
     public void setCheckMarkDrawable(Drawable d) {
         if (mCheckMarkDrawable != null) {

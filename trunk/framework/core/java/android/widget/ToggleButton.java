@@ -24,13 +24,15 @@ import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 
 /**
- * 通过一个带有亮度指示同时默认文本为“ON”或“OFF”的按钮显示选中/未选中状态。
+ * Displays checked/unchecked states as a button
+ * with a "light" indicator and by default accompanied with the text "ON" or "OFF".
+ *
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
+ * tutorial</a>.</p>
  * 
  * @attr ref android.R.styleable#ToggleButton_textOn
  * @attr ref android.R.styleable#ToggleButton_textOff
  * @attr ref android.R.styleable#ToggleButton_disabledAlpha
- * @author translate by 农民伯伯（Android中文翻译组）
- * @author convert by cnmahj
  */
 public class ToggleButton extends CompoundButton {
     private CharSequence mTextOn;
@@ -79,36 +81,36 @@ public class ToggleButton extends CompoundButton {
     }
 
     /**
-     * 返回按钮选中时的文本。
+     * Returns the text for when the button is in the checked state.
      * 
-     * @return 选中时的文本。
+     * @return The text.
      */
     public CharSequence getTextOn() {
         return mTextOn;
     }
 
     /**
-     * 设置按钮选中时显示的文本。
+     * Sets the text for when the button is in the checked state.
      *  
-     * @param textOn 要显示的文本。
+     * @param textOn The text.
      */
     public void setTextOn(CharSequence textOn) {
         mTextOn = textOn;
     }
 
     /**
-     * 返回按钮未选中时的文本。
+     * Returns the text for when the button is not in the checked state.
      * 
-     * @return 未选中时的文本。
+     * @return The text.
      */
     public CharSequence getTextOff() {
         return mTextOff;
     }
 
     /**
-     * 设置按钮未选中时显示的文本。
+     * Sets the text for when the button is not in the checked state.
      * 
-     * @param textOff 要显示的文本。
+     * @param textOff The text.
      */
     public void setTextOff(CharSequence textOff) {
         mTextOff = textOff;

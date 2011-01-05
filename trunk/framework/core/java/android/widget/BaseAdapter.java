@@ -22,11 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * 用于 {@link ListView} (实现了 {@link ListAdapter} 接口)和 {@link Spinner}
- * (实现了 {@link SpinnerAdapter} 接口)的共同实现的一个公共基类。
- * @author translate by 德罗德
- * @author review by cnmahj
- * @author convert by cnmahj
+ * Common base class of common implementation for an {@link Adapter} that can be
+ * used in both {@link ListView} (by implementing the specialized
+ * {@link ListAdapter} interface} and {@link Spinner} (by implementing the
+ * specialized {@link SpinnerAdapter} interface.
  */
 public abstract class BaseAdapter implements ListAdapter, SpinnerAdapter {
     private final DataSetObservable mDataSetObservable = new DataSetObservable();
@@ -44,7 +43,8 @@ public abstract class BaseAdapter implements ListAdapter, SpinnerAdapter {
     }
     
     /**
-     * 通知关联的视图，后台数据已经改变，视图需要刷新。
+     * Notifies the attached View that the underlying data has been changed
+     * and it should refresh itself.
      */
     public void notifyDataSetChanged() {
         mDataSetObservable.notifyChanged();

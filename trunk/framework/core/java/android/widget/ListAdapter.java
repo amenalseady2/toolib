@@ -17,30 +17,31 @@
 package android.widget;
 
 /**
- * 扩展自 {@link Adapter}。是在 {@link ListView} 与数据之间的一座桥梁。
- * 大多数情况，数据来自于游标，但不是必须的。列表视图可以显示经过
- * ListAdapter 封包的任何数据。
- * 
- * @author translate by 德罗德
- * @author convert by cnmahj
+ * Extended {@link Adapter} that is the bridge between a {@link ListView}
+ * and the data that backs the list. Frequently that data comes from a Cursor,
+ * but that is not
+ * required. The ListView can display any data provided that it is wrapped in a
+ * ListAdapter.
  */
 public interface ListAdapter extends Adapter {
 
     /**
-     * ListAdapter 中的所有项目是否可用？如果是，则代表所有的项目都是可选择，可点击的。
+     * Are all items in this ListAdapter enabled?
+     * If yes it means all items are selectable and clickable.
      * 
-     * @return 如果所有项目是可用的返回真。
+     * @return True if all items are enabled
      */
     public boolean areAllItemsEnabled();
 
     /**
-     * 如果指定的位置不是分隔符（分隔符是不可选择、不可点击的条目）则返回真。
+     * Returns true if the item at the specified position is not a separator.
+     * (A separator is a non-selectable, non-clickable item).
      * 
-     * 如果位置无效，其结果将是不确定的。在这种情况下，在最初失败的地方，应该抛出
-     * {@link ArrayIndexOutOfBoundsException} 异常。
+     * The result is unspecified if position is invalid. An {@link ArrayIndexOutOfBoundsException}
+     * should be thrown in that case for fast failure.
      *
-     * @param position 条目索引。
-     * @return 如果指定条目不是分隔符，返回正。
+     * @param position Index of the item
+     * @return True if the item is not a separator
      */
     boolean isEnabled(int position);
 }

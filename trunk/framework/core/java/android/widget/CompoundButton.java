@@ -31,18 +31,17 @@ import android.view.accessibility.AccessibilityEvent;
 
 /**
  * <p>
- * 一个包含选中/未选中两个状态的按钮。当按钮按下或单击时自动改变状态。
+ * A button with two states, checked and unchecked. When the button is pressed
+ * or clicked, the state changes automatically.
  * </p>
  *
- * <p><strong>XML 属性</strong></p>
+ * <p><strong>XML attributes</strong></p>
  * <p>
- * 参见 {@link android.R.styleable#CompoundButton
- * CompoundButton 属性}、{@link android.R.styleable#Button Button
- * 属性}、{@link android.R.styleable#TextView TextView 属性} 和 {@link
- * android.R.styleable#View View 属性}。
+ * See {@link android.R.styleable#CompoundButton
+ * CompoundButton Attributes}, {@link android.R.styleable#Button Button
+ * Attributes}, {@link android.R.styleable#TextView TextView Attributes}, {@link
+ * android.R.styleable#View View Attributes}
  * </p>
- * @author translate by 德罗德
- * @author convert by cnmahj
  */
 public abstract class CompoundButton extends Button implements Checkable {
     private boolean mChecked;
@@ -106,9 +105,9 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     /**
-     * <p>改变按钮的选中状态。</p>	
+     * <p>Changes the checked state of this button.</p>
      *
-     * @param checked true 选中按钮，false 取消选中。
+     * @param checked true to check the button, false to uncheck it
      */
     public void setChecked(boolean checked) {
         if (mChecked != checked) {
@@ -133,9 +132,10 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     /**
-     * 注册一个在按钮状态发生改变时执行的回调函数
+     * Register a callback to be invoked when the checked state of this button
+     * changes.
      *
-     * @param listener 当选中状态改变时调用的回调函数
+     * @param listener the callback to call on checked state change
      */
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         mOnCheckedChangeListener = listener;
@@ -153,20 +153,23 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     /**
-     * 定义了一个在按钮的选中状态改变时要调用的回调函数的接口。
+     * Interface definition for a callback to be invoked when the checked state
+     * of a compound button changed.
      */
     public static interface OnCheckedChangeListener {
         /**
-         * 在按钮选中状态发生改变时被调用。
-         * @param buttonView 选中状态发生改变的那个按钮。
-         * @param isChecked  按钮的选中状态。
+         * Called when the checked state of a compound button has changed.
+         *
+         * @param buttonView The compound button view whose state has changed.
+         * @param isChecked  The new checked state of buttonView.
          */
         void onCheckedChanged(CompoundButton buttonView, boolean isChecked);
     }
 
     /**
-     * 通过资源 ID 给按钮背景设置一个可绘制对象。
-     * @param resid 作为背景可绘制对象的资源 ID。
+     * Set the background to a given Drawable, identified by its resource id.
+     *
+     * @param resid the resource id of the drawable to use as the background 
      */
     public void setButtonDrawable(int resid) {
         if (resid != 0 && resid == mButtonResource) {
@@ -183,9 +186,9 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     /**
-     * 通过资源 ID 给按钮背景设置一个可绘制对象。
+     * Set the background to a given Drawable
      *
-     * @param d 作为背景的可绘制对象
+     * @param d The Drawable to use as the background
      */
     public void setButtonDrawable(Drawable d) {
         if (d != null) {

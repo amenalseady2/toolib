@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2006 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,29 +33,30 @@ import android.view.accessibility.AccessibilityEvent;
 
 
 /**
- * AdapterView 是内容由 {@link Adapter} 来决定的视图类。
+ * An AdapterView is a view whose children are determined by an {@link Adapter}.
  *
  * <p>
- * 参见 {@link ListView}、{@link GridView}、{@link Spinner} 和
- *      {@link Gallery} 等常见子类。
- * @author translate by cnmahj
+ * See {@link ListView}, {@link GridView}, {@link Spinner} and
+ *      {@link Gallery} for commonly used subclasses of AdapterView.
  */
 public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     /**
-     * 当适配器禁止条项的视图再利用时，调用 {@link Adapter#getItemViewType(int)} 函数的返回值。
+     * The item view type returned by {@link Adapter#getItemViewType(int)} when
+     * the adapter does not want the item's view recycled.
      */
     public static final int ITEM_VIEW_TYPE_IGNORE = -1;
 
     /**
-     * 当条项是列表头或列表尾时，调用 {@link Adapter#getItemViewType(int)} 函数的返回值。
+     * The item view type returned by {@link Adapter#getItemViewType(int)} when
+     * the item is a header or footer.
      */
     public static final int ITEM_VIEW_TYPE_HEADER_OR_FOOTER = -2;
 
     /**
      * The position of the first child displayed
      */
-    @ViewDebug.ExportedProperty
+    @ViewDebug.ExportedProperty(category = "scrolling")
     int mFirstPosition = 0;
 
     /**
@@ -140,7 +141,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
      * The position within the adapter's data set of the item to select
      * during the next layout.
      */
-    @ViewDebug.ExportedProperty    
+    @ViewDebug.ExportedProperty(category = "list")
     int mNextSelectedPosition = INVALID_POSITION;
 
     /**
@@ -151,7 +152,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     /**
      * The position within the adapter's data set of the currently selected item.
      */
-    @ViewDebug.ExportedProperty    
+    @ViewDebug.ExportedProperty(category = "list")
     int mSelectedPosition = INVALID_POSITION;
 
     /**
@@ -167,7 +168,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     /**
      * The number of items in the current adapter.
      */
-    @ViewDebug.ExportedProperty
+    @ViewDebug.ExportedProperty(category = "list")
     int mItemCount;
 
     /**
@@ -176,12 +177,13 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     int mOldItemCount;
 
     /**
-     * 代表无效的位置。有效值的范围是 0 到当前适配器项目数减 1 。
+     * Represents an invalid position. All valid positions are in the range 0 to 1 less than the
+     * number of items in the current adapter.
      */
     public static final int INVALID_POSITION = -1;
 
     /**
-     * 代表空或者无效的行ID。
+     * Represents an empty or invalid row id
      */
     public static final long INVALID_ROW_ID = Long.MIN_VALUE;
 
@@ -228,7 +230,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
 
     /**
-     * 定义了当单击 AdapterView 中的项目时调用的回调函数的接口。
+     * Interface definition for a callback to be invoked when an item in this
+     * AdapterView has been clicked.
      */
     public interface OnItemClickListener {
 
@@ -249,7 +252,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 注册单击 AdapterView 中的条目时执行的回调函数。
+     * Register a callback to be invoked when an item in this AdapterView has
+     * been clicked.
      *
      * @param listener The callback that will be invoked.
      */
@@ -258,19 +262,21 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * @return 点击 AdapterView 中的条目时执行的回调函数；没有设置时返回空。
+     * @return The callback to be invoked with an item in this AdapterView has
+     *         been clicked, or null id no callback has been set.
      */
     public final OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }
 
     /**
-     * 如果定义了 OnItemClickListener 则调用它。
+     * Call the OnItemClickListener, if it is defined.
      *
-     * @param view AdapterView 中被点击的视图。
-     * @param position 视图在适配器中的索引。
-     * @param id 点击的条目的行 ID。
-     * @return 如果成功调用了定义的 OnItemClickListener 则返回真；否则返回假。
+     * @param view The view within the AdapterView that was clicked.
+     * @param position The position of the view in the adapter.
+     * @param id The row id of the item that was clicked.
+     * @return True if there was an assigned OnItemClickListener that was
+     *         called, false otherwise is returned.
      */
     public boolean performItemClick(View view, int position, long id) {
         if (mOnItemClickListener != null) {
@@ -283,29 +289,33 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 定义了当长按视图中的项目时调用的回调函数的接口。
+     * Interface definition for a callback to be invoked when an item in this
+     * view has been clicked and held.
      */
     public interface OnItemLongClickListener {
         /**
-         * 当按下视图中的项目并保持按下状态（长按）时执行的回调函数。
+         * Callback method to be invoked when an item in this view has been
+         * clicked and held.
          *
-         * 实现时如果需要访问与选中条目关联的数据，可以调用 getItemAtPosition(position)。
+         * Implementers can call getItemAtPosition(position) if they need to access
+         * the data associated with the selected item.
          *
-         * @param parent 发生点击事件的 AbsListView。
-         * @param view AbsListView 中被点击的视图。
-         * @param position 视图在一览中的位置（索引）。
-         * @param id 被点击条目的行 ID。
+         * @param parent The AbsListView where the click happened
+         * @param view The view within the AbsListView that was clicked
+         * @param position The position of the view in the list
+         * @param id The row id of the item that was clicked
          *
-         * @return 如果回调函数处理了长按事件，返回真；否则返回假。
+         * @return true if the callback consumed the long click, false otherwise
          */
         boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id);
     }
 
 
     /**
-     * 注册长按 AdapterView 中的条目时执行的回调函数。
+     * Register a callback to be invoked when an item in this AdapterView has
+     * been clicked and held
      *
-     * @param listener 事件发生时运行的回调函数。
+     * @param listener The callback that will run
      */
     public void setOnItemLongClickListener(OnItemLongClickListener listener) {
         if (!isLongClickable()) {
@@ -315,42 +325,48 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * @return 取得长按 AdapterView 中的条目时执行的回调函数的监听器；未设置则返回空。
+     * @return The callback to be invoked with an item in this AdapterView has
+     *         been clicked and held, or null id no callback as been set.
      */
     public final OnItemLongClickListener getOnItemLongClickListener() {
         return mOnItemLongClickListener;
     }
 
     /**
-     * 定义了当选中视图中的项目时调用的回调函数的接口。
+     * Interface definition for a callback to be invoked when
+     * an item in this view has been selected.
      */
     public interface OnItemSelectedListener {
         /**
-         * 当选中视图中的项目时执行的回调函数。
+         * Callback method to be invoked when an item in this view has been
+         * selected.
          *
-         * 实现时如果需要访问与选中条目关联的数据，可以调用 getItemAtPosition(position)。
+         * Impelmenters can call getItemAtPosition(position) if they need to access the
+         * data associated with the selected item.
          *
-         * @param parent 发生选中事件的 AbsListView。
-         * @param view AbsListView 中被选中的视图。
-         * @param position 视图在一览中的位置（索引）。
-         * @param id 被点击条目的行 ID。
+         * @param parent The AdapterView where the selection happened
+         * @param view The view within the AdapterView that was clicked
+         * @param position The position of the view in the adapter
+         * @param id The row id of the item that is selected
          */
         void onItemSelected(AdapterView<?> parent, View view, int position, long id);
 
         /**
-         * 当视图中的处于选中状态的条目全部消失时执行的回调函数。
-         * 启动触控功能或适配器为空都可能导致选中条目消失。
+         * Callback method to be invoked when the selection disappears from this
+         * view. The selection can disappear for instance when touch is activated
+         * or when the adapter becomes empty.
          *
-         * @param parent 没有任何选中条目的 AdapterView。
+         * @param parent The AdapterView that now contains no selected item.
          */
         void onNothingSelected(AdapterView<?> parent);
     }
 
 
     /**
-     * 注册选中 AdapterView 中的条目时执行的回调函数。
+     * Register a callback to be invoked when an item in this AdapterView has
+     * been selected.
      *
-     * @param listener 事件发生时运行的回调函数。
+     * @param listener The callback that will run
      */
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
         mOnItemSelectedListener = listener;
@@ -361,9 +377,10 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 当显示 AdapterView 的上下文菜单时，为
+     * Extra menu information provided to the
      * {@link android.view.View.OnCreateContextMenuListener#onCreateContextMenu(ContextMenu, View, ContextMenuInfo) }
-     * 回调函数提供的额外的菜单信息。
+     * callback when a context menu is brought up for this AdapterView.
+     *
      */
     public static class AdapterContextMenuInfo implements ContextMenu.ContextMenuInfo {
 
@@ -374,41 +391,44 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         }
 
         /**
-         * 用于显示上下文菜单的子视图。也是 AdapterView 的子视图之一。
+         * The child view for which the context menu is being displayed. This
+         * will be one of the children of this AdapterView.
          */
         public View targetView;
 
         /**
-         * 用于显示上下文菜单的子视图在适配器中的位置。
+         * The position in the adapter for which the context menu is being
+         * displayed.
          */
         public int position;
 
         /**
-         * 用于显示上下文菜单的子视图的行 ID。
+         * The row id of the item for which the context menu is being displayed.
          */
         public long id;
     }
 
     /**
-     * 返回当前与该小部件关联的适配器。
+     * Returns the adapter currently associated with this widget.
      *
-     * @return 用于提供视图内容的适配器。
+     * @return The adapter used to provide this view's content.
      */
     public abstract T getAdapter();
 
     /**
-     * 设置用于为该小部件的视图提供用于显示的数据的适配器。
+     * Sets the adapter that provides the data and the views to represent the data
+     * in this widget.
      *
-     * @param adapter 用于创建视图内容的适配器。
+     * @param adapter The adapter to use to create this view's content.
      */
     public abstract void setAdapter(T adapter);
 
     /**
-     * 该类不支持该方法，如果调用将抛出 UnsupportedOperationException 异常。
+     * This method is not supported and throws an UnsupportedOperationException when called.
      *
-     * @param child 忽略。
+     * @param child Ignored.
      *
-     * @throws UnsupportedOperationException 调用该方法时
+     * @throws UnsupportedOperationException Every time this method is invoked.
      */
     @Override
     public void addView(View child) {
@@ -416,12 +436,12 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 该类不支持该方法，如果调用将抛出 UnsupportedOperationException 异常。
+     * This method is not supported and throws an UnsupportedOperationException when called.
      *
-     * @param child 忽略。
-     * @param index 忽略。
+     * @param child Ignored.
+     * @param index Ignored.
      *
-     * @throws UnsupportedOperationException 调用该方法时
+     * @throws UnsupportedOperationException Every time this method is invoked.
      */
     @Override
     public void addView(View child, int index) {
@@ -429,12 +449,12 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 该类不支持该方法，如果调用将抛出 UnsupportedOperationException 异常。
+     * This method is not supported and throws an UnsupportedOperationException when called.
      *
-     * @param child 忽略。
-     * @param params 忽略。
+     * @param child Ignored.
+     * @param params Ignored.
      *
-     * @throws UnsupportedOperationException 调用该方法时
+     * @throws UnsupportedOperationException Every time this method is invoked.
      */
     @Override
     public void addView(View child, LayoutParams params) {
@@ -443,13 +463,13 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 该类不支持该方法，如果调用将抛出 UnsupportedOperationException 异常。
+     * This method is not supported and throws an UnsupportedOperationException when called.
      *
-     * @param child 忽略。
-     * @param index 忽略。
-     * @param params 忽略。
+     * @param child Ignored.
+     * @param index Ignored.
+     * @param params Ignored.
      *
-     * @throws UnsupportedOperationException 调用该方法时
+     * @throws UnsupportedOperationException Every time this method is invoked.
      */
     @Override
     public void addView(View child, int index, LayoutParams params) {
@@ -458,11 +478,11 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 该类不支持该方法，如果调用将抛出 UnsupportedOperationException 异常。
+     * This method is not supported and throws an UnsupportedOperationException when called.
      *
-     * @param child 忽略。
+     * @param child Ignored.
      *
-     * @throws UnsupportedOperationException 调用该方法时
+     * @throws UnsupportedOperationException Every time this method is invoked.
      */
     @Override
     public void removeView(View child) {
@@ -470,11 +490,11 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 该类不支持该方法，如果调用将抛出 UnsupportedOperationException 异常。
+     * This method is not supported and throws an UnsupportedOperationException when called.
      *
-     * @param index 忽略。
+     * @param index Ignored.
      *
-     * @throws UnsupportedOperationException 调用该方法时
+     * @throws UnsupportedOperationException Every time this method is invoked.
      */
     @Override
     public void removeViewAt(int index) {
@@ -482,9 +502,9 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 该类不支持该方法，如果调用将抛出 UnsupportedOperationException 异常。
+     * This method is not supported and throws an UnsupportedOperationException when called.
      *
-     * @throws UnsupportedOperationException 调用该方法时
+     * @throws UnsupportedOperationException Every time this method is invoked.
      */
     @Override
     public void removeAllViews() {
@@ -497,9 +517,9 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 返回当前选中项目在适配器数据中的位置。
+     * Return the position of the currently selected item within the adapter's data set
      *
-     * @return 返回从零开始的位置（索引）信息，没有选择条目时返回 {@link #INVALID_POSITION}。
+     * @return int Position (starting at 0), or {@link #INVALID_POSITION} if there is nothing selected.
      */
     @ViewDebug.CapturedViewProperty
     public int getSelectedItemPosition() {
@@ -507,7 +527,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * @return 当前选中条目相应的 ID；无选中条目则返回 {@link #INVALID_ROW_ID}。
+     * @return The id corresponding to the currently selected item, or {@link #INVALID_ROW_ID}
+     * if nothing is selected.
      */
     @ViewDebug.CapturedViewProperty
     public long getSelectedItemId() {
@@ -515,12 +536,14 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * @return 当前选中条目对应的视图；无选中条目时返回空。
+     * @return The view corresponding to the currently selected item, or null
+     * if nothing is selected
      */
     public abstract View getSelectedView();
 
     /**
-     * @return 当前选中条目对应的数据；无选中条目时返回空。
+     * @return The data corresponding to the currently selected item, or
+     * null if there is nothing selected.
      */
     public Object getSelectedItem() {
         T adapter = getAdapter();
@@ -533,8 +556,9 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * @return 与 AdapterView 相关联的适配器的条目数量。（该值是数据条目的数量，
-     *         可能大于可见的视图的数量。）
+     * @return The number of items owned by the Adapter associated with this
+     *         AdapterView. (This is the number of data items, which may be
+     *         larger than the number of visible view.)
      */
     @ViewDebug.CapturedViewProperty
     public int getCount() {
@@ -542,11 +566,13 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 取得适配器项目对应的视图或其子视图在适配器的数据中所处的位置。
+     * Get the position within the adapter's data set for the view, where view is a an adapter item
+     * or a descendant of an adapter item.
      *
-     * @param view 适配器条目或其后代的视图。调用时该项目在 AdapterView 中必须可见。
-     * @return 视图在适配器数据集中的位置；如果视图不在数据列表中或当前不可见，则返回
-     *         {@link #INVALID_POSITION}。
+     * @param view an adapter item, or a descendant of an adapter item. This must be visible in this
+     *        AdapterView at the time of the call.
+     * @return the position within the adapter's data set of the view, or {@link #INVALID_POSITION}
+     *         if the view does not correspond to a list item (or it is not currently visible).
      */
     public int getPositionForView(View view) {
         View listItem = view;
@@ -573,32 +599,35 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 返回显示在屏幕上的第一个元素在适配器中所处的位置。
+     * Returns the position within the adapter's data set for the first item
+     * displayed on screen.
      *
-     * @return 在适配器数据集中的位置。
+     * @return The position within the adapter's data set
      */
     public int getFirstVisiblePosition() {
         return mFirstPosition;
     }
 
     /**
-     * 返回显示在屏幕上的最后一个元素在适配器中所处的位置。
+     * Returns the position within the adapter's data set for the last item
+     * displayed on screen.
      *
-     * @return 在适配器数据集中的位置。
+     * @return The position within the adapter's data set
      */
     public int getLastVisiblePosition() {
         return mFirstPosition + getChildCount() - 1;
     }
 
     /**
-     * 设置当前选择条目。为了支持无障碍功能，重写该方法的子类必须首先调用父类的该方法。
+     * Sets the currently selected item. To support accessibility subclasses that
+     * override this method must invoke the overriden super method first.
      *
-     * @param position 选择的数据条目的索引（从零开始）。
+     * @param position Index (starting at 0) of the data item to be selected.
      */
     public abstract void setSelection(int position);
 
     /**
-     * 设置适配器内容为空时显示的视图。
+     * Sets the view to show if the adapter is empty
      */
     public void setEmptyView(View emptyView) {
         mEmptyView = emptyView;
@@ -609,10 +638,11 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 当前适配器无内容时，AdapterView 会显示特殊的空视图。
-     * 空视图用于告诉用户，该 AdapterView 没有数据。
+     * When the current adapter is empty, the AdapterView can display a special view
+     * call the empty view. The empty view is used to provide feedback to the user
+     * that no data is available in this AdapterView.
      *
-     * @return 适配器为空时显示的视图。
+     * @return The view to show if the adapter is empty.
      */
     public View getEmptyView() {
         return mEmptyView;
@@ -700,10 +730,10 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 取得列表中指定位置的数据。
+     * Gets the data associated with the specified position in the list.
      *
-     * @param position 要取得数据的位置。
-     * @return 列表中指定位置的数据。
+     * @param position Which data to get
+     * @return The data associated with the specified position in the list
      */
     public Object getItemAtPosition(int position) {
         T adapter = getAdapter();
@@ -722,7 +752,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 为了防止适配器生成的视图被冻结而重写。
+     * Override to prevent freezing of any views created by the adapter.
      */
     @Override
     protected void dispatchSaveInstanceState(SparseArray<Parcelable> container) {
@@ -730,7 +760,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * 为了防止适配器生成的视图被解冻而重写。
+     * Override to prevent thawing of any views created by the adapter.
      */
     @Override
     protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
@@ -778,7 +808,6 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
             mNextSelectedPosition = INVALID_POSITION;
             mNextSelectedRowId = INVALID_ROW_ID;
             mNeedSync = false;
-            checkSelectionChanged();
 
             checkFocus();
             requestLayout();
@@ -789,13 +818,21 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         }
     }
 
-    private class SelectionNotifier extends Handler implements Runnable {
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        removeCallbacks(mSelectionNotifier);
+    }
+
+    private class SelectionNotifier implements Runnable {
         public void run() {
             if (mDataChanged) {
                 // Data has changed between when this SelectionNotifier
                 // was posted and now. We need to wait until the AdapterView
                 // has been synched to the new data.
-                post(this);
+                if (getAdapter() != null) {
+                    post(this);
+                }
             } else {
                 fireOnSelected();
             }
@@ -812,7 +849,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
                 if (mSelectionNotifier == null) {
                     mSelectionNotifier = new SelectionNotifier();
                 }
-                mSelectionNotifier.post(mSelectionNotifier);
+                post(mSelectionNotifier);
             } else {
                 fireOnSelected();
             }

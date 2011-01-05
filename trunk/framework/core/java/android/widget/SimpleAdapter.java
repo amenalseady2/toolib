@@ -27,22 +27,25 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 这是一个简单的适配器，可以将静态数据映射到XML文件中定义好的视图。
- * 你可以将 Maps 的 ArrayList 指定为用于列表的数据。ArrayList 中的每一项对应列表中的一行。
- * Maps 中包含用于一行的数据。你也可以指定 XML 文件，其中定义了用于显示行的视图，通过
- * Map 的关键字映射到指定的视图。
- * 绑定数据到视图分两个阶段。首先，如果 {@link android.widget.SimpleAdapter.ViewBinder} 是有效的，
- * 则调用 {@link ViewBinder#setViewValue(android.view.View, Object, String)} 方法。
- * 如果返回值为真，则执行绑定。如果返回值为假，则按以下顺序绑定视图：
+ * An easy adapter to map static data to views defined in an XML file. You can specify the data
+ * backing the list as an ArrayList of Maps. Each entry in the ArrayList corresponds to one row
+ * in the list. The Maps contain the data for each row. You also specify an XML file that
+ * defines the views used to display the row, and a mapping from keys in the Map to specific
+ * views.
+ *
+ * Binding data to views occurs in two phases. First, if a
+ * {@link android.widget.SimpleAdapter.ViewBinder} is available,
+ * {@link ViewBinder#setViewValue(android.view.View, Object, String)}
+ * is invoked. If the returned value is true, binding has occurred. 
+ * If the returned value is false, the following views are then tried in order:
  * <ul>
- * <li> 实现了 Checkable 的视图（例如 CheckBox），期望绑定值是布尔类型。
- * <li> TextView，期望绑定值是字符串类型，通过调用 {@link #setViewText(TextView, String)} 绑定。
- * <li> ImageView，期望绑定值是资源 ID 或者一个字符串，通过调用
- * {@link #setViewImage(ImageView, int)} 或 {@link #setViewImage(ImageView, String)}绑定。
+ * <li> A view that implements Checkable (e.g. CheckBox).  The expected bind value is a boolean.
+ * <li> TextView.  The expected bind value is a string and {@link #setViewText(TextView, String)} 
+ * is invoked.
+ * <li> ImageView. The expected bind value is a resource id or a string and 
+ * {@link #setViewImage(ImageView, int)} or {@link #setViewImage(ImageView, String)} is invoked. 
  * </ul>
- * 如果没有合适的绑定发生，将会抛出 {@link IllegalStateException} 异常。
- * @author translate by 德罗德
- * @author convert by cnmahj
+ * If no appropriate binding can be found, an {@link IllegalStateException} is thrown.
  */
 public class SimpleAdapter extends BaseAdapter implements Filterable {
     private int[] mTo;
@@ -59,14 +62,19 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     private ArrayList<Map<String, ?>> mUnfilteredData;
 
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param context 与 SimpleAdapter 关联的运行着的视图的上下文。
-     * @param data Map 的列表。列表中的每个条目对应一行。Maps 中包含所有在 from 中指定的数据。
-     * @param resource 定义列表项目的视图布局的资源 ID。布局文件至少应该包含在 to 中定义了的名称。
-     * @param from 与 Map 中的项目建立关联的列名的列表。
-     * @param to 用于显示 from 中参数中的列的视图列表。这些视图应该都是 TextView 类型的。
-     * 该列表中的第 N 个视图显示从参数 from 中的第 N 列获取的值。
+     * @param context The context where the View associated with this SimpleAdapter is running
+     * @param data A List of Maps. Each entry in the List corresponds to one row in the list. The
+     *        Maps contain the data for each row, and should include all the entries specified in
+     *        "from"
+     * @param resource Resource identifier of a view layout that defines the views for this list
+     *        item. The layout file should include at least those named views defined in "to"
+     * @param from A list of column names that will be added to the Map associated with each
+     *        item.
+     * @param to The views that should display column in the "from" parameter. These should all be
+     *        TextViews. The first N views in this list are given the values of the first N columns
+     *        in the from parameter.
      */
     public SimpleAdapter(Context context, List<? extends Map<String, ?>> data,
             int resource, String[] from, int[] to) {
@@ -121,9 +129,9 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
-     * <p>设置创建下拉列表视图的布局资源 ID。</p>
+     * <p>Sets the layout resource to create the drop down views.</p>
      *
-     * @param resource 定义下拉列表视图的布局资源 ID。
+     * @param resource the layout resource defining the drop down views
      * @see #getDropDownView(int, android.view.View, android.view.ViewGroup)
      */
     public void setDropDownViewResource(int resource) {
@@ -193,9 +201,9 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
-     * 返回用于将数据绑定到视图的 {@link ViewBinder}。
+     * Returns the {@link ViewBinder} used to bind data to views.
      *
-     * @return ViewBinder，如果绑定器不存在则返回 null。
+     * @return a ViewBinder or null if the binder does not exist
      *
      * @see #setViewBinder(android.widget.SimpleAdapter.ViewBinder)
      */
@@ -204,9 +212,10 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
-     * 设置用于将数据绑定到视图的绑定器。
+     * Sets the binder used to bind data to views.
      *
-     * @param viewBinder 用于将数据绑定到视图的绑定器。设置为 null，可以删除既存的绑定器。
+     * @param viewBinder the binder used to bind data to views, can be null to
+     *        remove the existing binder
      *
      * @see #getViewBinder()
      */
@@ -215,14 +224,15 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
-     * 由 bindView() 方法调用，用于为 ImageView 设置图像。只在
-     * ViewBinder 不存在或者既存的 ViewBinder 无法处理 ImageView 的绑定时才调用。
+     * Called by bindView() to set the image for an ImageView but only if
+     * there is no existing ViewBinder or if the existing ViewBinder cannot
+     * handle binding to an ImageView.
      *
-     * 如果调用 {@link #setViewImage(ImageView, String)} 方法时提供的 
-     * value 参数可以转换为整数类型，则会自动调用本方法。
+     * This method is called instead of {@link #setViewImage(ImageView, String)}
+     * if the supplied data is an int or Integer.
      *
-     * @param v 接收图像的 ImageView。
-     * @param value 从数据集获取到的值
+     * @param v ImageView to receive an image
+     * @param value the value retrieved from the data set
      *
      * @see #setViewImage(ImageView, String)
      */
@@ -231,14 +241,19 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
-     * 由 bindView() 方法调用，用于为 ImageView 设置图像。只在
-     * ViewBinder 不存在或者既存的 ViewBinder 无法处理 ImageView 的绑定时才调用。
+     * Called by bindView() to set the image for an ImageView but only if
+     * there is no existing ViewBinder or if the existing ViewBinder cannot
+     * handle binding to an ImageView.
      *
-     * 本方法默认将 value 作为图像资源 ID 来对待；当 value
-     * 无法变换为整数类型时，才作为图像的 Uri 来使用。
+     * By default, the value will be treated as an image resource. If the
+     * value cannot be used as an image resource, the value is used as an
+     * image Uri.
      *
-     * @param v 接收图像的 ImageView。
-     * @param value 从数据集获取到的值。
+     * This method is called instead of {@link #setViewImage(ImageView, int)}
+     * if the supplied data is not an int or Integer.
+     *
+     * @param v ImageView to receive an image
+     * @param value the value retrieved from the data set
      *
      * @see #setViewImage(ImageView, int) 
      */
@@ -251,11 +266,12 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
-     * 由 bindView() 方法调用，用于为 TextView 设置文本。只在
-     * ViewBinder 不存在或者既存的 ViewBinder 无法处理 TextView 的绑定时才调用。
+     * Called by bindView() to set the text for a TextView but only if
+     * there is no existing ViewBinder or if the existing ViewBinder cannot
+     * handle binding to an TextView.
      *
-     * @param v 接收文本的 TextView。
-     * @param text 设置到 TextView 的文本。
+     * @param v TextView to receive text
+     * @param text the text to be set for the TextView
      */
     public void setViewText(TextView v, String text) {
         v.setText(text);
@@ -269,10 +285,12 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
-     * 该类用于 SimpleAdapter 的外部客户将适配器的值绑定到视图。
+     * This class can be used by external clients of SimpleAdapter to bind
+     * values to views.
      *
-     * 你可以使用此类将 SimpleAdapter 不支持的值绑定到视图，或者改变 SimpleAdapter
-     * 支持的视图的绑定方式。
+     * You should use this class to bind values to views that are not
+     * directly supported by SimpleAdapter or to change the way binding
+     * occurs for views supported by SimpleAdapter.
      *
      * @see SimpleAdapter#setViewImage(ImageView, int)
      * @see SimpleAdapter#setViewImage(ImageView, String)
@@ -280,17 +298,19 @@ public class SimpleAdapter extends BaseAdapter implements Filterable {
      */
     public static interface ViewBinder {
         /**
-         * 绑定指定的数据到指定的视图。
+         * Binds the specified data to the specified view.
          *
-         * 当使用 ViewBinder 绑定了数据时，必须返回真。如果该方法返回假，
-         * SimpleAdapter 会用自己的方式去绑定数据。
+         * When binding is handled by this ViewBinder, this method must return true.
+         * If this method returns false, SimpleAdapter will attempts to handle
+         * the binding on its own.
          *
-         * @param view 要绑定数据的视图
-         * @param data 绑定用的数据
-         * @param textRepresentation 代表所提供的数据的安全字符串：
-         *        或者是 data.toString()，或者是空串，不能为空。
+         * @param view the view to bind the data to
+         * @param data the data to bind to the view
+         * @param textRepresentation a safe String representation of the supplied data:
+         *        it is either the result of data.toString() or an empty String but it
+         *        is never null
          *
-         * @return 如果将数据绑定到了视图，返回真；否则返回假。
+         * @return true if the data was bound to the view, false otherwise
          */
         boolean setViewValue(View view, Object data, String textRepresentation);
     }

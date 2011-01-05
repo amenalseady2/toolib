@@ -76,6 +76,9 @@ import com.android.internal.R;
  * }
  * </pre>
  *
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-autocomplete.html">Auto Complete
+ * tutorial</a>.</p>
+ *
  * @attr ref android.R.styleable#AutoCompleteTextView_completionHint
  * @attr ref android.R.styleable#AutoCompleteTextView_completionThreshold
  * @attr ref android.R.styleable#AutoCompleteTextView_completionHintView
@@ -886,8 +889,9 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
      * method to filter with a different pattern, for instance a substring of
      * <code>text</code>.</p>
      *
-     * @param text 过滤模式
-     * @param keyCode 插入编辑框的最后一个字符。注意，当使用软键盘输入时，该值为空。
+     * @param text the filtering pattern
+     * @param keyCode the last character inserted in the edit box; beware that
+     * this will be null when text is being added through a soft input method.
      */
     @SuppressWarnings({ "UnusedDeclaration" })
     protected void performFiltering(CharSequence text, int keyCode) {

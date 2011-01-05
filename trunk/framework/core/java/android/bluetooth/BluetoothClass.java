@@ -20,17 +20,25 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * 代表一个描述了设备通用特性和功能的蓝牙类。比如，一个蓝牙类会指定皆如电话、
- * 计算机或耳机的通用设备类型，可以提供皆如音频或者电话的服务。
- * <p>每个蓝牙类都是有0个或更多的服务类，以及一个设备类组成。
- * 设备类将被分解成主要和较小的设备类部分。</p>
- * <p>{@link BluetoothClass} 用作一个能粗略描述一个设备
- * （比如关闭用户界面上一个图标的设备）的线索，但当蓝牙服务事实上是被一个设备所支撑的时候，
- * BluetoothClass的 介绍则不那么可信任。精确的服务搜寻通过SDP请求来完成。当运用
- * {@link BluetoothDevice#createRfcommSocketToServiceRecord(UUID)} 和
- * {@link BluetoothAdapter#listenUsingRfcommWithServiceRecord(String,UUID)}
- * 来创建RFCOMM端口的时候，SDP请求就会自动执行。</p>
- * <p>使用 {@link BluetoothDevice#getBluetoothClass} 方法来获取为远程设备所提供的类。</p>
+ * Represents a Bluetooth class, which describes general characteristics
+ * and capabilities of a device. For example, a Bluetooth class will
+ * specify the general device type such as a phone, a computer, or
+ * headset, and whether it's capable of services such as audio or telephony.
+ *
+ * <p>Every Bluetooth class is composed of zero or more service classes, and
+ * exactly one device class. The device class is further broken down into major
+ * and minor device class components.
+ *
+ * <p>{@link BluetoothClass} is useful as a hint to roughly describe a device
+ * (for example to show an icon in the UI), but does not reliably describe which
+ * Bluetooth profiles or services are actually supported by a device. Accurate
+ * service discovery is done through SDP requests, which are automatically
+ * performed when creating an RFCOMM socket with {@link
+ * BluetoothDevice#createRfcommSocketToServiceRecord} and {@link
+ * BluetoothAdapter#listenUsingRfcommWithServiceRecord}</p>
+ *
+ * <p>Use {@link BluetoothDevice#getBluetoothClass} to retrieve the class for
+ * a remote device.
  *
  * <!--
  * The Bluetooth class is a 32 bit field. The format of these bits is defined at
@@ -39,10 +47,6 @@ import android.os.Parcelable;
  * constants and methods to determine which Service Class(es) and Device Class
  * are encoded in that field.
  * -->
- * 
- * @author translate by Android Club SYSU
- * @author translate by cnmahj
- * @author convert by cnmahj
  */
 public final class BluetoothClass implements Parcelable {
     /**
@@ -95,8 +99,8 @@ public final class BluetoothClass implements Parcelable {
     }
 
     /**
-     * 定义所有的服务类常量。
-     * <p>每个 {@link BluetoothClass} 由0或多个服务类编码。
+     * Defines all service class constants.
+     * <p>Each {@link BluetoothClass} encodes zero or more service classes.
      */
     public static final class Service {
         private static final int BITMASK                 = 0xFFE000;
@@ -113,25 +117,28 @@ public final class BluetoothClass implements Parcelable {
     }
 
     /**
-     * 如果 {@link BluetoothClass} 支持指定的服务，则返回真。 
-     * <p>在 {@link BluetoothClass.Service} 
-     * 中的代表服务类的公共常量可用于该方法。
-     * 例如 {@link BluetoothClass.Service#AUDIO}类。
+     * Return true if the specified service class is supported by this
+     * {@link BluetoothClass}.
+     * <p>Valid service classes are the public constants in
+     * {@link BluetoothClass.Service}. For example, {@link
+     * BluetoothClass.Service#AUDIO}.
      *
-     * @param service 可用的服务类常量。
-     * @return 如果支持指定的服务，返回真。
+     * @param service valid service class
+     * @return true if the service class is supported
      */
     public boolean hasService(int service) {
         return ((mClass & Service.BITMASK & service) != 0);
     }
 
     /**
-     * 定义所有的设备类常量。
-     * <p>每个 {@link BluetoothClass} 对主次分类完全匹配的设备类进行编码。
-     * <p>{@link BluetoothClass.Device}中的常量代表主次设备组件的组合
-     * （完整的设备类）。{@link BluetoothClass.Device.Major} 
-     * 中的常量只能代表主要设备类。
-     * <p>参见服务类的常量 {@link BluetoothClass.Service}。
+     * Defines all device class constants.
+     * <p>Each {@link BluetoothClass} encodes exactly one device class, with
+     * major and minor components.
+     * <p>The constants in {@link
+     * BluetoothClass.Device} represent a combination of major and minor
+     * device components (the complete device class). The constants in {@link
+     * BluetoothClass.Device.Major} represent only major device classes.
+     * <p>See {@link BluetoothClass.Service} for service class constants.
      */
     public static class Device {
         private static final int BITMASK               = 0x1FFC;
@@ -222,22 +229,25 @@ public final class BluetoothClass implements Parcelable {
     }
 
     /**
-     * 返回该 {@link BluetoothClass} 中的主设备类型。
-     * <p>通过将函数的返回值与 {@link BluetoothClass.Device.Major} 
-     * 中的公共常量做比较，可以确定该 BluetoothClass 用于为那种主要设备进行编码。
+     * Return the major device class component of this {@link BluetoothClass}.
+     * <p>Values returned from this function can be compared with the
+     * public constants in {@link BluetoothClass.Device.Major} to determine
+     * which major class is encoded in this Bluetooth class.
      *
-     * @return major 主设备分类。
+     * @return major device class component
      */
     public int getMajorDeviceClass() {
         return (mClass & Device.Major.BITMASK);
     }
 
     /**
-     * 返回该 {@link BluetoothClass} 的设备类型(包含主次设备)。
-     * <p>通过将函数的返回值与 {@link BluetoothClass.Device} 
-     * 中的公共常量做比较，可以确定该 BluetoothClass 用于为那种设备进行编码。
+     * Return the (major and minor) device class component of this
+     * {@link BluetoothClass}.
+     * <p>Values returned from this function can be compared with the
+     * public constants in {@link BluetoothClass.Device} to determine which
+     * device class is encoded in this Bluetooth class.
      *
-     * @return 设备分类。
+     * @return device class component
      */
     public int getDeviceClass() {
         return (mClass & Device.BITMASK);

@@ -28,12 +28,10 @@ import android.util.AttributeSet;
 import java.util.Calendar;
 
 /**
- * 类似 AnalogClock 的数字时钟，显示到秒。
+ * Like AnalogClock, but digital.  Shows seconds.
  *
- * FIXME: 对时、分、秒使用各自的视图，这样对于变宽字体也不会使显示发生晃动。
- * @author translate by 农民伯伯
- * @author translate by cnmahj
- * @author convert by cnmahj
+ * FIXME: implement separate views for hours/minutes/seconds, so
+ * proportional fonts don't shake rendering
  */
 
 public class DigitalClock extends TextView {

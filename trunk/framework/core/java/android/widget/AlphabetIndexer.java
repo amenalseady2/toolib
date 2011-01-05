@@ -21,15 +21,15 @@ import android.database.DataSetObserver;
 import android.util.SparseIntArray;
 
 /**
- * 实现了 SectionIndexer 接口的适配器的辅助类。如果适配器使用简单的基于字母的排序方式，
- * 该类提供了使用二进制检索来对项目数巨大的列表进行快速索引的方法。
+ * A helper class for adapters that implement the SectionIndexer interface.
+ * If the items in the adapter are sorted by simple alphabet-based sorting, then
+ * this class provides a way to do fast indexing of large lists using binary search.
  * It caches the indices that have been determined through the binary search and also
  * invalidates the cache if changes occur in the cursor.
  * <p/>
  * Your adapter is responsible for updating the cursor by calling {@link #setCursor} if the
  * cursor changes. {@link #getPositionForSection} method does the binary search for the starting
  * index of a given section (alphabet).
- * @author translate by cnmahj
  */
 public class AlphabetIndexer extends DataSetObserver implements SectionIndexer {
 
