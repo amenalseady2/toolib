@@ -17,19 +17,15 @@
 
 package android.os;
 
-import android.os.WorkSource;
-
 /** @hide */
 interface IPowerManager
 {
-    void acquireWakeLock(int flags, IBinder lock, String tag, in WorkSource ws);
-    void updateWakeLockWorkSource(IBinder lock, in WorkSource ws);
+    void acquireWakeLock(int flags, IBinder lock, String tag);
     void goToSleep(long time);
     void goToSleepWithReason(long time, int reason);
     void releaseWakeLock(IBinder lock, int flags);
     void userActivity(long when, boolean noChangeLights);
     void userActivityWithForce(long when, boolean noChangeLights, boolean force);
-    void clearUserActivityTimeout(long now, long timeout);
     void setPokeLock(int pokey, IBinder lock, String tag);
     int getSupportedWakeLockFlags();
     void setStayOnSetting(int val);

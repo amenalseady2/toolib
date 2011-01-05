@@ -45,11 +45,6 @@ public class DisplayMetrics {
     public static final int DENSITY_HIGH = 240;
 
     /**
-     * Standard quantized DPI for extra-high-density screens.
-     */
-    public static final int DENSITY_XHIGH = 320;
-
-    /**
      * The reference density used throughout the system.
      */
     public static final int DENSITY_DEFAULT = DENSITY_MEDIUM;
@@ -140,7 +135,6 @@ public class DisplayMetrics {
             int screenLayout) {
         boolean expandable = compatibilityInfo.isConfiguredExpandable();
         boolean largeScreens = compatibilityInfo.isConfiguredLargeScreens();
-        boolean xlargeScreens = compatibilityInfo.isConfiguredXLargeScreens();
         
         // Note: this assume that configuration is updated before calling
         // updateMetrics method.
@@ -163,18 +157,8 @@ public class DisplayMetrics {
                 compatibilityInfo.setLargeScreens(false);
             }
         }
-        if (!xlargeScreens) {
-            if ((screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK)
-                    != Configuration.SCREENLAYOUT_SIZE_XLARGE) {
-                xlargeScreens = true;
-                // the current screen size is not large.
-                compatibilityInfo.setXLargeScreens(true);
-            } else {
-                compatibilityInfo.setXLargeScreens(false);
-            }
-        }
         
-        if (!expandable || (!largeScreens && !xlargeScreens)) {
+        if (!expandable || !largeScreens) {
             // This is a larger screen device and the app is not 
             // compatible with large screens, so diddle it.
             

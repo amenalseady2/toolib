@@ -16,13 +16,8 @@
 package android.pim.vcard;
 
 /**
- * <p>
- * The interface called by {@link VCardEntryConstructor}.
- * </p>
- * <p>
- * This class is useful when you don't want to know vCard data in detail. If you want to know
- * it, it would be better to consider using {@link VCardInterpreter}.
- * </p>
+ * The interface called by {@link VCardEntryConstructor}. Useful when you don't want to
+ * handle detailed information as what {@link VCardParser} provides via {@link VCardInterpreter}.
  */
 public interface VCardEntryHandler {
     /**

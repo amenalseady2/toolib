@@ -99,6 +99,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.accounts.AccountManager;
 import android.accounts.IAccountManager;
 import android.app.admin.DevicePolicyManager;
+
 import com.android.internal.os.IDropBoxManagerService;
 
 import java.io.File;
@@ -114,11 +115,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.WeakHashMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
+import java.util.Map.Entry;
 
 class ReceiverRestrictedContext extends ContextWrapper {
     ReceiverRestrictedContext(Context base) {
@@ -167,11 +166,11 @@ class ContextImpl extends Context {
     private static ThrottleManager sThrottleManager;
     private static WifiManager sWifiManager;
     private static LocationManager sLocationManager;
-    private static final HashMap<String, SharedPreferencesImpl> sSharedPrefs =
-            new HashMap<String, SharedPreferencesImpl>();
+    private static final HashMap<File, SharedPreferencesImpl> sSharedPrefs =
+            new HashMap<File, SharedPreferencesImpl>();
 
     private AudioManager mAudioManager;
-    /*package*/ LoadedApk mPackageInfo;
+    /*package*/ ActivityThread.PackageInfo mPackageInfo;
     private Resources mResources;
     /*package*/ ActivityThread mMainThread;
     private Context mOuterContext;
@@ -197,7 +196,6 @@ class ContextImpl extends Context {
     private DropBoxManager mDropBoxManager = null;
     private DevicePolicyManager mDevicePolicyManager = null;
     private UiModeManager mUiModeManager = null;
-    private DownloadManager mDownloadManager = null;
 
     private final Object mSync = new Object();
 
@@ -332,54 +330,55 @@ class ContextImpl extends Context {
     @Override
     public SharedPreferences getSharedPreferences(String name, int mode) {
         SharedPreferencesImpl sp;
-        File prefsFile;
-        boolean needInitialLoad = false;
+        File f = getSharedPrefsFile(name);
         synchronized (sSharedPrefs) {
-            sp = sSharedPrefs.get(name);
-            if (sp != null && !sp.hasFileChangedUnexpectedly()) {
+            sp = sSharedPrefs.get(f);
+            if (sp != null && !sp.hasFileChanged()) {
+                //Log.i(TAG, "Returning existing prefs " + name + ": " + sp);
                 return sp;
-            }
-            prefsFile = getSharedPrefsFile(name);
-            if (sp == null) {
-                sp = new SharedPreferencesImpl(prefsFile, mode, null);
-                sSharedPrefs.put(name, sp);
-                needInitialLoad = true;
             }
         }
 
-        synchronized (sp) {
-            if (needInitialLoad && sp.isLoaded()) {
-                // lost the race to load; another thread handled it
-                return sp;
-            }
-            File backup = makeBackupFile(prefsFile);
-            if (backup.exists()) {
-                prefsFile.delete();
-                backup.renameTo(prefsFile);
-            }
+        FileInputStream str = null;
+        File backup = makeBackupFile(f);
+        if (backup.exists()) {
+            f.delete();
+            backup.renameTo(f);
+        }
 
-            // Debugging
-            if (prefsFile.exists() && !prefsFile.canRead()) {
-                Log.w(TAG, "Attempt to read preferences file " + prefsFile + " without permission");
-            }
+        // Debugging
+        if (f.exists() && !f.canRead()) {
+            Log.w(TAG, "Attempt to read preferences file " + f + " without permission");
+        }
 
-            Map map = null;
-            if (prefsFile.exists() && prefsFile.canRead()) {
-                try {
-                    FileInputStream str = new FileInputStream(prefsFile);
-                    map = XmlUtils.readMapXml(str);
-                    str.close();
-                } catch (org.xmlpull.v1.XmlPullParserException e) {
-                    Log.w(TAG, "getSharedPreferences", e);
-                } catch (FileNotFoundException e) {
-                    Log.w(TAG, "getSharedPreferences", e);
-                } catch (IOException e) {
-                    Log.w(TAG, "getSharedPreferences", e);
+        Map map = null;
+        if (f.exists() && f.canRead()) {
+            try {
+                str = new FileInputStream(f);
+                map = XmlUtils.readMapXml(str);
+                str.close();
+            } catch (org.xmlpull.v1.XmlPullParserException e) {
+                Log.w(TAG, "getSharedPreferences", e);
+            } catch (FileNotFoundException e) {
+                Log.w(TAG, "getSharedPreferences", e);
+            } catch (IOException e) {
+                Log.w(TAG, "getSharedPreferences", e);
+            }
+        }
+
+        synchronized (sSharedPrefs) {
+            if (sp != null) {
+                //Log.i(TAG, "Updating existing prefs " + name + " " + sp + ": " + map);
+                sp.replace(map);
+            } else {
+                sp = sSharedPrefs.get(f);
+                if (sp == null) {
+                    sp = new SharedPreferencesImpl(f, mode, map);
+                    sSharedPrefs.put(f, sp);
                 }
             }
-            sp.replace(map);
+            return sp;
         }
-        return sp;
     }
 
     private File getPreferencesDir() {
@@ -694,7 +693,7 @@ class ContextImpl extends Context {
                 if (scheduler == null) {
                     scheduler = mMainThread.getHandler();
                 }
-                rd = new LoadedApk.ReceiverDispatcher(
+                rd = new ActivityThread.PackageInfo.ReceiverDispatcher(
                         resultReceiver, getOuterContext(), scheduler, null, false).getIIntentReceiver();
             }
         }
@@ -737,7 +736,7 @@ class ContextImpl extends Context {
                 if (scheduler == null) {
                     scheduler = mMainThread.getHandler();
                 }
-                rd = new LoadedApk.ReceiverDispatcher(
+                rd = new ActivityThread.PackageInfo.ReceiverDispatcher(
                         resultReceiver, getOuterContext(), scheduler, null, false).getIIntentReceiver();
             }
         }
@@ -793,7 +792,7 @@ class ContextImpl extends Context {
                 if (scheduler == null) {
                     scheduler = mMainThread.getHandler();
                 }
-                rd = new LoadedApk.ReceiverDispatcher(
+                rd = new ActivityThread.PackageInfo.ReceiverDispatcher(
                         receiver, context, scheduler, null, true).getIIntentReceiver();
             }
         }
@@ -971,8 +970,6 @@ class ContextImpl extends Context {
             return getDevicePolicyManager();
         } else if (UI_MODE_SERVICE.equals(name)) {
             return getUiModeManager();
-        } else if (DOWNLOAD_SERVICE.equals(name)) {
-            return getDownloadManager();
         }
 
         return null;
@@ -1157,16 +1154,12 @@ class ContextImpl extends Context {
         return mAudioManager;
     }
 
-    /* package */ static DropBoxManager createDropBoxManager() {
-        IBinder b = ServiceManager.getService(DROPBOX_SERVICE);
-        IDropBoxManagerService service = IDropBoxManagerService.Stub.asInterface(b);
-        return new DropBoxManager(service);
-    }
-
     private DropBoxManager getDropBoxManager() {
         synchronized (mSync) {
             if (mDropBoxManager == null) {
-                mDropBoxManager = createDropBoxManager();
+                IBinder b = ServiceManager.getService(DROPBOX_SERVICE);
+                IDropBoxManagerService service = IDropBoxManagerService.Stub.asInterface(b);
+                mDropBoxManager = new DropBoxManager(service);
             }
         }
         return mDropBoxManager;
@@ -1189,15 +1182,6 @@ class ContextImpl extends Context {
             }
         }
         return mUiModeManager;
-    }
-
-    private DownloadManager getDownloadManager() {
-        synchronized (mSync) {
-            if (mDownloadManager == null) {
-                mDownloadManager = new DownloadManager(getContentResolver(), getPackageName());
-            }
-        }
-        return mDownloadManager;
     }
 
     @Override
@@ -1434,7 +1418,7 @@ class ContextImpl extends Context {
             return new ContextImpl(mMainThread.getSystemContext());
         }
 
-        LoadedApk pi =
+        ActivityThread.PackageInfo pi =
             mMainThread.getPackageInfo(packageName, flags);
         if (pi != null) {
             ContextImpl c = new ContextImpl();
@@ -1501,12 +1485,12 @@ class ContextImpl extends Context {
         mOuterContext = this;
     }
 
-    final void init(LoadedApk packageInfo,
+    final void init(ActivityThread.PackageInfo packageInfo,
             IBinder activityToken, ActivityThread mainThread) {
         init(packageInfo, activityToken, mainThread, null);
     }
 
-    final void init(LoadedApk packageInfo,
+    final void init(ActivityThread.PackageInfo packageInfo,
                 IBinder activityToken, ActivityThread mainThread,
                 Resources container) {
         mPackageInfo = packageInfo;
@@ -1621,23 +1605,22 @@ class ContextImpl extends Context {
     // ----------------------------------------------------------------------
 
     private static final class ApplicationContentResolver extends ContentResolver {
-        public ApplicationContentResolver(Context context, ActivityThread mainThread) {
+        public ApplicationContentResolver(Context context,
+                                          ActivityThread mainThread)
+        {
             super(context);
             mMainThread = mainThread;
         }
 
         @Override
-        protected IContentProvider acquireProvider(Context context, String name) {
+        protected IContentProvider acquireProvider(Context context, String name)
+        {
             return mMainThread.acquireProvider(context, name);
         }
 
         @Override
-        protected IContentProvider acquireExistingProvider(Context context, String name) {
-            return mMainThread.acquireExistingProvider(context, name);
-        }
-
-        @Override
-        public boolean releaseProvider(IContentProvider provider) {
+        public boolean releaseProvider(IContentProvider provider)
+        {
             return mMainThread.releaseProvider(provider);
         }
 
@@ -1832,21 +1815,6 @@ class ContextImpl extends Context {
                 ServiceInfo si = mPM.getServiceInfo(className, flags);
                 if (si != null) {
                     return si;
-                }
-            } catch (RemoteException e) {
-                throw new RuntimeException("Package manager has died", e);
-            }
-
-            throw new NameNotFoundException(className.toString());
-        }
-
-        @Override
-        public ProviderInfo getProviderInfo(ComponentName className, int flags)
-            throws NameNotFoundException {
-            try {
-                ProviderInfo pi = mPM.getProviderInfo(className, flags);
-                if (pi != null) {
-                    return pi;
                 }
             } catch (RemoteException e) {
                 throw new RuntimeException("Package manager has died", e);
@@ -2202,39 +2170,6 @@ class ContextImpl extends Context {
         @Override public Drawable getApplicationIcon(String packageName)
                 throws NameNotFoundException {
             return getApplicationIcon(getApplicationInfo(packageName, 0));
-        }
-        
-        @Override 
-        public Drawable getActivityLogo(ComponentName activityName)
-                throws NameNotFoundException {
-            return getActivityInfo(activityName, 0).loadLogo(this);
-        }
-
-        @Override
-        public Drawable getActivityLogo(Intent intent)
-                throws NameNotFoundException {
-            if (intent.getComponent() != null) {
-                return getActivityLogo(intent.getComponent());
-            }
-
-            ResolveInfo info = resolveActivity(
-                    intent, PackageManager.MATCH_DEFAULT_ONLY);
-            if (info != null) {
-                return info.activityInfo.loadLogo(this);
-            }
-
-            throw new NameNotFoundException(intent.toUri(0));
-        }
-
-        @Override
-        public Drawable getApplicationLogo(ApplicationInfo info) {
-            return info.loadLogo(this);
-        }
-
-        @Override
-        public Drawable getApplicationLogo(String packageName)
-                throws NameNotFoundException {
-            return getApplicationLogo(getApplicationInfo(packageName, 0));
         }
 
         @Override public Resources getResourcesForActivity(
@@ -2683,15 +2618,6 @@ class ContextImpl extends Context {
             return PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
         }
 
-        @Override
-        public void setPackageObbPath(String packageName, String path) {
-            try {
-                mPM.setPackageObbPath(packageName, path);
-            } catch (RemoteException e) {
-                // Should never happen!
-            }
-        }
-
         private final ContextImpl mContext;
         private final IPackageManager mPM;
 
@@ -2708,68 +2634,40 @@ class ContextImpl extends Context {
 
     private static final class SharedPreferencesImpl implements SharedPreferences {
 
-        // Lock ordering rules:
-        //  - acquire SharedPreferencesImpl.this before EditorImpl.this
-        //  - acquire mWritingToDiskLock before EditorImpl.this
-
         private final File mFile;
         private final File mBackupFile;
         private final int mMode;
+        private Map mMap;
+        private final FileStatus mFileStatus = new FileStatus();
+        private long mTimestamp;
 
-        private Map<String, Object> mMap;     // guarded by 'this'
-        private int mDiskWritesInFlight = 0;  // guarded by 'this'
-        private boolean mLoaded = false;      // guarded by 'this'
-        private long mStatTimestamp;          // guarded by 'this'
-        private long mStatSize;               // guarded by 'this'
-
-        private final Object mWritingToDiskLock = new Object();
         private static final Object mContent = new Object();
-        private final WeakHashMap<OnSharedPreferenceChangeListener, Object> mListeners;
+        private WeakHashMap<OnSharedPreferenceChangeListener, Object> mListeners;
 
         SharedPreferencesImpl(
             File file, int mode, Map initialContents) {
             mFile = file;
             mBackupFile = makeBackupFile(file);
             mMode = mode;
-            mLoaded = initialContents != null;
-            mMap = initialContents != null ? initialContents : new HashMap<String, Object>();
-            FileStatus stat = new FileStatus();
-            if (FileUtils.getFileStatus(file.getPath(), stat)) {
-                mStatTimestamp = stat.mtime;
+            mMap = initialContents != null ? initialContents : new HashMap();
+            if (FileUtils.getFileStatus(file.getPath(), mFileStatus)) {
+                mTimestamp = mFileStatus.mtime;
             }
             mListeners = new WeakHashMap<OnSharedPreferenceChangeListener, Object>();
         }
 
-        // Has this SharedPreferences ever had values assigned to it?
-        boolean isLoaded() {
+        public boolean hasFileChanged() {
             synchronized (this) {
-                return mLoaded;
-            }
-        }
-
-        // Has the file changed out from under us?  i.e. writes that
-        // we didn't instigate.
-        public boolean hasFileChangedUnexpectedly() {
-            synchronized (this) {
-                if (mDiskWritesInFlight > 0) {
-                    // If we know we caused it, it's not unexpected.
-                    if (DEBUG) Log.d(TAG, "disk write in flight, not unexpected.");
-                    return false;
+                if (!FileUtils.getFileStatus(mFile.getPath(), mFileStatus)) {
+                    return true;
                 }
-            }
-            FileStatus stat = new FileStatus();
-            if (!FileUtils.getFileStatus(mFile.getPath(), stat)) {
-                return true;
-            }
-            synchronized (this) {
-                return mStatTimestamp != stat.mtime || mStatSize != stat.size;
+                return mTimestamp != mFileStatus.mtime;
             }
         }
 
         public void replace(Map newContents) {
-            synchronized (this) {
-                mLoaded = true;
-                if (newContents != null) {
+            if (newContents != null) {
+                synchronized (this) {
                     mMap = newContents;
                 }
             }
@@ -2790,7 +2688,7 @@ class ContextImpl extends Context {
         public Map<String, ?> getAll() {
             synchronized(this) {
                 //noinspection unchecked
-                return new HashMap<String, Object>(mMap);
+                return new HashMap(mMap);
             }
         }
 
@@ -2809,7 +2707,7 @@ class ContextImpl extends Context {
         }
         public long getLong(String key, long defValue) {
             synchronized (this) {
-                Long v = (Long)mMap.get(key);
+                Long v = (Long) mMap.get(key);
                 return v != null ? v : defValue;
             }
         }
@@ -2829,25 +2727,6 @@ class ContextImpl extends Context {
         public boolean contains(String key) {
             synchronized (this) {
                 return mMap.containsKey(key);
-            }
-        }
-
-        public Editor edit() {
-            return new EditorImpl();
-        }
-
-        // Return value from EditorImpl#commitToMemory()
-        private static class MemoryCommitResult {
-            public boolean changesMade;  // any keys different?
-            public List<String> keysModified;  // may be null
-            public Set<OnSharedPreferenceChangeListener> listeners;  // may be null
-            public Map<?, ?> mapToWriteToDisk;
-            public final CountDownLatch writtenToDiskLatch = new CountDownLatch(1);
-            public volatile boolean writeToDiskResult = false;
-
-            public void setDiskWriteResult(boolean result) {
-                writeToDiskResult = result;
-                writtenToDiskLatch.countDown();
             }
         }
 
@@ -2900,188 +2779,67 @@ class ContextImpl extends Context {
                 }
             }
 
-            public void apply() {
-                final MemoryCommitResult mcr = commitToMemory();
-                final Runnable awaitCommit = new Runnable() {
-                        public void run() {
-                            try {
-                                mcr.writtenToDiskLatch.await();
-                            } catch (InterruptedException ignored) {
-                            }
-                        }
-                    };
+            public boolean commit() {
+                boolean returnValue;
 
-                QueuedWork.add(awaitCommit);
+                boolean hasListeners;
+                List<String> keysModified = null;
+                Set<OnSharedPreferenceChangeListener> listeners = null;
 
-                Runnable postWriteRunnable = new Runnable() {
-                        public void run() {
-                            awaitCommit.run();
-                            QueuedWork.remove(awaitCommit);
-                        }
-                    };
-
-                SharedPreferencesImpl.this.enqueueDiskWrite(mcr, postWriteRunnable);
-
-                // Okay to notify the listeners before it's hit disk
-                // because the listeners should always get the same
-                // SharedPreferences instance back, which has the
-                // changes reflected in memory.
-                notifyListeners(mcr);
-            }
-
-            // Returns true if any changes were made
-            private MemoryCommitResult commitToMemory() {
-                MemoryCommitResult mcr = new MemoryCommitResult();
                 synchronized (SharedPreferencesImpl.this) {
-                    // We optimistically don't make a deep copy until
-                    // a memory commit comes in when we're already
-                    // writing to disk.
-                    if (mDiskWritesInFlight > 0) {
-                        // We can't modify our mMap as a currently
-                        // in-flight write owns it.  Clone it before
-                        // modifying it.
-                        // noinspection unchecked
-                        mMap = new HashMap<String, Object>(mMap);
-                    }
-                    mcr.mapToWriteToDisk = mMap;
-                    mDiskWritesInFlight++;
-
-                    boolean hasListeners = mListeners.size() > 0;
+                    hasListeners = mListeners.size() > 0;
                     if (hasListeners) {
-                        mcr.keysModified = new ArrayList<String>();
-                        mcr.listeners =
-                            new HashSet<OnSharedPreferenceChangeListener>(mListeners.keySet());
+                        keysModified = new ArrayList<String>();
+                        listeners =
+                                new HashSet<OnSharedPreferenceChangeListener>(mListeners.keySet());
                     }
 
                     synchronized (this) {
                         if (mClear) {
-                            if (!mMap.isEmpty()) {
-                                mcr.changesMade = true;
-                                mMap.clear();
-                            }
+                            mMap.clear();
                             mClear = false;
                         }
 
                         for (Entry<String, Object> e : mModified.entrySet()) {
                             String k = e.getKey();
                             Object v = e.getValue();
-                            if (v == this) {  // magic value for a removal mutation
-                                if (!mMap.containsKey(k)) {
-                                    continue;
-                                }
+                            if (v == this) {
                                 mMap.remove(k);
                             } else {
-                                boolean isSame = false;
-                                if (mMap.containsKey(k)) {
-                                    Object existingValue = mMap.get(k);
-                                    if (existingValue != null && existingValue.equals(v)) {
-                                        continue;
-                                    }
-                                }
                                 mMap.put(k, v);
                             }
 
-                            mcr.changesMade = true;
                             if (hasListeners) {
-                                mcr.keysModified.add(k);
+                                keysModified.add(k);
                             }
                         }
 
                         mModified.clear();
                     }
-                }
-                return mcr;
-            }
 
-            public boolean commit() {
-                MemoryCommitResult mcr = commitToMemory();
-                SharedPreferencesImpl.this.enqueueDiskWrite(
-                    mcr, null /* sync write on this thread okay */);
-                try {
-                    mcr.writtenToDiskLatch.await();
-                } catch (InterruptedException e) {
-                    return false;
+                    returnValue = writeFileLocked();
                 }
-                notifyListeners(mcr);
-                return mcr.writeToDiskResult;
-            }
 
-            private void notifyListeners(final MemoryCommitResult mcr) {
-                if (mcr.listeners == null || mcr.keysModified == null ||
-                    mcr.keysModified.size() == 0) {
-                    return;
-                }
-                if (Looper.myLooper() == Looper.getMainLooper()) {
-                    for (int i = mcr.keysModified.size() - 1; i >= 0; i--) {
-                        final String key = mcr.keysModified.get(i);
-                        for (OnSharedPreferenceChangeListener listener : mcr.listeners) {
+                if (hasListeners) {
+                    for (int i = keysModified.size() - 1; i >= 0; i--) {
+                        final String key = keysModified.get(i);
+                        for (OnSharedPreferenceChangeListener listener : listeners) {
                             if (listener != null) {
                                 listener.onSharedPreferenceChanged(SharedPreferencesImpl.this, key);
                             }
                         }
                     }
-                } else {
-                    // Run this function on the main thread.
-                    ActivityThread.sMainThreadHandler.post(new Runnable() {
-                            public void run() {
-                                notifyListeners(mcr);
-                            }
-                        });
                 }
+
+                return returnValue;
             }
         }
 
-        /**
-         * Enqueue an already-committed-to-memory result to be written
-         * to disk.
-         *
-         * They will be written to disk one-at-a-time in the order
-         * that they're enqueued.
-         *
-         * @param postWriteRunnable if non-null, we're being called
-         *   from apply() and this is the runnable to run after
-         *   the write proceeds.  if null (from a regular commit()),
-         *   then we're allowed to do this disk write on the main
-         *   thread (which in addition to reducing allocations and
-         *   creating a background thread, this has the advantage that
-         *   we catch them in userdebug StrictMode reports to convert
-         *   them where possible to apply() ...)
-         */
-        private void enqueueDiskWrite(final MemoryCommitResult mcr,
-                                      final Runnable postWriteRunnable) {
-            final Runnable writeToDiskRunnable = new Runnable() {
-                    public void run() {
-                        synchronized (mWritingToDiskLock) {
-                            writeToFile(mcr);
-                        }
-                        synchronized (SharedPreferencesImpl.this) {
-                            mDiskWritesInFlight--;
-                        }
-                        if (postWriteRunnable != null) {
-                            postWriteRunnable.run();
-                        }
-                    }
-                };
-
-            final boolean isFromSyncCommit = (postWriteRunnable == null);
-
-            // Typical #commit() path with fewer allocations, doing a write on
-            // the current thread.
-            if (isFromSyncCommit) {
-                boolean wasEmpty = false;
-                synchronized (SharedPreferencesImpl.this) {
-                    wasEmpty = mDiskWritesInFlight == 1;
-                }
-                if (wasEmpty) {
-                    writeToDiskRunnable.run();
-                    return;
-                }
-            }
-
-            QueuedWork.singleThreadExecutor().execute(writeToDiskRunnable);
+        public Editor edit() {
+            return new EditorImpl();
         }
 
-        private static FileOutputStream createFileOutputStream(File file) {
+        private FileOutputStream createFileOutputStream(File file) {
             FileOutputStream str = null;
             try {
                 str = new FileOutputStream(file);
@@ -3104,24 +2862,14 @@ class ContextImpl extends Context {
             return str;
         }
 
-        // Note: must hold mWritingToDiskLock
-        private void writeToFile(MemoryCommitResult mcr) {
+        private boolean writeFileLocked() {
             // Rename the current file so it may be used as a backup during the next read
             if (mFile.exists()) {
-                if (!mcr.changesMade) {
-                    // If the file already exists, but no changes were
-                    // made to the underlying map, it's wasteful to
-                    // re-write the file.  Return as if we wrote it
-                    // out.
-                    mcr.setDiskWriteResult(true);
-                    return;
-                }
                 if (!mBackupFile.exists()) {
                     if (!mFile.renameTo(mBackupFile)) {
                         Log.e(TAG, "Couldn't rename file " + mFile
                                 + " to backup file " + mBackupFile);
-                        mcr.setDiskWriteResult(false);
-                        return;
+                        return false;
                     }
                 } else {
                     mFile.delete();
@@ -3134,28 +2882,22 @@ class ContextImpl extends Context {
             try {
                 FileOutputStream str = createFileOutputStream(mFile);
                 if (str == null) {
-                    mcr.setDiskWriteResult(false);
-                    return;
+                    return false;
                 }
-                XmlUtils.writeMapXml(mcr.mapToWriteToDisk, str);
-                FileUtils.sync(str);
+                XmlUtils.writeMapXml(mMap, str);
                 str.close();
                 setFilePermissionsFromMode(mFile.getPath(), mMode, 0);
-                FileStatus stat = new FileStatus();
-                if (FileUtils.getFileStatus(mFile.getPath(), stat)) {
-                    synchronized (this) {
-                        mStatTimestamp = stat.mtime;
-                        mStatSize = stat.size;
-                    }
+                if (FileUtils.getFileStatus(mFile.getPath(), mFileStatus)) {
+                    mTimestamp = mFileStatus.mtime;
                 }
+
                 // Writing was successful, delete the backup file if there is one.
                 mBackupFile.delete();
-                mcr.setDiskWriteResult(true);
-                return;
+                return true;
             } catch (XmlPullParserException e) {
-                Log.w(TAG, "writeToFile: Got exception:", e);
+                Log.w(TAG, "writeFileLocked: Got exception:", e);
             } catch (IOException e) {
-                Log.w(TAG, "writeToFile: Got exception:", e);
+                Log.w(TAG, "writeFileLocked: Got exception:", e);
             }
             // Clean up an unsuccessfully written file
             if (mFile.exists()) {
@@ -3163,7 +2905,7 @@ class ContextImpl extends Context {
                     Log.e(TAG, "Couldn't clean up partially-written file " + mFile);
                 }
             }
-            mcr.setDiskWriteResult(false);
+            return false;
         }
     }
 }

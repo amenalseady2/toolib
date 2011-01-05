@@ -24,6 +24,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract.Groups;
+import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
@@ -36,10 +40,6 @@ import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
-import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Data;
-import android.provider.ContactsContract.Groups;
-import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -78,12 +78,12 @@ public class VCardEntry {
                 Im.PROTOCOL_GOOGLE_TALK);
     }
 
-    public static class PhoneData {
+    static public class PhoneData {
         public final int type;
         public final String data;
         public final String label;
-        // isPrimary is (not final but) changable, only when there's no appropriate one existing
-        // in the original VCard.
+        // isPrimary is changable only when there's no appropriate one existing in
+        // the original VCard.
         public boolean isPrimary;
         public PhoneData(int type, String data, String label, boolean isPrimary) {
             this.type = type;
@@ -109,11 +109,13 @@ public class VCardEntry {
         }
     }
 
-    public static class EmailData {
+    static public class EmailData {
         public final int type;
         public final String data;
         // Used only when TYPE is TYPE_CUSTOM.
         public final String label;
+        // isPrimary is changable only when there's no appropriate one existing in
+        // the original VCard.
         public boolean isPrimary;
         public EmailData(int type, String data, String label, boolean isPrimary) {
             this.type = type;
@@ -139,9 +141,9 @@ public class VCardEntry {
         }
     }
 
-    public static class PostalData {
-        // Determined by vCard specification.
-        // - PO Box, Extended Addr, Street, Locality, Region, Postal Code, Country Name
+    static public class PostalData {
+        // Determined by vCard spec.
+        // PO Box, Extended Addr, Street, Locality, Region, Postal Code, Country Name
         public static final int ADDR_MAX_DATA_SIZE = 7;
         private final String[] dataArray;
         public final String pobox;
@@ -246,28 +248,24 @@ public class VCardEntry {
         }
     }
 
-    public static class OrganizationData {
+    static public class OrganizationData {
         public final int type;
         // non-final is Intentional: we may change the values since this info is separated into
-        // two parts in vCard: "ORG" + "TITLE", and we have to cope with each field in
-        // different timing.
+        // two parts in vCard: "ORG" + "TITLE".
         public String companyName;
         public String departmentName;
         public String titleName;
-        public final String phoneticName;  // We won't have this in "TITLE" property.
         public boolean isPrimary;
 
         public OrganizationData(int type,
-                final String companyName,
-                final String departmentName,
-                final String titleName,
-                final String phoneticName,
-                final boolean isPrimary) {
+                String companyName,
+                String departmentName,
+                String titleName,
+                boolean isPrimary) {
             this.type = type;
             this.companyName = companyName;
             this.departmentName = departmentName;
             this.titleName = titleName;
-            this.phoneticName = phoneticName;
             this.isPrimary = isPrimary;
         }
 
@@ -315,7 +313,7 @@ public class VCardEntry {
         }
     }
 
-    public static class ImData {
+    static public class ImData {
         public final int protocol;
         public final String customProtocol;
         public final int type;
@@ -436,14 +434,6 @@ public class VCardEntry {
         }
     }
 
-    // TODO(dmiyakawa): vCard 4.0 logically has multiple formatted names and we need to
-    // select the most preferable one using PREF parameter.
-    //
-    // e.g. (based on rev.13)
-    // FN;PREF=1:John M. Doe
-    // FN;PREF=2:John Doe
-    // FN;PREF=3;John
-
     private String mFamilyName;
     private String mGivenName;
     private String mMiddleName;
@@ -451,7 +441,7 @@ public class VCardEntry {
     private String mSuffix;
 
     // Used only when no family nor given name is found.
-    private String mFormattedName;
+    private String mFullName;
 
     private String mPhoneticFamilyName;
     private String mPhoneticGivenName;
@@ -464,7 +454,6 @@ public class VCardEntry {
     private String mDisplayName;
 
     private String mBirthday;
-    private String mAnniversary;
 
     private List<String> mNoteList;
     private List<PhoneData> mPhoneList;
@@ -480,7 +469,7 @@ public class VCardEntry {
     private final Account mAccount;
 
     public VCardEntry() {
-        this(VCardConfig.VCARD_TYPE_V21_GENERIC);
+        this(VCardConfig.VCARD_TYPE_V21_GENERIC_UTF8);
     }
 
     public VCardEntry(int vcardType) {
@@ -499,7 +488,7 @@ public class VCardEntry {
         final StringBuilder builder = new StringBuilder();
         final String trimed = data.trim();
         final String formattedNumber;
-        if (type == Phone.TYPE_PAGER || VCardConfig.refrainPhoneNumberFormatting(mVCardType)) {
+        if (type == Phone.TYPE_PAGER) {
             formattedNumber = trimed;
         } else {
             final int length = trimed.length();
@@ -510,7 +499,9 @@ public class VCardEntry {
                 }
             }
 
-            final int formattingType = VCardUtils.getPhoneNumberFormat(mVCardType);
+            // Use NANP in default when there's no information about locale.
+            final int formattingType = (VCardConfig.isJapaneseDevice(mVCardType) ?
+                    PhoneNumberUtils.FORMAT_JAPAN : PhoneNumberUtils.FORMAT_NANP);
             formattedNumber = PhoneNumberUtils.formatNumber(builder.toString(), formattingType);
         }
         PhoneData phoneData = new PhoneData(type, formattedNumber, label, isPrimary);
@@ -539,43 +530,21 @@ public class VCardEntry {
     }
 
     /**
-     * Should be called via {@link #handleOrgValue(int, List, Map, boolean) or
+     * Should be called via {@link #handleOrgValue(int, List, boolean)} or
      * {@link #handleTitleValue(String)}.
      */
     private void addNewOrganization(int type, final String companyName,
             final String departmentName,
-            final String titleName,
-            final String phoneticName,
-            final boolean isPrimary) {
+            final String titleName, boolean isPrimary) {
         if (mOrganizationList == null) {
             mOrganizationList = new ArrayList<OrganizationData>();
         }
         mOrganizationList.add(new OrganizationData(type, companyName,
-                departmentName, titleName, phoneticName, isPrimary));
+                departmentName, titleName, isPrimary));
     }
 
     private static final List<String> sEmptyList =
             Collections.unmodifiableList(new ArrayList<String>(0));
-
-    private String buildSinglePhoneticNameFromSortAsParam(Map<String, Collection<String>> paramMap) {
-        final Collection<String> sortAsCollection = paramMap.get(VCardConstants.PARAM_SORT_AS);
-        if (sortAsCollection != null && sortAsCollection.size() != 0) {
-            if (sortAsCollection.size() > 1) {
-                Log.w(LOG_TAG, "Incorrect multiple SORT_AS parameters detected: " +
-                        Arrays.toString(sortAsCollection.toArray()));
-            }
-            final List<String> sortNames =
-                    VCardUtils.constructListFromValue(sortAsCollection.iterator().next(),
-                            mVCardType);
-            final StringBuilder builder = new StringBuilder();
-            for (final String elem : sortNames) {
-                builder.append(elem);
-            }
-            return builder.toString();
-        } else {
-            return null;
-        }
-    }
 
     /**
      * Set "ORG" related values to the appropriate data. If there's more than one
@@ -584,9 +553,7 @@ public class VCardEntry {
      * {@link OrganizationData} object, a new {@link OrganizationData} is created,
      * whose title is set to null.
      */
-    private void handleOrgValue(final int type, List<String> orgList,
-            Map<String, Collection<String>> paramMap, boolean isPrimary) {
-        final String phoneticName = buildSinglePhoneticNameFromSortAsParam(paramMap);
+    private void handleOrgValue(final int type, List<String> orgList, boolean isPrimary) {
         if (orgList == null) {
             orgList = sEmptyList;
         }
@@ -621,7 +588,7 @@ public class VCardEntry {
         if (mOrganizationList == null) {
             // Create new first organization entry, with "null" title which may be
             // added via handleTitleValue().
-            addNewOrganization(type, companyName, departmentName, null, phoneticName, isPrimary);
+            addNewOrganization(type, companyName, departmentName, null, isPrimary);
             return;
         }
         for (OrganizationData organizationData : mOrganizationList) {
@@ -639,7 +606,7 @@ public class VCardEntry {
         }
         // No OrganizatioData is available. Create another one, with "null" title, which may be
         // added via handleTitleValue().
-        addNewOrganization(type, companyName, departmentName, null, phoneticName, isPrimary);
+        addNewOrganization(type, companyName, departmentName, null, isPrimary);
     }
 
     /**
@@ -653,7 +620,7 @@ public class VCardEntry {
         if (mOrganizationList == null) {
             // Create new first organization entry, with "null" other info, which may be
             // added via handleOrgValue().
-            addNewOrganization(DEFAULT_ORGANIZATION_TYPE, null, null, title, null, false);
+            addNewOrganization(DEFAULT_ORGANIZATION_TYPE, null, null, title, false);
             return;
         }
         for (OrganizationData organizationData : mOrganizationList) {
@@ -664,7 +631,7 @@ public class VCardEntry {
         }
         // No Organization is available. Create another one, with "null" other info, which may be
         // added via handleOrgValue().
-        addNewOrganization(DEFAULT_ORGANIZATION_TYPE, null, null, title, null, false);
+        addNewOrganization(DEFAULT_ORGANIZATION_TYPE, null, null, title, false);
     }
 
     private void addIm(int protocol, String customProtocol, int type,
@@ -690,54 +657,11 @@ public class VCardEntry {
         mPhotoList.add(photoData);
     }
 
-    /**
-     * Tries to extract paramMap, constructs SORT-AS parameter values, and store them in
-     * appropriate phonetic name variables.
-     *
-     * This method does not care the vCard version. Even when we have SORT-AS parameters in
-     * invalid versions (i.e. 2.1 and 3.0), we scilently accept them so that we won't drop
-     * meaningful information. If we had this parameter in the N field of vCard 3.0, and
-     * the contact data also have SORT-STRING, we will prefer SORT-STRING, since it is
-     * regitimate property to be understood.
-     */
-    private void tryHandleSortAsName(final Map<String, Collection<String>> paramMap) {
-        if (VCardConfig.isVersion30(mVCardType) &&
-                !(TextUtils.isEmpty(mPhoneticFamilyName) &&
-                        TextUtils.isEmpty(mPhoneticMiddleName) &&
-                        TextUtils.isEmpty(mPhoneticGivenName))) {
-            return;
-        }
-
-        final Collection<String> sortAsCollection = paramMap.get(VCardConstants.PARAM_SORT_AS);
-        if (sortAsCollection != null && sortAsCollection.size() != 0) {
-            if (sortAsCollection.size() > 1) {
-                Log.w(LOG_TAG, "Incorrect multiple SORT_AS parameters detected: " +
-                        Arrays.toString(sortAsCollection.toArray()));
-            }
-            final List<String> sortNames =
-                    VCardUtils.constructListFromValue(sortAsCollection.iterator().next(),
-                            mVCardType);
-            int size = sortNames.size();
-            if (size > 3) {
-                size = 3;
-            }
-            switch (size) {
-            case 3: mPhoneticMiddleName = sortNames.get(2); //$FALL-THROUGH$
-            case 2: mPhoneticGivenName = sortNames.get(1); //$FALL-THROUGH$
-            default: mPhoneticFamilyName = sortNames.get(0); break;
-            }
-        }
-    }
-
     @SuppressWarnings("fallthrough")
-    private void handleNProperty(final List<String> paramValues,
-            Map<String, Collection<String>> paramMap) {
-        // in vCard 4.0, SORT-AS parameter is available.
-        tryHandleSortAsName(paramMap);
-
+    private void handleNProperty(List<String> elems) {
         // Family, Given, Middle, Prefix, Suffix. (1 - 5)
         int size;
-        if (paramValues == null || (size = paramValues.size()) < 1) {
+        if (elems == null || (size = elems.size()) < 1) {
             return;
         }
         if (size > 5) {
@@ -745,12 +669,12 @@ public class VCardEntry {
         }
 
         switch (size) {
-        // Fall-through.
-        case 5: mSuffix = paramValues.get(4);
-        case 4: mPrefix = paramValues.get(3);
-        case 3: mMiddleName = paramValues.get(2);
-        case 2: mGivenName = paramValues.get(1);
-        default: mFamilyName = paramValues.get(0);
+            // fallthrough
+            case 5: mSuffix = elems.get(4);
+            case 4: mPrefix = elems.get(3);
+            case 3: mMiddleName = elems.get(2);
+            case 2: mGivenName = elems.get(1);
+            default: mFamilyName = elems.get(0);
         }
     }
 
@@ -831,13 +755,13 @@ public class VCardEntry {
         if (propName.equals(VCardConstants.PROPERTY_VERSION)) {
             // vCard version. Ignore this.
         } else if (propName.equals(VCardConstants.PROPERTY_FN)) {
-            mFormattedName = propValue;
-        } else if (propName.equals(VCardConstants.PROPERTY_NAME) && mFormattedName == null) {
+            mFullName = propValue;
+        } else if (propName.equals(VCardConstants.PROPERTY_NAME) && mFullName == null) {
             // Only in vCard 3.0. Use this if FN, which must exist in vCard 3.0 but may not
             // actually exist in the real vCard data, does not exist.
-            mFormattedName = propValue;
+            mFullName = propValue;
         } else if (propName.equals(VCardConstants.PROPERTY_N)) {
-            handleNProperty(propValueList, paramMap);
+            handleNProperty(propValueList);
         } else if (propName.equals(VCardConstants.PROPERTY_SORT_STRING)) {
             mPhoneticFullName = propValue;
         } else if (propName.equals(VCardConstants.PROPERTY_NICKNAME) ||
@@ -852,7 +776,8 @@ public class VCardEntry {
                 // which is correct behavior from the view of vCard 2.1.
                 // But we want it to be separated, so do the separation here.
                 final List<String> phoneticNameList =
-                        VCardUtils.constructListFromValue(propValue, mVCardType);
+                        VCardUtils.constructListFromValue(propValue,
+                                VCardConfig.isV30(mVCardType));
                 handlePhoneticNameFromSound(phoneticNameList);
             } else {
                 // Ignore this field since Android cannot understand what it is.
@@ -953,7 +878,7 @@ public class VCardEntry {
                     }
                 }
             }
-            handleOrgValue(type, propValueList, paramMap, isPrimary);
+            handleOrgValue(type, propValueList, isPrimary);
         } else if (propName.equals(VCardConstants.PROPERTY_TITLE)) {
             handleTitleValue(propValue);
         } else if (propName.equals(VCardConstants.PROPERTY_ROLE)) {
@@ -1030,7 +955,7 @@ public class VCardEntry {
                 }
             }
             if (type < 0) {
-                type = Im.TYPE_HOME;
+                type = Phone.TYPE_HOME;
             }
             addIm(protocol, null, type, propValue, isPrimary);
         } else if (propName.equals(VCardConstants.PROPERTY_NOTE)) {
@@ -1042,8 +967,6 @@ public class VCardEntry {
             mWebsiteList.add(propValue);
         } else if (propName.equals(VCardConstants.PROPERTY_BDAY)) {
             mBirthday = propValue;
-        } else if (propName.equals(VCardConstants.PROPERTY_ANNIVERSARY)) {
-            mAnniversary = propValue;
         } else if (propName.equals(VCardConstants.PROPERTY_X_PHONETIC_FIRST_NAME)) {
             mPhoneticGivenName = propValue;
         } else if (propName.equals(VCardConstants.PROPERTY_X_PHONETIC_MIDDLE_NAME)) {
@@ -1052,9 +975,33 @@ public class VCardEntry {
             mPhoneticFamilyName = propValue;
         } else if (propName.equals(VCardConstants.PROPERTY_X_ANDROID_CUSTOM)) {
             final List<String> customPropertyList =
-                VCardUtils.constructListFromValue(propValue, mVCardType);
+                VCardUtils.constructListFromValue(propValue,
+                        VCardConfig.isV30(mVCardType));
             handleAndroidCustomProperty(customPropertyList);
+        /*} else if (propName.equals("REV")) {
+            // Revision of this VCard entry. I think we can ignore this.
+        } else if (propName.equals("UID")) {
+        } else if (propName.equals("KEY")) {
+            // Type is X509 or PGP? I don't know how to handle this...
+        } else if (propName.equals("MAILER")) {
+        } else if (propName.equals("TZ")) {
+        } else if (propName.equals("GEO")) {
+        } else if (propName.equals("CLASS")) {
+            // vCard 3.0 only.
+            // e.g. CLASS:CONFIDENTIAL
+        } else if (propName.equals("PROFILE")) {
+            // VCard 3.0 only. Must be "VCARD". I think we can ignore this.
+        } else if (propName.equals("CATEGORIES")) {
+            // VCard 3.0 only.
+            // e.g. CATEGORIES:INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY
+        } else if (propName.equals("SOURCE")) {
+            // VCard 3.0 only.
+        } else if (propName.equals("PRODID")) {
+            // VCard 3.0 only.
+            // To specify the identifier for the product that created
+            // the vCard object.*/
         } else {
+            // Unknown X- words and IANA token.
         }
     }
 
@@ -1070,8 +1017,8 @@ public class VCardEntry {
      */
     private void constructDisplayName() {
         // FullName (created via "FN" or "NAME" field) is prefered.
-        if (!TextUtils.isEmpty(mFormattedName)) {
-            mDisplayName = mFormattedName;
+        if (!TextUtils.isEmpty(mFullName)) {
+            mDisplayName = mFullName;
         } else if (!(TextUtils.isEmpty(mFamilyName) && TextUtils.isEmpty(mGivenName))) {
             mDisplayName = VCardUtils.constructNameFromElements(mVCardType,
                     mFamilyName, mMiddleName, mGivenName, mPrefix, mSuffix);
@@ -1208,9 +1155,6 @@ public class VCardEntry {
                 if (organizationData.titleName != null) {
                     builder.withValue(Organization.TITLE, organizationData.titleName);
                 }
-                if (organizationData.phoneticName != null) {
-                    builder.withValue(Organization.PHONETIC_NAME, organizationData.phoneticName);
-                }
                 if (organizationData.isPrimary) {
                     builder.withValue(Organization.IS_PRIMARY, 1);
                 }
@@ -1252,14 +1196,12 @@ public class VCardEntry {
                 builder.withValue(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE);
                 builder.withValue(Im.TYPE, imData.type);
                 builder.withValue(Im.PROTOCOL, imData.protocol);
-                builder.withValue(Im.DATA, imData.data);
                 if (imData.protocol == Im.PROTOCOL_CUSTOM) {
                     builder.withValue(Im.CUSTOM_PROTOCOL, imData.customProtocol);
                 }
                 if (imData.isPrimary) {
                     builder.withValue(Data.IS_PRIMARY, 1);
                 }
-                operationList.add(builder.build());
             }
         }
 
@@ -1305,15 +1247,6 @@ public class VCardEntry {
             builder.withValue(Data.MIMETYPE, Event.CONTENT_ITEM_TYPE);
             builder.withValue(Event.START_DATE, mBirthday);
             builder.withValue(Event.TYPE, Event.TYPE_BIRTHDAY);
-            operationList.add(builder.build());
-        }
-
-        if (!TextUtils.isEmpty(mAnniversary)) {
-            builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
-            builder.withValueBackReference(Event.RAW_CONTACT_ID, 0);
-            builder.withValue(Data.MIMETYPE, Event.CONTENT_ITEM_TYPE);
-            builder.withValue(Event.START_DATE, mAnniversary);
-            builder.withValue(Event.TYPE, Event.TYPE_ANNIVERSARY);
             operationList.add(builder.build());
         }
 
@@ -1388,7 +1321,7 @@ public class VCardEntry {
                 && TextUtils.isEmpty(mGivenName)
                 && TextUtils.isEmpty(mPrefix)
                 && TextUtils.isEmpty(mSuffix)
-                && TextUtils.isEmpty(mFormattedName)
+                && TextUtils.isEmpty(mFullName)
                 && TextUtils.isEmpty(mPhoneticFamilyName)
                 && TextUtils.isEmpty(mPhoneticMiddleName)
                 && TextUtils.isEmpty(mPhoneticGivenName)
@@ -1447,7 +1380,7 @@ public class VCardEntry {
     }
 
     public String getFullName() {
-        return mFormattedName;
+        return mFullName;
     }
 
     public String getPhoneticFamilyName() {

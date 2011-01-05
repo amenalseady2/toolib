@@ -39,7 +39,6 @@ import android.util.TypedValue;
 
 import com.android.internal.util.XmlUtils;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -106,19 +105,17 @@ public class PackageParser {
         final int nameRes;
         final int labelRes;
         final int iconRes;
-        final int logoRes;
         
         String tag;
         TypedArray sa;
         
         ParsePackageItemArgs(Package _owner, String[] _outError,
-                int _nameRes, int _labelRes, int _iconRes, int _logoRes) {
+                int _nameRes, int _labelRes, int _iconRes) {
             owner = _owner;
             outError = _outError;
             nameRes = _nameRes;
             labelRes = _labelRes;
             iconRes = _iconRes;
-            logoRes = _logoRes;
         }
     }
     
@@ -130,10 +127,10 @@ public class PackageParser {
         int flags;
         
         ParseComponentArgs(Package _owner, String[] _outError,
-                int _nameRes, int _labelRes, int _iconRes, int _logoRes,
+                int _nameRes, int _labelRes, int _iconRes,
                 String[] _sepProcesses, int _processRes,
                 int _descriptionRes, int _enabledRes) {
-            super(_owner, _outError, _nameRes, _labelRes, _iconRes, _logoRes);
+            super(_owner, _outError, _nameRes, _labelRes, _iconRes);
             sepProcesses = _sepProcesses;
             processRes = _processRes;
             descriptionRes = _descriptionRes;
@@ -187,7 +184,7 @@ public class PackageParser {
      * @param flags indicating which optional information is included.
      */
     public static PackageInfo generatePackageInfo(PackageParser.Package p,
-            int gids[], int flags, long firstInstallTime, long lastUpdateTime) {
+            int gids[], int flags) {
 
         PackageInfo pi = new PackageInfo();
         pi.packageName = p.packageName;
@@ -197,8 +194,6 @@ public class PackageParser {
         pi.sharedUserLabel = p.mSharedUserLabel;
         pi.applicationInfo = p.applicationInfo;
         pi.installLocation = p.installLocation;
-        pi.firstInstallTime = firstInstallTime;
-        pi.lastUpdateTime = lastUpdateTime;
         if ((flags&PackageManager.GET_GIDS) != 0) {
             pi.gids = gids;
         }
@@ -339,7 +334,7 @@ public class PackageParser {
         try {
             // We must read the stream for the JarEntry to retrieve
             // its certificates.
-            InputStream is = new BufferedInputStream(jarFile.getInputStream(je));
+            InputStream is = jarFile.getInputStream(je);
             while (is.read(readBuffer, 0, readBuffer.length) != -1) {
                 // not using
             }
@@ -590,7 +585,7 @@ public class PackageParser {
      * location from the apk location at the given file path.
      * @param packageFilePath file location of the apk
      * @param flags Special parse flags
-     * @return PackageLite object with package information or null on failure.
+     * @return PackageLite object with package information.
      */
     public static PackageLite parsePackageLite(String packageFilePath, int flags) {
         XmlResourceParser parser = null;
@@ -789,13 +784,11 @@ public class PackageParser {
         pkg.installLocation = sa.getInteger(
                 com.android.internal.R.styleable.AndroidManifest_installLocation,
                 PARSE_DEFAULT_INSTALL_LOCATION);
-        pkg.applicationInfo.installLocation = pkg.installLocation;
-        
+
         // Resource boolean are -1, so 1 means we don't know the value.
         int supportsSmallScreens = 1;
         int supportsNormalScreens = 1;
         int supportsLargeScreens = 1;
-        int supportsXLargeScreens = 1;
         int resizeable = 1;
         int anyDensity = 1;
         
@@ -1003,12 +996,9 @@ public class PackageParser {
                 supportsLargeScreens = sa.getInteger(
                         com.android.internal.R.styleable.AndroidManifestSupportsScreens_largeScreens,
                         supportsLargeScreens);
-                supportsXLargeScreens = sa.getInteger(
-                        com.android.internal.R.styleable.AndroidManifestSupportsScreens_xlargeScreens,
-                        supportsXLargeScreens);
                 resizeable = sa.getInteger(
                         com.android.internal.R.styleable.AndroidManifestSupportsScreens_resizeable,
-                        resizeable);
+                        supportsLargeScreens);
                 anyDensity = sa.getInteger(
                         com.android.internal.R.styleable.AndroidManifestSupportsScreens_anyDensity,
                         anyDensity);
@@ -1080,16 +1070,6 @@ public class PackageParser {
 
                 XmlUtils.skipCurrentTag(parser);
                 
-            } else if (tagName.equals("uses-gl-texture")) {
-                // Just skip this tag
-                XmlUtils.skipCurrentTag(parser);
-                continue;
-                
-            } else if (tagName.equals("compatible-screens")) {
-                // Just skip this tag
-                XmlUtils.skipCurrentTag(parser);
-                continue;
-                
             } else if (tagName.equals("eat-comment")) {
                 // Just skip this tag
                 XmlUtils.skipCurrentTag(parser);
@@ -1151,11 +1131,6 @@ public class PackageParser {
                 && pkg.applicationInfo.targetSdkVersion
                         >= android.os.Build.VERSION_CODES.DONUT)) {
             pkg.applicationInfo.flags |= ApplicationInfo.FLAG_SUPPORTS_LARGE_SCREENS;
-        }
-        if (supportsXLargeScreens < 0 || (supportsXLargeScreens > 0
-                && pkg.applicationInfo.targetSdkVersion
-                        >= android.os.Build.VERSION_CODES.GINGERBREAD)) {
-            pkg.applicationInfo.flags |= ApplicationInfo.FLAG_SUPPORTS_XLARGE_SCREENS;
         }
         if (resizeable < 0 || (resizeable > 0
                 && pkg.applicationInfo.targetSdkVersion
@@ -1266,7 +1241,7 @@ public class PackageParser {
                 "<permission-group>", sa,
                 com.android.internal.R.styleable.AndroidManifestPermissionGroup_name,
                 com.android.internal.R.styleable.AndroidManifestPermissionGroup_label,
-                com.android.internal.R.styleable.AndroidManifestPermissionGroup_icon, 0)) {
+                com.android.internal.R.styleable.AndroidManifestPermissionGroup_icon)) {
             sa.recycle();
             mParseError = PackageManager.INSTALL_PARSE_FAILED_MANIFEST_MALFORMED;
             return null;
@@ -1301,7 +1276,7 @@ public class PackageParser {
                 "<permission>", sa,
                 com.android.internal.R.styleable.AndroidManifestPermission_name,
                 com.android.internal.R.styleable.AndroidManifestPermission_label,
-                com.android.internal.R.styleable.AndroidManifestPermission_icon, 0)) {
+                com.android.internal.R.styleable.AndroidManifestPermission_icon)) {
             sa.recycle();
             mParseError = PackageManager.INSTALL_PARSE_FAILED_MANIFEST_MALFORMED;
             return null;
@@ -1354,7 +1329,7 @@ public class PackageParser {
                 "<permission-tree>", sa,
                 com.android.internal.R.styleable.AndroidManifestPermissionTree_name,
                 com.android.internal.R.styleable.AndroidManifestPermissionTree_label,
-                com.android.internal.R.styleable.AndroidManifestPermissionTree_icon, 0)) {
+                com.android.internal.R.styleable.AndroidManifestPermissionTree_icon)) {
             sa.recycle();
             mParseError = PackageManager.INSTALL_PARSE_FAILED_MANIFEST_MALFORMED;
             return null;
@@ -1398,7 +1373,7 @@ public class PackageParser {
             mParseInstrumentationArgs = new ParsePackageItemArgs(owner, outError,
                     com.android.internal.R.styleable.AndroidManifestInstrumentation_name,
                     com.android.internal.R.styleable.AndroidManifestInstrumentation_label,
-                    com.android.internal.R.styleable.AndroidManifestInstrumentation_icon, 0);
+                    com.android.internal.R.styleable.AndroidManifestInstrumentation_icon);
             mParseInstrumentationArgs.tag = "<instrumentation>";
         }
         
@@ -1567,12 +1542,6 @@ public class PackageParser {
             ai.flags |= ApplicationInfo.FLAG_TEST_ONLY;
         }
 
-        if (sa.getBoolean(
-                com.android.internal.R.styleable.AndroidManifestApplication_neverEncrypt,
-                false)) {
-            ai.flags |= ApplicationInfo.FLAG_NEVER_ENCRYPT;
-        }
-
         String str;
         str = sa.getNonConfigurationString(
                 com.android.internal.R.styleable.AndroidManifestApplication_permission, 0);
@@ -1608,20 +1577,6 @@ public class PackageParser {
     
             ai.enabled = sa.getBoolean(
                     com.android.internal.R.styleable.AndroidManifestApplication_enabled, true);
-            
-            if (false) {
-                if (sa.getBoolean(
-                        com.android.internal.R.styleable.AndroidManifestApplication_cantSaveState,
-                        false)) {
-                    ai.flags |= ApplicationInfo.FLAG_CANT_SAVE_STATE;
-
-                    // A heavy-weight application can not be in a custom process.
-                    // We can do direct compare because we intern all strings.
-                    if (ai.processName != null && ai.processName != ai.packageName) {
-                        outError[0] = "cantSaveState applications can not use custom processes";
-                    }
-                }
-            }
         }
 
         sa.recycle();
@@ -1730,11 +1685,6 @@ public class PackageParser {
 
                 XmlUtils.skipCurrentTag(parser);
 
-            } else if (tagName.equals("uses-package")) {
-                // Dependencies for app installers; we don't currently try to
-                // enforce this.
-                XmlUtils.skipCurrentTag(parser);
-
             } else {
                 if (!RIGID_PARSER) {
                     Log.w(TAG, "Unknown element under <application>: " + tagName
@@ -1755,7 +1705,7 @@ public class PackageParser {
 
     private boolean parsePackageItemInfo(Package owner, PackageItemInfo outInfo,
             String[] outError, String tag, TypedArray sa,
-            int nameRes, int labelRes, int iconRes, int logoRes) {
+            int nameRes, int labelRes, int iconRes) {
         String name = sa.getNonConfigurationString(nameRes, 0);
         if (name == null) {
             outError[0] = tag + " does not specify android:name";
@@ -1773,7 +1723,7 @@ public class PackageParser {
             outInfo.icon = iconVal;
             outInfo.nonLocalizedLabel = null;
         }
-        
+
         TypedValue v = sa.peekValue(labelRes);
         if (v != null && (outInfo.labelRes=v.resourceId) == 0) {
             outInfo.nonLocalizedLabel = v.coerceToString();
@@ -1794,7 +1744,7 @@ public class PackageParser {
             mParseActivityArgs = new ParseComponentArgs(owner, outError,
                     com.android.internal.R.styleable.AndroidManifestActivity_name,
                     com.android.internal.R.styleable.AndroidManifestActivity_label,
-                    com.android.internal.R.styleable.AndroidManifestActivity_icon, 0,
+                    com.android.internal.R.styleable.AndroidManifestActivity_icon,
                     mSeparateProcesses,
                     com.android.internal.R.styleable.AndroidManifestActivity_process,
                     com.android.internal.R.styleable.AndroidManifestActivity_description,
@@ -1910,14 +1860,6 @@ public class PackageParser {
 
         sa.recycle();
 
-        if (receiver && (owner.applicationInfo.flags&ApplicationInfo.FLAG_CANT_SAVE_STATE) != 0) {
-            // A heavy-weight application can not have receives in its main process
-            // We can do direct compare because we intern all strings.
-            if (a.info.processName == owner.packageName) {
-                outError[0] = "Heavy-weight applications can not have receivers in main process";
-            }
-        }
-        
         if (outError[0] != null) {
             return null;
         }
@@ -2004,7 +1946,7 @@ public class PackageParser {
             mParseActivityAliasArgs = new ParseComponentArgs(owner, outError,
                     com.android.internal.R.styleable.AndroidManifestActivityAlias_name,
                     com.android.internal.R.styleable.AndroidManifestActivityAlias_label,
-                    com.android.internal.R.styleable.AndroidManifestActivityAlias_icon, 0,
+                    com.android.internal.R.styleable.AndroidManifestActivityAlias_icon,
                     mSeparateProcesses,
                     0,
                     com.android.internal.R.styleable.AndroidManifestActivityAlias_description,
@@ -2038,7 +1980,6 @@ public class PackageParser {
         info.configChanges = target.info.configChanges;
         info.flags = target.info.flags;
         info.icon = target.info.icon;
-        info.logo = target.info.logo;
         info.labelRes = target.info.labelRes;
         info.nonLocalizedLabel = target.info.nonLocalizedLabel;
         info.launchMode = target.info.launchMode;
@@ -2132,7 +2073,7 @@ public class PackageParser {
             mParseProviderArgs = new ParseComponentArgs(owner, outError,
                     com.android.internal.R.styleable.AndroidManifestProvider_name,
                     com.android.internal.R.styleable.AndroidManifestProvider_label,
-                    com.android.internal.R.styleable.AndroidManifestProvider_icon, 0,
+                    com.android.internal.R.styleable.AndroidManifestProvider_icon,
                     mSeparateProcesses,
                     com.android.internal.R.styleable.AndroidManifestProvider_process,
                     com.android.internal.R.styleable.AndroidManifestProvider_description,
@@ -2198,15 +2139,6 @@ public class PackageParser {
 
         sa.recycle();
 
-        if ((owner.applicationInfo.flags&ApplicationInfo.FLAG_CANT_SAVE_STATE) != 0) {
-            // A heavy-weight application can not have providers in its main process
-            // We can do direct compare because we intern all strings.
-            if (p.info.processName == owner.packageName) {
-                outError[0] = "Heavy-weight applications can not have providers in main process";
-                return null;
-            }
-        }
-        
         if (cpname == null) {
             outError[0] = "<provider> does not incude authorities attribute";
             return null;
@@ -2404,7 +2336,7 @@ public class PackageParser {
             mParseServiceArgs = new ParseComponentArgs(owner, outError,
                     com.android.internal.R.styleable.AndroidManifestService_name,
                     com.android.internal.R.styleable.AndroidManifestService_label,
-                    com.android.internal.R.styleable.AndroidManifestService_icon, 0,
+                    com.android.internal.R.styleable.AndroidManifestService_icon,
                     mSeparateProcesses,
                     com.android.internal.R.styleable.AndroidManifestService_process,
                     com.android.internal.R.styleable.AndroidManifestService_description,
@@ -2438,15 +2370,6 @@ public class PackageParser {
 
         sa.recycle();
 
-        if ((owner.applicationInfo.flags&ApplicationInfo.FLAG_CANT_SAVE_STATE) != 0) {
-            // A heavy-weight application can not have services in its main process
-            // We can do direct compare because we intern all strings.
-            if (s.info.processName == owner.packageName) {
-                outError[0] = "Heavy-weight applications can not have services in main process";
-                return null;
-            }
-        }
-        
         int outerDepth = parser.getDepth();
         int type;
         while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
@@ -2617,7 +2540,7 @@ public class PackageParser {
 
         outInfo.icon = sa.getResourceId(
                 com.android.internal.R.styleable.AndroidManifestIntentFilter_icon, 0);
-        
+
         sa.recycle();
 
         int outerDepth = parser.getDepth();
@@ -2783,15 +2706,9 @@ public class PackageParser {
         // For use by package manager to keep track of where it has done dexopt.
         public boolean mDidDexOpt;
         
-        // User set enabled state.
-        public int mSetEnabled = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
-
         // Additional data supplied by callers.
         public Object mExtras;
-
-        // Whether an operation is currently pending on this package
-        public boolean mOperationPending;
-
+        
         /*
          *  Applications hardware preferences
          */
@@ -2884,7 +2801,7 @@ public class PackageParser {
                 outInfo.icon = iconVal;
                 outInfo.nonLocalizedLabel = null;
             }
-            
+
             TypedValue v = args.sa.peekValue(args.labelRes);
             if (v != null && (outInfo.labelRes=v.resourceId) == 0) {
                 outInfo.nonLocalizedLabel = v.coerceToString();
@@ -3010,12 +2927,6 @@ public class PackageParser {
     }
 
     private static boolean copyNeeded(int flags, Package p, Bundle metaData) {
-        if (p.mSetEnabled != PackageManager.COMPONENT_ENABLED_STATE_DEFAULT) {
-            boolean enabled = p.mSetEnabled == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-            if (p.applicationInfo.enabled != enabled) {
-                return true;
-            }
-        }
         if ((flags & PackageManager.GET_META_DATA) != 0
                 && (metaData != null || p.mAppMetaData != null)) {
             return true;
@@ -3049,7 +2960,6 @@ public class PackageParser {
         if (!sCompatibilityModeEnabled) {
             ai.disableCompatibilityMode();
         }
-        ai.enabled = p.mSetEnabled == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         return ai;
     }
 
@@ -3225,7 +3135,6 @@ public class PackageParser {
         public int labelRes;
         public CharSequence nonLocalizedLabel;
         public int icon;
-        public int logo;
     }
 
     public final static class ActivityIntentInfo extends IntentInfo {

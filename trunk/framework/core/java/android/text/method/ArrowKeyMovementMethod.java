@@ -16,31 +16,30 @@
 
 package android.text.method;
 
-import android.text.Layout;
-import android.text.Selection;
-import android.text.Spannable;
+import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
+import android.graphics.Rect;
+import android.text.*;
 import android.widget.TextView;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.MotionEvent;
 
 // XXX this doesn't extend MetaKeyKeyListener because the signatures
 // don't match.  Need to figure that out.  Meanwhile the meta keys
 // won't work in fields that don't take input.
 
-public class ArrowKeyMovementMethod implements MovementMethod {
-    private boolean isCap(Spannable buffer) {
-        return ((MetaKeyKeyListener.getMetaState(buffer, KeyEvent.META_SHIFT_ON) == 1) ||
-                (MetaKeyKeyListener.getMetaState(buffer, MetaKeyKeyListener.META_SELECTING) != 0));
-    }
-
-    private boolean isAlt(Spannable buffer) {
-        return MetaKeyKeyListener.getMetaState(buffer, KeyEvent.META_ALT_ON) == 1;
-    }
-
+public class
+ArrowKeyMovementMethod
+implements MovementMethod
+{
     private boolean up(TextView widget, Spannable buffer) {
-        boolean cap = isCap(buffer);
-        boolean alt = isAlt(buffer);
+        boolean cap = (MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_SHIFT_ON) == 1) ||
+                      (MetaKeyKeyListener.getMetaState(buffer,
+                        MetaKeyKeyListener.META_SELECTING) != 0);
+        boolean alt = MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_ALT_ON) == 1;
         Layout layout = widget.getLayout();
 
         if (cap) {
@@ -61,8 +60,12 @@ public class ArrowKeyMovementMethod implements MovementMethod {
     }
 
     private boolean down(TextView widget, Spannable buffer) {
-        boolean cap = isCap(buffer);
-        boolean alt = isAlt(buffer);
+        boolean cap = (MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_SHIFT_ON) == 1) ||
+                      (MetaKeyKeyListener.getMetaState(buffer,
+                        MetaKeyKeyListener.META_SELECTING) != 0);
+        boolean alt = MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_ALT_ON) == 1;
         Layout layout = widget.getLayout();
 
         if (cap) {
@@ -83,8 +86,12 @@ public class ArrowKeyMovementMethod implements MovementMethod {
     }
 
     private boolean left(TextView widget, Spannable buffer) {
-        boolean cap = isCap(buffer);
-        boolean alt = isAlt(buffer);
+        boolean cap = (MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_SHIFT_ON) == 1) ||
+                      (MetaKeyKeyListener.getMetaState(buffer,
+                        MetaKeyKeyListener.META_SELECTING) != 0);
+        boolean alt = MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_ALT_ON) == 1;
         Layout layout = widget.getLayout();
 
         if (cap) {
@@ -103,8 +110,12 @@ public class ArrowKeyMovementMethod implements MovementMethod {
     }
 
     private boolean right(TextView widget, Spannable buffer) {
-        boolean cap = isCap(buffer);
-        boolean alt = isAlt(buffer);
+        boolean cap = (MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_SHIFT_ON) == 1) ||
+                      (MetaKeyKeyListener.getMetaState(buffer,
+                        MetaKeyKeyListener.META_SELECTING) != 0);
+        boolean alt = MetaKeyKeyListener.getMetaState(buffer,
+                        KeyEvent.META_ALT_ON) == 1;
         Layout layout = widget.getLayout();
 
         if (cap) {
@@ -120,6 +131,35 @@ public class ArrowKeyMovementMethod implements MovementMethod {
                 return Selection.moveRight(buffer, layout); 
             }
         }
+    }
+
+    private int getOffset(int x, int y, TextView widget){
+      // Converts the absolute X,Y coordinates to the character offset for the
+      // character whose position is closest to the specified
+      // horizontal position.
+      x -= widget.getTotalPaddingLeft();
+      y -= widget.getTotalPaddingTop();
+
+      // Clamp the position to inside of the view.
+      if (x < 0) {
+          x = 0;
+      } else if (x >= (widget.getWidth()-widget.getTotalPaddingRight())) {
+          x = widget.getWidth()-widget.getTotalPaddingRight() - 1;
+      }
+      if (y < 0) {
+          y = 0;
+      } else if (y >= (widget.getHeight()-widget.getTotalPaddingBottom())) {
+          y = widget.getHeight()-widget.getTotalPaddingBottom() - 1;
+      }
+
+      x += widget.getScrollX();
+      y += widget.getScrollY();
+
+      Layout layout = widget.getLayout();
+      int line = layout.getLineForVertical(y);
+
+      int offset = layout.getOffsetForHorizontal(line, x);
+      return offset;
     }
 
     public boolean onKeyDown(TextView widget, Spannable buffer, int keyCode, KeyEvent event) {
@@ -153,9 +193,10 @@ public class ArrowKeyMovementMethod implements MovementMethod {
             break;
 
         case KeyEvent.KEYCODE_DPAD_CENTER:
-            if ((MetaKeyKeyListener.getMetaState(buffer, MetaKeyKeyListener.META_SELECTING) != 0) &&
-                (widget.showContextMenu())) {
+            if (MetaKeyKeyListener.getMetaState(buffer, MetaKeyKeyListener.META_SELECTING) != 0) {
+                if (widget.showContextMenu()) {
                     handled = true;
+                }
             }
         }
 
@@ -173,7 +214,8 @@ public class ArrowKeyMovementMethod implements MovementMethod {
 
     public boolean onKeyOther(TextView view, Spannable text, KeyEvent event) {
         int code = event.getKeyCode();
-        if (code != KeyEvent.KEYCODE_UNKNOWN && event.getAction() == KeyEvent.ACTION_MULTIPLE) {
+        if (code != KeyEvent.KEYCODE_UNKNOWN
+                && event.getAction() == KeyEvent.ACTION_MULTIPLE) {
             int repeat = event.getRepeatCount();
             boolean handled = false;
             while ((--repeat) > 0) {
@@ -184,11 +226,13 @@ public class ArrowKeyMovementMethod implements MovementMethod {
         return false;
     }
 
-    public boolean onTrackballEvent(TextView widget, Spannable text, MotionEvent event) {
+    public boolean onTrackballEvent(TextView widget, Spannable text,
+            MotionEvent event) {
         return false;
     }
 
-    public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
+    public boolean onTouchEvent(TextView widget, Spannable buffer,
+                                MotionEvent event) {
         int initialScrollX = -1, initialScrollY = -1;
         if (event.getAction() == MotionEvent.ACTION_UP) {
             initialScrollX = Touch.getInitialScrollX(widget, buffer);
@@ -199,20 +243,53 @@ public class ArrowKeyMovementMethod implements MovementMethod {
 
         if (widget.isFocused() && !widget.didTouchFocusSelect()) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-              boolean cap = isCap(buffer);
+              boolean cap = (MetaKeyKeyListener.getMetaState(buffer,
+                              KeyEvent.META_SHIFT_ON) == 1) ||
+                            (MetaKeyKeyListener.getMetaState(buffer,
+                              MetaKeyKeyListener.META_SELECTING) != 0);
+              int x = (int) event.getX();
+              int y = (int) event.getY();
+              int offset = getOffset(x, y, widget);
+
               if (cap) {
-                  int offset = widget.getOffset((int) event.getX(), (int) event.getY());
-                  
-                  buffer.setSpan(LAST_TAP_DOWN, offset, offset, Spannable.SPAN_POINT_POINT);
+                  buffer.setSpan(LAST_TAP_DOWN, offset, offset,
+                                 Spannable.SPAN_POINT_POINT);
 
                   // Disallow intercepting of the touch events, so that
                   // users can scroll and select at the same time.
                   // without this, users would get booted out of select
                   // mode once the view detected it needed to scroll.
                   widget.getParent().requestDisallowInterceptTouchEvent(true);
+              } else {
+                  OnePointFiveTapState[] tap = buffer.getSpans(0, buffer.length(),
+                      OnePointFiveTapState.class);
+
+                  if (tap.length > 0) {
+                      if (event.getEventTime() - tap[0].mWhen <=
+                          ViewConfiguration.getDoubleTapTimeout() &&
+                          sameWord(buffer, offset, Selection.getSelectionEnd(buffer))) {
+
+                          tap[0].active = true;
+                          MetaKeyKeyListener.startSelecting(widget, buffer);
+                          widget.getParent().requestDisallowInterceptTouchEvent(true);
+                          buffer.setSpan(LAST_TAP_DOWN, offset, offset,
+                              Spannable.SPAN_POINT_POINT);
+                      }
+
+                      tap[0].mWhen = event.getEventTime();
+                  } else {
+                      OnePointFiveTapState newtap = new OnePointFiveTapState();
+                      newtap.mWhen = event.getEventTime();
+                      newtap.active = false;
+                      buffer.setSpan(newtap, 0, buffer.length(),
+                          Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                  }
               }
             } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                boolean cap = isCap(buffer);
+                boolean cap = (MetaKeyKeyListener.getMetaState(buffer,
+                                KeyEvent.META_SHIFT_ON) == 1) ||
+                              (MetaKeyKeyListener.getMetaState(buffer,
+                                MetaKeyKeyListener.META_SELECTING) != 0);
 
                 if (cap && handled) {
                     // Before selecting, make sure we've moved out of the "slop".
@@ -220,15 +297,45 @@ public class ArrowKeyMovementMethod implements MovementMethod {
                     // OUT of the slop
 
                     // Turn long press off while we're selecting. User needs to
-                    // re-tap on the selection to enable long press
+                    // re-tap on the selection to enable longpress
                     widget.cancelLongPress();
 
                     // Update selection as we're moving the selection area.
 
                     // Get the current touch position
-                    int offset = widget.getOffset((int) event.getX(), (int) event.getY());
+                    int x = (int) event.getX();
+                    int y = (int) event.getY();
+                    int offset = getOffset(x, y, widget);
 
-                    Selection.extendSelection(buffer, offset);
+                    final OnePointFiveTapState[] tap = buffer.getSpans(0, buffer.length(),
+                            OnePointFiveTapState.class);
+
+                    if (tap.length > 0 && tap[0].active) {
+                        // Get the last down touch position (the position at which the
+                        // user started the selection)
+                        int lastDownOffset = buffer.getSpanStart(LAST_TAP_DOWN);
+
+                        // Compute the selection boundaries
+                        int spanstart;
+                        int spanend;
+                        if (offset >= lastDownOffset) {
+                            // Expand from word start of the original tap to new word
+                            // end, since we are selecting "forwards"
+                            spanstart = findWordStart(buffer, lastDownOffset);
+                            spanend = findWordEnd(buffer, offset);
+                        } else {
+                            // Expand to from new word start to word end of the original
+                            // tap since we are selecting "backwards".
+                            // The spanend will always need to be associated with the touch
+                            // up position, so that refining the selection with the
+                            // trackball will work as expected.
+                            spanstart = findWordEnd(buffer, lastDownOffset);
+                            spanend = findWordStart(buffer, offset);
+                        }
+                        Selection.setSelection(buffer, spanstart, spanend);
+                    } else {
+                        Selection.extendSelection(buffer, offset);
+                    }
                     return true;
                 }
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -237,17 +344,70 @@ public class ArrowKeyMovementMethod implements MovementMethod {
                 // the current scroll offset to avoid the scroll jumping later
                 // to show it.
                 if ((initialScrollY >= 0 && initialScrollY != widget.getScrollY()) ||
-                    (initialScrollX >= 0 && initialScrollX != widget.getScrollX())) {
+                        (initialScrollX >= 0 && initialScrollX != widget.getScrollX())) {
                     widget.moveCursorToVisibleOffset();
                     return true;
                 }
 
-                int offset = widget.getOffset((int) event.getX(), (int) event.getY());
-                if (isCap(buffer)) {
+                int x = (int) event.getX();
+                int y = (int) event.getY();
+                int off = getOffset(x, y, widget);
+
+                // XXX should do the same adjust for x as we do for the line.
+
+                OnePointFiveTapState[] onepointfivetap = buffer.getSpans(0, buffer.length(),
+                    OnePointFiveTapState.class);
+                if (onepointfivetap.length > 0 && onepointfivetap[0].active &&
+                    Selection.getSelectionStart(buffer) == Selection.getSelectionEnd(buffer)) {
+                    // If we've set select mode, because there was a onepointfivetap,
+                    // but there was no ensuing swipe gesture, undo the select mode
+                    // and remove reference to the last onepointfivetap.
+                    MetaKeyKeyListener.stopSelecting(widget, buffer);
+                    for (int i=0; i < onepointfivetap.length; i++) {
+                        buffer.removeSpan(onepointfivetap[i]);
+                    }
                     buffer.removeSpan(LAST_TAP_DOWN);
-                    Selection.extendSelection(buffer, offset);
+                }
+                boolean cap = (MetaKeyKeyListener.getMetaState(buffer,
+                                KeyEvent.META_SHIFT_ON) == 1) ||
+                              (MetaKeyKeyListener.getMetaState(buffer,
+                                MetaKeyKeyListener.META_SELECTING) != 0);
+
+                DoubleTapState[] tap = buffer.getSpans(0, buffer.length(),
+                                                       DoubleTapState.class);
+                boolean doubletap = false;
+
+                if (tap.length > 0) {
+                    if (event.getEventTime() - tap[0].mWhen <=
+                        ViewConfiguration.getDoubleTapTimeout() &&
+                        sameWord(buffer, off, Selection.getSelectionEnd(buffer))) {
+
+                        doubletap = true;
+                    }
+
+                    tap[0].mWhen = event.getEventTime();
                 } else {
-                    Selection.setSelection(buffer, offset);
+                    DoubleTapState newtap = new DoubleTapState();
+                    newtap.mWhen = event.getEventTime();
+                    buffer.setSpan(newtap, 0, buffer.length(),
+                                   Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                }
+
+                if (cap) {
+                    buffer.removeSpan(LAST_TAP_DOWN);
+                    if (onepointfivetap.length > 0 && onepointfivetap[0].active) {
+                        // If we selecting something with the onepointfivetap-and
+                        // swipe gesture, stop it on finger up.
+                        MetaKeyKeyListener.stopSelecting(widget, buffer);
+                    } else {
+                        Selection.extendSelection(buffer, off);
+                    }
+                } else if (doubletap) {
+                    Selection.setSelection(buffer,
+                                           findWordStart(buffer, off),
+                                           findWordEnd(buffer, off));
+                } else {
+                    Selection.setSelection(buffer, off);
                 }
 
                 MetaKeyKeyListener.adjustMetaAfterKeypress(buffer);
@@ -260,6 +420,75 @@ public class ArrowKeyMovementMethod implements MovementMethod {
         return handled;
     }
 
+    private static class DoubleTapState implements NoCopySpan {
+        long mWhen;
+    }
+
+    /* We check for a onepointfive tap. This is similar to
+    *  doubletap gesture (where a finger goes down, up, down, up, in a short
+    *  time period), except in the onepointfive tap, a users finger only needs
+    *  to go down, up, down in a short time period. We detect this type of tap
+    *  to implement the onepointfivetap-and-swipe selection gesture.
+    *  This gesture allows users to select a segment of text without going
+    *  through the "select text" option in the context menu.
+    */
+    private static class OnePointFiveTapState implements NoCopySpan {
+        long mWhen;
+        boolean active;
+    }
+
+    private static boolean sameWord(CharSequence text, int one, int two) {
+        int start = findWordStart(text, one);
+        int end = findWordEnd(text, one);
+
+        if (end == start) {
+            return false;
+        }
+
+        return start == findWordStart(text, two) &&
+               end == findWordEnd(text, two);
+    }
+
+    // TODO: Unify with TextView.getWordForDictionary()
+    private static int findWordStart(CharSequence text, int start) {
+        for (; start > 0; start--) {
+            char c = text.charAt(start - 1);
+            int type = Character.getType(c);
+
+            if (c != '\'' &&
+                type != Character.UPPERCASE_LETTER &&
+                type != Character.LOWERCASE_LETTER &&
+                type != Character.TITLECASE_LETTER &&
+                type != Character.MODIFIER_LETTER &&
+                type != Character.DECIMAL_DIGIT_NUMBER) {
+                break;
+            }
+        }
+
+        return start;
+    }
+
+    // TODO: Unify with TextView.getWordForDictionary()
+    private static int findWordEnd(CharSequence text, int end) {
+        int len = text.length();
+
+        for (; end < len; end++) {
+            char c = text.charAt(end);
+            int type = Character.getType(c);
+
+            if (c != '\'' &&
+                type != Character.UPPERCASE_LETTER &&
+                type != Character.LOWERCASE_LETTER &&
+                type != Character.TITLECASE_LETTER &&
+                type != Character.MODIFIER_LETTER &&
+                type != Character.DECIMAL_DIGIT_NUMBER) {
+                break;
+            }
+        }
+
+        return end;
+    }
+
     public boolean canSelectArbitrarily() {
         return true;
     }
@@ -270,9 +499,25 @@ public class ArrowKeyMovementMethod implements MovementMethod {
 
     public void onTakeFocus(TextView view, Spannable text, int dir) {
         if ((dir & (View.FOCUS_FORWARD | View.FOCUS_DOWN)) != 0) {
-            if (view.getLayout() == null) {
-                // This shouldn't be null, but do something sensible if it is.
+            Layout layout = view.getLayout();
+
+            if (layout == null) {
+                /*
+                 * This shouldn't be null, but do something sensible if it is.
+                 */
                 Selection.setSelection(text, text.length());
+            } else {
+                /*
+                 * Put the cursor at the end of the first line, which is
+                 * either the last offset if there is only one line, or the
+                 * offset before the first character of the second line
+                 * if there is more than one line.
+                 */
+                if (layout.getLineCount() == 1) {
+                    Selection.setSelection(text, text.length());
+                } else {
+                    Selection.setSelection(text, layout.getLineStart(1) - 1);
+                }
             }
         } else {
             Selection.setSelection(text, text.length());
@@ -280,9 +525,8 @@ public class ArrowKeyMovementMethod implements MovementMethod {
     }
 
     public static MovementMethod getInstance() {
-        if (sInstance == null) {
+        if (sInstance == null)
             sInstance = new ArrowKeyMovementMethod();
-        }
 
         return sInstance;
     }

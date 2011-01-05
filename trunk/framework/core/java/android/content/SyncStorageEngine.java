@@ -95,7 +95,7 @@ public class SyncStorageEngine extends Handler {
 
     public static final long NOT_IN_BACKOFF_MODE = -1;
 
-    public static final Intent SYNC_CONNECTION_SETTING_CHANGED_INTENT =
+    private static final Intent SYNC_CONNECTION_SETTING_CHANGED_INTENT =
             new Intent("com.android.sync.SYNC_CONN_STATUS_CHANGED");
 
     // TODO: i18n -- grab these out of resources.
@@ -317,9 +317,7 @@ public class SyncStorageEngine extends Handler {
         if (sSyncStorageEngine != null) {
             return;
         }
-        // This call will return the correct directory whether Encrypted File Systems is
-        // enabled or not.
-        File dataDir = Environment.getSecureDataDirectory();
+        File dataDir = Environment.getDataDirectory();
         sSyncStorageEngine = new SyncStorageEngine(context, dataDir);
     }
 
@@ -411,7 +409,7 @@ public class SyncStorageEngine extends Handler {
     }
 
     public void setSyncAutomatically(Account account, String providerName, boolean sync) {
-        Log.d(TAG, "setSyncAutomatically: " + /*account +*/ ", provider " + providerName
+        Log.d(TAG, "setSyncAutomatically: " + account + ", provider " + providerName
                 + " -> " + sync);
         synchronized (mAuthorities) {
             AuthorityInfo authority = getOrCreateAuthorityLocked(account, providerName, -1, false);

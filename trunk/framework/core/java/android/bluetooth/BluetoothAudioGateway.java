@@ -23,7 +23,7 @@ import android.os.Handler;
 import android.util.Log;
 
 /**
- * Listens for incoming RFCOMM connection for the headset / handsfree service.
+ * Listen's for incoming RFCOMM connection for the headset / handsfree service.
  *
  * TODO: Use the new generic BluetoothSocket class instead of this legacy code
  *

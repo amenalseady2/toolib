@@ -157,14 +157,6 @@ public class ComponentInfo extends PackageItemInfo {
     /**
      * @hide
      */
-    @Override
-    protected Drawable loadDefaultLogo(PackageManager pm) {
-        return applicationInfo.loadLogo(pm);
-    }
-    
-    /**
-     * @hide
-     */
     @Override protected ApplicationInfo getApplicationInfo() {
         return applicationInfo;
     }

@@ -45,7 +45,6 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.SystemProperties;
-import android.os.WorkSource;
 import android.provider.Settings;
 import android.text.format.DateUtils;
 import android.text.format.Time;
@@ -127,8 +126,8 @@ public class SyncManager implements OnAccountsUpdateListener {
 
     private static final int INITIALIZATION_UNBIND_DELAY_MS = 5000;
 
-    private static final String SYNC_WAKE_LOCK = "*sync*";
-    private static final String HANDLE_SYNC_ALARM_WAKE_LOCK = "SyncManagerHandleSyncAlarm";
+    private static final String SYNC_WAKE_LOCK = "SyncManagerSyncWakeLock";
+    private static final String HANDLE_SYNC_ALARM_WAKE_LOCK = "SyncManagerHandleSyncAlarmWakeLock";
 
     private Context mContext;
 
@@ -1701,12 +1700,10 @@ public class SyncManager implements OnAccountsUpdateListener {
                 mActiveSyncContext.close();
                 mActiveSyncContext = null;
                 mSyncStorageEngine.setActiveSync(mActiveSyncContext);
-                mSyncWakeLock.setWorkSource(null);
                 runStateIdle();
                 return;
             }
 
-            mSyncWakeLock.setWorkSource(new WorkSource(syncAdapterInfo.uid));
             mSyncWakeLock.acquire();
             // no need to schedule an alarm, as that will be done by our caller.
 

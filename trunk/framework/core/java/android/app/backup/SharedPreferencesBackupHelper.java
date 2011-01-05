@@ -16,7 +16,6 @@
 
 package android.app.backup;
 
-import android.app.QueuedWork;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.ParcelFileDescriptor;
@@ -95,11 +94,7 @@ public class SharedPreferencesBackupHelper extends FileBackupHelperBase implemen
     public void performBackup(ParcelFileDescriptor oldState, BackupDataOutput data,
             ParcelFileDescriptor newState) {
         Context context = mContext;
-
-        // If a SharedPreference has an outstanding write in flight,
-        // wait for it to finish flushing to disk.
-        QueuedWork.waitToFinish();
-
+        
         // make filenames for the prefGroups
         String[] prefGroups = mPrefGroups;
         final int N = prefGroups.length;
@@ -128,3 +123,4 @@ public class SharedPreferencesBackupHelper extends FileBackupHelperBase implemen
         }
     }
 }
+

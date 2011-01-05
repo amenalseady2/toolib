@@ -74,6 +74,4 @@ interface IConnectivityManager
     String[] getTetherableUsbRegexs();
 
     String[] getTetherableWifiRegexs();
-
-    void reportInetCondition(int networkType, int percentage);
 }

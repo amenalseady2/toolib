@@ -39,6 +39,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
@@ -67,8 +68,6 @@ import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1206,37 +1205,19 @@ public class Activity extends ContextThemeWrapper
      * @see #onPause
      */
     public boolean onCreateThumbnail(Bitmap outBitmap, Canvas canvas) {
-        if (mDecor == null) {
+        final View view = mDecor;
+        if (view == null) {
             return false;
         }
 
-        int paddingLeft = 0;
-        int paddingRight = 0;
-        int paddingTop = 0;
-        int paddingBottom = 0;
-
-        // Find System window and use padding so we ignore space reserved for decorations
-        // like the status bar and such.
-        final FrameLayout top = (FrameLayout) mDecor;
-        for (int i = 0; i < top.getChildCount(); i++) {
-            View child = top.getChildAt(i);
-            if (child.isFitsSystemWindowsFlagSet()) {
-                paddingLeft = child.getPaddingLeft();
-                paddingRight = child.getPaddingRight();
-                paddingTop = child.getPaddingTop();
-                paddingBottom = child.getPaddingBottom();
-                break;
-            }
-        }
-        
-        final int visibleWidth = mDecor.getWidth() - paddingLeft - paddingRight;
-        final int visibleHeight = mDecor.getHeight() - paddingTop - paddingBottom;
+        final int vw = view.getWidth();
+        final int vh = view.getHeight();
+        final int dw = outBitmap.getWidth();
+        final int dh = outBitmap.getHeight();
 
         canvas.save();
-        canvas.scale( (float) outBitmap.getWidth() / visibleWidth,
-                (float) outBitmap.getHeight() / visibleHeight);
-        canvas.translate(-paddingLeft, -paddingTop);
-        mDecor.draw(canvas);
+        canvas.scale(((float)dw)/vw, ((float)dh)/vh);
+        view.draw(canvas);
         canvas.restore();
 
         return true;
@@ -1426,9 +1407,7 @@ public class Activity extends ContextThemeWrapper
      * <li> The function will be called between {@link #onStop} and
      * {@link #onDestroy}.
      * <li> A new instance of the activity will <em>always</em> be immediately
-     * created after this one's {@link #onDestroy()} is called.  In particular,
-     * <em>no</em> messages will be dispatched during this time (when the returned
-     * object does not have an activity to be associated with).
+     * created after this one's {@link #onDestroy()} is called.
      * <li> The object you return here will <em>always</em> be available from
      * the {@link #getLastNonConfigurationInstance()} method of the following
      * activity instance as described there.
@@ -1441,15 +1420,6 @@ public class Activity extends ContextThemeWrapper
      * may change based on the configuration, including any data loaded from
      * resources such as strings, layouts, or drawables.
      * 
-     * <p>The guarantee of no message handling during the switch to the next
-     * activity simplifies use with active objects.  For example if your retained
-     * state is an {@link android.os.AsyncTask} you are guaranteed that its
-     * call back functions (like {@link android.os.AsyncTask#onPostExecute}) will
-     * not be called from the call here until you execute the next instance's
-     * {@link #onCreate(Bundle)}.  (Note however that there is of course no such
-     * guarantee for {@link android.os.AsyncTask#doInBackground} since that is
-     * running in a separate thread.)
-     *
      * @return Return any Object holding the desired state to propagate to the
      * next activity instance.
      */
@@ -1630,11 +1600,31 @@ public class Activity extends ContextThemeWrapper
     }
 
     /**
-     * @deprecated As of {@link android.os.Build.VERSION_CODES#GINGERBREAD}
-     * this is a no-op.
+     * Control whether this activity is required to be persistent.  By default
+     * activities are not persistent; setting this to true will prevent the
+     * system from stopping this activity or its process when running low on
+     * resources.
+     * 
+     * <p><em>You should avoid using this method</em>, it has severe negative
+     * consequences on how well the system can manage its resources.  A better
+     * approach is to implement an application service that you control with
+     * {@link Context#startService} and {@link Context#stopService}.
+     * 
+     * @param isPersistent Control whether the current activity must be
+     *                     persistent, true if so, false for the normal
+     *                     behavior.
      */
-    @Deprecated
     public void setPersistent(boolean isPersistent) {
+        if (mParent == null) {
+            try {
+                ActivityManagerNative.getDefault()
+                    .setPersistent(mToken, isPersistent);
+            } catch (RemoteException e) {
+                // Empty
+            }
+        } else {
+            throw new RuntimeException("setPersistent() not yet supported for embedded activities");
+        }
     }
 
     /**
@@ -2608,10 +2598,6 @@ public class Activity extends ContextThemeWrapper
      * <p>This can be useful if you know that you will never show a dialog again and
      * want to avoid the overhead of saving and restoring it in the future.
      *
-     * <p>As of {@link android.os.Build.VERSION_CODES#GINGERBREAD}, this function
-     * will not throw an exception if you try to remove an ID that does not
-     * currently have an associated dialog.</p>
-     * 
      * @param id The id of the managed dialog.
      *
      * @see #onCreateDialog(int, Bundle)
@@ -2620,13 +2606,17 @@ public class Activity extends ContextThemeWrapper
      * @see #dismissDialog(int)
      */
     public final void removeDialog(int id) {
-        if (mManagedDialogs != null) {
-            final ManagedDialog md = mManagedDialogs.get(id);
-            if (md != null) {
-                md.mDialog.dismiss();
-                mManagedDialogs.remove(id);
-            }
+        if (mManagedDialogs == null) {
+            return;
         }
+
+        final ManagedDialog md = mManagedDialogs.get(id);
+        if (md == null) {
+            return;
+        }
+
+        md.mDialog.dismiss();
+        mManagedDialogs.remove(id);
     }
 
     /**
@@ -3849,14 +3839,7 @@ public class Activity extends ContextThemeWrapper
     }
 
     final void performPause() {
-        mCalled = false;
         onPause();
-        if (!mCalled && getApplicationInfo().targetSdkVersion
-                >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-            throw new SuperNotCalledException(
-                    "Activity " + mComponent.toShortString() +
-                    " did not call through to super.onPause()");
-        }
     }
     
     final void performUserLeaving() {

@@ -46,32 +46,27 @@ import android.widget.RemoteViews.RemoteView;
  */
 @RemoteView
 public class FrameLayout extends ViewGroup {
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     boolean mMeasureAllChildren = false;
 
-    @ViewDebug.ExportedProperty(category = "drawing")
+    @ViewDebug.ExportedProperty
     private Drawable mForeground;
-
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     private int mForegroundPaddingLeft = 0;
-
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     private int mForegroundPaddingTop = 0;
-
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     private int mForegroundPaddingRight = 0;
-
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     private int mForegroundPaddingBottom = 0;
 
     private final Rect mSelfBounds = new Rect();
     private final Rect mOverlayBounds = new Rect();
-
-    @ViewDebug.ExportedProperty(category = "drawing")
+    @ViewDebug.ExportedProperty
     private int mForegroundGravity = Gravity.FILL;
 
     /** {@hide} */
-    @ViewDebug.ExportedProperty(category = "drawing")
+    @ViewDebug.ExportedProperty
     protected boolean mForegroundInPadding = true;
 
     boolean mForegroundBoundsChanged = false;
