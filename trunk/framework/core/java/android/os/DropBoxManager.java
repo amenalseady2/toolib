@@ -21,6 +21,7 @@ import android.util.Log;
 import com.android.internal.os.IDropBoxManagerService;
 
 import java.io.ByteArrayInputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -54,11 +55,35 @@ public class DropBoxManager {
     public static final int IS_GZIPPED = 4;
 
     /**
+     * Broadcast Action: This is broadcast when a new entry is added in the dropbox.
+     * You must hold the {@link android.Manifest.permission#READ_LOGS} permission
+     * in order to receive this broadcast.
+     *
+     * <p class="note">This is a protected intent that can only be sent
+     * by the system.
+     */
+    public static final String ACTION_DROPBOX_ENTRY_ADDED =
+        "android.intent.action.DROPBOX_ENTRY_ADDED";
+
+    /**
+     * Extra for {@link android.os.DropBoxManager#ACTION_DROPBOX_ENTRY_ADDED}:
+     * string containing the dropbox tag.
+     */
+    public static final String EXTRA_TAG = "tag";
+
+    /**
+     * Extra for {@link android.os.DropBoxManager#ACTION_DROPBOX_ENTRY_ADDED}:
+     * long integer value containing time (in milliseconds since January 1, 1970 00:00:00 UTC)
+     * when the entry was created.
+     */
+    public static final String EXTRA_TIME = "time";
+
+    /**
      * A single entry retrieved from the drop box.
      * This may include a reference to a stream, so you must call
      * {@link #close()} when you are done using it.
      */
-    public static class Entry implements Parcelable {
+    public static class Entry implements Parcelable, Closeable {
         private final String mTag;
         private final long mTimeMillis;
 
@@ -135,7 +160,7 @@ public class DropBoxManager {
         /** @return time when the entry was originally created. */
         public long getTimeMillis() { return mTimeMillis; }
 
-        /** @return flags describing the content returned by @{link #getInputStream()}. */
+        /** @return flags describing the content returned by {@link #getInputStream()}. */
         public int getFlags() { return mFlags & ~IS_GZIPPED; }  // getInputStream() decompresses.
 
         /**
@@ -247,7 +272,7 @@ public class DropBoxManager {
         if (file == null) throw new NullPointerException();
         Entry entry = new Entry(tag, 0, file, flags);
         try {
-            mService.add(new Entry(tag, 0, file, flags));
+            mService.add(entry);
         } catch (RemoteException e) {
             // ignore
         } finally {
@@ -268,8 +293,8 @@ public class DropBoxManager {
     }
 
     /**
-     * Gets the next entry from the drop box *after* the specified time.
-     * Requires android.permission.READ_LOGS.  You must always call
+     * Gets the next entry from the drop box <em>after</em> the specified time.
+     * Requires <code>android.permission.READ_LOGS</code>.  You must always call
      * {@link Entry#close()} on the return value!
      *
      * @param tag of entry to look for, null for all tags

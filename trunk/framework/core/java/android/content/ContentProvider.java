@@ -78,6 +78,7 @@ public abstract class ContentProvider implements ComponentCallbacks {
     private String mReadPermission;
     private String mWritePermission;
     private PathPermission[] mPathPermissions;
+    private boolean mExported;
 
     private Transport mTransport = new Transport();
 
@@ -234,9 +235,9 @@ public abstract class ContentProvider implements ComponentCallbacks {
             final Context context = getContext();
             final String rperm = getReadPermission();
             final int pid = Binder.getCallingPid();
-            if (rperm == null
+            if (mExported && (rperm == null
                     || context.checkPermission(rperm, pid, uid)
-                    == PackageManager.PERMISSION_GRANTED) {
+                    == PackageManager.PERMISSION_GRANTED)) {
                 return;
             }
             
@@ -280,9 +281,9 @@ public abstract class ContentProvider implements ComponentCallbacks {
             final Context context = getContext();
             final String wperm = getWritePermission();
             final int pid = Binder.getCallingPid();
-            if (wperm == null
+            if (mExported && (wperm == null
                     || context.checkPermission(wperm, pid, uid)
-                    == PackageManager.PERMISSION_GRANTED) {
+                    == PackageManager.PERMISSION_GRANTED)) {
                 return true;
             }
             
@@ -483,6 +484,12 @@ public abstract class ContentProvider implements ComponentCallbacks {
      * threads, as described in
      * <a href="{@docRoot}guide/topics/fundamentals.html#procthread">Application Fundamentals:
      * Processes and Threads</a>.
+     *
+     * <p>Note that there are no permissions needed for an application to
+     * access this information; if your content provider requires read and/or
+     * write permissions, or is not exported, all applications can still call
+     * this method regardless of their access permissions.  This allows them
+     * to retrieve the MIME type for a URI when dispatching intents.
      *
      * @param uri the URI to query.
      * @return a MIME type string, or null if there is no type.
@@ -729,6 +736,7 @@ public abstract class ContentProvider implements ComponentCallbacks {
                 setReadPermission(info.readPermission);
                 setWritePermission(info.writePermission);
                 setPathPermissions(info.pathPermissions);
+                mExported = info.exported;
             }
             ContentProvider.this.onCreate();
         }

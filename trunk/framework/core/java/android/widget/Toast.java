@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,6 +42,8 @@ import android.view.WindowManagerImpl;
  * 有两个典型的例子就是音量控制和设置信息保存成功提示。</p>
  * <p>
  * 使用该类最简单的方法就是调用其静态方法，让他来构造你需要的一切并返回一个新的 Toast 对象。
+ * @author translate by cnmahj/jiahuibin（Android中文翻译组）
+ * @author convert by cnmahj
  */ 
 public class Toast {
     static final String TAG = "Toast";
