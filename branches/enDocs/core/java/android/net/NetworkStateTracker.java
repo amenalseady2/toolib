@@ -46,11 +46,16 @@ public abstract class NetworkStateTracker extends Handler {
     protected String[] mDnsPropNames;
     private boolean mPrivateDnsRouteSet;
     protected int mDefaultGatewayAddr;
-    private boolean mDefaultRouteSet;
     private boolean mTeardownRequested;
 
-    private static boolean DBG = true;
+    private static boolean DBG = false;
     private static final String TAG = "NetworkStateTracker";
+
+    // Share the event space with ConnectivityService (which we can't see, but
+    // must send events to).  If you change these, change ConnectivityService
+    // too.
+    private static final int MIN_NETWORK_STATE_TRACKER_EVENT = 1;
+    private static final int MAX_NETWORK_STATE_TRACKER_EVENT = 100;
 
     public static final int EVENT_STATE_CHANGED = 1;
     public static final int EVENT_SCAN_RESULTS_AVAILABLE = 2;
@@ -63,7 +68,6 @@ public abstract class NetworkStateTracker extends Handler {
     public static final int EVENT_CONFIGURATION_CHANGED = 4;
     public static final int EVENT_ROAMING_CHANGED = 5;
     public static final int EVENT_NETWORK_SUBTYPE_CHANGED = 6;
-    public static final int EVENT_RESTORE_DEFAULT_NETWORK = 7;
 
     public NetworkStateTracker(Context context,
             Handler target,
@@ -159,8 +163,7 @@ public abstract class NetworkStateTracker extends Handler {
     }
 
     public void addDefaultRoute() {
-        if ((mInterfaceName != null) && (mDefaultGatewayAddr != 0) &&
-                mDefaultRouteSet == false) {
+        if ((mInterfaceName != null) && (mDefaultGatewayAddr != 0)) {
             if (DBG) {
                 Log.d(TAG, "addDefaultRoute for " + mNetworkInfo.getTypeName() +
                         " (" + mInterfaceName + "), GatewayAddr=" + mDefaultGatewayAddr);
@@ -169,23 +172,20 @@ public abstract class NetworkStateTracker extends Handler {
             if (inetAddress == null) {
                 if (DBG) Log.d(TAG, " Unable to add default route. mDefaultGatewayAddr Error");
             } else {
-                if (NetworkUtils.addDefaultRoute(mInterfaceName, inetAddress)) {
-                    mDefaultRouteSet = true;
-                } else {
-                    if (DBG) Log.d(TAG, "  Unable to add default route.");
+                if (!NetworkUtils.addDefaultRoute(mInterfaceName, inetAddress) && DBG) {
+                    Log.d(TAG, "  Unable to add default route.");
                 }
             }
         }
     }
 
     public void removeDefaultRoute() {
-        if (mInterfaceName != null && mDefaultRouteSet == true) {
+        if (mInterfaceName != null) {
             if (DBG) {
                 Log.d(TAG, "removeDefaultRoute for " + mNetworkInfo.getTypeName() + " (" +
                         mInterfaceName + ")");
             }
             NetworkUtils.removeDefaultRoute(mInterfaceName);
-            mDefaultRouteSet = false;
         }
     }
 
@@ -199,7 +199,7 @@ public abstract class NetworkStateTracker extends Handler {
         String bufferSizes = SystemProperties.get(key);
 
         if (bufferSizes.length() == 0) {
-            Log.e(TAG, key + " not found in system properties. Using defaults");
+            Log.w(TAG, key + " not found in system properties. Using defaults");
 
             // Setting to default values so we won't be stuck to previous values
             key = "net.tcp.buffersize.default";
@@ -243,10 +243,10 @@ public abstract class NetworkStateTracker extends Handler {
                 stringToFile(prefix + "wmem_def", values[4]);
                 stringToFile(prefix + "wmem_max", values[5]);
             } else {
-                Log.e(TAG, "Invalid buffersize string: " + bufferSizes);
+                Log.w(TAG, "Invalid buffersize string: " + bufferSizes);
             }
         } catch (IOException e) {
-            Log.e(TAG, "Can't set tcp buffer sizes:" + e);
+            Log.w(TAG, "Can't set tcp buffer sizes:" + e);
         }
     }
 
