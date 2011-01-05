@@ -32,29 +32,35 @@ import android.view.WindowManager;
 import android.view.WindowManagerImpl;
 
 /**
- * Toast是为用户提供简短信息的视图。Toast类帮助你创建和显示该视图。
+ * A toast is a view containing a quick little message for the user.  The toast class
+ * helps you create and show those.
  * {@more}
  *
  * <p>
- * 该视图以浮于应用程序之上的形式呈现给用户。
- * 因为它并不获得焦点，即使用户正在输入也不会受到影响。
- * 它的目标是尽可能不中断用户操作，并使用户看到你提供的信息。
- * 有两个典型的例子就是音量控制和设置信息保存成功提示。</p>
+ * When the view is shown to the user, appears as a floating view over the
+ * application.  It will never receive focus.  The user will probably be in the
+ * middle of typing something else.  The idea is to be as unobtrusive as
+ * possible, while still showing the user the information you want them to see.
+ * Two examples are the volume control, and the brief message saying that your
+ * settings have been saved.
  * <p>
- * 使用该类最简单的方法就是调用其静态方法，让他来构造你需要的一切并返回一个新的 Toast 对象。
+ * The easiest way to use this class is to call one of the static methods that constructs
+ * everything you need and returns a new Toast object.
  */ 
 public class Toast {
     static final String TAG = "Toast";
     static final boolean localLOGV = false;
 
     /**
-     * 持续显示视图或文本提示较短时间。该时间长度可定制。该值为默认值。
+     * Show the view or text notification for a short period of time.  This time
+     * could be user-definable.  This is the default.
      * @see #setDuration
      */
     public static final int LENGTH_SHORT = 0;
 
     /**
-     * 持续显示视图或文本提示较长时间。该时间长度可定制。
+     * Show the view or text notification for a long period of time.  This time
+     * could be user-definable.
      * @see #setDuration
      */
     public static final int LENGTH_LONG = 1;
@@ -71,10 +77,11 @@ public class Toast {
     View mNextView;
 
     /**
-     * 构造一个空的 Toast 对象。在调用 {@link #show} 之前，必须先调用 {@link #setView}。
+     * Construct an empty Toast object.  You must call {@link #setView} before you
+     * can call {@link #show}.
      *
-     * @param context  使用的上下文。通常是你的 {@link android.app.Application} 或
-     * {@link android.app.Activity} 对象。
+     * @param context  The context to use.  Usually your {@link android.app.Application}
+     *                 or {@link android.app.Activity} object.
      */
     public Toast(Context context) {
         mContext = context;
@@ -84,7 +91,7 @@ public class Toast {
     }
     
     /**
-     * 按照指定的存续期间显示提示信息。
+     * Show the view for the specified duration.
      */
     public void show() {
         if (mNextView == null) {
@@ -105,8 +112,9 @@ public class Toast {
     }
 
     /**
-     * 如果视图已经显示则将其关闭，还没有显示则不再显示。一般不需要调用该方法。
-     * 正常情况下，视图会在超过存续期间后消失。
+     * Close the view if it's showing, or don't show it if it isn't showing yet.
+     * You do not normally have to call this.  Normally view will disappear on its own
+     * after the appropriate duration.
      */
     public void cancel() {
         mTN.hide();
@@ -114,7 +122,7 @@ public class Toast {
     }
     
     /**
-     * 设置要显示的视图。
+     * Set the view to show.
      * @see #getView
      */
     public void setView(View view) {
@@ -122,7 +130,7 @@ public class Toast {
     }
 
     /**
-     * 返回视图对象。
+     * Return the view.
      * @see #setView
      */
     public View getView() {
@@ -130,7 +138,7 @@ public class Toast {
     }
 
     /**
-     * 设置存续期间。
+     * Set how long to show the view for.
      * @see #LENGTH_SHORT
      * @see #LENGTH_LONG
      */
@@ -139,7 +147,7 @@ public class Toast {
     }
 
     /**
-     * 返回存续期间。
+     * Return the duration.
      * @see #setDuration
      */
     public int getDuration() {
@@ -147,10 +155,14 @@ public class Toast {
     }
     
     /**
-     * 设置视图的栏外空白。
+     * Set the margins of the view.
      *
-     * @param horizontalMargin 容器的边缘与提示信息的横向空白（与容器宽度的比）。
-     * @param verticalMargin 容器的边缘与提示信息的纵向空白（与容器高度的比）。
+     * @param horizontalMargin The horizontal margin, in percentage of the
+     *        container width, between the container's edges and the
+     *        notification
+     * @param verticalMargin The vertical margin, in percentage of the
+     *        container height, between the container's edges and the
+     *        notification
      */
     public void setMargin(float horizontalMargin, float verticalMargin) {
         mHorizontalMargin = horizontalMargin;
@@ -158,21 +170,21 @@ public class Toast {
     }
 
     /**
-     * 返回横向栏外空白。
+     * Return the horizontal margin.
      */
     public float getHorizontalMargin() {
         return mHorizontalMargin;
     }
 
     /**
-     * 返回纵向栏外空白。
+     * Return the vertical margin.
      */
     public float getVerticalMargin() {
         return mVerticalMargin;
     }
 
     /**
-     * 设置提示信息在屏幕上的显示位置。
+     * Set the location at which the notification should appear on the screen.
      * @see android.view.Gravity
      * @see #getGravity
      */
@@ -183,7 +195,7 @@ public class Toast {
     }
 
      /**
-     * 取得提示信息在屏幕上显示位置。
+     * Get the location at which the notification should appear on the screen.
      * @see android.view.Gravity
      * @see #getGravity
      */
@@ -192,26 +204,27 @@ public class Toast {
     }
 
     /**
-     * 返回相对于指定显示位置的横向偏移像素量。
+     * Return the X offset in pixels to apply to the gravity's location.
      */
     public int getXOffset() {
         return mX;
     }
     
     /**
-     * 返回相对于指定显示位置的纵向偏移像素量。
+     * Return the Y offset in pixels to apply to the gravity's location.
      */
     public int getYOffset() {
         return mY;
     }
     
     /**
-     * 生成一个包含文本的标准 Toast 视图对象。
+     * Make a standard toast that just contains a text view.
      *
-     * @param context  使用的上下文。通常是你的 {@link android.app.Application}
-     *                 或 {@link android.app.Activity} 对象。
-     * @param text     要显示的文本，可以是已格式化文本。
-     * @param duration 该信息的存续期间。值为 {@link #LENGTH_SHORT} 或 {@link #LENGTH_LONG}。
+     * @param context  The context to use.  Usually your {@link android.app.Application}
+     *                 or {@link android.app.Activity} object.
+     * @param text     The text to show.  Can be formatted text.
+     * @param duration How long to display the message.  Either {@link #LENGTH_SHORT} or
+     *                 {@link #LENGTH_LONG}
      *
      */
     public static Toast makeText(Context context, CharSequence text, int duration) {
@@ -230,14 +243,15 @@ public class Toast {
     }
 
     /**
-     * 生成一个从资源中取得的包含文本视图的标准 Toast 对象。
+     * Make a standard toast that just contains a text view with the text from a resource.
      *
-     * @param context  使用的上下文。通常是你的 {@link android.app.Application}
-     *                 或 {@link android.app.Activity} 对象。
-     * @param resId    要使用的字符串资源ID，可以是已格式化文本。
-     * @param duration 该信息的存续期间。值为 {@link #LENGTH_SHORT} 或 {@link #LENGTH_LONG}。
+     * @param context  The context to use.  Usually your {@link android.app.Application}
+     *                 or {@link android.app.Activity} object.
+     * @param resId    The resource id of the string resource to use.  Can be formatted text.
+     * @param duration How long to display the message.  Either {@link #LENGTH_SHORT} or
+     *                 {@link #LENGTH_LONG}
      *
-     * @throws Resources.NotFoundException 当资源未找到时
+     * @throws Resources.NotFoundException if the resource can't be found.
      */
     public static Toast makeText(Context context, int resId, int duration)
                                 throws Resources.NotFoundException {
@@ -245,16 +259,16 @@ public class Toast {
     }
 
     /**
-     * 更新之前通过 makeText() 方法生成的 Toast 对象的文本内容。
-     * @param resId 为 Toast 指定的新的字符串资源ID。
+     * Update the text in a Toast that was previously created using one of the makeText() methods.
+     * @param resId The new text for the Toast.
      */
     public void setText(int resId) {
         setText(mContext.getText(resId));
     }
     
     /**
-     * 更新之前通过 makeText() 方法生成的 Toast 对象的文本内容。
-     * @param s 为 Toast 指定的新的文本。
+     * Update the text in a Toast that was previously created using one of the makeText() methods.
+     * @param s The new text for the Toast.
      */
     public void setText(CharSequence s) {
         if (mNextView == null) {

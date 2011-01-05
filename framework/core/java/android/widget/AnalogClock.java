@@ -33,10 +33,8 @@ import android.widget.RemoteViews.RemoteView;
 import java.util.TimeZone;
 
 /**
- * 这个控件是一个带有时针和分针的模拟时钟。
- * @author translate by 农民伯伯
- * @author review by cnmahj
- * @author convert by cnmahj
+ * This widget display an analogic clock with two hands for hours and
+ * minutes.
  */
 @RemoteView
 public class AnalogClock extends View {

@@ -17,26 +17,26 @@
 package android.widget;
 
 /**
- * 此接口定义了一个使视图具有选中状态的扩展。
- * @author translate by CN七号
- * @author convert by cnmahj
+ * Defines an extension for views that make them checkable.
+ *
  */
 public interface Checkable {
     
     /**
-     * 设置当前视图控件的选中状态。
+     * Change the checked state of the view
      * 
      * @param checked The new checked state
      */
     void setChecked(boolean checked);
         
     /**
-     * @return 当前视图是否出于选中状态。	
+     * @return The current checked state of the view
      */
     boolean isChecked();
     
     /**
-     * 反转当前视图控件的选中状态。
+     * Change the checked state of the view to the inverse of its current state
+     *
      */
     void toggle();
 }

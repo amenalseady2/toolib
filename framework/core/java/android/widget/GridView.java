@@ -29,10 +29,11 @@ import android.view.animation.GridLayoutAnimationController;
 
 
 /**
- * 在二维滚动网格中显示条目的视图。网格中的条目来自与视图关联的 {@link ListAdapter}。
- * @author translate by 0_1
- * @author translate by cnmahj
- * @author convert by cnmahj
+ * A view that shows items in two-dimensional scrolling grid. The items in the
+ * grid come from the {@link ListAdapter} associated with this view.
+ *
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-gridview.html">Grid
+ * View tutorial</a>.</p>
  */
 public class GridView extends AbsListView {
     public static final int NO_STRETCH = 0;
@@ -108,9 +109,9 @@ public class GridView extends AbsListView {
     }
 
     /**
-     * 设置 GridView 的后端数据。
+     * Sets the data behind this GridView.
      *
-     * @param adapter 为网格提供数据的适配器
+     * @param adapter the adapter providing the grid's data
      */
     @Override
     public void setAdapter(ListAdapter adapter) {
@@ -1327,11 +1328,12 @@ public class GridView extends AbsListView {
     }
 
     /**
-     * 设置选中的条目。
+     * Sets the currently selected item
      * 
-     * @param position 数据条目在列表中的索引值（从 0 开始）。
+     * @param position Index (starting at 0) of the data item to be selected.
      * 
-     * 在触控模式下，不会选中条目，但会适当的调整显示位置。
+     * If in touch mode, the item will not be selected but it will still be positioned
+     * appropriately.
      */
     @Override
     public void setSelection(int position) {
@@ -1683,9 +1685,9 @@ public class GridView extends AbsListView {
     }
 
     /**
-     * 设置子视图的横向对齐模式。默认值为：Gravity.LEFT。
+     * Describes how the child views are horizontally aligned. Defaults to Gravity.LEFT
      *
-     * @param gravity 应用到网格子视图的对齐模式。
+     * @param gravity the gravity to apply to this grid's children
      *
      * @attr ref android.R.styleable#GridView_gravity
      */
@@ -1697,9 +1699,11 @@ public class GridView extends AbsListView {
     }
 
     /**
-     * 设置网格列间距。
+     * Set the amount of horizontal (x) spacing to place between each item
+     * in the grid.
      *
-     * @param horizontalSpacing 以像素为单位的网格列间距。
+     * @param horizontalSpacing The amount of horizontal space between items,
+     * in pixels.
      *
      * @attr ref android.R.styleable#GridView_horizontalSpacing
      */
@@ -1712,9 +1716,11 @@ public class GridView extends AbsListView {
 
 
     /**
-     * 设置网格行间距。
+     * Set the amount of vertical (y) spacing to place between each item
+     * in the grid.
      *
-     * @param verticalSpacing 以像素为单位的网格行间距。
+     * @param verticalSpacing The amount of vertical space between items,
+     * in pixels.
      *
      * @attr ref android.R.styleable#GridView_verticalSpacing
      */
@@ -1726,9 +1732,10 @@ public class GridView extends AbsListView {
     }
 
     /**
-     * 设置填充空间时网格中的条目的伸缩模式。
-     * @param stretchMode {@link #NO_STRETCH}、{@link #STRETCH_SPACING}、
-     * {@link #STRETCH_SPACING_UNIFORM} 或 {@link #STRETCH_COLUMN_WIDTH}。
+     * Control how items are stretched to fill their space.
+     *
+     * @param stretchMode Either {@link #NO_STRETCH},
+     * {@link #STRETCH_SPACING}, {@link #STRETCH_SPACING_UNIFORM}, or {@link #STRETCH_COLUMN_WIDTH}.
      *
      * @attr ref android.R.styleable#GridView_stretchMode
      */
@@ -1744,9 +1751,9 @@ public class GridView extends AbsListView {
     }
 
     /**
-     * 设置网格的列宽。
+     * Set the width of columns in the grid.
      *
-     * @param columnWidth 以像素为单位的列宽。
+     * @param columnWidth The column width, in pixels.
      *
      * @attr ref android.R.styleable#GridView_columnWidth
      */
@@ -1758,9 +1765,9 @@ public class GridView extends AbsListView {
     }
 
     /**
-     * 设置网格的列数。
+     * Set the number of columns in the grid
      *
-     * @param numColumns 设计列数。
+     * @param numColumns The desired number of columns.
      *
      * @attr ref android.R.styleable#GridView_numColumns
      */
@@ -1869,7 +1876,12 @@ public class GridView extends AbsListView {
         // TODO: Account for vertical spacing too
         final int numColumns = mNumColumns;
         final int rowCount = (mItemCount + numColumns - 1) / numColumns;
-        return Math.max(rowCount * 100, 0);
+        int result = Math.max(rowCount * 100, 0);
+        if (mScrollY != 0) {
+            // Compensate for overscroll
+            result += Math.abs((int) ((float) mScrollY / getHeight() * rowCount * 100));
+        }
+        return result;
     }
 }
 

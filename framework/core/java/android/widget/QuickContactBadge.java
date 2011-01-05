@@ -36,10 +36,8 @@ import android.view.View.OnClickListener;
 import com.android.internal.R;
 
 /**
- * 该小部件定义了用于显示一个可以显示标准快捷联系人徽章的图片以及点击 图片时的动作。
- * @author translate by 农民伯伯
- * @author review by cnmahj
- * @author convert by cnmahj
+ * Widget used to show an image with the standard QuickContact badge
+ * and on-click behavior.
  */
 public class QuickContactBadge extends ImageView implements OnClickListener {
 
@@ -50,6 +48,7 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     private QueryHandler mQueryHandler;
     private Drawable mBadgeBackground;
     private Drawable mNoBadgeBackground;
+    private int mSelectedContactsAppTabIndex = -1;
 
     protected String[] mExcludeMimes = null;
 
@@ -112,8 +111,8 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 设置 QuickContact 窗口的模式。可选项为 {@link QuickContact#MODE_SMALL}、
-     * {@link QuickContact#MODE_MEDIUM} 和 {@link QuickContact#MODE_LARGE}。
+     * Set the QuickContact window mode. Options are {@link QuickContact#MODE_SMALL},
+     * {@link QuickContact#MODE_MEDIUM}, {@link QuickContact#MODE_LARGE}.
      * @param size
      */
     public void setMode(int size) {
@@ -121,17 +120,27 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 指定与该 QuickContactBadge 相关联的联系人的URI。注意，该方法只用于显示
-     * QuickContact 窗口，并不会为你绑定联系人图片。
+     * Assign the contact uri that this QuickContactBadge should be associated
+     * with. Note that this is only used for displaying the QuickContact window and
+     * won't bind the contact's photo for you.
      *
-     * @param contactUri {@link Contacts#CONTENT_URI} 或者
-     *            {@link Contacts#CONTENT_LOOKUP_URI} 风格的 URI。
+     * @param contactUri Either a {@link Contacts#CONTENT_URI} or
+     *            {@link Contacts#CONTENT_LOOKUP_URI} style URI.
      */
     public void assignContactUri(Uri contactUri) {
         mContactUri = contactUri;
         mContactEmail = null;
         mContactPhone = null;
         onContactUriChanged();
+    }
+
+    /**
+     * Sets the currently selected tab of the Contacts application. If not set, this is -1
+     * and therefore does not save a tab selection when a phone call is being made
+     * @hide
+     */
+    public void setSelectedContactsAppTabIndex(int value) {
+        mSelectedContactsAppTabIndex = value;
     }
 
     private void onContactUriChanged() {
@@ -146,11 +155,13 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 使用电子邮箱地址来指定联系人。该方法应该只在联系人的 URI 未知时，
-     * 作为附加的手段，通过电子邮箱地址来查询联系人的 URI。
+     * Assign a contact based on an email address. This should only be used when
+     * the contact's URI is not available, as an extra query will have to be
+     * performed to lookup the URI based on the email.
      *
-     * @param emailAddress 联系人的电子邮件地址。
-     * @param lazyLookup 如果该值为真，该查询不立即执行，而是在单击视图时才执行。
+     * @param emailAddress The email address of the contact.
+     * @param lazyLookup If this is true, the lookup query will not be performed
+     * until this view is clicked.
      */
     public void assignContactFromEmail(String emailAddress, boolean lazyLookup) {
         mContactEmail = emailAddress;
@@ -165,11 +176,13 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 使用电话号码来指定联系人。该方法应该只在联系人的 URI 未知时，
-     * 作为附加的手段，通过电话号码来查询联系人的 URI。
-     * 
-     * @param phoneNumber 联系人的电话号码。
-     * @param lazyLookup 如果该值为真，该查询不立即执行，而是在单击视图时才执行。
+     * Assign a contact based on a phone number. This should only be used when
+     * the contact's URI is not available, as an extra query will have to be
+     * performed to lookup the URI based on the phone number.
+     *
+     * @param phoneNumber The phone number of the contact.
+     * @param lazyLookup If this is true, the lookup query will not be performed
+     * until this view is clicked.
      */
     public void assignContactFromPhone(String phoneNumber, boolean lazyLookup) {
         mContactPhone = phoneNumber;
@@ -203,16 +216,22 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 设置一组要排除不显示的MIMI类型列表。例如，可以隐藏Contacts.CONTENT_ITEM_TYPE类型的图标。
-     * 设置排除在外的、不显示的 MIME 类型一览。例如，
-     * {@link Contacts#CONTENT_ITEM_TYPE} 用于隐藏个人资料图标。
+     * Set a list of specific MIME-types to exclude and not display. For
+     * example, this can be used to hide the {@link Contacts#CONTENT_ITEM_TYPE}
+     * profile icon.
      */
     public void setExcludeMimes(String[] excludeMimes) {
         mExcludeMimes = excludeMimes;
     }
 
     private void trigger(Uri lookupUri) {
-        QuickContact.showQuickContact(getContext(), this, lookupUri, mMode, mExcludeMimes);
+        final Intent intent = QuickContact.getQuickContactIntent(getContext(), this, lookupUri,
+                mMode, mExcludeMimes);
+        if (mSelectedContactsAppTabIndex != -1) {
+            intent.putExtra(QuickContact.EXTRA_SELECTED_CONTACTS_APP_TAB_INDEX,
+                    mSelectedContactsAppTabIndex);
+        }
+        getContext().startActivity(intent);
     }
 
     private class QueryHandler extends AsyncQueryHandler {
@@ -233,6 +252,7 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
                         trigger = true;
                         createUri = Uri.fromParts("tel", (String)cookie, null);
 
+                        //$FALL-THROUGH$
                     case TOKEN_PHONE_LOOKUP: {
                         if (cursor != null && cursor.moveToFirst()) {
                             long contactId = cursor.getLong(PHONE_ID_COLUMN_INDEX);
@@ -246,12 +266,14 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
                         trigger = true;
                         createUri = Uri.fromParts("mailto", (String)cookie, null);
 
+                        //$FALL-THROUGH$
                     case TOKEN_EMAIL_LOOKUP: {
                         if (cursor != null && cursor.moveToFirst()) {
                             long contactId = cursor.getLong(EMAIL_ID_COLUMN_INDEX);
                             String lookupKey = cursor.getString(EMAIL_LOOKUP_STRING_COLUMN_INDEX);
                             lookupUri = Contacts.getLookupUri(contactId, lookupKey);
                         }
+                        break;
                     }
 
                     case TOKEN_CONTACT_LOOKUP_AND_TRIGGER: {
