@@ -46,6 +46,9 @@ oneway interface IWindow {
 
     void resized(int w, int h, in Rect coveredInsets, in Rect visibleInsets,
             boolean reportDraw, in Configuration newConfig);
+    void dispatchKey(in KeyEvent event);
+    void dispatchPointer(in MotionEvent event, long eventTime, boolean callWhenDone);
+    void dispatchTrackball(in MotionEvent event, long eventTime, boolean callWhenDone);
     void dispatchAppVisibility(boolean visible);
     void dispatchGetNewSurface();
 

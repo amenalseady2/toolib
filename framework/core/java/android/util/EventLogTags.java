@@ -29,7 +29,6 @@ import java.util.regex.Pattern;
  * @deprecated This class is no longer functional.
  * Use {@link android.util.EventLog} instead.
  */
-@Deprecated
 public class EventLogTags {
     public static class Description {
         public final int mTag;

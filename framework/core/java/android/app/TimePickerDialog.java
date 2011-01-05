@@ -32,9 +32,6 @@ import java.util.Calendar;
 
 /**
  * A dialog that prompts the user for the time of day using a {@link TimePicker}.
- *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-timepicker.html">Time Picker
- * tutorial</a>.</p>
  */
 public class TimePickerDialog extends AlertDialog implements OnClickListener,
         OnTimeChangedListener {

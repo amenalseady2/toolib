@@ -33,17 +33,16 @@ import android.view.ViewGroup;
  */
 public interface Adapter {
     /**
-     * Register an observer that is called when changes happen to the data used by this adapter.
+     * 注册当用该适配器修改数据时调用的观察器。
      *
-     * @param observer the object that gets notified when the data set changes.
+     * @param observer 当数据变更时得到通知的对象。
      */
     void registerDataSetObserver(DataSetObserver observer);
 
     /**
-     * Unregister an observer that has previously been registered with this
-     * adapter via {@link #registerDataSetObserver}.
+     * 注销之前通过 {@link #registerDataSetObserver} 方法注册到该适配器的观察器。
      *
-     * @param observer the object to unregister.
+     * @param observer 要注销的对象。
      */
     void unregisterDataSetObserver(DataSetObserver observer);
 
@@ -72,10 +71,9 @@ public interface Adapter {
     long getItemId(int position);
     
     /**
-     * Indicated whether the item ids are stable across changes to the
-     * underlying data.
+     * 表明底层数据发生变化时，条目 ID 是否保存不变。
      * 
-     * @return True if the same id always refers to the same object.
+     * @return 如果相同的 ID 永远代表相同的对象，返回真。
      */
     boolean hasStableIds();
     
@@ -108,41 +106,36 @@ public interface Adapter {
     static final int IGNORE_ITEM_VIEW_TYPE = AdapterView.ITEM_VIEW_TYPE_IGNORE;
     
     /**
-     * Get the type of View that will be created by {@link #getView} for the specified item.
+     * 获取要通过 {@link #getView} 方法创建的指定位置条目的视图类型。
      * 
-     * @param position The position of the item within the adapter's data set whose view type we
-     *        want.
-     * @return An integer representing the type of View. Two views should share the same type if one
-     *         can be converted to the other in {@link #getView}. Note: Integers must be in the
-     *         range 0 to {@link #getViewTypeCount} - 1. {@link #IGNORE_ITEM_VIEW_TYPE} can
-     *         also be returned.
+     * @param position 我们要取得其视图类型的条目在适配器数据集中的位置。
+     * @return 视图类型的整数表现。如果一个视图可以通过 {@link #getView} 方法转换成另一个视图，
+     *         则两个视图将共享同一类型。注意：该整数的范围必须在 0 到 {@link #getViewTypeCount}
+     *         - 1之间。也可能返回 {@link #IGNORE_ITEM_VIEW_TYPE}。
      * @see #IGNORE_ITEM_VIEW_TYPE
      */
     int getItemViewType(int position);
     
     /**
      * <p>
-     * Returns the number of types of Views that will be created by
-     * {@link #getView}. Each type represents a set of views that can be
-     * converted in {@link #getView}. If the adapter always returns the same
-     * type of View for all items, this method should return 1.
+     * 返回通过 {@link #getView} 创建的视图类型的数量。每个类型代表一组可以通过
+     * {@link #getView} 方法转换的视图。如果适配器对所有条目都返回相同的视图类型，
+     * 该方法返回 1。
      * </p>
      * <p>
-     * This method will only be called when when the adapter is set on the
-     * the {@link AdapterView}.
+     * 该方法仅当适配器属于 {@link AdapterView} 时调用。
      * </p>
      * 
-     * @return The number of types of Views that will be created by this adapter
+     * @return 将由该适配器创建的视图类型的数量。
      */
     int getViewTypeCount();
     
     static final int NO_SELECTION = Integer.MIN_VALUE;
  
      /**
-      * @return true if this adapter doesn't contain any data.  This is used to determine
-      * whether the empty view should be displayed.  A typical implementation will return
-      * getCount() == 0 but since getCount() includes the headers and footers, specialized
-      * adapters might want a different behavior.
+      * @return 如果适配器没有任何数据，返回真。该方法用于检查是否应该显示空视图。
+      * 典型的实现是返回 <code>getCount() == 0</code>，但是当 getCount() 包含了
+      * 列表头和列表尾时，特定的适配器可以有不同的行为。
       */
      boolean isEmpty();
 }

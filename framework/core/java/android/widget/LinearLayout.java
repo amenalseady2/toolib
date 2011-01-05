@@ -37,12 +37,10 @@ import android.widget.RemoteViews.RemoteView;
  * {@link android.widget.LinearLayout.LayoutParams LinearLayout.LayoutParams}.
  * The default orientation is horizontal.
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-linearlayout.html">Linear Layout
- * tutorial</a>.</p>
- *
  * <p>
  * Also see {@link LinearLayout.LayoutParams android.widget.LinearLayout.LayoutParams}
  * for layout attributes </p>
+ * @author translate by cnmahj
  */
 @RemoteView
 public class LinearLayout extends ViewGroup {
@@ -53,7 +51,7 @@ public class LinearLayout extends ViewGroup {
      * Whether the children of this layout are baseline aligned.  Only applicable
      * if {@link #mOrientation} is horizontal.
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     private boolean mBaselineAligned = true;
 
     /**
@@ -63,7 +61,7 @@ public class LinearLayout extends ViewGroup {
      * Note: this is orthogonal to {@link #mBaselineAligned}, which is concerned
      * with whether the children of this layout are baseline aligned.
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     private int mBaselineAlignedChildIndex = -1;
 
     /**
@@ -71,13 +69,12 @@ public class LinearLayout extends ViewGroup {
      * We'll calculate the baseline of this layout as we measure vertically; for
      * horizontal linear layouts, the offset of 0 is appropriate.
      */
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     private int mBaselineChildTop = 0;
 
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     private int mOrientation;
-
-    @ViewDebug.ExportedProperty(category = "measurement", mapping = {
+    @ViewDebug.ExportedProperty(mapping = {
             @ViewDebug.IntToString(from =  -1,                       to = "NONE"),
             @ViewDebug.IntToString(from = Gravity.NO_GRAVITY,        to = "NONE"),
             @ViewDebug.IntToString(from = Gravity.TOP,               to = "TOP"),
@@ -92,14 +89,13 @@ public class LinearLayout extends ViewGroup {
             @ViewDebug.IntToString(from = Gravity.FILL,              to = "FILL")
         })
     private int mGravity = Gravity.LEFT | Gravity.TOP;
-
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     private int mTotalLength;
 
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     private float mWeightSum;
 
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     private boolean mUseLargestChild;
 
     private int[] mMaxAscent;
@@ -1327,12 +1323,11 @@ public class LinearLayout extends ViewGroup {
     }
 
     /**
-     * Returns a set of layout parameters with a width of
-     * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
-     * and a height of {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
-     * when the layout's orientation is {@link #VERTICAL}. When the orientation is
-     * {@link #HORIZONTAL}, the width is set to {@link LayoutParams#WRAP_CONTENT}
-     * and the height to {@link LayoutParams#WRAP_CONTENT}.
+     * 返回一组包含宽度和高度的布局参数的集合。当视图为纵向布局 （{@link #VERTICAL}）
+     * 时，返回的宽度为 {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}、
+     * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。
+     * 当视图为横向布局（{@link #HORIZONTAL}）时，宽度为 {@link LayoutParams#WRAP_CONTENT}、
+     * 高度为 {@link LayoutParams#WRAP_CONTENT}。
      */
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
@@ -1369,7 +1364,7 @@ public class LinearLayout extends ViewGroup {
          * 0 if the view should not be stretched. Otherwise the extra pixels
          * will be pro-rated among all views whose weight is greater than 0.
          */
-        @ViewDebug.ExportedProperty(category = "layout")
+        @ViewDebug.ExportedProperty
         public float weight;
 
         /**
@@ -1377,7 +1372,7 @@ public class LinearLayout extends ViewGroup {
          *
          * @see android.view.Gravity
          */
-        @ViewDebug.ExportedProperty(category = "layout", mapping = {
+        @ViewDebug.ExportedProperty(mapping = {
             @ViewDebug.IntToString(from =  -1,                       to = "NONE"),
             @ViewDebug.IntToString(from = Gravity.NO_GRAVITY,        to = "NONE"),
             @ViewDebug.IntToString(from = Gravity.TOP,               to = "TOP"),

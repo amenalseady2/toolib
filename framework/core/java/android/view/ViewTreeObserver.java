@@ -92,9 +92,9 @@ public final class ViewTreeObserver {
      */
     public interface OnTouchModeChangeListener {
         /**
-         * Callback method to be invoked when the touch mode changes.
+         * 触摸模式发生改变时调用的回调函数。
          *
-         * @param isInTouchMode True if the view hierarchy is now in touch mode, false  otherwise.
+         * @param isInTouchMode 如果视图结构当前处于触摸模式，参数为真；否则为假。
          */
         public void onTouchModeChanged(boolean isInTouchMode);
     }

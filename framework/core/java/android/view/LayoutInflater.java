@@ -348,7 +348,6 @@ public abstract class LayoutInflater {
     public View inflate(XmlPullParser parser, ViewGroup root, boolean attachToRoot) {
         synchronized (mConstructorArgs) {
             final AttributeSet attrs = Xml.asAttributeSet(parser);
-            Context lastContext = (Context)mConstructorArgs[0];
             mConstructorArgs[0] = mContext;
             View result = root;
 
@@ -433,10 +432,6 @@ public abstract class LayoutInflater {
                         + ": " + e.getMessage());
                 ex.initCause(e);
                 throw ex;
-            } finally {
-                // Don't retain static reference on context.
-                mConstructorArgs[0] = lastContext;
-                mConstructorArgs[1] = null;
             }
 
             return result;

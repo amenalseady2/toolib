@@ -52,9 +52,9 @@ public class VCardEntryCommitter implements VCardEntryHandler {
         }
     }
 
-    public void onEntryCreated(final VCardEntry vcardEntry) {
+    public void onEntryCreated(final VCardEntry contactStruct) {
         long start = System.currentTimeMillis();
-        mCreatedUris.add(vcardEntry.pushIntoContentResolver(mContentResolver));
+        mCreatedUris.add(contactStruct.pushIntoContentResolver(mContentResolver));
         mTimeToCommit += System.currentTimeMillis() - start;
     }
 

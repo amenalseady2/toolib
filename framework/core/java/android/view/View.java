@@ -542,28 +542,6 @@ import java.util.WeakHashMap;
  * take care of redrawing the appropriate views until the animation completes.
  * </p>
  *
- * <a name="Security"></a>
- * <h3>Security</h3>
- * <p>
- * Sometimes it is essential that an application be able to verify that an action
- * is being performed with the full knowledge and consent of the user, such as
- * granting a permission request, making a purchase or clicking on an advertisement.
- * Unfortunately, a malicious application could try to spoof the user into
- * performing these actions, unaware, by concealing the intended purpose of the view.
- * As a remedy, the framework offers a touch filtering mechanism that can be used to
- * improve the security of views that provide access to sensitive functionality.
- * </p><p>
- * To enable touch filtering, call {@link #setFilterTouchesWhenObscured} or set the
- * andoird:filterTouchesWhenObscured attribute to true.  When enabled, the framework
- * will discard touches that are received whenever the view's window is obscured by
- * another visible window.  As a result, the view will not receive touches whenever a
- * toast, dialog or other window appears above the view's window.
- * </p><p>
- * For more fine-grained control over security, consider overriding the
- * {@link #onFilterTouchEventForSecurity} method to implement your own security policy.
- * See also {@link MotionEvent#FLAG_WINDOW_IS_OBSCURED}.
- * </p>
- *
  * @attr ref android.R.styleable#View_background
  * @attr ref android.R.styleable#View_clickable
  * @attr ref android.R.styleable#View_contentDescription
@@ -572,7 +550,6 @@ import java.util.WeakHashMap;
  * @attr ref android.R.styleable#View_id
  * @attr ref android.R.styleable#View_fadingEdge
  * @attr ref android.R.styleable#View_fadingEdgeLength
- * @attr ref android.R.styleable#View_filterTouchesWhenObscured
  * @attr ref android.R.styleable#View_fitsSystemWindows
  * @attr ref android.R.styleable#View_isScrollContainer
  * @attr ref android.R.styleable#View_focusable
@@ -611,6 +588,7 @@ import java.util.WeakHashMap;
  * @attr ref android.R.styleable#View_visibility
  *
  * @see android.view.ViewGroup
+ * @author translate by cnmahj
  */
 public class View implements Drawable.Callback, KeyEvent.Callback, AccessibilityEventSource {
     private static final boolean DBG = false;
@@ -734,14 +712,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     static final int SCROLLBARS_MASK = 0x00000300;
 
-    /**
-     * Indicates that the view should filter touches when its window is obscured.
-     * Refer to the class comments for more information about this security feature.
-     * {@hide}
-     */
-    static final int FILTER_TOUCHES_WHEN_OBSCURED = 0x00000400;
-
-    // note flag value 0x00000800 is now available for next flags...
+    // note 0x00000400 and 0x00000800 are now available for next flags...
 
     /**
      * <p>This view doesn't show fading edges.</p>
@@ -1388,14 +1359,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * Width as measured during measure pass.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     protected int mMeasuredWidth;
 
     /**
      * Height as measured during measure pass.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     protected int mMeasuredHeight;
 
     /**
@@ -1450,8 +1421,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int MEASURED_DIMENSION_SET         = 0x00000800;
     /** {@hide} */
     static final int FORCE_LAYOUT                   = 0x00001000;
-    /** {@hide} */
-    static final int LAYOUT_REQUIRED                = 0x00002000;
+
+    private static final int LAYOUT_REQUIRED        = 0x00002000;
 
     private static final int PRESSED                = 0x00004000;
 
@@ -1551,40 +1522,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static final int AWAKEN_SCROLL_BARS_ON_ATTACH = 0x08000000;
 
     /**
-     * Always allow a user to over-scroll this view, provided it is a
-     * view that can scroll.
-     *
-     * @see #getOverScrollMode()
-     * @see #setOverScrollMode(int)
-     */
-    public static final int OVER_SCROLL_ALWAYS = 0;
-
-    /**
-     * Allow a user to over-scroll this view only if the content is large
-     * enough to meaningfully scroll, provided it is a view that can scroll.
-     *
-     * @see #getOverScrollMode()
-     * @see #setOverScrollMode(int)
-     */
-    public static final int OVER_SCROLL_IF_CONTENT_SCROLLS = 1;
-
-    /**
-     * Never allow a user to over-scroll this view.
-     *
-     * @see #getOverScrollMode()
-     * @see #setOverScrollMode(int)
-     */
-    public static final int OVER_SCROLL_NEVER = 2;
-
-    /**
-     * Controls the over-scroll mode for this view.
-     * See {@link #overScrollBy(int, int, int, int, int, int, int, int, boolean)},
-     * {@link #OVER_SCROLL_ALWAYS}, {@link #OVER_SCROLL_IF_CONTENT_SCROLLS},
-     * and {@link #OVER_SCROLL_NEVER}.
-     */
-    private int mOverScrollMode;
-
-    /**
      * The parent this view is attached to.
      * {@hide}
      *
@@ -1639,28 +1576,28 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * to the left edge of this view.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     protected int mLeft;
     /**
      * The distance in pixels from the left edge of this view's parent
      * to the right edge of this view.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     protected int mRight;
     /**
      * The distance in pixels from the top edge of this view's parent
      * to the top edge of this view.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     protected int mTop;
     /**
      * The distance in pixels from the top edge of this view's parent
      * to the bottom edge of this view.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     protected int mBottom;
 
     /**
@@ -1668,14 +1605,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * horizontally.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "scrolling")
+    @ViewDebug.ExportedProperty
     protected int mScrollX;
     /**
      * The offset, in pixels, by which the content of this view is scrolled
      * vertically.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "scrolling")
+    @ViewDebug.ExportedProperty
     protected int mScrollY;
 
     /**
@@ -1683,28 +1620,28 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * left edge of this view and the left edge of its content.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     protected int mPaddingLeft;
     /**
      * The right padding in pixels, that is the distance in pixels between the
      * right edge of this view and the right edge of its content.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     protected int mPaddingRight;
     /**
      * The top padding in pixels, that is the distance in pixels between the
      * top edge of this view and the top edge of its content.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     protected int mPaddingTop;
     /**
      * The bottom padding in pixels, that is the distance in pixels between the
      * bottom edge of this view and the bottom edge of its content.
      * {@hide}
      */
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     protected int mPaddingBottom;
 
     /**
@@ -1715,13 +1652,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     /**
      * Cache the paddingRight set by the user to append to the scrollbar's size.
      */
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     int mUserPaddingRight;
 
     /**
      * Cache the paddingBottom set by the user to append to the scrollbar's size.
      */
-    @ViewDebug.ExportedProperty(category = "padding")
+    @ViewDebug.ExportedProperty
     int mUserPaddingBottom;
 
     /**
@@ -1828,14 +1765,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * The minimum height of the view. We'll try our best to have the height
      * of this view to at least this amount.
      */
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     private int mMinHeight;
 
     /**
      * The minimum width of the view. We'll try our best to have the width
      * of this view to at least this amount.
      */
-    @ViewDebug.ExportedProperty(category = "measurement")
+    @ViewDebug.ExportedProperty
     private int mMinWidth;
 
     /**
@@ -1876,7 +1813,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         // Used for debug only
         //++sInstanceCount;
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        setOverScrollMode(OVER_SCROLL_IF_CONTENT_SCROLLS);
     }
 
     /**
@@ -1942,7 +1878,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
         int scrollbarStyle = SCROLLBARS_INSIDE_OVERLAY;
 
-        int overScrollMode = mOverScrollMode;
         final int N = a.getIndexCount();
         for (int i = 0; i < N; i++) {
             int attr = a.getIndex(i);
@@ -2083,12 +2018,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         viewFlagMasks |= KEEP_SCREEN_ON;
                     }
                     break;
-                case R.styleable.View_filterTouchesWhenObscured:
-                    if (a.getBoolean(attr, false)) {
-                        viewFlagValues |= FILTER_TOUCHES_WHEN_OBSCURED;
-                        viewFlagMasks |= FILTER_TOUCHES_WHEN_OBSCURED;
-                    }
-                    break;
                 case R.styleable.View_nextFocusLeft:
                     mNextFocusLeftId = a.getResourceId(attr, View.NO_ID);
                     break;
@@ -2148,13 +2077,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         });
                     }
                     break;
-                case R.styleable.View_overScrollMode:
-                    overScrollMode = a.getInt(attr, OVER_SCROLL_IF_CONTENT_SCROLLS);
-                    break;
             }
         }
-
-        setOverScrollMode(overScrollMode);
 
         if (background != null) {
             setBackgroundDrawable(background);
@@ -2428,10 +2352,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Register a callback to be invoked when this view is clicked. If this view is not
-     * clickable, it becomes clickable.
+     * 注册点击该视图时执行的回调函数。如果该视图不可点击，会将其改为可以点击的状态。
      *
-     * @param l The callback that will run
+     * @param l 事件发生时运行的回调函数。
      *
      * @see #setClickable(boolean)
      */
@@ -2472,10 +2395,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Call this view's OnClickListener, if it is defined.
+     * 如果该视图定义了 OnClickListener，则调用它。
      *
-     * @return True there was an assigned OnClickListener that was called, false
-     *         otherwise is returned.
+     * @return 调用了 OnClickListener 则返回真；否则返回假。
      */
     public boolean performClick() {
         sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
@@ -2490,10 +2412,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Call this view's OnLongClickListener, if it is defined. Invokes the context menu if the
-     * OnLongClickListener did not consume the event.
+     * Call this view's OnLongClickListener, if it is defined. Invokes the context menu
+     * if the OnLongClickListener did not consume the event.
      *
-     * @return True if one of the above receivers consumed the event, false otherwise.
+     * @return True there was an assigned OnLongClickListener that was called, false
+     *         otherwise is returned.
      */
     public boolean performLongClick() {
         sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
@@ -2678,7 +2601,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      *
      * @return True if this view has or contains focus, false otherwise.
      */
-    @ViewDebug.ExportedProperty(category = "focus")
+    @ViewDebug.ExportedProperty
     public boolean hasFocus() {
         return (mPrivateFlags & FOCUSED) != 0;
     }
@@ -2700,22 +2623,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called by the view system when the focus state of this view changes.
-     * When the focus change event is caused by directional navigation, direction
-     * and previouslyFocusedRect provide insight into where the focus is coming from.
-     * When overriding, be sure to call up through to the super class so that
-     * the standard focus handling will occur.
+     * 当视图的焦点改变时调用。由定向导航导致的焦点变更时， {@code direction} 和
+     * {@code previouslyFocusedRect} 提供了焦点是从那里来的进一步信息。
      *
-     * @param gainFocus True if the View has focus; false otherwise.
-     * @param direction The direction focus has moved when requestFocus()
-     *                  is called to give this view focus. Values are
-     *                  {@link #FOCUS_UP}, {@link #FOCUS_DOWN}, {@link #FOCUS_LEFT} or
-     *                  {@link #FOCUS_RIGHT}. It may not always apply, in which
-     *                  case use the default.
-     * @param previouslyFocusedRect The rectangle, in this view's coordinate
-     *        system, of the previously focused view.  If applicable, this will be
-     *        passed in as finer grained information about where the focus is coming
-     *        from (in addition to direction).  Will be <code>null</code> otherwise.
+     * @param gainFocus 如果视图具有焦点，值为真；否则为假。
+     * @param direction 当调用 requestFocus() 为该视图设置焦点时，该值为焦点移动的方向。
+     *                  其值为 {@link #FOCUS_UP}、{@link #FOCUS_DOWN}、
+     *                  {@link #FOCUS_LEFT} 或者 {@link #FOCUS_RIGHT}。
+     *                  当使用无参数的 requestFocus() 时，可能无值。
+     * @param previouslyFocusedRect 失去焦点的视图的矩形坐标，使用该视图的坐标系统。如果指定了，
+     *        它将传入可以知道焦点来自哪里的详细信息（作为对 {@code direction} 的补充）。
+     *        否则，其值为 <code>null</code>。
      */
     protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
         if (gainFocus) {
@@ -2779,12 +2697,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Dispatches an {@link AccessibilityEvent} to the {@link View} children
-     * to be populated.
+     * 分发 {@link AccessibilityEvent} 事件到 {@link View 该视图} 的子视图中。
      *
-     * @param event The event.
+     * @param event 事件。
      *
-     * @return True if the event population was completed.
+     * @return 如果事件分发完成，返回真。
      */
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         return false;
@@ -2856,7 +2773,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      *
      * @return True if this view has focus, false otherwise.
      */
-    @ViewDebug.ExportedProperty(category = "focus")
+    @ViewDebug.ExportedProperty
     public boolean isFocused() {
         return (mPrivateFlags & FOCUSED) != 0;
     }
@@ -3081,16 +2998,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Determine if this view has the FITS_SYSTEM_WINDOWS flag set.
-     * @return True if window has FITS_SYSTEM_WINDOWS set
-     *
-     * @hide
-     */
-    public boolean isFitsSystemWindowsFlagSet() {
-        return (mViewFlags & FITS_SYSTEM_WINDOWS) == FITS_SYSTEM_WINDOWS;
-    }
-
-    /**
      * Returns the visibility status for this view.
      *
      * @return One of {@link #VISIBLE}, {@link #INVISIBLE}, or {@link #GONE}.
@@ -3129,10 +3036,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Set the enabled state of this view. The interpretation of the enabled
-     * state varies by subclass.
+     * 设置视图的可用状态。由子类决定视图的各可用状态如何显示。
      *
-     * @param enabled True if this view is enabled, false otherwise.
+     * @param enabled 为真时视图可用，否则不可用。
      */
     @RemotableViewMethod
     public void setEnabled(boolean enabled) {
@@ -3152,12 +3058,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Set whether this view can receive the focus.
+     * 设置该视图是否可以获取焦点。
      *
-     * Setting this to false will also ensure that this view is not focusable
-     * in touch mode.
+     * 设为假时，可以确保在触控模式中该视图不能得到焦点。
      *
-     * @param focusable If true, this view can receive the focus.
+     * @param focusable 设为真时，该视图可以得到焦点。
      *
      * @see #setFocusableInTouchMode(boolean)
      * @attr ref android.R.styleable#View_focusable
@@ -3170,12 +3075,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Set whether this view can receive focus while in touch mode.
+     * 设置在触控模式下该视图是否可以获取焦点。
      *
-     * Setting this to true will also ensure that this view is focusable.
+     * 设为真时，可以保证视图可以得到焦点。
      *
-     * @param focusableInTouchMode If true, this view can receive the focus while
-     *   in touch mode.
+     * @param focusableInTouchMode 设为真时，该视图在触控模式下可以得到焦点。
      *
      * @see #setFocusable(boolean)
      * @attr ref android.R.styleable#View_focusableInTouchMode
@@ -3267,7 +3171,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      *
      * @return true if this view has nothing to draw, false otherwise
      */
-    @ViewDebug.ExportedProperty(category = "drawing")
+    @ViewDebug.ExportedProperty
     public boolean willNotDraw() {
         return (mViewFlags & DRAW_MASK) == WILL_NOT_DRAW;
     }
@@ -3290,7 +3194,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      *
      * @return true if this view does not cache its drawing, false otherwise
      */
-    @ViewDebug.ExportedProperty(category = "drawing")
+    @ViewDebug.ExportedProperty
     public boolean willNotCacheDrawing() {
         return (mViewFlags & WILL_NOT_CACHE_DRAWING) == WILL_NOT_CACHE_DRAWING;
     }
@@ -3426,35 +3330,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         setFlags(enabled ? 0 : SAVE_DISABLED, SAVE_DISABLED_MASK);
     }
 
-    /**
-     * Gets whether the framework should discard touches when the view's
-     * window is obscured by another visible window.
-     * Refer to the {@link View} security documentation for more details.
-     *
-     * @return True if touch filtering is enabled.
-     *
-     * @see #setFilterTouchesWhenObscured(boolean)
-     * @attr ref android.R.styleable#View_filterTouchesWhenObscured
-     */
-    @ViewDebug.ExportedProperty
-    public boolean getFilterTouchesWhenObscured() {
-        return (mViewFlags & FILTER_TOUCHES_WHEN_OBSCURED) != 0;
-    }
-
-    /**
-     * Sets whether the framework should discard touches when the view's
-     * window is obscured by another visible window.
-     * Refer to the {@link View} security documentation for more details.
-     *
-     * @param enabled True if touch filtering should be enabled.
-     *
-     * @see #getFilterTouchesWhenObscured
-     * @attr ref android.R.styleable#View_filterTouchesWhenObscured
-     */
-    public void setFilterTouchesWhenObscured(boolean enabled) {
-        setFlags(enabled ? 0 : FILTER_TOUCHES_WHEN_OBSCURED,
-                FILTER_TOUCHES_WHEN_OBSCURED);
-    }
 
     /**
      * Returns whether this View is able to take focus.
@@ -3462,7 +3337,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * @return True if this view can take focus, or false otherwise.
      * @attr ref android.R.styleable#View_focusable
      */
-    @ViewDebug.ExportedProperty(category = "focus")
+    @ViewDebug.ExportedProperty
     public final boolean isFocusable() {
         return FOCUSABLE == (mViewFlags & FOCUSABLE_MASK);
     }
@@ -3498,15 +3373,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * This method is the last chance for the focused view and its ancestors to
-     * respond to an arrow key. This is called when the focused view did not
-     * consume the key internally, nor could the view system find a new view in
-     * the requested direction to give focus to.
+     * 对于具有焦点的视图及其祖先，该方法是处理箭头事件最后的机会。
+     * 当具有焦点的视图内部没有处理键盘事件，
+     * 视图系统也无法在指定的方向上找到可以赋予焦点的新的视图时调用该方法。
      *
-     * @param focused The currently focused view.
-     * @param direction The direction focus wants to move. One of FOCUS_UP,
-     *        FOCUS_DOWN, FOCUS_LEFT, and FOCUS_RIGHT.
-     * @return True if the this view consumed this unhandled move.
+     * @param focused 当前具有焦点的视图。
+     * @param direction 焦点移动的方向：FOCUS_UP、FOCUS_DOWN、FOCUS_LEFT 或 FOCUS_RIGHT。
+     * @return 如果视图处理了该未处理的移动，返回真。
      */
     public boolean dispatchUnhandledMove(View focused, int direction) {
         return false;
@@ -3830,14 +3703,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Dispatch a key event to the next view on the focus path. This path runs
-     * from the top of the view tree down to the currently focused view. If this
-     * view has focus, it will dispatch to itself. Otherwise it will dispatch
-     * the next node down the focus path. This method also fires any key
-     * listeners.
+     * 按照焦点路径分发键盘事件到下一个视图。
+     * 该路径由视图树的顶端开始，到当前拥有焦点的视图结束。如果该类拥有焦点，事件会分发给自己；
+     * 否则会分发给焦点路径的下一个节点。该方法同时触发所有的键盘事件监听器。
      *
-     * @param event The key event to be dispatched.
-     * @return True if the event was handled, false otherwise.
+     * @param event 分发的键盘事件。
+     * @return 如果事件已经处理，返回真；否则返回假。
      */
     public boolean dispatchKeyEvent(KeyEvent event) {
         // If any attached key listener a first crack at the event.
@@ -3874,32 +3745,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * @return True if the event was handled by the view, false otherwise.
      */
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (!onFilterTouchEventForSecurity(event)) {
-            return false;
-        }
-
         if (mOnTouchListener != null && (mViewFlags & ENABLED_MASK) == ENABLED &&
                 mOnTouchListener.onTouch(this, event)) {
             return true;
         }
         return onTouchEvent(event);
-    }
-
-    /**
-     * Filter the touch event to apply security policies.
-     *
-     * @param event The motion event to be filtered.
-     * @return True if the event should be dispatched, false if the event should be dropped.
-     * 
-     * @see #getFilterTouchesWhenObscured
-     */
-    public boolean onFilterTouchEventForSecurity(MotionEvent event) {
-        if ((mViewFlags & FILTER_TOUCHES_WHEN_OBSCURED) != 0
-                && (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0) {
-            // Window is obscured, drop this touch.
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -3914,11 +3764,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called when the window containing this view gains or loses window focus.
-     * ViewGroups should override to route to their children.
+     * 当包含的此视图的窗口获得或失去焦点时调用此方法。视图组应该重写此方法，
+     * 将消息传递到他的子视图。
      *
-     * @param hasFocus True if the window containing this view now has focus,
-     *        false otherwise.
+     * @param hasFocus 当包含的此视图的窗口具有焦点时，参数为真；否则为假。
      */
     public void dispatchWindowFocusChanged(boolean hasFocus) {
         onWindowFocusChanged(hasFocus);
@@ -4029,14 +3878,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called when the window containing has change its visibility
-     * (between {@link #GONE}, {@link #INVISIBLE}, and {@link #VISIBLE}).  Note
-     * that this tells you whether or not your window is being made visible
-     * to the window manager; this does <em>not</em> tell you whether or not
-     * your window is obscured by other windows on the screen, even if it
-     * is itself visible.
+     * 当窗口中内容的可视性在 {@link #GONE} 、 {@link #INVISIBLE} 和 {@link #VISIBLE}
+     * 之间变更时调用。注意，该可视性代表你的窗口在窗口管理器中是否可见；并<em>不</em>
+     * 会告诉你属性为 {@link #VISIBLE} 的窗口在屏幕上是否可见。
      *
-     * @param visibility The new visibility of the window.
+     * @param visibility 窗口的新的可视性
      */
     protected void onWindowVisibilityChanged(int visibility) {
         if (visibility == VISIBLE) {
@@ -4186,14 +4032,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Default implementation of {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()}: perform press of the view
-     * when {@link KeyEvent#KEYCODE_DPAD_CENTER} or {@link KeyEvent#KEYCODE_ENTER}
-     * is released, if the view is enabled and clickable.
+     * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现。 如果视图可用并可按，
+     * 当按下 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
+     * 时执行视图的按下事件。
      *
-     * @param keyCode A key code that represents the button pressed, from
-     *                {@link android.view.KeyEvent}.
-     * @param event   The KeyEvent object that defines the button action.
+     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码。
+     * @param event   KeyEvent 对象，定义了按钮动作。
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         boolean result = false;
@@ -4230,14 +4075,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Default implementation of {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()}: perform clicking of the view
-     * when {@link KeyEvent#KEYCODE_DPAD_CENTER} or
-     * {@link KeyEvent#KEYCODE_ENTER} is released.
+     * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现。 
+     * 当释放 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
+     * 时执行视图的单击事件。
      *
-     * @param keyCode A key code that represents the button pressed, from
-     *                {@link android.view.KeyEvent}.
-     * @param event   The KeyEvent object that defines the button action.
+     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码。
+     * @param event   KeyEvent 对象，定义了按钮动作。
      */
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         boolean result = false;
@@ -4265,14 +4109,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Default implementation of {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()}: always returns false (doesn't handle
-     * the event).
+     * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现。 不处理该事件，总是返回假。
      *
-     * @param keyCode     A key code that represents the button pressed, from
-     *                    {@link android.view.KeyEvent}.
-     * @param repeatCount The number of times the action was made.
-     * @param event       The KeyEvent object that defines the button action.
+     * @param keyCode     表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码。
+     * @param repeatCount 按键次数。
+     * @param event       KeyEvent 对象，定义了按钮动作。
      */
     public boolean onKeyMultiple(int keyCode, int repeatCount, KeyEvent event) {
         return false;
@@ -4345,10 +4187,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * Show the context menu for this view. It is not safe to hold on to the
      * menu after returning from this method.
      *
-     * You should normally not overload this method. Overload
-     * {@link #onCreateContextMenu(ContextMenu)} or define an
-     * {@link OnCreateContextMenuListener} to add items to the context menu.
-     *
      * @param menu The context menu to populate
      */
     public void createContextMenu(ContextMenu menu) {
@@ -4412,10 +4250,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Implement this method to handle touch screen motion events.
+     * 实现该方法来处理触屏事件。
      *
-     * @param event The motion event.
-     * @return True if the event was handled, false otherwise.
+     * @param event 触屏事件。
+     * @return 如果事件已经处理返回真；否则返回假。
      */
     public boolean onTouchEvent(MotionEvent event) {
         final int viewFlags = mViewFlags;
@@ -4738,23 +4576,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * This is called during layout when the size of this view has changed. If
-     * you were just added to the view hierarchy, you're called with the old
-     * values of 0.
+     * 布局时该视图的大小发生改变时调用该方法。如果是刚加入的视图，变更前的值为 0。
      *
-     * @param w Current width of this view.
-     * @param h Current height of this view.
-     * @param oldw Old width of this view.
-     * @param oldh Old height of this view.
+     * @param w 视图的当前宽度。
+     * @param h 视图的当前高度。
+     * @param oldw 视图变更前的宽度。
+     * @param oldh 视图变更前的高度。
      */
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     }
 
     /**
-     * Called by draw to draw the child views. This may be overridden
-     * by derived classes to gain control just before its children are drawn
-     * (but after its own view has been drawn).
-     * @param canvas the canvas on which to draw the view
+     * 调用此方法来绘出子视图。可被衍生类重写，以便在其子项被画出之前取得控制权。
+     * 此方法由 draw 方法在绘制子视图时调用。
+     * 子类可以重写该方法，在绘制其子视图之前获得控制权。（但是在绘制其自身的视图之后。）
+     * @param canvas 绘制视图的画布。
      */
     protected void dispatchDraw(Canvas canvas) {
     }
@@ -4797,7 +4633,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      *
      * @return The width of your view, in pixels.
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     public final int getWidth() {
         return mRight - mLeft;
     }
@@ -4807,7 +4643,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      *
      * @return The height of your view, in pixels.
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     public final int getHeight() {
         return mBottom - mTop;
     }
@@ -5293,7 +5129,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      *
      * @return True if this View is guaranteed to be fully opaque, false otherwise.
      */
-    @ViewDebug.ExportedProperty(category = "drawing")
+    @ViewDebug.ExportedProperty
     public boolean isOpaque() {
         return (mPrivateFlags & OPAQUE_MASK) == OPAQUE_MASK;
     }
@@ -5817,15 +5653,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>Compute the vertical range that the vertical scrollbar represents.</p>
+     * <p>计算滚动条代表的纵向范围。</p>
      *
-     * <p>The range is expressed in arbitrary units that must be the same as the
-     * units used by {@link #computeVerticalScrollExtent()} and
-     * {@link #computeVerticalScrollOffset()}.</p>
+     * <p>范围使用与 {@link #computeVerticalScrollExtent()}
+     * 和 {@link #computeVerticalScrollOffset()} 相同的任意单位。</p>
      *
-     * @return the total vertical range represented by the vertical scrollbar
+     * @return 纵向滚动条代表的整个纵向范围。
      *
-     * <p>The default range is the drawing height of this view.</p>
+     * <p>默认纵向范围时视图的绘制高度。</p>
      *
      * @see #computeVerticalScrollExtent()
      * @see #computeVerticalScrollOffset()
@@ -5836,17 +5671,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>Compute the vertical offset of the vertical scrollbar's thumb
-     * within the horizontal range. This value is used to compute the position
-     * of the thumb within the scrollbar's track.</p>
+     * <p>计算滚动条把手在纵向滚动范围内的位置。该值用于计算滚动条把手在滚动条滑道中的位置。</p>
      *
-     * <p>The range is expressed in arbitrary units that must be the same as the
-     * units used by {@link #computeVerticalScrollRange()} and
-     * {@link #computeVerticalScrollExtent()}.</p>
+     * <p>范围使用与 {@link #computeVerticalScrollRange()}
+     * 和 {@link #computeVerticalScrollExtent()} 相同的任意单位。</p>
      *
-     * <p>The default offset is the scroll offset of this view.</p>
+     * <p>默认位置是视图的滚动条位置。</p>
      *
-     * @return the vertical offset of the scrollbar's thumb
+     * @return 滚动条把手的纵向位置
      *
      * @see #computeVerticalScrollRange()
      * @see #computeVerticalScrollExtent()
@@ -5857,17 +5689,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>Compute the vertical extent of the horizontal scrollbar's thumb
-     * within the vertical range. This value is used to compute the length
-     * of the thumb within the scrollbar's track.</p>
+     * <p>计算滚动条把手在纵向滚动范围内占用的幅度。该值用于计算滚动条把手在滚动条滑道中的长度。</p>
      *
-     * <p>The range is expressed in arbitrary units that must be the same as the
-     * units used by {@link #computeVerticalScrollRange()} and
-     * {@link #computeVerticalScrollOffset()}.</p>
+     * <p>范围使用与 {@link #computeVerticalScrollRange()}
+     * 和 {@link #computeVerticalScrollOffset()} 相同的任意单位。</p>
      *
-     * <p>The default extent is the drawing height of this view.</p>
+     * <p>默认的长度是视图的可绘制高度。</p>
      *
-     * @return the vertical extent of the scrollbar's thumb
+     * @return 滚动条把手在纵向滚动范围内占用的幅度。
      *
      * @see #computeVerticalScrollRange()
      * @see #computeVerticalScrollOffset()
@@ -6036,9 +5865,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Implement this to do your drawing.
+     * 实现该方法，用于自己绘制内容。
      *
-     * @param canvas the canvas on which the background will be drawn
+     * @param canvas 用于绘制背景的画布。
      */
     protected void onDraw(Canvas canvas) {
     }
@@ -6059,11 +5888,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * This is called when the view is attached to a window.  At this point it
-     * has a Surface and will start drawing.  Note that this function is
-     * guaranteed to be called before {@link #onDraw}, however it may be called
-     * any time before the first onDraw -- including before or after
-     * {@link #onMeasure}.
+     * 当视图附加到窗体上时调用该方法。在这个时点，视图拥有了用于显示的表面，将开始绘制。
+     * 注意，系统保证在调用 {@link #onDraw} 之前调用该方法，但可能在调用 {@link #onDraw}
+     * 之前的任何时刻，包括调用 {@link #onMeasure} 之前或之后。
      *
      * @see #onDetachedFromWindow()
      */
@@ -6078,8 +5905,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * This is called when the view is detached from a window.  At this point it
-     * no longer has a surface for drawing.
+     * 将视图从屏幕上分离的时候调用该方法。这个时点视图已经不具有可绘制部分。
      *
      * @see #onAttachedToWindow()
      */
@@ -6197,7 +6023,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * May be overridden to modify how freezing happens to a view's children; for example, some
      * views may want to not store state for their children.
      *
-     * @param container The SparseArray in which to save the view's state.
+     * @param container 保存视图状态的 SparseArray。
      *
      * @see #dispatchRestoreInstanceState
      * @see #saveHierarchyState
@@ -6220,21 +6046,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Hook allowing a view to generate a representation of its internal state
-     * that can later be used to create a new instance with that same state.
-     * This state should only contain information that is not persistent or can
-     * not be reconstructed later. For example, you will never store your
-     * current position on screen because that will be computed again when a
-     * new instance of the view is placed in its view hierarchy.
+     * 允许视图保存其内部状态的回调函数，以便于之后使用相同状态创建新实例。
+     * 该状态应该只包含非持久的或者之后不可重现的信息。例如，你不能保存视图在屏幕上的位置，
+     * 因为在创建新视图时，会在视图得层次结构中重新计算它的位置。
      * <p>
-     * Some examples of things you may store here: the current cursor position
-     * in a text view (but usually not the text itself since that is stored in a
-     * content provider or other persistent storage), the currently selected
-     * item in a list view.
+     * 这里是一些可以保存的信息的例子：文本框中当前光标的位置（通常不是文字内容本身，
+     * 因为文字内容一般保存在内容提供者或其他持久的储存器中），列表视图中的当前选中条目等等。
      *
-     * @return Returns a Parcelable object containing the view's current dynamic
-     *         state, or null if there is nothing interesting to save. The
-     *         default implementation returns null.
+     * @return 返回包含视图当前状态的 Parcelable 对象，当不想保存状态时返回空。
+     *         默认实现返回空。
      * @see #onRestoreInstanceState
      * @see #saveHierarchyState
      * @see #dispatchSaveInstanceState
@@ -6263,7 +6083,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * children. May be overridden to modify how restoreing happens to a view's children; for
      * example, some views may want to not store state for their children.
      *
-     * @param container The SparseArray which holds previously saved state.
+     * @param container 保存有之前存储的状态信息的 SparseArray。
      *
      * @see #dispatchSaveInstanceState
      * @see #restoreHierarchyState
@@ -6286,12 +6106,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Hook allowing a view to re-apply a representation of its internal state that had previously
-     * been generated by {@link #onSaveInstanceState}. This function will never be called with a
-     * null state.
+     * 允许视图重新应用之前由 {@link #onSaveInstanceState} 保存的内部状态的回调函数。
+     * 该方法得 state 参数不可能为空。
      *
-     * @param state The frozen state that had previously been returned by
-     *        {@link #onSaveInstanceState}.
+     * @param state 之前由 {@link #onSaveInstanceState} 返回的状态信息。
      *
      * @see #onSaveInstanceState
      * @see #restoreHierarchyState
@@ -6378,7 +6196,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * @see #setDrawingCacheEnabled(boolean)
      * @see #getDrawingCache()
      */
-    @ViewDebug.ExportedProperty(category = "drawing")
+    @ViewDebug.ExportedProperty
     public boolean isDrawingCacheEnabled() {
         return (mViewFlags & DRAWING_CACHE_ENABLED) == DRAWING_CACHE_ENABLED;
     }
@@ -6534,11 +6352,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
             final int drawingCacheBackgroundColor = mDrawingCacheBackgroundColor;
             final boolean opaque = drawingCacheBackgroundColor != 0 || isOpaque();
-            final boolean use32BitCache = attachInfo != null && attachInfo.mUse32BitDrawingCache;
+            final boolean translucentWindow = attachInfo != null && attachInfo.mTranslucentWindow;
 
             if (width <= 0 || height <= 0 ||
                      // Projected bitmap size in bytes
-                    (width * height * (opaque && !use32BitCache ? 2 : 4) >
+                    (width * height * (opaque && !translucentWindow ? 2 : 4) >
                             ViewConfiguration.get(mContext).getScaledMaximumDrawingCacheSize())) {
                 destroyDrawingCache();
                 return;
@@ -6568,7 +6386,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 } else {
                     // Optimization for translucent windows
                     // If the window is translucent, use a 32 bits bitmap to benefit from memcpy()
-                    quality = use32BitCache ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+                    quality = translucentWindow ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
                 }
 
                 // Try to cleanup memory
@@ -6582,7 +6400,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     } else {
                         mUnscaledDrawingCache = new SoftReference<Bitmap>(bitmap);
                     }
-                    if (opaque && use32BitCache) bitmap.setHasAlpha(false);
+                    if (opaque && translucentWindow) bitmap.setHasAlpha(false);
                 } catch (OutOfMemoryError e) {
                     // If there is not enough memory to create the bitmap cache, just
                     // ignore the issue as bitmap caches are not required to draw the
@@ -7180,17 +6998,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called from layout when this view should
-     * assign a size and position to each of its children.
-     *
-     * Derived classes with children should override
-     * this method and call layout on each of
-     * their their children.
-     * @param changed This is a new size or position for this view
-     * @param left Left position, relative to parent
-     * @param top Top position, relative to parent
-     * @param right Right position, relative to parent
-     * @param bottom Bottom position, relative to parent
+     * 该视图设置其子视图的大小及位置时调用。派生类可以重写此方法，并为其子类布局。
+     * @param changed 是否为视图设置了新的大小和位置。
+     * @param left 相对于父视图的左侧的位置。
+     * @param top 相对于父视图的顶部的位置。
+     * @param right 相对于父视图的右侧的位置。
+     * @param bottom 相对于父视图的底部的位置。
      */
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
     }
@@ -7262,11 +7075,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Finalize inflating a view from XML.  This is called as the last phase
-     * of inflation, after all child views have been added.
+     * 根据 XML 生成视图工作完成。该函数在生成视图的最后调用，在所有子视图添加完之后。
      *
-     * <p>Even if the subclass overrides onFinishInflate, they should always be
-     * sure to call the super method, so that we get called.
+     * <p>即使子类覆盖了 onFinishInflate 方法，也应该调用父类的方法，使该方法得以执行。
      */
     protected void onFinishInflate() {
     }
@@ -7338,19 +7149,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * If your view subclass is displaying its own Drawable objects, it should
-     * override this function and return true for any Drawable it is
-     * displaying.  This allows animations for those drawables to be
-     * scheduled.
+     * 如果你的视图子类显示自己的可绘制对象，他应该重写此方法并为自己的每个可绘制对象返回真。
+     * 该函数允许为这些可绘制对象准备动画效果。
      *
-     * <p>Be sure to call through to the super class when overriding this
-     * function.
+     * <p>重写此方法时，要保证调用其父类的该方法。
      *
-     * @param who The Drawable to verify.  Return true if it is one you are
-     *            displaying, else return the result of calling through to the
-     *            super class.
+     * @param who 待校验的可绘制对象。如果是你显示的对象之一，返回真；否则返回调用父类的返回值。
      *
-     * @return boolean If true than the Drawable is being displayed in the
+     * @return boolean 如果可绘制对象已经显示在视图上了，返回真；否则返回假，不允许动画效果。
      *         view; else false and it is not allowed to animate.
      *
      * @see #unscheduleDrawable
@@ -7361,11 +7167,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * This function is called whenever the state of the view changes in such
-     * a way that it impacts the state of drawables being shown.
+     * 在视图状态的变化影响到所显示可绘制对象的状态时调用该方法。
      *
-     * <p>Be sure to call through to the superclass when overriding this
-     * function.
+     * <p>覆盖该方法时，要确保调用了父类的该方法。
      *
      * @see Drawable#setState
      */
@@ -7415,17 +7219,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Generate the new {@link android.graphics.drawable.Drawable} state for
-     * this view. This is called by the view
-     * system when the cached Drawable state is determined to be invalid.  To
-     * retrieve the current state, you should use {@link #getDrawableState}.
+     * 为当前视图生成新的 {@link android.graphics.drawable.Drawable} 状态时发生。
+     * 当视图系统检测到缓存的可绘制对象失效时，调用该方法。你可以使用 {@link #getDrawableState} 
+     * 方法重新取得当前的状态。
      *
-     * @param extraSpace if non-zero, this is the number of extra entries you
-     * would like in the returned array in which you can place your own
-     * states.
+     * @param extraSpace 如果为非零，该值为你要在返回值的数组中存放的你自己的状态信息的数量。
      *
-     * @return Returns an array holding the current {@link Drawable} state of
-     * the view.
+     * @return 返回保存了视图的当前 {@link Drawable} 状态的数组。
      *
      * @see #mergeDrawableStates
      */
@@ -7539,14 +7339,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Set the background to a given Drawable, or remove the background. If the
-     * background has padding, this View's padding is set to the background's
-     * padding. However, when a background is removed, this View's padding isn't
-     * touched. If setting the padding is desired, please use
-     * {@link #setPadding(int, int, int, int)}.
+     * 将指定的可绘制对象设为背景；或删除背景。如果指定的可绘制对象有内边距，
+     * 则这个视图的内边距就会设为可绘制对象的内边距。然而，当背景被移除时，视图的内边距不变。
+     * 如果想设置内边距，请调用 {@link #setPadding(int, int, int, int)} 方法。
      *
-     * @param d The Drawable to use as the background, or null to remove the
-     *        background
+     * @param d 作为背景使用的可绘制对象，如果是空将移除背景。
      */
     public void setBackgroundDrawable(Drawable d) {
         boolean requestLayout = false;
@@ -7636,21 +7433,19 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Sets the padding. The view may add on the space required to display
-     * the scrollbars, depending on the style and visibility of the scrollbars.
-     * So the values returned from {@link #getPaddingLeft}, {@link #getPaddingTop},
-     * {@link #getPaddingRight} and {@link #getPaddingBottom} may be different
-     * from the values set in this call.
+     * 设置内边距。视图可能会根据滚动条的样式和可视性，增加一些必要的用于显示滚动条的空间。
+     * 因此，{@link #getPaddingLeft}、{@link #getPaddingTop}、{@link #getPaddingRight}
+     * 和 {@link #getPaddingBottom} 返回的结果可能与该方法设置的值不同。
      *
      * @attr ref android.R.styleable#View_padding
      * @attr ref android.R.styleable#View_paddingBottom
      * @attr ref android.R.styleable#View_paddingLeft
      * @attr ref android.R.styleable#View_paddingRight
      * @attr ref android.R.styleable#View_paddingTop
-     * @param left the left padding in pixels
-     * @param top the top padding in pixels
-     * @param right the right padding in pixels
-     * @param bottom the bottom padding in pixels
+     * @param left 以像素为单位的左侧内边距
+     * @param top 以像素为单位的顶部内边距
+     * @param right 以像素为单位的右侧内边距
+     * @param bottom 以像素为单位的底部内边距
      */
     public void setPadding(int left, int top, int right, int bottom) {
         boolean changed = false;
@@ -7881,8 +7676,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * {@hide}
-     * @param tag the tag of the view to be found
-     * @return the view of specified tag, null if cannot be found
+     * @param tag 查找视图用的标签。
+     * @return 标签对应的视图；未找到返回空。
      */
     protected View findViewWithTagTraversal(Object tag) {
         if (tag != null && tag.equals(mTag)) {
@@ -8031,9 +7826,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * without resorting to another data structure.
      *
      * The specified key should be an id declared in the resources of the
-     * application to ensure it is unique (see the <a
-     * href={@docRoot}guide/topics/resources/more-resources.html#Id">ID resource type</a>).
-     * Keys identified as belonging to
+     * application to ensure it is unique. Keys identified as belonging to
      * the Android framework or not associated with any package will cause
      * an {@link IllegalArgumentException} to be thrown.
      *
@@ -8240,22 +8033,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>Return the offset of the widget's text baseline from the widget's top
-     * boundary. If this widget does not support baseline alignment, this
-     * method returns -1. </p>
+     * <p>返回小部件顶端到文本基线的偏移量。如果小部件不支持基线对齐，该方法返回 -1。</p>
      *
-     * @return the offset of the baseline within the widget's bounds or -1
-     *         if baseline alignment is not supported
+     * @return 小部件顶端到文本基线的偏移量；或者是 -1 当小部件不支持基线对齐时。 
      */
-    @ViewDebug.ExportedProperty(category = "layout")
+    @ViewDebug.ExportedProperty
     public int getBaseline() {
         return -1;
     }
 
     /**
-     * Call this when something has changed which has invalidated the
-     * layout of this view. This will schedule a layout pass of the view
-     * tree.
+     * 当某些变更导致视图的布局失效时调用该方法。该方法按照视图树的顺序调用。
      */
     public void requestLayout() {
         if (ViewDebug.TRACE_HIERARCHY) {
@@ -8330,41 +8118,31 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * <p>
-     * Measure the view and its content to determine the measured width and the
-     * measured height. This method is invoked by {@link #measure(int, int)} and
-     * should be overriden by subclasses to provide accurate and efficient
-     * measurement of their contents.
+     * 评估视图及其内容，以决定其宽度和高度。此方法由 {@link #measure(int, int)}
+     * 调用，子类可以重载以提供更精确、更有效率的衡量其内容尺寸的方法。
      * </p>
      *
      * <p>
-     * <strong>CONTRACT:</strong> When overriding this method, you
-     * <em>must</em> call {@link #setMeasuredDimension(int, int)} to store the
-     * measured width and height of this view. Failure to do so will trigger an
-     * <code>IllegalStateException</code>, thrown by
-     * {@link #measure(int, int)}. Calling the superclass'
-     * {@link #onMeasure(int, int)} is a valid use.
+     * <strong>约定：</strong> 覆盖该方法时，<em>必须</em>调用 {@link #setMeasuredDimension(int, int)}
+     * 方法来保存评估结果的视图的宽度和高度。如果忘记将导致 {@link #measure(int, int)}
+     * 方法抛出<code>IllegalStateException</code>异常。要有效的利用父类的
+     * {@link #onMeasure(int, int)}方法。
      * </p>
      *
      * <p>
-     * The base class implementation of measure defaults to the background size,
-     * unless a larger size is allowed by the MeasureSpec. Subclasses should
-     * override {@link #onMeasure(int, int)} to provide better measurements of
-     * their content.
+     * 基类测量的是背景的大小，除非 MeasureSpec 允许超过背景。子类应该重写
+     * {@link #onMeasure(int, int)} 方法，以为其内容提供更适合的大小。
      * </p>
      *
      * <p>
-     * If this method is overridden, it is the subclass's responsibility to make
-     * sure the measured height and width are at least the view's minimum height
-     * and width ({@link #getSuggestedMinimumHeight()} and
-     * {@link #getSuggestedMinimumWidth()}).
+     * 如果重写了该方法，子类要确保其高度和宽度大于等于视图的最小高度和宽度。
+     * （{@link #getSuggestedMinimumHeight()} 和 {@link #getSuggestedMinimumWidth()}）
      * </p>
      *
-     * @param widthMeasureSpec horizontal space requirements as imposed by the parent.
-     *                         The requirements are encoded with
-     *                         {@link android.view.View.MeasureSpec}.
-     * @param heightMeasureSpec vertical space requirements as imposed by the parent.
-     *                         The requirements are encoded with
-     *                         {@link android.view.View.MeasureSpec}.
+     * @param widthMeasureSpec 父视图要求的横向空间大小。该要求由
+     *                         {@link android.view.View.MeasureSpec} 进行了编码处理。
+     * @param heightMeasureSpec 父视图要求的纵向空间大小。该要求由
+     *                         {@link android.view.View.MeasureSpec} 进行了编码处理。
      *
      * @see #getMeasuredWidth()
      * @see #getMeasuredHeight()
@@ -8590,15 +8368,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Invoked if there is a Transform that involves alpha. Subclass that can
-     * draw themselves with the specified alpha should return true, and then
-     * respect that alpha when their onDraw() is called. If this returns false
-     * then the view may be redirected to draw into an offscreen buffer to
-     * fulfill the request, which will look fine, but may be slower than if the
-     * subclass handles it internally. The default implementation returns false.
+     * 执行阿尔法变换时执行。子类可以使用该方法指定阿尔法值，然后返回真；
+     * 在调用 onDraw() 时，使用该阿尔法值。如果返回假，则先在不可见的缓存中绘制视图，
+     * 完成该请求；看起来不错，但是可能相对于在子类中绘制要慢。默认实现返回假。
      *
-     * @param alpha The alpha (0..255) to apply to the view's drawing
-     * @return true if the view can draw with the specified alpha.
+     * @param alpha 应用到视图的阿尔法值 (0…255)。
+     * @return 如果该类可以绘制该阿尔法值返回真。
      */
     protected boolean onSetAlpha(int alpha) {
         return false;
@@ -8809,128 +8584,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Scroll the view with standard behavior for scrolling beyond the normal
-     * content boundaries. Views that call this method should override
-     * {@link #onOverScrolled(int, int, boolean, boolean)} to respond to the
-     * results of an over-scroll operation.
-     *
-     * Views can use this method to handle any touch or fling-based scrolling.
-     *
-     * @param deltaX Change in X in pixels
-     * @param deltaY Change in Y in pixels
-     * @param scrollX Current X scroll value in pixels before applying deltaX
-     * @param scrollY Current Y scroll value in pixels before applying deltaY
-     * @param scrollRangeX Maximum content scroll range along the X axis
-     * @param scrollRangeY Maximum content scroll range along the Y axis
-     * @param maxOverScrollX Number of pixels to overscroll by in either direction
-     *          along the X axis.
-     * @param maxOverScrollY Number of pixels to overscroll by in either direction
-     *          along the Y axis.
-     * @param isTouchEvent true if this scroll operation is the result of a touch event.
-     * @return true if scrolling was clamped to an over-scroll boundary along either
-     *          axis, false otherwise.
-     */
-    protected boolean overScrollBy(int deltaX, int deltaY,
-            int scrollX, int scrollY,
-            int scrollRangeX, int scrollRangeY,
-            int maxOverScrollX, int maxOverScrollY,
-            boolean isTouchEvent) {
-        final int overScrollMode = mOverScrollMode;
-        final boolean canScrollHorizontal =
-                computeHorizontalScrollRange() > computeHorizontalScrollExtent();
-        final boolean canScrollVertical =
-                computeVerticalScrollRange() > computeVerticalScrollExtent();
-        final boolean overScrollHorizontal = overScrollMode == OVER_SCROLL_ALWAYS ||
-                (overScrollMode == OVER_SCROLL_IF_CONTENT_SCROLLS && canScrollHorizontal);
-        final boolean overScrollVertical = overScrollMode == OVER_SCROLL_ALWAYS ||
-                (overScrollMode == OVER_SCROLL_IF_CONTENT_SCROLLS && canScrollVertical);
-
-        int newScrollX = scrollX + deltaX;
-        if (!overScrollHorizontal) {
-            maxOverScrollX = 0;
-        }
-
-        int newScrollY = scrollY + deltaY;
-        if (!overScrollVertical) {
-            maxOverScrollY = 0;
-        }
-
-        // Clamp values if at the limits and record
-        final int left = -maxOverScrollX;
-        final int right = maxOverScrollX + scrollRangeX;
-        final int top = -maxOverScrollY;
-        final int bottom = maxOverScrollY + scrollRangeY;
-
-        boolean clampedX = false;
-        if (newScrollX > right) {
-            newScrollX = right;
-            clampedX = true;
-        } else if (newScrollX < left) {
-            newScrollX = left;
-            clampedX = true;
-        }
-
-        boolean clampedY = false;
-        if (newScrollY > bottom) {
-            newScrollY = bottom;
-            clampedY = true;
-        } else if (newScrollY < top) {
-            newScrollY = top;
-            clampedY = true;
-        }
-
-        onOverScrolled(newScrollX, newScrollY, clampedX, clampedY);
-
-        return clampedX || clampedY;
-    }
-
-    /**
-     * Called by {@link #overScrollBy(int, int, int, int, int, int, int, int, boolean)} to
-     * respond to the results of an over-scroll operation.
-     *
-     * @param scrollX New X scroll value in pixels
-     * @param scrollY New Y scroll value in pixels
-     * @param clampedX True if scrollX was clamped to an over-scroll boundary
-     * @param clampedY True if scrollY was clamped to an over-scroll boundary
-     */
-    protected void onOverScrolled(int scrollX, int scrollY,
-            boolean clampedX, boolean clampedY) {
-        // Intentionally empty.
-    }
-
-    /**
-     * Returns the over-scroll mode for this view. The result will be
-     * one of {@link #OVER_SCROLL_ALWAYS} (default), {@link #OVER_SCROLL_IF_CONTENT_SCROLLS}
-     * (allow over-scrolling only if the view content is larger than the container),
-     * or {@link #OVER_SCROLL_NEVER}.
-     *
-     * @return This view's over-scroll mode.
-     */
-    public int getOverScrollMode() {
-        return mOverScrollMode;
-    }
-
-    /**
-     * Set the over-scroll mode for this view. Valid over-scroll modes are
-     * {@link #OVER_SCROLL_ALWAYS} (default), {@link #OVER_SCROLL_IF_CONTENT_SCROLLS}
-     * (allow over-scrolling only if the view content is larger than the container),
-     * or {@link #OVER_SCROLL_NEVER}.
-     *
-     * Setting the over-scroll mode of a view will have an effect only if the
-     * view is capable of scrolling.
-     *
-     * @param overScrollMode The new over-scroll mode for this view.
-     */
-    public void setOverScrollMode(int overScrollMode) {
-        if (overScrollMode != OVER_SCROLL_ALWAYS &&
-                overScrollMode != OVER_SCROLL_IF_CONTENT_SCROLLS &&
-                overScrollMode != OVER_SCROLL_NEVER) {
-            throw new IllegalArgumentException("Invalid overscroll mode " + overScrollMode);
-        }
-        mOverScrollMode = overScrollMode;
-    }
-
-    /**
      * A MeasureSpec encapsulates the layout requirements passed from parent to child.
      * Each MeasureSpec represents a requirement for either the width or the height.
      * A MeasureSpec is comprised of a size and a mode. There are three possible
@@ -9124,11 +8777,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     public interface OnLongClickListener {
         /**
-         * Called when a view has been clicked and held.
+         * 当按下视图并保持时调用的回调函数。
          *
-         * @param v The view that was clicked and held.
+         * @param v 按下并保持的视图。
          *
-         * return True if the callback consumed the long click, false otherwise
+         * return 如果回调函数处理了长按事件，返回真；否则返回假。
          */
         boolean onLongClick(View v);
     }
@@ -9316,9 +8969,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int mWindowTop;
 
         /**
-         * Indicates whether views need to use 32-bit drawing caches
+         * Indicates whether the window is translucent/transparent
          */
-        boolean mUse32BitDrawingCache;
+        boolean mTranslucentWindow;        
 
         /**
          * For windows that are full-screen but using insets to layout inside

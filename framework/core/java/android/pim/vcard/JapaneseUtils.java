@@ -27,6 +27,7 @@ import java.util.Map;
         new HashMap<Character, String>();
 
     static {
+        // There's no logical mapping rule in Unicode. Sigh.
         sHalfWidthMap.put('\u3001', "\uFF64");
         sHalfWidthMap.put('\u3002', "\uFF61");
         sHalfWidthMap.put('\u300C', "\uFF62");
@@ -365,11 +366,11 @@ import java.util.Map;
     }
 
     /**
-     * Returns half-width version of that character if possible. Returns null if not possible
+     * Return half-width version of that character if possible. Return null if not possible
      * @param ch input character
      * @return CharSequence object if the mapping for ch exists. Return null otherwise.
      */
-    public static String tryGetHalfWidthText(final char ch) {
+    public static String tryGetHalfWidthText(char ch) {
         if (sHalfWidthMap.containsKey(ch)) {
             return sHalfWidthMap.get(ch);
         } else {

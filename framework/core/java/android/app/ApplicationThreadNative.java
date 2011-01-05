@@ -341,6 +341,13 @@ public abstract class ApplicationThreadNative extends Binder
             return true;
         }
         
+        case REQUEST_PSS_TRANSACTION:
+        {
+            data.enforceInterface(IApplicationThread.descriptor);
+            requestPss();
+            return true;
+        }
+        
         case PROFILER_CONTROL_TRANSACTION:
         {
             data.enforceInterface(IApplicationThread.descriptor);
@@ -393,14 +400,6 @@ public abstract class ApplicationThreadNative extends Binder
             int cmd = data.readInt();
             String[] packages = data.readStringArray();
             dispatchPackageBroadcast(cmd, packages);
-            return true;
-        }
-
-        case SCHEDULE_CRASH_TRANSACTION:
-        {
-            data.enforceInterface(IApplicationThread.descriptor);
-            String msg = data.readString();
-            scheduleCrash(msg);
             return true;
         }
         }
@@ -772,6 +771,14 @@ class ApplicationThreadProxy implements IApplicationThread {
         data.recycle();
     }
     
+    public final void requestPss() throws RemoteException {
+        Parcel data = Parcel.obtain();
+        data.writeInterfaceToken(IApplicationThread.descriptor);
+        mRemote.transact(REQUEST_PSS_TRANSACTION, data, null,
+                IBinder.FLAG_ONEWAY);
+        data.recycle();
+    }
+    
     public void profilerControl(boolean start, String path,
             ParcelFileDescriptor fd) throws RemoteException {
         Parcel data = Parcel.obtain();
@@ -815,16 +822,6 @@ class ApplicationThreadProxy implements IApplicationThread {
         data.writeInt(cmd);
         data.writeStringArray(packages);
         mRemote.transact(DISPATCH_PACKAGE_BROADCAST_TRANSACTION, data, null,
-                IBinder.FLAG_ONEWAY);
-        data.recycle();
-        
-    }
-    
-    public void scheduleCrash(String msg) throws RemoteException {
-        Parcel data = Parcel.obtain();
-        data.writeInterfaceToken(IApplicationThread.descriptor);
-        data.writeString(msg);
-        mRemote.transact(SCHEDULE_CRASH_TRANSACTION, data, null,
                 IBinder.FLAG_ONEWAY);
         data.recycle();
         

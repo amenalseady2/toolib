@@ -50,14 +50,7 @@ public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
      * data.
      */
     public String dataDir;
-
-    /**
-     * Full path to the directory where the native JNI libraries are stored.
-     * 
-     * {@hide}
-     */
-    public String nativeLibraryDir;
-
+    
     /**
      * Specifies whether or not this instrumentation will handle profiling.
      */
@@ -75,7 +68,6 @@ public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
         sourceDir = orig.sourceDir;
         publicSourceDir = orig.publicSourceDir;
         dataDir = orig.dataDir;
-        nativeLibraryDir = orig.nativeLibraryDir;
         handleProfiling = orig.handleProfiling;
         functionalTest = orig.functionalTest;
     }
@@ -96,7 +88,6 @@ public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
         dest.writeString(sourceDir);
         dest.writeString(publicSourceDir);
         dest.writeString(dataDir);
-        dest.writeString(nativeLibraryDir);
         dest.writeInt((handleProfiling == false) ? 0 : 1);
         dest.writeInt((functionalTest == false) ? 0 : 1);
     }
@@ -117,7 +108,6 @@ public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
         sourceDir = source.readString();
         publicSourceDir = source.readString();
         dataDir = source.readString();
-        nativeLibraryDir = source.readString();
         handleProfiling = source.readInt() != 0;
         functionalTest = source.readInt() != 0;
     }

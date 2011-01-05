@@ -62,9 +62,6 @@ public class Build {
     /** The name of the hardware (from the kernel command line or /proc). */
     public static final String HARDWARE = getString("ro.hardware");
 
-    /** A hardware serial number, if available.  Alphanumeric only, case-insensitive. */ 
-    public static final String SERIAL = getString("ro.serialno");
-  
     /** Various version strings. */
     public static class VERSION {
         /**
@@ -182,15 +179,7 @@ public class Build {
          */
         public static final int ECLAIR_MR1 = 7;
         
-        /**
-         * June 2010: Android 2.2
-         */
         public static final int FROYO = 8;
-        
-        /**
-         * Newest version of Android, version 2.3.
-         */
-        public static final int GINGERBREAD = 9;
     }
     
     /** The type of build, like "user" or "eng". */

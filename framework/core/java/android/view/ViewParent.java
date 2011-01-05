@@ -184,27 +184,23 @@ public interface ViewParent {
     public void requestDisallowInterceptTouchEvent(boolean disallowIntercept);
     
     /**
-     * Called when a child of this group wants a particular rectangle to be
-     * positioned onto the screen.  {@link ViewGroup}s overriding this can trust
-     * that:
+     * 当视图组里的某个子视图需要定位到屏幕上的特定矩形区域时，调用此方法。
+     * {@link ViewGroup} 重写此方法时可以认为：
      * <ul>
-     *   <li>child will be a direct child of this group</li>
-     *   <li>rectangle will be in the child's coordinates</li>
+     *   <li>child 是该视图的直接子视图。</li>
+     *   <li>rectangle 使用子视图的坐标系。</li>
      * </ul>
      *
-     * <p>{@link ViewGroup}s overriding this should uphold the contract:</p>
+     * <p>{@link ViewGroup}重写此方法时应该遵守如下约定：</p>
      * <ul>
-     *   <li>nothing will change if the rectangle is already visible</li>
-     *   <li>the view port will be scrolled only just enough to make the
-     *       rectangle visible</li>
+     *   <li>如果矩形可见，不做任何变更。</li>
+     *   <li>视窗滚动到矩形可见即可。</li>
      * <ul>
      *
-     * @param child The direct child making the request.
-     * @param rectangle The rectangle in the child's coordinates the child
-     *        wishes to be on the screen.
-     * @param immediate True to forbid animated or delayed scrolling,
-     *        false otherwise
-     * @return Whether the group scrolled to handle the operation
+     * @param child 发出请求的直接子视图。
+     * @param rectangle 子视图希望显示在屏幕上的、基于子视图坐标系的矩形。
+     * @param immediate 设为真时，禁止动画形式或延迟的滚动；设为假时不禁止。
+     * @return 该方法是否滚动了屏幕。
      */
     public boolean requestChildRectangleOnScreen(View child, Rect rectangle,
             boolean immediate);

@@ -20,7 +20,6 @@ import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.lang.ref.SoftReference;
 import java.util.Arrays;
 
 /**
@@ -31,7 +30,7 @@ public class Signature implements Parcelable {
     private final byte[] mSignature;
     private int mHashCode;
     private boolean mHaveHashCode;
-    private SoftReference<String> mStringRef;
+    private String mString;
 
     /**
      * Create Signature from an existing raw byte array.
@@ -97,13 +96,10 @@ public class Signature implements Parcelable {
      * cached so future calls will return the same String.
      */
     public String toCharsString() {
-        String str = mStringRef == null ? null : mStringRef.get();
-        if (str != null) {
-            return str;
-        }
-        str = new String(toChars());
-        mStringRef = new SoftReference<String>(str);
-        return str;
+        if (mString != null) return mString;
+        String str = new String(toChars());
+        mString = str;
+        return mString;
     }
 
     /**

@@ -36,8 +36,7 @@ public interface BluetoothDevicePicker {
 
     /**
      * Broadcast when one BT device is selected from BT device picker screen.
-     * Selected {@link BluetoothDevice} is returned in extra data named
-     * {@link BluetoothDevice#EXTRA_DEVICE}.
+     * Selected BT device address is contained in extra string {@link BluetoothIntent}
      */
     @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
     public static final String ACTION_DEVICE_SELECTED =

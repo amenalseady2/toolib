@@ -207,7 +207,6 @@ public class WebSettings {
     private boolean         mBuiltInZoomControls = false;
     private boolean         mAllowFileAccess = true;
     private boolean         mLoadWithOverviewMode = false;
-    private boolean         mUseWebViewBackgroundOverscrollBackground = true;
 
     // private WebSettings, not accessible by the host activity
     static private int      mDoubleTapToastCount = 3;
@@ -483,23 +482,6 @@ public class WebSettings {
      */
     public boolean getLoadWithOverviewMode() {
         return mLoadWithOverviewMode;
-    }
-
-    /**
-     * Set whether the WebView uses its background for over scroll background.
-     * If true, it will use the WebView's background. If false, it will use an
-     * internal pattern. Default is true.
-     */
-    public void setUseWebViewBackgroundForOverscrollBackground(boolean view) {
-        mUseWebViewBackgroundOverscrollBackground = view;
-    }
-
-    /**
-     * Returns true if this WebView uses WebView's background instead of
-     * internal pattern for over scroll background.
-     */
-    public boolean getUseWebViewBackgroundForOverscrollBackground() {
-        return mUseWebViewBackgroundOverscrollBackground;
     }
 
     /**
@@ -1029,7 +1011,6 @@ public class WebSettings {
      * @deprecated This method has been deprecated in favor of
      *             {@link #setPluginState}
      */
-    @Deprecated
     public synchronized void setPluginsEnabled(boolean flag) {
         setPluginState(PluginState.ON);
     }
@@ -1049,13 +1030,8 @@ public class WebSettings {
     }
 
     /**
-     * Set a custom path to plugins used by the WebView. This method is
-     * obsolete since each plugin is now loaded from its own package.
-     * @param pluginsPath String path to the directory containing plugins.
-     * @deprecated This method is no longer used as plugins are loaded from
-     * their own APK via the system's package manager.
+     * TODO: need to add @Deprecated
      */
-    @Deprecated
     public synchronized void setPluginsPath(String pluginsPath) {
     }
 
@@ -1212,7 +1188,6 @@ public class WebSettings {
      * @return True if plugins are enabled.
      * @deprecated This method has been replaced by {@link #getPluginState}
      */
-    @Deprecated
     public synchronized boolean getPluginsEnabled() {
         return mPluginState == PluginState.ON;
     }
@@ -1226,13 +1201,8 @@ public class WebSettings {
     }
 
     /**
-     * Returns the directory that contains the plugin libraries. This method is
-     * obsolete since each plugin is now loaded from its own package.
-     * @return An empty string.
-     * @deprecated This method is no longer used as plugins are loaded from
-     * their own APK via the system's package manager.
+     * TODO: need to add @Deprecated
      */
-    @Deprecated
     public synchronized String getPluginsPath() {
         return "";
     }

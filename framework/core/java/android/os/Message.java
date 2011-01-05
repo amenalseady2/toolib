@@ -19,7 +19,6 @@ package android.os;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.TimeUtils;
 
 /**
  * 
@@ -367,17 +366,13 @@ public final class Message implements Parcelable {
     }
 
     public String toString() {
-        return toString(SystemClock.uptimeMillis());
-    }
-
-    String toString(long now) {
         StringBuilder   b = new StringBuilder();
         
         b.append("{ what=");
         b.append(what);
 
         b.append(" when=");
-        TimeUtils.formatDuration(when-now, b);
+        b.append(when);
 
         if (arg1 != 0) {
             b.append(" arg1=");

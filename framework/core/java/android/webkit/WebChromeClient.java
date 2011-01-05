@@ -320,22 +320,4 @@ public class WebChromeClient {
     public void openFileChooser(ValueCallback<Uri> uploadFile) {
         uploadFile.onReceiveValue(null);
     }
-
-    /**
-     * Tell the client that the selection has been initiated.
-     * @hide
-     */
-    public void onSelectionStart(WebView view) {
-        // By default we cancel the selection again, thus disabling
-        // text selection unless the chrome client supports it.
-        view.notifySelectDialogDismissed();
-    }
-
-    /**
-     * Tell the client that the selection has been copied or canceled.
-     * @hide
-     */
-    public void onSelectionDone(WebView view) {
-    }
-
 }

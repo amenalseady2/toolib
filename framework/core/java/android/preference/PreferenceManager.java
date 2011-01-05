@@ -443,16 +443,7 @@ public class PreferenceManager {
             pm.setSharedPreferencesMode(sharedPreferencesMode);
             pm.inflateFromResource(context, resId, null);
 
-            SharedPreferences.Editor editor =
-                    defaultValueSp.edit().putBoolean(KEY_HAS_SET_DEFAULT_VALUES, true);
-            try {
-                editor.apply();
-            } catch (AbstractMethodError unused) {
-                // The app injected its own pre-Gingerbread
-                // SharedPreferences.Editor implementation without
-                // an apply method.
-                editor.commit();
-            }
+            defaultValueSp.edit().putBoolean(KEY_HAS_SET_DEFAULT_VALUES, true).commit();
         }
     }
     
@@ -487,21 +478,15 @@ public class PreferenceManager {
     boolean shouldCommit() {
         return !mNoCommit;
     }
-
+    
     private void setNoCommit(boolean noCommit) {
         if (!noCommit && mEditor != null) {
-            try {
-                mEditor.apply();
-            } catch (AbstractMethodError unused) {
-                // The app injected its own pre-Gingerbread
-                // SharedPreferences.Editor implementation without
-                // an apply method.
-                mEditor.commit();
-            }
+            mEditor.commit();
         }
+        
         mNoCommit = noCommit;
     }
-
+    
     /**
      * Returns the activity that shows the preferences. This is useful for doing
      * managed queries, but in most cases the use of {@link #getContext()} is

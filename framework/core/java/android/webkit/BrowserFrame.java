@@ -71,7 +71,6 @@ class BrowserFrame extends Handler {
     // that if the UI thread posts any messages after the message
     // queue has been cleared,they are ignored.
     private boolean mBlockMessages = false;
-    private int mOrientation = -1;
 
     // Is this frame the main frame?
     private boolean mIsMainFrame;
@@ -474,10 +473,7 @@ class BrowserFrame extends Handler {
             }
 
             case ORIENTATION_CHANGED: {
-                if (mOrientation != msg.arg1) {
-                    mOrientation = msg.arg1;
-                    nativeOrientationChanged(msg.arg1);
-                }
+                nativeOrientationChanged(msg.arg1);
                 break;
             }
 

@@ -17,13 +17,14 @@
 package android.text.method;
 
 import android.text.Layout;
-import android.text.Layout.Alignment;
 import android.text.NoCopySpan;
+import android.text.Layout.Alignment;
 import android.text.Spannable;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
+import android.view.KeyEvent;
 
 public class Touch {
     private Touch() { }
@@ -98,7 +99,7 @@ public class Touch {
                                        MotionEvent event) {
         DragState[] ds;
 
-        switch (event.getActionMasked()) {
+        switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
             ds = buffer.getSpans(0, buffer.length(), DragState.class);
 

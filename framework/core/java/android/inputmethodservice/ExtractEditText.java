@@ -98,8 +98,7 @@ public class ExtractEditText extends EditText {
     }
     
     @Override public boolean onTextContextMenuItem(int id) {
-        // Horrible hack: select word option has to be handled by original view to work.
-        if (mIME != null && id != android.R.id.startSelectingText) {
+        if (mIME != null) {
             if (mIME.onExtractTextContextMenuItem(id)) {
                 return true;
             }
@@ -110,7 +109,6 @@ public class ExtractEditText extends EditText {
     /**
      * We are always considered to be an input method target.
      */
-    @Override
     public boolean isInputMethodTarget() {
         return true;
     }
@@ -127,7 +125,7 @@ public class ExtractEditText extends EditText {
      * highlight and cursor will be displayed.
      */
     @Override public boolean hasWindowFocus() {
-        return this.isEnabled();
+        return this.isEnabled() ? true : false;
     }
 
     /**
@@ -135,7 +133,7 @@ public class ExtractEditText extends EditText {
      * highlight and cursor will be displayed.
      */
     @Override public boolean isFocused() {
-        return this.isEnabled();
+        return this.isEnabled() ? true : false;
     }
 
     /**
@@ -143,6 +141,6 @@ public class ExtractEditText extends EditText {
      * highlight and cursor will be displayed.
      */
     @Override public boolean hasFocus() {
-        return this.isEnabled();
+        return this.isEnabled() ? true : false;
     }
 }

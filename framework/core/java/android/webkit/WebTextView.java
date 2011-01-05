@@ -28,7 +28,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.Layout;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextPaint;
@@ -289,22 +288,6 @@ import java.util.ArrayList;
         return ptr == mNodePointer;
     }
 
-    /**
-     * Ensure that the underlying textfield is lined up with the WebTextView.
-     */
-    private void lineUpScroll() {
-        Layout layout = getLayout();
-        if (mWebView != null && layout != null) {
-            float maxScrollX = Touch.getMaxScrollX(this, layout, mScrollY);
-            if (DebugFlags.WEB_TEXT_VIEW) {
-                Log.v(LOGTAG, "onTouchEvent x=" + mScrollX + " y="
-                        + mScrollY + " maxX=" + maxScrollX);
-            }
-            mWebView.scrollFocusedTextInput(maxScrollX > 0 ?
-                    mScrollX / maxScrollX : 0, mScrollY);
-        }
-    }
-
     @Override public InputConnection onCreateInputConnection(
             EditorInfo outAttrs) {
         InputConnection connection = super.onCreateInputConnection(outAttrs);
@@ -332,10 +315,6 @@ import java.util.ArrayList;
         } else {
             super.onDraw(canvas);
         }
-    }
-
-    public void onDrawSubstitute() {
-      updateCursorControllerPositions();
     }
 
     @Override
@@ -380,12 +359,6 @@ import java.util.ArrayList;
     }
 
     @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
-        lineUpScroll();
-    }
-
-    @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
         if (mInSetTextAndKeepSelection) return;
         // This code is copied from TextView.onDraw().  That code does not get
@@ -405,7 +378,6 @@ import java.util.ArrayList;
                         + " selEnd=" + selEnd);
             }
             mWebView.setSelection(selStart, selEnd);
-            lineUpScroll();
         }
     }
 
@@ -509,7 +481,16 @@ import java.util.ArrayList;
             // to big for the case of a small textfield.
             int smallerSlop = slop/2;
             if (dx > smallerSlop || dy > smallerSlop) {
-                // Scrolling is handled in onScrollChanged.
+                if (mWebView != null) {
+                    float maxScrollX = (float) Touch.getMaxScrollX(this,
+                                getLayout(), mScrollY);
+                    if (DebugFlags.WEB_TEXT_VIEW) {
+                        Log.v(LOGTAG, "onTouchEvent x=" + mScrollX + " y="
+                                + mScrollY + " maxX=" + maxScrollX);
+                    }
+                    mWebView.scrollFocusedTextInput(maxScrollX > 0 ?
+                            mScrollX / maxScrollX : 0, mScrollY);
+                }
                 mScrolled = true;
                 cancelLongPress();
                 return true;
@@ -538,7 +519,6 @@ import java.util.ArrayList;
             return false;
         case MotionEvent.ACTION_UP:
         case MotionEvent.ACTION_CANCEL:
-            super.onTouchEvent(event);
             if (mHasPerformedLongClick) {
                 mGotTouchDown = false;
                 return false;
@@ -704,6 +684,9 @@ import java.util.ArrayList;
         // webkit's drawing.
         setWillNotDraw(!inPassword);
         setBackgroundDrawable(inPassword ? mBackground : null);
+        // For non-password fields, avoid the invals from TextView's blinking
+        // cursor
+        setCursorVisible(inPassword);
     }
 
     /**

@@ -20,8 +20,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Set;
 
 final class JWebCoreJavaBridge extends Handler {
@@ -46,8 +44,7 @@ final class JWebCoreJavaBridge extends Handler {
 
     // keep track of the main WebView attached to the current window so that we
     // can get the proper Context.
-    private static WeakReference<WebView> sCurrentMainWebView =
-            new WeakReference<WebView>(null);
+    private WebView mCurrentMainWebView;
 
     /* package */
     static final int REFRESH_PLUGINS = 100;
@@ -65,20 +62,20 @@ final class JWebCoreJavaBridge extends Handler {
         nativeFinalize();
     }
 
-    static synchronized void setActiveWebView(WebView webview) {
-        if (sCurrentMainWebView.get() != null) {
+    synchronized void setActiveWebView(WebView webview) {
+        if (mCurrentMainWebView != null) {
             // it is possible if there is a sub-WebView. Do nothing.
             return;
         }
-        sCurrentMainWebView = new WeakReference<WebView>(webview);
+        mCurrentMainWebView = webview;
     }
 
-    static synchronized void removeActiveWebView(WebView webview) {
-        if (sCurrentMainWebView.get() != webview) {
+    synchronized void removeActiveWebView(WebView webview) {
+        if (mCurrentMainWebView != webview) {
             // it is possible if there is a sub-WebView. Do nothing.
             return;
         }
-        sCurrentMainWebView.clear();
+        mCurrentMainWebView = null;
     }
 
     /**
@@ -259,12 +256,11 @@ final class JWebCoreJavaBridge extends Handler {
 
     synchronized private String getSignedPublicKey(int index, String challenge,
             String url) {
-        WebView current = sCurrentMainWebView.get();
-        if (current != null) {
+        if (mCurrentMainWebView != null) {
             // generateKeyPair expects organizations which we don't have. Ignore
             // url.
             return CertTool.getSignedPublicKey(
-                    current.getContext(), index, challenge);
+                    mCurrentMainWebView.getContext(), index, challenge);
         } else {
             Log.e(LOGTAG, "There is no active WebView for getSignedPublicKey");
             return "";
