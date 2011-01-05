@@ -51,8 +51,6 @@ public class Scroller  {
     private float mDurationReciprocal;
     private float mDeltaX;
     private float mDeltaY;
-    private float mViscousFluidScale;
-    private float mViscousFluidNormalize;
     private boolean mFinished;
     private Interpolator mInterpolator;
 
@@ -65,6 +63,17 @@ public class Scroller  {
     private static final int FLING_MODE = 1;
 
     private final float mDeceleration;
+
+    private static float sViscousFluidScale;
+    private static float sViscousFluidNormalize;
+
+    static {
+        // This controls the viscous fluid effect (how much of it)
+        sViscousFluidScale = 8.0f;
+        // must be set to 1.0 (used in viscousFluid())
+        sViscousFluidNormalize = 1.0f;
+        sViscousFluidNormalize = 1.0f / viscousFluid(1.0f);
+    }
 
     /**
      * 使用缺省的持续持续时间和动画插入器（interpolator）创建 Scroller。
@@ -263,11 +272,6 @@ public class Scroller  {
         mDeltaX = dx;
         mDeltaY = dy;
         mDurationReciprocal = 1.0f / (float) mDuration;
-        // This controls the viscous fluid effect (how much of it)
-        mViscousFluidScale = 8.0f;
-        // must be set to 1.0 (used in viscousFluid())
-        mViscousFluidNormalize = 1.0f;
-        mViscousFluidNormalize = 1.0f / viscousFluid(1.0f);
     }
 
     /**
@@ -318,11 +322,9 @@ public class Scroller  {
         mFinalY = Math.max(mFinalY, mMinY);
     }
     
-    
-    
-    private float viscousFluid(float x)
+    static float viscousFluid(float x)
     {
-        x *= mViscousFluidScale;
+        x *= sViscousFluidScale;
         if (x < 1.0f) {
             x -= (1.0f - (float)Math.exp(-x));
         } else {
@@ -330,7 +332,7 @@ public class Scroller  {
             x = 1.0f - (float)Math.exp(1.0f - x);
             x = start + x * (1.0f - start);
         }
-        x *= mViscousFluidNormalize;
+        x *= sViscousFluidNormalize;
         return x;
     }
     
