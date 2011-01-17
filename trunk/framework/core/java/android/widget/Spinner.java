@@ -31,6 +31,8 @@ import android.view.ViewGroup;
 /**
  * 下拉列表（Spinner）是一个每次只能选择所有项中一项的部件。
  * 它的项目来自于与之相关联的 {@link Adapter}。
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-spinner.html">Spinner
+ * tutorial</a>.</p>
  * 
  * @attr ref android.R.styleable#Spinner_prompt
  * @author translate by 思考的狼（Android中文翻译组）

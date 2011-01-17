@@ -38,6 +38,8 @@ import com.android.internal.R;
  * （如果宽度设置为其他布局模式，结果不可预知）。
  * <p>
  * 次级进度一般不应该被修改，因为他仅仅是被当作星型部分内部的填充背景。
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
+ * tutorial</a>.</p>
  * 
  * @attr ref android.R.styleable#RatingBar_numStars
  * @attr ref android.R.styleable#RatingBar_rating

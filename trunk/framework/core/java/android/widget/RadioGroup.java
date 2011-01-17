@@ -46,9 +46,6 @@ import android.view.ViewGroup;
  * @author translate by 首当其冲
  * @author convert by cnmahj
  *
- * @author translate by 首当其冲
- * @author translate by cnmahj
- * @author convert by cnmahj
  */
 public class RadioGroup extends LinearLayout {
     // holds the checked id; the selection is empty by default

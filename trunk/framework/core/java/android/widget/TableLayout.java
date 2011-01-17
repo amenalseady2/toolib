@@ -58,6 +58,8 @@ import java.util.regex.Pattern;
  *
  * <p>虽然表格布局典型的子对象是表格行，实际上你可以使用任何视图类的子类，
  * 作为表格视图的直接子对象。视图会作为只有一行并结合了所有列的单元格显示。</p>
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-tablelayout.html">Table
+ * Layout tutorial</a>.</p>
  * @author translate by cnmahj
  */
 public class TableLayout extends LinearLayout {

@@ -251,11 +251,6 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
             contentResolver.registerContentObserver(Settings.System.CONTENT_URI, true, mObserver);
         }
 
-        if (mObserver == null) {
-            mObserver = new SettingsObserver();
-            contentResolver.registerContentObserver(Settings.System.CONTENT_URI, true, mObserver);
-        }
-
         updatePrefs(contentResolver);
         mPrefsInited = true;
     }

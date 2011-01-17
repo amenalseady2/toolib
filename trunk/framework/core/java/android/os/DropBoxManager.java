@@ -54,29 +54,8 @@ public class DropBoxManager {
     /** Flag value: Content can be decompressed with {@link java.util.zip.GZIPOutputStream}. */
     public static final int IS_GZIPPED = 4;
 
-    /**
-     * Broadcast Action: This is broadcast when a new entry is added in the dropbox.
-     * You must hold the {@link android.Manifest.permission#READ_LOGS} permission
-     * in order to receive this broadcast.
-     *
-     * <p class="note">This is a protected intent that can only be sent
-     * by the system.
-     */
-    public static final String ACTION_DROPBOX_ENTRY_ADDED =
-        "android.intent.action.DROPBOX_ENTRY_ADDED";
-
-    /**
-     * Extra for {@link android.os.DropBoxManager#ACTION_DROPBOX_ENTRY_ADDED}:
-     * string containing the dropbox tag.
-     */
-    public static final String EXTRA_TAG = "tag";
-
-    /**
-     * Extra for {@link android.os.DropBoxManager#ACTION_DROPBOX_ENTRY_ADDED}:
-     * long integer value containing time (in milliseconds since January 1, 1970 00:00:00 UTC)
-     * when the entry was created.
-     */
-    public static final String EXTRA_TIME = "time";
+    /** Flag value for serialization only: Value is a byte array, not a file descriptor */
+    private static final int HAS_BYTE_ARRAY = 8;
 
     /**
      * A single entry retrieved from the drop box.
@@ -93,12 +72,25 @@ public class DropBoxManager {
 
         /** Create a new empty Entry with no contents. */
         public Entry(String tag, long millis) {
-            this(tag, millis, (Object) null, IS_EMPTY);
+            if (tag == null) throw new NullPointerException("tag == null");
+
+            mTag = tag;
+            mTimeMillis = millis;
+            mData = null;
+            mFileDescriptor = null;
+            mFlags = IS_EMPTY;
         }
 
         /** Create a new Entry with plain text contents. */
         public Entry(String tag, long millis, String text) {
-            this(tag, millis, (Object) text.getBytes(), IS_TEXT);
+            if (tag == null) throw new NullPointerException("tag == null");
+            if (text == null) throw new NullPointerException("text == null");
+
+            mTag = tag;
+            mTimeMillis = millis;
+            mData = text.getBytes();
+            mFileDescriptor = null;
+            mFlags = IS_TEXT;
         }
 
         /**
@@ -106,7 +98,16 @@ public class DropBoxManager {
          * The data array must not be modified after creating this entry.
          */
         public Entry(String tag, long millis, byte[] data, int flags) {
-            this(tag, millis, (Object) data, flags);
+            if (tag == null) throw new NullPointerException("tag == null");
+            if (((flags & IS_EMPTY) != 0) != (data == null)) {
+                throw new IllegalArgumentException("Bad flags: " + flags);
+            }
+
+            mTag = tag;
+            mTimeMillis = millis;
+            mData = data;
+            mFileDescriptor = null;
+            mFlags = flags;
         }
 
         /**
@@ -114,7 +115,16 @@ public class DropBoxManager {
          * Takes ownership of the ParcelFileDescriptor.
          */
         public Entry(String tag, long millis, ParcelFileDescriptor data, int flags) {
-            this(tag, millis, (Object) data, flags);
+            if (tag == null) throw new NullPointerException("tag == null");
+            if (((flags & IS_EMPTY) != 0) != (data == null)) {
+                throw new IllegalArgumentException("Bad flags: " + flags);
+            }
+
+            mTag = tag;
+            mTimeMillis = millis;
+            mData = null;
+            mFileDescriptor = data;
+            mFlags = flags;
         }
 
         /**
@@ -122,31 +132,14 @@ public class DropBoxManager {
          * The file will be read when the entry's contents are requested.
          */
         public Entry(String tag, long millis, File data, int flags) throws IOException {
-            this(tag, millis, (Object) ParcelFileDescriptor.open(
-                    data, ParcelFileDescriptor.MODE_READ_ONLY), flags);
-        }
-
-        /** Internal constructor for CREATOR.createFromParcel(). */
-        private Entry(String tag, long millis, Object value, int flags) {
-            if (tag == null) throw new NullPointerException();
-            if (((flags & IS_EMPTY) != 0) != (value == null)) throw new IllegalArgumentException();
+            if (tag == null) throw new NullPointerException("tag == null");
+            if ((flags & IS_EMPTY) != 0) throw new IllegalArgumentException("Bad flags: " + flags);
 
             mTag = tag;
             mTimeMillis = millis;
+            mData = null;
+            mFileDescriptor = ParcelFileDescriptor.open(data, ParcelFileDescriptor.MODE_READ_ONLY);
             mFlags = flags;
-
-            if (value == null) {
-                mData = null;
-                mFileDescriptor = null;
-            } else if (value instanceof byte[]) {
-                mData = (byte[]) value;
-                mFileDescriptor = null;
-            } else if (value instanceof ParcelFileDescriptor) {
-                mData = null;
-                mFileDescriptor = (ParcelFileDescriptor) value;
-            } else {
-                throw new IllegalArgumentException();
-            }
         }
 
         /** Close the input stream associated with this entry. */
@@ -174,13 +167,9 @@ public class DropBoxManager {
             InputStream is = null;
             try {
                 is = getInputStream();
+                if (is == null) return null;
                 byte[] buf = new byte[maxBytes];
-                int readBytes = 0;
-                int n = 0;
-                while (n >= 0 && (readBytes += n) < maxBytes) {
-                    n = is.read(buf, readBytes, maxBytes - readBytes);
-                }
-                return new String(buf, 0, readBytes);
+                return new String(buf, 0, Math.max(0, is.read(buf)));
             } catch (IOException e) {
                 return null;
             } finally {
@@ -204,8 +193,14 @@ public class DropBoxManager {
         public static final Parcelable.Creator<Entry> CREATOR = new Parcelable.Creator() {
             public Entry[] newArray(int size) { return new Entry[size]; }
             public Entry createFromParcel(Parcel in) {
-                return new Entry(
-                        in.readString(), in.readLong(), in.readValue(null), in.readInt());
+                String tag = in.readString();
+                long millis = in.readLong();
+                int flags = in.readInt();
+                if ((flags & HAS_BYTE_ARRAY) != 0) {
+                    return new Entry(tag, millis, in.createByteArray(), flags & ~HAS_BYTE_ARRAY);
+                } else {
+                    return new Entry(tag, millis, in.readFileDescriptor(), flags);
+                }
             }
         };
 
@@ -217,11 +212,12 @@ public class DropBoxManager {
             out.writeString(mTag);
             out.writeLong(mTimeMillis);
             if (mFileDescriptor != null) {
-                out.writeValue(mFileDescriptor);
+                out.writeInt(mFlags & ~HAS_BYTE_ARRAY);  // Clear bit just to be safe
+                mFileDescriptor.writeToParcel(out, flags);
             } else {
-                out.writeValue(mData);
+                out.writeInt(mFlags | HAS_BYTE_ARRAY);
+                out.writeByteArray(mData);
             }
-            out.writeInt(mFlags);
         }
     }
 
@@ -255,7 +251,7 @@ public class DropBoxManager {
      * @param flags describing the data
      */
     public void addData(String tag, byte[] data, int flags) {
-        if (data == null) throw new NullPointerException();
+        if (data == null) throw new NullPointerException("data == null");
         try { mService.add(new Entry(tag, 0, data, flags)); } catch (RemoteException e) {}
     }
 
@@ -269,7 +265,7 @@ public class DropBoxManager {
      * @throws IOException if the file can't be opened
      */
     public void addFile(String tag, File file, int flags) throws IOException {
-        if (file == null) throw new NullPointerException();
+        if (file == null) throw new NullPointerException("file == null");
         Entry entry = new Entry(tag, 0, file, flags);
         try {
             mService.add(entry);

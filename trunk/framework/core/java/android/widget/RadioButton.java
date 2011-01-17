@@ -27,6 +27,9 @@ import android.util.AttributeSet;
  * <p>单选按钮通常与 {@link android.widget.RadioGroup} 同时使用。
  * 当多个单选按钮属于同一个单选按钮组时，选中其中一个的同时将取消其它单选按钮的选中状态。</p>
  *
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
+ * tutorial</a>.</p>
+ *
  * <p><strong>XML attributes</strong></p>
  * <p> 
  * 参见 {@link android.R.styleable#CompoundButton CompoundButton Attributes}、
