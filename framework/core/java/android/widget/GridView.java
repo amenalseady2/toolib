@@ -30,6 +30,8 @@ import android.view.animation.GridLayoutAnimationController;
 
 /**
  * 在二维滚动网格中显示条目的视图。网格中的条目来自与视图关联的 {@link ListAdapter}。
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-gridview.html">Grid
+ * View tutorial</a>.</p>
  * @author translate by 0_1
  * @author translate by cnmahj
  * @author convert by cnmahj

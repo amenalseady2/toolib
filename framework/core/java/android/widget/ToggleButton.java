@@ -25,6 +25,8 @@ import android.util.AttributeSet;
 
 /**
  * 通过一个带有亮度指示同时默认文本为“ON”或“OFF”的按钮显示选中/未选中状态。
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
+ * tutorial</a>.</p>
  * 
  * @attr ref android.R.styleable#ToggleButton_textOn
  * @attr ref android.R.styleable#ToggleButton_textOff

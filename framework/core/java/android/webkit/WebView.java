@@ -119,6 +119,9 @@ import junit.framework.Assert;
  * href="{@docRoot}guide/topics/manifest/manifest-element.html">{@code &lt;manifest&gt;}</a>
  * element.</p>
  *
+ * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-webview.html">Web View
+ * tutorial</a>.</p>
+ *
  * <h3>Basic usage</h3>
  *
  * <p>By default, a WebView provides no browser-like widgets, does not
@@ -309,10 +312,6 @@ public class WebView extends AbsoluteLayout
     static private final boolean AUTO_REDRAW_HACK = false;
     // true means redraw the screen all-the-time. Only with AUTO_REDRAW_HACK
     private boolean mAutoRedraw;
-
-    // Reference to the AlertDialog displayed by InvokeListBox.
-    // It's used to dismiss the dialog in destroy if not done before.
-    private AlertDialog mListBoxDialog = null;
 
     static final String LOGTAG = "webview";
 
@@ -1302,14 +1301,6 @@ public class WebView extends AbsoluteLayout
      */
     public void destroy() {
         clearHelpers();
-        if (mListBoxDialog != null) {
-            mListBoxDialog.dismiss();
-            mListBoxDialog = null;
-        }
-        if (mListBoxDialog != null) {
-            mListBoxDialog.dismiss();
-            mListBoxDialog = null;
-        }
         if (mWebViewCore != null) {
             // Set the handlers to null before destroying WebViewCore so no
             // more messages will be posted.
@@ -4180,16 +4171,6 @@ public class WebView extends AbsoluteLayout
             } else if (!nativeCursorWantsKeyEvents() && !mSelectingText) {
                 setUpSelect();
             }
-        }
-
-        if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
-            pageUp(false);
-            return true;
-        }
-
-        if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
-            pageDown(false);
-            return true;
         }
 
         if (keyCode >= KeyEvent.KEYCODE_DPAD_UP
@@ -7559,7 +7540,7 @@ public class WebView extends AbsoluteLayout
                                 EventHub.SINGLE_LISTBOX_CHOICE, -2, 0);
                 }});
             }
-            mListBoxDialog = b.create();
+            final AlertDialog dialog = b.create();
             listView.setAdapter(adapter);
             listView.setFocusableInTouchMode(true);
             // There is a bug (1250103) where the checks in a ListView with
@@ -7581,8 +7562,7 @@ public class WebView extends AbsoluteLayout
                             int position, long id) {
                         mWebViewCore.sendMessage(
                                 EventHub.SINGLE_LISTBOX_CHOICE, (int)id, 0);
-                        mListBoxDialog.dismiss();
-                        mListBoxDialog = null;
+                        dialog.dismiss();
                     }
                 });
                 if (mSelection != -1) {
@@ -7594,14 +7574,13 @@ public class WebView extends AbsoluteLayout
                     adapter.registerDataSetObserver(observer);
                 }
             }
-            mListBoxDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 public void onCancel(DialogInterface dialog) {
                     mWebViewCore.sendMessage(
                                 EventHub.SINGLE_LISTBOX_CHOICE, -2, 0);
-                    mListBoxDialog = null;
                 }
             });
-            mListBoxDialog.show();
+            dialog.show();
         }
     }
 
