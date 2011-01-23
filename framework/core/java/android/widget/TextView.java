@@ -1007,27 +1007,24 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Subclasses override this to specify that they have a KeyListener
-     * by default even if not specifically called for in the XML options.
+     * 子类覆盖该方法，已使其可以在默认 XML 选项未指定可编辑时设置 KeyListener。
      */
     protected boolean getDefaultEditable() {
         return false;
     }
 
     /**
-     * Subclasses override this to specify a default movement method.
+     * 子类覆盖该方法，以指定默认动作方法。
      */
     protected MovementMethod getDefaultMovementMethod() {
         return null;
     }
 
     /**
-     * Return the text the TextView is displaying. If setText() was called with
-     * an argument of BufferType.SPANNABLE or BufferType.EDITABLE, you can cast
-     * the return value from this method to Spannable or Editable, respectively.
+     * 返回 TextView 显示的文本。如果使用 BufferType.SPANNABLE 或 BufferType.EDITABLE
+     * 参数调用 setText() 方法，你可以将本方法的返回值分别转换为 Spannable 或 Editable。
      *
-     * Note: The content of the return value should not be modified. If you want
-     * a modifiable one, you should make your own copy first.
+     * 注意：返回值的内容不能修改。如果你需要编辑其中的值，首先你应该生成自己的实例。
      */
     @ViewDebug.CapturedViewProperty
     public CharSequence getText() {
@@ -2581,9 +2578,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the text that this TextView is to display (see
-     * {@link #setText(CharSequence)}) and also sets whether it is stored
-     * in a styleable/spannable buffer and whether it is editable.
+     * 设置该 TextView 显示的文本（参见 {@link #setText(CharSequence)}） 
+     * 以及是否可以保存在 styleable/spannable 缓存中，以及是否可以编辑。
      *
      * @attr ref android.R.styleable#TextView_text
      * @attr ref android.R.styleable#TextView_bufferType
@@ -5962,11 +5958,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
     
     /**
-     * Causes words in the text that are longer than the view is wide
-     * to be ellipsized instead of broken in the middle.  You may also
-     * want to {@link #setSingleLine} or {@link #setHorizontallyScrolling}
-     * to constrain the text to a single line.  Use <code>null</code>
-     * to turn off ellipsizing.
+     * 指定当文字的长度超过视图宽度时用何种方式来取代简单的中途截断文本。
+     * 你可能想使用 {@link #setSingleLine} 或 {@link #setHorizontallyScrolling}
+     * 使文本显示在一行中，请使用 <code>null</code> 关闭该功能。
      *
      * @attr ref android.R.styleable#TextView_ellipsize
      */

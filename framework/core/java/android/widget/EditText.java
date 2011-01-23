@@ -33,17 +33,19 @@ import android.util.AttributeSet;
  */
 
 /**
- * EditText is a thin veneer over TextView that configures itself
- * to be editable.
+ * 译者：<a href="http://over140.cnblogs.com/">农民伯伯</a><br>
+ * 译者：<a href="http://android.toolib.net/blog/"> cnmahj@工具屋</a><br>
+ * 整理：<a href="http://android.toolib.net/blog/"> cnmahj@工具屋</a><br>
+ * <hr>
+ * EditText 只是对 TextView 进行了少量变更，以使其可以编辑。
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
- * tutorial</a>.</p>
+ * <p>参见 <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">窗体简明教程</a>。</p>
  * <p>
- * <b>XML attributes</b>
+ * <b>XML 属性</b>
  * <p>
- * See {@link android.R.styleable#EditText EditText Attributes},
- * {@link android.R.styleable#TextView TextView Attributes},
- * {@link android.R.styleable#View View Attributes}
+ * 参见 {@link android.R.styleable#EditText EditText 属性},
+ * {@link android.R.styleable#TextView TextView 属性},
+ * {@link android.R.styleable#View View 属性}
  */
 public class EditText extends TextView {
     public EditText(Context context) {
@@ -79,28 +81,28 @@ public class EditText extends TextView {
     }
 
     /**
-     * Convenience for {@link Selection#setSelection(Spannable, int, int)}.
+     * {@link Selection#setSelection(Spannable, int, int)} 的封装简化版。
      */
     public void setSelection(int start, int stop) {
         Selection.setSelection(getText(), start, stop);
     }
 
     /**
-     * Convenience for {@link Selection#setSelection(Spannable, int)}.
+     * {@link Selection#setSelection(Spannable, int)} 的封装简化版。
      */
     public void setSelection(int index) {
         Selection.setSelection(getText(), index);
     }
 
     /**
-     * Convenience for {@link Selection#selectAll}.
+     * {@link Selection#selectAll} 的封装简化版。
      */
     public void selectAll() {
         Selection.selectAll(getText());
     }
 
     /**
-     * Convenience for {@link Selection#extendSelection}.
+     * {@link Selection#extendSelection} 的封装简化版。
      */
     public void extendSelection(int index) {
         Selection.extendSelection(getText(), index);
