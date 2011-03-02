@@ -4,182 +4,128 @@ parent.link=index.html
 @jd:body
 
 
-<p><em>In this exercise, you will construct a simple notes list that lets the
-user add new notes but not edit them. The exercise demonstrates:</em></p>
+<p><em>在这个练习中，你将要创建一个简单的记事本列表，用户可以添加新的记事但是不能编辑他们。这个练习示范了如下内容：</em></p>
 <ul>
-<li><em>The basics of <code>ListActivities</code> and creating and handling menu
-options. </em></li>
-<li><em>How to use a SQLite database to store the notes.</em></li>
-<li><em>How to bind data from a database cursor into a ListView using a
-SimpleCursorAdapter.</em></li>
-<li><em>The basics of screen layouts, including how to lay out a list view, how
-you can add items to the activity menu, and how the activity handles those menu
-selections. </em></li>
+	<li><em><code>ListActivities</code>的基础知识以及创建和处理菜单选项。</em></li>
+	<li><em>如何使用 SQLite 数据库存储记事。</em></li>
+	<li><em>如何使用 SimpleCursorAdapter 把数据库的游标绑定到 ListView。</em></li>
+	<li><em>屏幕布局的基础知识，包括如何摆放列表视图、如何为活动菜单添加菜单项和活动如何处理这些菜单的选中操作。</em></li>
 </ul>
 
 <div style="float:right;white-space:nowrap">
 <span style="color:#BBB;">
-	[<a href="notepad-ex1.html" style="color:#BBB;">Exercise 1</a>]</span>
-	[<a href="notepad-ex2.html">Exercise 2</a>]
-	[<a href="notepad-ex3.html">Exercise 3</a>]
-	[<a href="notepad-extra-credit.html">Extra Credit</a>]
+	[<a href="notepad-ex1.html" style="color:#BBB;">练习 1</a>]</span>
+	[<a href="notepad-ex2.html">练习 2</a>]
+	[<a href="notepad-ex3.html">练习 3</a>]
+	[<a href="notepad-extra-credit.html">附加内容</a>]
 </div>
 
+<h2>第一步</h2>
 
-
-<h2>Step 1</h2>
-
-	<p>Open up the <code>Notepadv1</code> project in Eclipse.</p>
+	<p>在 Eclipse 中打开<code>Notepadv1</code>项目。</p>
     
-    <p><code>Notepadv1</code> is a project that is provided as a starting point. It
-    takes care of some of the boilerplate work that you have already seen if you
-    followed the <a href="{@docRoot}resources/tutorials/hello-world.html">Hello,
-    World</a> tutorial.</p>
+    <p><code>Notepadv1</code>作为起始项目，它象你在<a href="{@docRoot}resources/tutorials/hello-world.html">Hello World</a>
+中看到的一样，做了一些准备模板的工作。</p>
     
   <ol>
-    <li>
-      Start a new Android Project by clicking <strong>File</strong> > 
-      <strong>New</strong> > <strong>Android Project</strong>.</li>
-    <li>
-      In the New Android Project dialog, select <strong>Create project from existing source</strong>.</li>
-    <li>
-      Click <strong>Browse</strong> and navigate to where you copied the <code>NotepadCodeLab</code> 
-      (downloaded during <a href="{@docRoot}resources/tutorials/notepad/index.html#preparing">setup</a>) 
-      and select <code>Notepadv1</code>.</li>
+	<li>通过单击<strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Android Project</strong> 创建新的 Android 项目。</li>
+	<li>在新 Android 项目对话框中选择<strong>Create project from existing source</strong>。</li>
+	<li>单击<strong>Browse</strong>并定位到<code>NotepadCodeLab</code>文件夹（在
+	<a href="{@docRoot}resources/tutorials/notepad/index.html#preparing">事前准备</a>
+	时下载的），选择<code>Notepadv1</code>。</li>
+
     <li>
       The Project Name and other properties should be automatically filled for you. 
       You must select the Build Target&mdash;we recommend selecting a target with the 
       lowest platform version available. Also add an integer to the Min SDK Version field 
       that matches the API Level of the selected Build Target.</li>
-    <li>
-      Click <strong>Finish</strong>. The <code>Notepadv1</code> project should open and be 
-      visible in your Eclipse package explorer.</li>
+
+	<li>单击<strong>Finish</strong>按钮。<code>Notepadv1</code>项目会被打开，并且可以在Eclipse的
+	Package Explorer中看到它。</li>
   </ol>
   
-    <p>If you see an error about <code>AndroidManifest.xml</code>, or some
-      problems related to an Android zip file, right click on the project and
-      select <strong>Android Tools</strong> > <strong>Fix Project Properties</strong>.
-      (The project is looking in the wrong location for the library file,
-      this will fix it for you.)</p>
-
-  <h2>Step 2</h2>
+    <p>如果你看到了关于<code>AndroidManifest.xml</code>的错误，或者与Android的zip文件有关的问题，在项目上单击右键，
+选择<strong>Android Tools</strong> &gt; <strong>Fix Project Properties</strong>。
+（项目在错误的位置查找了库文件，该操作将为你修复它。）</p>
+  <h2>第二步</h2>
 
   <div class="sidebox-wrapper">
   <div class="sidebox">
-    <h2>Accessing and modifying data</h2>
-    <p>For this
-    exercise, we are using a SQLite database to store our data. This is useful
-    if only <em>your</em> application will need to access or modify the data. If you wish for
-    other activities to access or modify the data, you have to expose the data using a 
-    {@link android.content.ContentProvider ContentProvider}.</p>
-    <p>If you are interested, you can find out more about
-    <a href="{@docRoot}guide/topics/providers/content-providers.html">content providers</a> or the
-whole
-    subject of <a href="{@docRoot}guide/topics/data/data-storage.html">Data Storage</a>.
-    The NotePad sample in the <code>samples/</code> folder of the SDK also has an example of how
-    to create a ContentProvider.</p>
+    <h2>访问和修改数据</h2>
+    <p>在这个练习中，我们使用 SQLite 数据库来存储我们的数据。这在只有<em>你的</em>应用程序需要访问或修改数据的时候是有用的。
+如果你希望其他的活动访问或修改数据，你必须使用 {@link android.content.ContentProvider ContentProvider} 来提供数据。</p>
+<p>如果你对此感兴趣的话，可以找到更多的<a href="{@docRoot}guide/topics/providers/content-providers.html">内容提供者</a>或者整个
+<a href="{@docRoot}guide/topics/data/data-storage.html">数据存储</a>主题。SDK 的<code>samples/</code>文件夹中的记事本示例
+包含一个如何创建 ContentProvider 的例子。
   </div>
   </div>
 
-    <p>Take a look at the <code>NotesDbAdapter</code> class &mdash; this class is provided to
-    encapsulate data access to a SQLite database that will hold our notes data
-    and allow us to update it.</p>
-    <p>At the top of the class are some constant definitions that will be used in the application
-    to look up data from the proper field names in the database. There is also a database creation
-    string defined, which is used to create a new database schema if one doesn't exist already.</p>
-    <p>Our database will have the name <code>data</code>, and have a single table called 
-    <code>notes</code>, which in turn has three fields: <code>_id</code>, <code>title</code> and 
-    <code>body</code>. The <code>_id</code> is named with an underscore convention used in a number of
-    places inside the Android SDK and helps keep a track of state. The <code>_id</code>
-    usually has to be specified when querying or updating the database (in the column projections
-    and so on). The other two fields are simple text fields that will store data.
-    </p>
-    <p>The constructor for <code>NotesDbAdapter</code> takes a Context, which allows it to communicate with aspects
-    of the Android operating system. This is quite common for classes that need to touch the
-    Android system in some way. The Activity class implements the Context class, so usually you will just pass
-    <code>this</code> from your Activity, when needing a Context.</p>
-    <p>The <code>open()</code> method calls up an instance of DatabaseHelper, which is our local
-    implementation of the SQLiteOpenHelper class. It calls <code>getWritableDatabase()</code>, 
-    which handles creating/opening a database for us.</p>
-    <p><code>close()</code> just closes the database, releasing resources related to the 
-    connection.</p>
-    <p><code>createNote()</code> takes strings for the title and body of a new note,
-    then creates that note in the database. Assuming the new note is created successfully, the
-    method also returns the row <code>_id</code> value for the newly created note.</p>
-    <p><code>deleteNote()</code> takes a <var>rowId</var> for a particular note, and deletes that note from
-    the database.</p>
+<p>来看一下<code>NotesDbAdapter</code>类&mdash;它用来封装对 SQLite 数据库的数据访问，
+这个数据库将保存我们的记事本的数据并允许我们更新它。</p>
+<p>在该类的顶部是一些常量定义，这些常量将在应用程序需要从数据库中的适当字段名中查找数据时使用。
+这里定义了创建数据库的字符串，用于在没有数据库时创建新数据库的约束。</p>
+<p>我们的数据苦名字是<code>data</code>，只有一个叫<code>notes</code>的表，他包含三个字段：<code>_id</code>、
+<code>title</code>和<code>body</code>。<code>_id</code>使用下划线惯例命名，在 Android SDK 中表示一个数值，
+为了跟踪记录状态。<code>_id</code>一般在查询或者更新数据库的时候必须指定（当列明确的时候）。另外两个字段是简单的
+文本字段，用于存储数据。</p>
+<p><code>NotesDbAdapter</code>构造函数取得一个 Context，使他可以于 Android 操作系统通讯。这对于需要通过什么方法来
+访问系统的类来说，太常用了。Activity类实现了 Context 类，所以一般当你需要 Context 的时候，只要从你的 Activity 传递
+<code>this</code>即可。</p>
+<p><code>open()</code>方法打开一个内部类实现的DatabaseHelper类的一个实例，
+他通过调用<code>getWritableDatabase()</code>函数来为我们建立或打开数据库。</p>
+<p><code>close()</code>方法只是关闭数据库并释放与连接相关的资源。</p>
+<p><code>createNote()</code>方法接收新记事的标题和内容两个字符串，在数据库中建立记事。
+成功时返回新建的记事的<code>_id</code>字段的值。</p>
+<p><code>deleteNote()</code>方法接收一个即存记事的<var>rowId</var>，并从数据库中删除该记事。</p>
 
-    <p><code>fetchAllNotes()</code> issues a query to return a {@link android.database.Cursor} over all notes in the
-    database. The <code>query()</code> call is worth examination and understanding. The first field is the 
-    name of the database table to query (in this case <code>DATABASE_TABLE</code> is "notes").
-    The next is the list of columns we want returned, in this case we want the <code>_id</code>, 
-    <code>title</code> and <code>body</code> columns so these are specified in the String array.
-    The remaining fields are, in order: <code>selection</code>, 
-    <code>selectionArgs</code>, <code>groupBy</code>, <code>having</code> and <code>orderBy</code>.
-    Having these all <code>null</code> means we want all data, need no grouping, and will take the default
-    order. See {@link android.database.sqlite.SQLiteDatabase SQLiteDatabase} for more details.</p>
-    <p class="note"><b>Note:</b> A Cursor is returned rather than a collection of rows. This allows
-    Android to use resources efficiently -- instead of putting lots of data straight into memory
-    the cursor will retrieve and release data as it is needed, which is much more efficient for
-    tables with lots of rows.</p>
+<p><code>fetchAllNotes()</code>方法执行一个查询并返回可操作数据库中所以记事的 {@link android.database.Cursor}。
+	对<code>query()</code>方法的调用要好好理解一下。第一个参数是要查询的数据库表名
+	（这里的<code>DATABASE_TABLE</code>是“notes”）。下一个参数是我们要查询的字段列表，<code>_id</code>、
+	<code>title</code>和<code>body</code>被放在了字符串数组中。剩下的字段依次是：<code>selection</code>、
+	<code>selectionArgs</code>、<code>groupBy</code>、<code>having</code>、<code>orderBy</code>。
+	这些都设成<code>null</code>意味着我们想取得所有数据，不需要分组、使用默认顺序。
+	更多信息参见 {@link android.database.sqlite.SQLiteDatabase SQLiteDatabase}。</p>
+<p class="note"><b>注意：</b>返回的是游标而不是行的集合。这样可以使Android更有效率的使用资源－－代替在内存中
+直接存放大量数据，游标可以在需要的时候取得或释放数据，对于存有大量数据的表来说更有效率。</p>
 
-    <p><code>fetchNote()</code> is similar to <code>fetchAllNotes()</code> but just gets one note
-    with the <var>rowId</var> we specify. It uses a slightly different version of the 
-    {@link android.database.sqlite.SQLiteDatabase} <code>query()</code> method. 
-    The first parameter (set <em>true</em>) indicates that we are interested
-    in one distinct result. The <var>selection</var> parameter (the fourth parameter) has been specified to search
-    only for the row "where _id =" the <var>rowId</var> we passed in. So we are returned a Cursor on
-    the one row.</p>
-    <p>And finally, <code>updateNote()</code> takes a <var>rowId</var>, <var>title</var> and <var>body</var>, and uses a
-    {@link android.content.ContentValues ContentValues} instance to update the note of the given
-    <var>rowId</var>.</p>
-   
-<h2 style="clear:right;">Step 3</h2>
+<p><code>fetchNote()</code>函数与<code>fetchAllNotes()</code>相似，只是他只取得由<var>rowId</var>
+指定的一条记事。他使用了稍有不同的 {@link android.database.sqlite.SQLiteDatabase}
+的<code>query()</code>方法。第一个参数（设成<em>true</em>）表示我们需要不冗余的结果。
+<var>selection</var>参数（第四个参数）设为只检索“where _id =”等于我们传入的<var>rowId</var>的列。
+返回结果是只有一行的游标。</p>
+<p>最后，<code>updateNote()</code>方法传入<var>rowId</var>、<var>title</var>和<var>body</var>，
+并使用{@link android.content.ContentValues ContentValues}实例更新
+<var>rowId</var>指定的记事。</p>
+
+<h2 style="clear:right;">第三步</h2>
 
 	<div class="sidebox-wrapper">
   <div class="sidebox">
-    <h2>Layouts and activities</h2>
-      <p>Most Activity classes will have a layout associated with them. The layout
-    will be the "face" of the Activity to the user. In this case our layout will
-    take over the whole screen and provide a list of notes.</p>
-    <p>Full screen layouts are not the only option for an Activity however. You
-    might also want to use a <a
-href="{@docRoot}resources/faq/commontasks.html#floatingorfull">floating 
-    layout</a> (for example, a <a
-href="{@docRoot}resources/faq/commontasks.html#dialogsandalerts">dialog
-    or alert</a>), 
-    or perhaps you don't need a layout at all (the Activity will be invisible 
-    to the user unless you specify some kind of layout for it to use).</p>
+    <h2>布局和活动</h2>
+      <p>大多数的活动类
+都会有布局与之关联。布局是活动呈现给用户的“脸面”。现在，我们的布局将占据整个屏幕，提供一个记事的列表。</p>
+    <p>全屏显示并不是
+活动的唯一选项。你可能想使用<a href="{@docRoot}resources/faq/commontasks.html#floatingorfull">浮动布局</a>
+（例如，一个<a href="{@docRoot}resources/faq/commontasks.html#dialogsandalerts">对话框或警告</a>），
+或者你不需要布局（活动对用户来说不可见，除非你为他使用了某种形式的布局）。</p>
   </div>
   </div>
     
-    <p>Open the <code>notepad_list.xml</code> file in <code>res/layout</code>
-and 
-    take a look at it. (You may have to
-    hit the <em>xml</em> tab, at the bottom, in order to view the XML markup.)</p>
+    <p>从<code>res/layout</code>打开<code>notepad_list.xml</code>文件看一下。（你可以按一下底部的带有<em>xml</em>的
+选项卡，查看XML的标记。）</p>
      
-    <p>This is a mostly-empty layout definition file. Here are some
-    things you should know about a layout file:</p>
-
+    <p>这是一个近乎空的布局定义文件。你应该知道关于布局文件的如下信息：</p>
    
   <ul>
-    <li>
-      All Android layout files must start with the XML header line:
-      <code>&lt;?xml version="1.0" encoding="utf-8"?&gt;</code>.    </li>
-    <li>
-      The next definition will often (but not always) be a layout
-      definition of some kind, in this case a <code>LinearLayout</code>.    </li>
-    <li>
-      The XML namespace of Android should always be defined in
-      the top level component or layout in the XML so that <code>android:</code> tags can
-      be used through the rest of the file:
-      <p><code>xmlns:android="http://schemas.android.com/apk/res/android"</code></p>
-    </li>
+	<li>所有的Android布局文件必须以XML定义为第一行：<code>&lt;?xml	version="1.0" encoding="utf-8"?&gt;</code>。</li>
+	<li>接下来的定义一般（不总是）是某种布局定义，本例为<code>LinearLayout</code>。</li>
+	<li>Android的XML命名空间应该定义在最顶级的组件或布局中，以便于在后面的文件中使用<code>android:</code>标签。
+	<p><code>xmlns:android="http://schemas.android.com/apk/res/android"</code></p>
+	</li>
   </ul>
 
-  <h2 style="clear:right;">Step 4</h2>
-    <p>We need to create the layout to hold our list. Add code inside
-    of the <code>LinearLayout</code> element so the whole file looks like this: </p>
+  <h2 style="clear:right;">第四步</h2>
+    <p>我们需要建立布局，显示我们的记事列表。在<code>LinearLayout</code>元素中加入代码，是文件看起来想这样：</p>
     <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -197,162 +143,98 @@ and
 &lt;/LinearLayout&gt;
 </pre>
   <ul>
-    <li>
-      The <strong>&#64;</strong> symbol in the id strings of the <code>ListView</code> and 
-      <code>TextView</code> tags means 
-      that the XML parser should parse and expand the rest of
-      the id string and use an ID resource.</li>
-    <li>
-      The <code>ListView</code> and <code>TextView</code> can be
-      thought as two alternative views, only one of which will be displayed at once.
-      ListView will be used when there are notes to be shown, while the TextView
-      (which has a default value of "No Notes Yet!" defined as a string
-      resource in <code>res/values/strings.xml</code>) will be displayed if there 
-      aren't any notes to display.</li>
-    <li>The <code>list</code> and <code>empty</code> IDs are
-      provided for us by the Android platform, so, we must 
-      prefix the <code>id</code> with <code>android:</code> (e.g., <code>@android:id/list</code>).</li>
-    <li>The View with the <code>empty</code> id is used 
-      automatically when the {@link android.widget.ListAdapter} has no data for the ListView. The 
-      ListAdapter knows to look for this name by default. Alternatively, you could change the      
-      default empty view by using {@link android.widget.AdapterView#setEmptyView(View)}
-      on the ListView.
-      <p>
-      More broadly, the <code>android.R</code> class is a set of predefined 
-      resources provided for you by the platform, while your project's 
-      <code>R</code> class is the set of resources your project has defined.
-      Resources found in the <code>android.R</code> resource class can be
-      used in the XML files by using the <code>android:</code> name space prefix      
-      (as we see here).</p>
-    </li>
+	<li><code>ListView</code>和<code>TextView</code>标签的id字符串中的<strong>&#64;</strong>符号的意思是，
+	XML解析器将把他后面的字符串解析为使用该ID的资源。</li>
+	<li><code>ListView</code>和<code>TextView</code>可以是二选一的视图，一次只能显示他们中的一个。ListView
+	用于有记事显示的时候，TextView（有一个缺省值“还没有记事！”，在<code>res/values/strings.xml</code>
+	中定义的字符串资源）在没有任何记事时显示。</li>
+	<li><code>list</code>和<code>empty</code>ID由Android平台提供，我们必须在<code>id</code>前面写上
+	<code>android:</code>（例如，<code>@android:id/list</code>）。</li>
+	<li>包含<code>empty</code>id的视图会自动使用，当{@link android.widget.ListAdapter}
+  没有用于ListView的数据时。默认情况，ListAdapter知道去查找这个id。另外，你可以在ListView上使用
+  {@link android.widget.AdapterView#setEmptyView(View)}	来改变默认的空视图。
+	<p>更广泛的说，<code>android.R</code>类是平台为你预先定义的一套资源，你的项目的<code>R</code>类是你项目的资源的集合。
+	在<code>android.R</code>资源类中资源可以在XML文件中使用，以<code>android:</code>命名空间前缀开始（象在这里看到的）。</p>
+	</li>
   </ul>
 
-  <h2 style="clear:right;">Step 5</h2>
+  <h2 style="clear:right;">第五步</h2>
 
 	<div class="sidebox-wrapper">
   <div class="sidebox">
-    <h2>Resources and the R class</h2>
-    <p>The folders under res/ in the Eclipse project are for resources.
-     There is a <a href="{@docRoot}resources/faq/commontasks.html#filelist">specific structure</a>
-to the
-     folders and files under res/.</p>
-    <p>Resources defined in these folders and files will have
-    corresponding entries in the R class allowing them to be easily accessed
-    and used from your application. The R class is automatically generated using the contents
-    of the res/ folder by the eclipse plugin (or by aapt if you use the command line tools).
-    Furthermore, they will be bundled and deployed for you as part of the application.</p>
+    <h2>资源和R类</h2>
+    <p>Eclipse项目的
+res/下的文件夹用于存放资源。 在res/下有<a href="{@docRoot}resources/faq/commontasks.html#filelist">固定结构</a>的文件夹和文件。</p>
+<p >在这些文件夹和文件中
+定义的资源，在R类中有固定的项目，从你的应用程序中可以简单的访问它们。R类是Eclipse插件根据res/文件夹中的内容自动生成的
+（如果你使用命令行工具，由aapt生成）。而且，他们会被打包并作为你的应用程序的一部分来部署。
     </p>
   </div>
   </div>
 
-    <p>To make the list of notes in the ListView, we also need to define a View for each row:</p>
+    <p>为了在ListView中生成记事的列表，我们需要为每一行定义一个视图：</p>
   <ol>
-    <li>
-      Create a new file under <code>res/layout</code> called 
-      <code>notes_row.xml</code>.    </li>
-    <li>
-      Add the following contents (note: again the XML header is used, and the
-      first node defines the Android XML namespace)<br>
+	<li>在<code>res/layout</code>下建立一个叫<code>notes_row.xml</code>的文件。</li>
+	<li>添加如下内容（注意：再次使用了XML头和在第一个节点中定义Android XML的命名空间）。<br>
       <pre style="overflow:auto">
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;TextView android:id=&quot;&#64;+id/text1&quot;
     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;/&gt;</pre>
-    <p>
-      This is the View that will be used for each notes title row &mdash; it has only
-      one text field in it.    </p>
-    <p>In this case we create a new id called <code>text1</code>. The
-      <strong>+</strong> after the <strong>@</strong> in the id string indicates that the id should
-      be automatically created as a resource if it does not already exist, so we are defining
-      <code>text1</code> on the fly and then using it.</p>
-    </li>
-    <li>Save the file.</li>
+	<p>这是用于每个记事标题行的视图&mdash;他只有一个文本字段。</p>
+	<p>本例中我们建立了一个叫<code>text1</code>的新id。id字符串中<strong>@</strong>后面的<strong>+</strong>
+	意思是，如果该id不存在的话，自动创建一个资源。那么，我们动态的定义并使用<code>text1</code>。</p>
+	</li>
+	<li>保存文件。</li>
   </ol>
-      <p>Open the <code>R.java</code> class in the
-      project and look at it, you should see new definitions for
-      <code>notes_row</code> and <code>text1</code> (our new definitions)
-      meaning we can now gain access to these from the our code. </p>
+      <p>在项目中打开<code>R.java</code>类看一下，你会看到新的定义<code>notes_row</code>和<code>text1</code>
+（我们新定义的），这意味着我们能够通过我们的代码访问他们。</p>
 
-  <h2 style="clear:right;">Step 6</h2>
-<p>Next, open the <code>Notepadv1</code> class in the source. In the following steps, we are going to
-    alter this class to become a list adapter and display our notes, and also
-    allow us to add new notes.</p>
+  <h2 style="clear:right;">第六步</h2>
+<p>接下来打开<code>Notepadv1</code>类的源代码。下面步骤，我们要修改该类，使其成为列表适配器，显示我们的记事并
+允许我们添加新记事。</p>
 
-<p><code>Notepadv1</code> will inherit from a subclass
-    of <code>Activity</code> called a <code>ListActivity</code>, 
-    which has extra functionality to accommodate the kinds of 
-    things you might want to do with a list, for
-    example: displaying an arbitrary number of list items in rows on the screen,
-    moving through the list items, and allowing them to be selected.</p>
+<p><code>Notepadv1</code>继承自<code>Activity</code>的子类<code>ListActivity</code>，他扩展了一些用于
+列表的功能。例如：在屏幕上显示任意数量的列表项、在列表项目间移动和允许选择列表项。</p>
+<p>看一下<code>Notepadv1</code>类的既存代码。有一个当前未使用的成员变量<code>mNoteNumber</code>，我们将用他
+来建立编了号的记事标题。</p>
+<p>有三个已定义的覆盖方法：<code>onCreate</code>、<code>onCreateOptionsMenu</code>和
+<code>onOptionsItemSelected</code>；我们需要为他们填写代码：</p>
 
-<p>Take a look through the existing code in <code>Notepadv1</code> class.
-    There is a currently an unused private field called <code>mNoteNumber</code> that
-    we will use to create numbered note titles.</p>
-    <p>There are also three override methods defined:
-    <code>onCreate</code>, <code>onCreateOptionsMenu</code> and
-    <code>onOptionsItemSelected</code>; we need to fill these
-    out:</p>
     <ul>
-      <li><code>onCreate()</code> is called when the activity is
-      started &mdash; it is a little like the "main" method for an Activity. We use
-      this to set up resources and state for the activity when it is
-      running.</li>
-     <li><code>onCreateOptionsMenu()</code> is used to populate the
-      menu for the Activity. This is shown when the user hits the menu button,
-and
-      has a list of options they can select (like "Create
-      Note"). </li>
-     <li><code>onOptionsItemSelected()</code> is the other half of the
-      menu equation, it is used to handle events generated from the menu (e.g.,
-      when the user selects the "Create Note" item).
+	<li><code>onCreate()</code>在活动被启动是调用&mdash;有点儿象活动的“main”方法。
+	当他运行时，我们使用该方法设置资源和活动的状态。</li>
+	<li><code>onCreateOptionsMenu()</code>用于为活动建立菜单。该菜单在用户按下menu按钮时显示用户可选择的选项列表
+	（比如“添加记事”）。</li>
+	<li><code>onOptionsItemSelected()</code>是菜单处理的另一半，它用于处理菜单的事件
+	（例如，当用户选择“添加记事”时的事件）。</li>
       </li>
     </ul>
     
-  <h2>Step 7</h2>
-    <p>Change the inheritance of <code>Notepadv1</code> from
-<code>Activity</code>
-    to <code>ListActivity</code>:</p> 
-    <pre>public class Notepadv1 extends ListActivity</pre>
-    <p>Note: you will have to import <code>ListActivity</code> into the
-Notepadv1
-    class using Eclipse, <strong>ctrl-shift-O</strong> on Windows or Linux, or
-    <strong>cmd-shift-O</strong> on the Mac (organize imports) will do this for you
-    after you've written the above change.</p>
+<h2>第七步</h2>
+<p>将<code>Notepadv1</code>的继承关系由<code>Activity</code>改为<code>ListActivity</code>：</p>
+<pre>public class Notepadv1 extends ListActivity</pre>
+<p>注意：在你做了上述变更后，你必须将<code>ListActivity</code>导入到Notepadv1类中，
+使用Eclipse的组织导入快捷键<strong>ctrl-shift-O</strong>（Windows或Linux）或
+<strong>cmd-shift-O</strong>（Mac）可以完成该动作。</p>
+<h2>第八步</h2>
+<p>填写<code>onCreate()</code>的方法体。</p>
+<p>在这里，我们为活动设置标题（显示在屏幕上方）、使用我们用XML创建的<code>notepad_list</code>布局、设置
+<code>NotesDbAdapter</code>实例用于访问记事数据、显示已存在的记事标题列表：</p>
 
-  <h2>Step 8</h2>
-    <p>Fill out the body of the <code>onCreate()</code> method.</p>
-    <p>Here we will set the title for the Activity (shown at the top of the
-    screen), use the <code>notepad_list</code> layout we created in XML, 
-    set up the <code>NotesDbAdapter</code> instance that will
-    access notes data, and populate the list with the available note
-    titles:</p>
     <ol>
-    <li>
-      In the <code>onCreate</code> method, call <code>super.onCreate()</code> with the 
-      <code>savedInstanceState</code> parameter that's passed in.</li>
-    <li>
-      Call <code>setContentView()</code> and pass <code>R.layout.notepad_list</code>.</li>
-    <li>
-      At the top of the class, create a new private class field called <code>mDbHelper</code> of class
-      <code>NotesDbAdapter</code>.
-    </li>
-    <li>
-      Back in the <code>onCreate</code> method, construct a new
-<code>NotesDbAdapter</code>
-      instance and assign it to the <code>mDbHelper</code> field (pass
-      <code>this</code> into the constructor for <code>DBHelper</code>)
-    </li>
-    <li>
-      Call the <code>open()</code> method on <code>mDbHelper</code> to open (or create) the
-      database.
-    </li>
-    <li>
-      Finally, call a new method <code>fillData()</code>, which will get the data and
-      populate the ListView using the helper &mdash; we haven't defined this method yet.    </li>
+	<li>在<code>onCreate</code>方法中，使用传入的<code>savedInstanceState</code>参数调用<code>super.onCreate()</code>。</li>
+	<li>调用<code>setContentView()</code>传入<code>R.layout.notepad_list</code>参数。</li>
+	<li>在类的顶部，建立一个叫<code>mDbHelper</code>的私有的<code>NotesDbAdapter</code>的成员变量。</li>
+	<li>回到<code>onCreate</code>方法，创建一个<code>NotesDbAdapter</code>的新实例，赋给<code>mDbHelper</code>
+	成员（传递<code>this</code>到<code>DBHelper</code>的构造函数中）。</li>
+	<li>调用<code>mDbHelper</code>的<code>open()</code>方法，打开（或创建）数据库。</li>
+	<li>最后，调用新方法<code>fillData()</code>，取得数据并使用helper填充ListView&mdash;
+	我们还没有定义该方法。</li>
   </ol>
     <p>
-      <code>onCreate()</code> should now look like this:</p>
+      <code>onCreate()</code> 象这样：</p>
       <pre>
     &#64;Override
     public void onCreate(Bundle savedInstanceState) {
@@ -362,45 +244,39 @@ Notepadv1
         mDbHelper.open();
         fillData();
     }</pre>
-      <p>And be sure you have the <code>mDbHelper</code> field definition (right
-      under the mNoteNumber definition): </p>
+<p>并保证你定义了<code>mDbHelper</code>成员变量（放在mNoteNumber下面）：</p>
       <pre>    private NotesDbAdapter mDbHelper;</pre>
 
-  <h2>Step 9</h2>
+  <h2>第九步</h2>
 
   <div class="sidebox-wrapper">
   <div class="sidebox">
-    <h2>More about menus</h2>
-    <p>The notepad application we are constructing only scratches the
-     surface with <a href="{@docRoot}resources/faq/commontasks.html#addmenuitems">menus</a>. </p>
-    <p>You can also <a href="{@docRoot}resources/faq/commontasks.html#menukeyshortcuts">add
-shortcut keys for menu items</a>, <a
-href="{@docRoot}resources/faq/commontasks.html#menukeyshortcuts">create
-submenus</a> and even <a href="{@docRoot}resources/faq/commontasks.html#addingtoothermenus">add
-menu items to other applications!</a>. </p>
+    <h2>更多菜单设置</h2>
+    <p>记事本应用程序中我们只使用了<a href="{@docRoot}resources/faq/commontasks.html#addmenuitems">菜单</a>的很浅显的功能。</p>
+<p>你还可以
+<a href="{@docRoot}resources/faq/commontasks.html#menukeyshortcuts">给菜单项添加快捷键</a>、
+<a href="{@docRoot}resources/faq/commontasks.html#menukeyshortcuts">建立子菜单</a>甚至
+<a href="{@docRoot}resources/faq/commontasks.html#addingtoothermenus">给其他应用程序添加菜单项！</a></p>
+
   </div>
   </div>
 
-<p>Fill out the body of the <code>onCreateOptionsMenu()</code> method.</p>
+<p>补充<code>onCreateOptionsMenu()</code>方法体。</p>
+<p>我们现在建立“添加记事”按钮，它可以通过按设备上的菜单按钮来使用。我们将它指定为菜单的第一项。</p>
+<ol>
+	<li>在<code>strings.xml</code>资源文件中（在<code>res/values</code>目录下）添加一个新字符串，命名为“menu_insert”，
+	值设为<code>添加记事</code>：<pre>&lt;string name="menu_insert"&gt;添加记事&lt;/string&gt;</pre>
+	将“no_notes”的值改为<code>还没有记事！</code>:<pre>&lt;string name="no_notes"&gt;还没有记事！&lt;/string&gt;</pre>
+	<p>然后保存文件，回到<code>Notepadv1</code>文件。</p>
+	</li>
+	<li>在类的顶部创建一个菜单位置常量：<pre>public static final int INSERT_ID = Menu.FIRST;</pre>
+	</li>
+	<li>在<code>onCreateOptionsMenu()</code>方法中，将对<code>super</code>调用的返回值保存到
+	<code>result</code>变量中。最后我们会返回该值。</li>
+	<li>接下来使用<code>menu.add()</code>添加菜单。</li>
+</ol>
+<p>完整的方法应该是这样的：
 
-<p>We will now create the "Add Item" button that can be accessed by pressing the menu
-button on the device. We'll specify that it occupy the first position in the menu.</p>
-
-  <ol>
-    <li>
-      In <code>strings.xml</code> resource (under <code>res/values</code>), add
-      a new string named "menu_insert" with its value set to <code>Add Item</code>:
-     <pre>&lt;string name="menu_insert"&gt;Add Item&lt;/string&gt;</pre>
-      <p>Then save the file and return to <code>Notepadv1</code>.</p>
-    </li>
-    <li>Create a menu position constant at the top of the  class:
-      <pre>public static final int INSERT_ID = Menu.FIRST;</pre>
-    </li>
-    <li>In the <code>onCreateOptionsMenu()</code> method, change the 
-    <code>super</code> call so we capture the boolean return as <code>result</code>. We'll return this value at the end.</li>
-    <li>Then add the menu item with <code>menu.add()</code>.</li>
-  </ol>
-  <p>The whole method should now look like this: 
       <pre>
     &#64;Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -408,34 +284,25 @@ button on the device. We'll specify that it occupy the first position in the men
         menu.add(0, INSERT_ID, 0, R.string.menu_insert);
         return result;
     }</pre>
-  <p>The arguments passed to <code>add()</code> indicate: a group identifier for this menu (none,
-  in this case), a unique ID (defined above), the order of the item (zero indicates no preference),
-  and the resource of the string to use for the item.</p>
 
-<h2 style="clear:right;">Step 10</h2>
-    <p>Fill out the body of the <code>onOptionsItemSelected()</code> method:</p>
-    <p>This is going
-    to handle our new "Add Note" menu item.  When this is selected, the
-    <code>onOptionsItemSelected()</code> method will be called with the
-    <code>item.getId()</code> set to <code>INSERT_ID</code> (the constant we
-    used to identify the menu item). We can detect this, and take the
-    appropriate actions:</p>
-  <ol>
-    <li>
-      The <code>super.onOptionsItemSelected(item)</code> method call goes at the
-      end of this method &mdash; we want to catch our events first!    </li>
-    <li>
-      Write a switch statement on <code>item.getItemId()</code>.   
-      <p>In the case of <var>INSERT_ID</var>, call a new method, <code>createNote()</code>,
-      and return true, because we have handled this event and do not want to
-      propagate it through the system.</p>
-    </li>
-    <li>Return the result of the superclass' <code>onOptionsItemSelected()</code>
-    method at the end.</li>
-   </ol>
-    <p>
-      The whole <code>onOptionsItemSelect()</code> method should now look like
-      this:</p>
+<p>传给<code>add()</code>的参数含义：这个菜单的分组标识（本例中没有）、一个不重复的ID（上面定义的）、项目排序
+（零意味着不指定）和该项目使用的字符串资源。</p>
+<h2 style="clear: right;">第十步</h2>
+<p>填充<code>onOptionsItemSelected()</code>的方法体：</p>
+<p>这里要处理我们的“添加记事”菜单项。当它被按下时，<code>onOptionsItemSelected()</code>方法会被调用，
+<code>item.getId()</code>被设成<code>INSERT_ID</code>（我们用于识别菜单项的常量）。我们可以检测它，
+然后执行适当的动作：</p>
+
+<ol>
+	<li>在这个方法的最后再调用<code>super.onOptionsItemSelected(item)</code>&mdash;首先处理我们自己的事件！</li>
+	<li>写一个根据<code>item.getItemId()</code>进行分支判断的语句（switch）。
+	<p>内容是<var>INSERT_ID</var>时，调用新方法<code>createNote()</code>并返回true，以为我们处理了该事件，
+	不让它在系统中继续传播了。</p>
+	</li>
+	<li>最后，返回父类的<code>onOptionsItemSelected()</code>方法的返回值。</li>
+</ol>
+
+<p><code>onOptionsItemSelect()</code>方法的全文如下：</p>
       <pre>
     &#64;Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -448,28 +315,17 @@ button on the device. We'll specify that it occupy the first position in the men
         return super.onOptionsItemSelected(item);
     }</pre>
 
-<h2>Step 11</h2>
-    <p>Add a new <code>createNote()</code> method:</p>
-    <p>In this first version of
-    our application, <code>createNote()</code> is not going to be very useful.
-We will simply
-    create a new note with a title assigned to it based on a counter ("Note 1",
-    "Note 2"...) and with an empty body. At present we have no way of editing
-    the contents of a note, so for now we will have to be content making one
-    with some default values:</p>
-  <ol>
-    <li>Construct the name using "Note" and the counter we defined in the class: <code>
-      String noteName = "Note " + mNoteNumber++</code></li>
-    <li>
-      Call <code>mDbHelper.createNote()</code> using <code>noteName</code> as the
-      title and <code>""</code> for the body 
-    </li>
-    <li>
-      Call <code>fillData()</code> to populate the list of notes (inefficient but
-      simple) &mdash; we'll create this method next.</li>
-  </ol>
-    <p>
-      The whole <code>createNote()</code> method should look like this: </p>
+<h2>第十一步</h2>
+<p>添加新方法<code>createNote()</code>：</p>
+<p>我们应用程序的第一版，<code>createNote()</code>没什么太大的用处。我们只是简单的基于计数器生成一个新的记事标题
+（“记事 1”、“记事 2”……）和空白的内容。现在，我们无法编辑记事的内容，所以我们给他设了个默认值：</p>
+<ol>
+	<li>使用“记事”和类中定义的计数器来构成标题：<code>
+	String noteName = "记事 " + mNoteNumber++</code></li>
+	<li>调用<code>mDbHelper.createNote()</code>方法，以<code>noteName</code>作为标题、<code>""</code>作为内容</li>
+	<li>调用<code>fillData()</code>方法，取得记事列表（效率不高但是简单）&mdash;接下来创建该方法。</li>
+</ol>
+<p>完整的<code>createNote()</code>方法如下：</p>
       <pre>
     private void createNote() {
         String noteName = &quot;Note &quot; + mNoteNumber++;
@@ -478,34 +334,27 @@ We will simply
     }</pre>
 
 
-<h2>Step 12</h2>
+<h2>第十二步</h2>
   <div class="sidebox-wrapper">
-  <div class="sidebox">
-    <h2>List adapters</h2>
-    <p>Our example uses a {@link android.widget.SimpleCursorAdapter
-     SimpleCursorAdapter} to bind a database {@link android.database.Cursor Cursor}
-     into a ListView, and this is a common way to use a {@link android.widget.ListAdapter 
-     ListAdapter}. Other options exist like {@link android.widget.ArrayAdapter ArrayAdapter} which 
-     can be used to take a List or Array of in-memory data and bind it in to
-     a list as well.</p>
+<div class="sidebox">
+<h2>列表适配器</h2>
+<p>我们的例子使用
+{@link android.widget.SimpleCursorAdapter SimpleCursorAdapter}绑定数据库
+{@link android.database.Cursor Cursor}到ListView上，这是使用
+{@link android.widget.ListAdapter ListAdapter} 的一般方法。还有其他选项，比如
+{@link android.widget.ArrayAdapter ArrayAdapter} 可以用于将内存中的列表或数组绑定到
+ListView 上。</p>
+</div>
   </div>
-  </div>
-  
-  <p>Define the <code>fillData()</code> method:</p>
-   <p>This
-    method uses <code>SimpleCursorAdapter,</code> which takes a database <code>Cursor</code> 
-    and binds it to fields provided in the layout. These fields define the row elements of our list 
-    (in this case we use the <code>text1</code> field in our
-    <code>notes_row.xml</code> layout), so this allows us to easily populate the list with
-    entries from our database.</p>
-    <p>To do this we have to provide a mapping from the <code>title</code> field in the returned Cursor, to
-    our <code>text1</code> TextView, which is done by defining two arrays: the first a string array
-    with the list of columns to map <em>from</em> (just "title" in this case, from the constant 
-    <code>NotesDbAdapter.KEY_TITLE</code>) and, the second, an int array
-    containing references to the views that we'll bind the data <em>into</em> 
-    (the <code>R.id.text1</code> TextView).</p>
-    <p>This is a bigger chunk of code, so let's first take a look at it:</p>
-
+<p>定义<code>fillData()</code>方法：</p>
+<p>该方法使用<code>SimpleCursorAdapter</code>取得数据库<code>游标</code>并将其绑定到布局的字段上。
+这些字段定义了列表的行元素（这里我们使用<code>notes_row.xml</code>布局中的<code>text1</code>字段），
+那么它允许我们简单的将数据库中的内容显示到列表上。</p>
+<p>要做到这些，我们必须提供返回的游标中的<code>title</code>到<code>text1</code>TextView的映射，
+我们定义两个数组来做这个：第一个是字符串数组，列出映射字段的<em>源</em>
+（在这里只有“title”常量<code>NotesDbAdapter.KEY_TITLE</code>）；第二个是整型数组，包含绑定到的<em>目标</em>
+（<code>R.id.text1</code> TextView）。</p>
+<p>这是一个大一点的代码块，然我们看一下：</p>
     <pre>
     private void fillData() {
         // Get all of the notes from the database and create the item list
@@ -521,62 +370,32 @@ We will simply
         setListAdapter(notes);
     }</pre>
     
-  <p>Here's what we've done:</p>
-  <ol>
-    <li>
-      After obtaining the Cursor from <code>mDbHelper.fetchAllNotes()</code>, we 
-      use an Activity method called
-      <code>startManagingCursor()</code> that allows Android to take care of the
-      Cursor lifecycle instead of us needing to worry about it. (We will cover the implications
-      of the lifecycle in exercise 3, but for now just know that this allows Android to do some
-      of our resource management work for us.)</li>
-    <li>
-      Then we create a string array in which we declare the column(s) we want 
-      (just the title, in this case), and an int array that defines the View(s)
-      to which we'd like to bind the columns (these should be in order, respective to 
-      the string array, but here we only have one for each).</li>
-    <li>
-      Next is the SimpleCursorAdapter instantiation. 
-      Like many classes in Android, the SimpleCursorAdapter needs a Context in order to do its
-      work, so we pass in <code>this</code> for the context (since subclasses of Activity 
-      implement Context). We pass the <code>notes_row</code> View we created as the receptacle
-      for the data, the Cursor we just created, and then our arrays.</li>
-   </ol>
-    <p>
-      In the future, remember that the mapping between the <strong>from</strong> columns and <strong>to</strong> resources
-      is done using the respective ordering of the two arrays. If we had more columns we wanted
-      to bind, and more Views to bind them in to, we would specify them in order, for example we
-      might use <code>{ NotesDbAdapter.KEY_TITLE, NotesDbAdapter.KEY_BODY }</code> and
-      <code>{ R.id.text1, R.id.text2 }</code> to bind two fields into the row (and we would also need
-      to define text2 in the notes_row.xml, for the body text). This is how you can bind multiple fields
-      into a single row (and get a custom row layout as well).</p>
-    <p>
-      If you get compiler errors about classes not being found, ctrl-shift-O or
-      (cmd-shift-O on the mac) to organize imports. 
-    </p>
-    
-<h2 style="clear:right;">Step 13</h2>
-    <p>Run it!
-  <ol>
-    <li>
-      Right click on the <code>Notepadv1</code> project.</li>
-    <li>
-      From the popup menu, select <strong>Run As</strong> &gt; 
-      <strong>Android Application</strong>.</li>
-    <li>
-      If you see a dialog come up, select Android Launcher as the way of running
-      the application (you can also use the link near the top of the dialog to
-      set this as your default for the workspace; this is recommended as it will
-      stop the plugin from asking you this every time).</li>
-    <li>Add new notes by hitting the menu button and selecting <em>Add
-    Item</em> from the menu.</li>
-  </ol>
-
-<h2 style="clear:right;">Solution and Next Steps</h2>
-    <p>You can see the solution to this class in <code>Notepadv1Solution</code>
-from
-the zip file to compare with your own.</p>
-
-<p>Once you are ready, move on to <a href="notepad-ex2.html">Tutorial
-Exercise 2</a> to add the ability to create, edit and delete notes.</p>
-
+<p>在这里我们做了：</p>
+<ol>
+	<li>从<code>mDbHelper.fetchAllNotes()</code>得到游标后，我们调用叫<code>startManagingCursor()</code>
+	的活动方法，是Android来维护游标的生命周期，我们就不用操心了。（我们在练习3中会实现维护该生命周期的处理，在这里只要知道，
+	我们允许Android为我们做一些资源的管理工作即可。）</li>
+	<li>接下来我们创建一个字符串数组，声明我们想要的列（这里只有标题）；一个整型数组，定义要绑定到的视图（按照字符串数组对应的顺序，
+	本例每个数组只有一个元素）。</li>
+	<li>下面生成SimpleCursorAdapter实例。象Android中的很多类一样，SimpleCursorAdapter需要Context来实现其功能，
+	那么我们传入<code>this</code>作为Context（因为活动的子类实现了Context)。
+	传入用于显示数据的<code>notes_row</code>视图、我们建立的游标和数组。</li>
+</ol>
+<p>以后要记住，<strong>源</strong>字段和<strong>目标</strong>资源之间的关系与两个数组的顺序相关。如果我们有多个字段
+要绑定到多个视图上，我们应该指定它们的顺序。例如，我们可以使用<code>{ NotesDbAdapter.KEY_TITLE,
+NotesDbAdapter.KEY_BODY }</code>和<code>{ R.id.text1, R.id.text2 }</code>绑定两个字段到一行中
+（我们需要在notes_row.xml中定义text2，用于显示记事内容）。这是如何绑定多个字段到一行中（以及如何自定义行的布局）</p>
+<p>如果遇到了找不到类的编译错误，按ctrl-shift-O（或cmd-shift-O对于mac）来组织导入。</p>
+   
+<h2 style="clear: right;">第十三步</h2>
+<p>运行！
+<ol>
+	<li>右键单击<code>Notepadv1</code>项目。</li>
+	<li>在弹出菜单中选择<strong>Run As</strong> &gt; <strong>Android Application</strong>。</li>
+	<li>如果你看到了弹出对话框，选择Android Launcher作为运行应用程序的方法（你也可以使用对话框顶部的链接，
+	设置它作为该工作区的默认方式；推荐你这样做，它可以阻止插件每次询问你如何运行）。</li>
+	<li>按下menu按钮，选择<em>添加记事</em>来添加新的记事。</li>
+</ol>
+<h2 style="clear: right;">结果对照及进一步学习</h2>
+<p>你可以查看压缩文件中<code>Notepadv1Solution</code>工程的该类，和你的成果对比一下。</p>
+<p>如果你准备好了，就可以进入<a href="tutorial-ex2.php">教程-练习2</a>给他添加创建、编辑和删除记事的能力。</p>

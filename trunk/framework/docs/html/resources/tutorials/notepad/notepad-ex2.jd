@@ -4,65 +4,58 @@ parent.link=index.html
 @jd:body
 
 
-<p><em>In this exercise, you will add a second Activity to your notepad application, to let the user
-create and edit notes. You will also allow the user to delete existing notes through a context menu.
-The new Activity assumes responsibility for creating new notes by
-collecting user input and packing it into a return Bundle provided by the intent. This exercise
-demonstrates:</em></p>
+<p><em>本练习中，你将向记事本应用程序中添加第二个活动，使用户可以创建、编辑和删除记事。
+新的活动负责根据用户的输入建立新的记事，并将它们保存到意图提供的用于返回的包中。
+本练习演示了：</em></p>
 <ul>
-<li><em>Constructing a new Activity and adding it to the Android manifest</em></li>
-<li><em>Invoking another Activity asynchronously using <code>startActivityForResult()</code></em></li>
-<li><em>Passing data between Activity in Bundle objects</em></li>
-<li><em>How to use a more advanced screen layout</em></li>
-<li><em>How to create a context menu</em></li>
+<li><em>创建一个新的活动，并将其加入 Android 描述文件中。</em></li>
+<li><em>使用<code>startActivityForResult()</code>方法，异步调用另一个活动。</em></li>
+<li><em>使用包对象在活动间传递数据。</em></li>
+<li><em>如何使用更高级的屏幕布局。</em></li>
+<li><em>如何创建上下文菜单。</em></li>
 </ul>
 
 <div style="float:right;white-space:nowrap">
-	[<a href="notepad-ex1.html">Exercise 1</a>]
+	[<a href="notepad-ex1.html">练习 1</a>]
 	<span style="color:#BBB;">
-		[<a href="notepad-ex2.html" style="color:#DDD;">Exercise 2</a>]
+		[<a href="notepad-ex2.html" style="color:#DDD;">练习 2</a>]
 	</span>
-	[<a href="notepad-ex3.html">Exercise 3</a>]
-	[<a href="notepad-extra-credit.html">Extra Credit</a>]
+	[<a href="notepad-ex3.html">练习 3</a>]
+	[<a href="notepad-extra-credit.html">附加内容</a>]
 </div>
 
-<h2>Step 1</h2>
+<h2>第一步</h2>
 
-<p>Create a new Android project using the sources from <code>Notepadv2</code> under the
-<code>NotepadCodeLab</code> folder, just like you did for the first exercise. If you see an error about
-<code>AndroidManifest.xml</code>, or some problems related to an
-<code>android.zip</code> file, right click on the project and select <strong>Android
-Tools</strong> &gt; <strong>Fix Project Properties</strong>.</p>
+<p>象你做第一个练习一样，使用<code>NotepadCodeLab</code>文件夹下的<code>Notepadv2</code>
+建立一个新的 Android 项目。如果你看到了关于<code>AndroidManifest.xml</code>的错误，或者与
+Android 的 zip 文件有关的问题，在项目上单击右键，选择<strong>Android Tools</strong> &gt;
+<strong>Fix Project Properties</strong>。</p>
 
-<p>Open the <code>Notepadv2</code> project and take a look around:</p>
+<p>打开<code>Notepadv2</code>项目，浏览一下：</p>
+
 <ul>
     <li>
-      Open and look at the <code>strings.xml</code> file under
-      <code>res/values</code> &mdash; there are several new strings which we will use
-      for our new functionality
+      打开<code>res/values</code>下的<code>strings.xml</code>看看&mdash;
+      有一些我们要在新功能中使用的字符串。
     </li>
     <li>
-      Also, open and take a look at the top of the <code>Notepadv2</code> class,
-      you will notice several new constants have been defined along with a new <code>mNotesCursor</code>
-      field used to hold the cursor we are using.
+      再打开并看一下<code>Notepadv2</code>类的顶部，你会看到一些新的常量被定义了，
+      还有一个新的<code>mNotesCursor</code>字段，用来保存我们使用的游标。
     </li>
     <li>
-      Note also that the <code>fillData()</code> method has a few more comments and now uses
-      the new field to store the notes Cursor. The <code>onCreate()</code> method is
-      unchanged from the first exercise. Also notice that the member field used to store the
-      notes Cursor is now called <code>mNotesCursor</code>. The <code>m</code> denotes a member
-      field and is part of the Android coding style standards.
+      注意，连<code>fillData()</code>方法也多了一些注释，并使用心得字段来保存记事的游标。
+      <code>onCreate()</code>没有变化。还要注意，用于保存记事的游标的成员变量现在是
+      <code>mNotesCursor</code>。
+      <code>m</code>是Android编程风格的标准，意思是成员变量。
     </li>
     <li>
-      There are also a couple of new overridden methods
-      (<code>onCreateContextMenu()</code>, <code>onContextItemSelected()</code>,
-      <code>onListItemClick()</code> and <code>onActivityResult()</code>)
-      which we will be filling in below.
+      还有一些新的覆盖方法（<code>onListItemClick()</code>和<code>onActivityResult()
+      </code>）后面我们会填写他们的代码。
     </li>
 </ul>
 
 
-<h2>Step 2</h2>
+<h2>第二步</h2>
 <div class="sidebox-wrapper">
 <div class="sidebox">
 <p>Context menus should always be used when performing actions upon specific elements in the UI.
@@ -100,6 +93,7 @@ public boolean onCreateContextMenu(Menu menu, View v
     </li>
 </ol>
 
+
 <h2>Step 3</h2>
   <p>Now that the we've registered our ListView for a context menu and defined our context menu item, we need
   to handle the callback when it is selected. For this, we need to identify the list ID of the
@@ -122,16 +116,15 @@ the position of the item in the ListView. We then pass this to the <code>deleteN
 method of our NotesDbAdapter and the note is deleted. That's it for the context menu &mdash; notes
 can now be deleted.</p>
 
-<h2 style="clear:right;">Step 4</h2>
+<h2 style="clear:right;">第四步</h2>
   <div class="sidebox-wrapper">
   <div class="sidebox">
-    <h2>Starting Other Activities</h2>
-    <p>In this example our Intent uses a class name specifically.
-     As well as
-     <a href="{@docRoot}resources/faq/commontasks.html#intentexamples">starting intents</a> in
-    classes we already know about, be they in our own application or another
-    application, we can also create Intents without knowing exactly which
-    application will handle it.</p>
+    <h2>启动另一个活动</h2>
+    <p>在本例中，我们的意图通过类名来指定。象我们知道的那样，类的
+    <a href="{@docRoot}resources/faq/commontasks.html#intentexamples">启动意图</a>，
+    可以启动我们的应用程序中也可以启动其他应用程序中，
+    我们也可以在不确切知道哪个应用程序处理它的时候创建它。
+
     <p>For example, we might want to open a page in a
     browser, and for this we still use
     an Intent. But instead of specifying a class to handle it, we use
@@ -393,11 +386,7 @@ case ACTIVITY_EDIT:
       <pre>setContentView(R.layout.note_edit);</pre>
     </li>
     <li>
-      Change the Activity title to the "Edit Note" string:
-      <pre>setTitle(R.string.edit_note);</pre>
-    </li>
-    <li>
-      Find the {@link android.widget.EditText} and {@link android.widget.Button} components we need:
+      Find the edit and button components we need:
       <p>These are found by the
       IDs associated to them in the R class, and need to be cast to the right
       type of <code>View</code> (<code>EditText</code> for the two text views,

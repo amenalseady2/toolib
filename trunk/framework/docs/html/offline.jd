@@ -4,46 +4,37 @@ page.title=Welcome
 
 <div id="mainBodyFluid">
 
-<h1>Welcome to the Android SDK!</h1>
+<h1>欢迎使用 Android SDK！</h1>
 
 <img src="{@docRoot}assets/images/home/sdk-large.png" style="float:right; margin:-2em 3em 3em;" />
 
-<h3>If you've downloaded the Android SDK for the first time...</h3>
+<h3>如果你是首次下载 Android SDK ……</h3>
 
-<p>Follow the online guide to 
-<a href="{@docRoot}sdk/installing.html">Installing 
-the Android SDK</a>, which will help you setup your development environment
-(including the Android Development Tools plugin for Eclipse) 
-so you can start developing Android apps.</p>
+<p>根据在线手册
+<a href="{@docRoot}sdk/installing.html">安装 
+Android SDK</a>，他会帮助你设置你的开发环境
+（包括用于 Android 开发的 Eclipse 插件），
+之后你就可以开发 Android 应用程序了。</p>
 
-<p>Once your environment is setup, look at the
-<a href="{@docRoot}sdk/installing.html#NextSteps">Next
-Steps</a> for some suggestions on how to begin learning about Android.</p>
+<p>安装完开发环境，请看<a href="{@docRoot}sdk/installing.html#NextSteps">下一步
+</a>，你会得到如何开始学习 Android 的一些建议。</p>
 
-<h3>If you've just installed new SDK components using the <em>SDK and AVD Manager</em>...</h3>
+<h3>如果你只是通过 <em>SDK and AVD Manager</em> 安装了新的组件 ……</h3>
 
-<p>There's no additional setup.</p>
+<p>不需要额外的设置。</p>
 
-<p>Newly installed Android platforms are automatically saved in the 
-<code><em>&lt;sdk_dir>/</em>platforms/</code> directory of your existing SDK;
-new add-ons are saved in the <code><em>&lt;sdk_dir>/</em>add-ons/</code>
-directory; and new documentation is saved in the existing
-<code><em>&lt;sdk_dir>/</em>docs/</code> directory (old docs are replaced).</p>
-
+<p>新安装的 Android 平台自动保存在既存 SDK 的 <code><em>&lt;sdk_dir>/</em>platforms/</code> 目录中；
+新的插件保存在 <code><em>&lt;sdk_dir>/</em>add-ons/</code> 目录中；
+新的文档保存在既存的 <code><em>&lt;sdk_dir>/</em>docs/</code> 目录中（覆盖旧文档）。</p>
 
 <hr style="margin:2em 0;" />
 
-<p>Note that you are currently viewing a local, offline version of the
-Android developer documentation. The offline documentation offers almost all the same
-content and features as the online documentation. Because some features
-such as search and videos are network-based, not everything will work if you
-are not connected to the Internet.</p>
+<p>注意，你正在查看的是本地的 Android 开发文档的离线版本。离线文档提供了与在线文档几乎相同内容和特性。
+象检索和视频这样的基于网络的特性，如果你没有链接互联网，可能无法使用。</p>
 
-<p>For the most current documentation and a fully-functional experience, please visit:</p>
+<p>要获得最新的文档及全功能体验，请访问：</p>
 <p style="margin-left:2em;">
-<a href="http://developer.android.com">http://developer.android.com</a></strong>.
+<a href="http://android.toolib.net">Android 中文在线文档</a></strong>或<a href="http://developer.android.com">Android 官方网站</a></strong>。
 </p>
-
-
 
 </div>
