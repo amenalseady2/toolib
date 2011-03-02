@@ -19,7 +19,7 @@ package android.content;
 import android.view.KeyEvent;
 
 /**
- * @author translate by cnmahj
+ * 
  */
 public interface DialogInterface {    
     /**
@@ -111,10 +111,12 @@ public interface DialogInterface {
      */
     interface OnClickListener {
         /**
-         * 点击对话框中的按钮时调用该方法。
+         * This method will be invoked when a button in the dialog is clicked.
          * 
-         * @param dialog 收到点击事件的按钮
-         * @param which 按下的按钮（例如 {@link DialogInterface#BUTTON1}）或条目的索引。
+         * @param dialog The dialog that received the click.
+         * @param which The button that was clicked (e.g.
+         *            {@link DialogInterface#BUTTON1}) or the position
+         *            of the item clicked.
          */
         /* TODO: Change to use BUTTON_POSITIVE after API council */
         public void onClick(DialogInterface dialog, int which);

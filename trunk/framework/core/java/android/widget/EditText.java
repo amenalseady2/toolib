@@ -34,9 +34,9 @@ import android.util.AttributeSet;
 
 /**
  * 译者：<a href="http://over140.cnblogs.com/">农民伯伯</a><br>
- * 译者：<a href="http://android.toolib.net/blog/"> cnmahj@工具屋</a><br>
- * 整理：<a href="http://android.toolib.net/blog/"> cnmahj@工具屋</a><br>
- * <hr>
+ * 译者：<a href="http://android.toolib.net/blog/">cnmahj@toolib.cn</a><br>
+ * 整理：<a href="http://android.toolib.net/blog/">cnmahj@toolib.cn</a><br>
+ * 
  * EditText 只是对 TextView 进行了少量变更，以使其可以编辑。
  *
  * <p>参见 <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">窗体简明教程</a>。</p>
