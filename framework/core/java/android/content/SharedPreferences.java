@@ -30,8 +30,6 @@ import java.util.Map;
  * processes.  This will be added later.</em>
  *
  * @see Context#getSharedPreferences
- * @author translate madgoat
- * @author convert cnmahj
  */
 public interface SharedPreferences {
     /**

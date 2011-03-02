@@ -54,6 +54,9 @@ import android.view.WindowManager.LayoutParams;
  *   view hierarchy.
  */
 /**
+ * 译者：獨鍆躌踄<br>
+ * 整理：<a href="http://android.toolib.net/blog/">cnmahj@toolib.cn</a><br>
+
  * {@link ZoomButtonsController} 处理缩放控件的显示和隐藏并且定位其在相关父视图的位置。
  * 他也可以做为缩放控件的容器，允许在缩放控制窗口里面显示一些附加的按钮。
  * 
@@ -65,9 +68,6 @@ import android.view.WindowManager.LayoutParams;
  * <p>
  * 如果你需要和自定义视图搭配使用，请在 {@link View#onDetachedFromWindow} 事件中调用
  * {@link #setVisible(boolean) setVisible(false)} 方法。
- *
- * @author translate by 獨鍆躌踄
- * @author convert by cnmahj
  */
 public class ZoomButtonsController implements View.OnTouchListener {
 

@@ -617,12 +617,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static final boolean DBG = false;
 
     /**
-     * The logging tag used by this class with android.util.Log.
+     * 在该类中使用 android.util.Log 输出日志时的标签。
      */
     protected static final String VIEW_LOG_TAG = "View";
 
     /**
-     * Used to mark a View that has no ID.
+     * 用于识别没有 ID 的视图。
      */
     public static final int NO_ID = -1;
 
@@ -649,19 +649,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static final int FITS_SYSTEM_WINDOWS = 0x00000002;
 
     /**
-     * This view is visible.  Use with {@link #setVisibility}.
+     * 视图可见。用于 {@link #setVisibility}。
      */
     public static final int VISIBLE = 0x00000000;
 
     /**
-     * This view is invisible, but it still takes up space for layout purposes.
-     * Use with {@link #setVisibility}.
+     * 视图不可见，但为其保留布局时所占用的空间。用于 {@link #setVisibility}。
      */
     public static final int INVISIBLE = 0x00000004;
 
     /**
-     * This view is invisible, and it doesn't take any space for layout
-     * purposes. Use with {@link #setVisibility}.
+     * 视图不可见，并且不占用布局时的空间。用于 {@link #setVisibility}。
      */
     public static final int GONE = 0x00000008;
 
@@ -808,17 +806,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int FOCUSABLE_IN_TOUCH_MODE = 0x00040000;
 
     /**
-     * <p>Enables low quality mode for the drawing cache.</p>
+     * <p>为绘图缓存启用低质量控制模式。</p>
      */
     public static final int DRAWING_CACHE_QUALITY_LOW = 0x00080000;
 
     /**
-     * <p>Enables high quality mode for the drawing cache.</p>
+     * <p>为绘图缓存启用高质量控制模式。</p>
      */
     public static final int DRAWING_CACHE_QUALITY_HIGH = 0x00100000;
 
     /**
-     * <p>Enables automatic quality mode for the drawing cache.</p>
+     * <p>为绘图缓存启用自动质量控制模式。</p>
      */
     public static final int DRAWING_CACHE_QUALITY_AUTO = 0x00000000;
 
@@ -852,30 +850,26 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int DUPLICATE_PARENT_STATE = 0x00400000;
 
     /**
-     * The scrollbar style to display the scrollbars inside the content area,
-     * without increasing the padding. The scrollbars will be overlaid with
-     * translucency on the view's content.
+     * 用于在内容区域显示滚动条的滚动条风格，不增加内边距。
+     * 滚动条以半透明的形式覆盖在视图内容上面。
      */
     public static final int SCROLLBARS_INSIDE_OVERLAY = 0;
 
     /**
-     * The scrollbar style to display the scrollbars inside the padded area,
-     * increasing the padding of the view. The scrollbars will not overlap the
-     * content area of the view.
+     * 用于在内边距内显示滚动条的滚动条风格，增加视图的内边距。
+     * 滚动条不覆盖视图内容。
      */
     public static final int SCROLLBARS_INSIDE_INSET = 0x01000000;
 
     /**
-     * The scrollbar style to display the scrollbars at the edge of the view,
-     * without increasing the padding. The scrollbars will be overlaid with
-     * translucency.
+     * 用于在视图边上显示滚动条的滚动条风格，不增加内边距。
+     * 滚动条以半透明的形式显示在边上。
      */
     public static final int SCROLLBARS_OUTSIDE_OVERLAY = 0x02000000;
 
     /**
-     * The scrollbar style to display the scrollbars at the edge of the view,
-     * increasing the padding of the view. The scrollbars will only overlap the
-     * background, if any.
+     * 用于在视图边上显示滚动条的滚动条风格，增加视图的内边距。
+     * 如果有背景，滚动条会覆盖背景部分。
      */
     public static final int SCROLLBARS_OUTSIDE_INSET = 0x03000000;
 
@@ -898,66 +892,62 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int SCROLLBARS_STYLE_MASK = 0x03000000;
 
     /**
-     * View flag indicating that the screen should remain on while the
-     * window containing this view is visible to the user.  This effectively
-     * takes care of automatically setting the WindowManager's
-     * {@link WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON}.
+     * 视图标志位，用于指明当窗口包含对用户可见的该视图时，屏幕应该一直处于开启状态。
+     * 该效果通过自动设置  WindowManager 的
+     * {@link WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON} 实现。
      */
     public static final int KEEP_SCREEN_ON = 0x04000000;
 
     /**
-     * View flag indicating whether this view should have sound effects enabled
-     * for events such as clicking and touching.
+     * 视图标志位，指示发生诸如单击、触控事件时视图是否播放声音效果。
      */
     public static final int SOUND_EFFECTS_ENABLED = 0x08000000;
 
     /**
-     * View flag indicating whether this view should have haptic feedback
-     * enabled for events such as long presses.
+     * 视图标志位，指示发生诸如长按事件时视图是否执行震动反馈。
      */
     public static final int HAPTIC_FEEDBACK_ENABLED = 0x10000000;
 
     /**
-     * View flag indicating whether {@link #addFocusables(ArrayList, int, int)}
-     * should add all focusable Views regardless if they are focusable in touch mode.
+     * 视图标志位，指出无论是否处于触控模式下，以及触控模式下是否可以获得焦点，
+     *  {@link #addFocusables(ArrayList, int, int)}
+     * 函数都会添加该视图。
      */
     public static final int FOCUSABLES_ALL = 0x00000000;
 
     /**
-     * View flag indicating whether {@link #addFocusables(ArrayList, int, int)}
-     * should add only Views focusable in touch mode.
+     * 视图标志位，指出 {@link #addFocusables(ArrayList, int, int)}
+     * 函数只添加在触控模式下可以获得焦点的视图。
      */
     public static final int FOCUSABLES_TOUCH_MODE = 0x00000001;
 
     /**
-     * Use with {@link #focusSearch}. Move focus to the previous selectable
-     * item.
+     * 用于 {@link #focusSearch}。移动焦点到前一个可选择条目。
      */
     public static final int FOCUS_BACKWARD = 0x00000001;
 
     /**
-     * Use with {@link #focusSearch}. Move focus to the next selectable
-     * item.
+     * 用于 {@link #focusSearch}。移动焦点到下一个可选择条目。
      */
     public static final int FOCUS_FORWARD = 0x00000002;
 
     /**
-     * Use with {@link #focusSearch}. Move focus to the left.
+     * 用于 {@link #focusSearch}。向左移动焦点。
      */
     public static final int FOCUS_LEFT = 0x00000011;
 
     /**
-     * Use with {@link #focusSearch}. Move focus up.
+     * 用于 {@link #focusSearch}。向上移动焦点。
      */
     public static final int FOCUS_UP = 0x00000021;
 
     /**
-     * Use with {@link #focusSearch}. Move focus to the right.
+     * 用于 {@link #focusSearch}。向右移动焦点。
      */
     public static final int FOCUS_RIGHT = 0x00000042;
 
     /**
-     * Use with {@link #focusSearch}. Move focus down.
+     * 用于 {@link #focusSearch}。向下移动焦点。
      */
     public static final int FOCUS_DOWN = 0x00000082;
 
@@ -966,45 +956,40 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     // Singles
     /**
-     * Indicates the view has no states set. States are used with
-     * {@link android.graphics.drawable.Drawable} to change the drawing of the
-     * view depending on its state.
+     * 指出视图没有设置状态。 {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观。
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] EMPTY_STATE_SET = {};
     /**
-     * Indicates the view is enabled. States are used with
-     * {@link android.graphics.drawable.Drawable} to change the drawing of the
-     * view depending on its state.
+     * 指出视图时可用的。{@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观。
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] ENABLED_STATE_SET = {R.attr.state_enabled};
     /**
-     * Indicates the view is focused. States are used with
-     * {@link android.graphics.drawable.Drawable} to change the drawing of the
-     * view depending on its state.
+     * 指出视图得到焦点。 {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观。
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] FOCUSED_STATE_SET = {R.attr.state_focused};
     /**
-     * Indicates the view is selected. States are used with
-     * {@link android.graphics.drawable.Drawable} to change the drawing of the
-     * view depending on its state.
+     * 指出视图已选中。 {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观。
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] SELECTED_STATE_SET = {R.attr.state_selected};
     /**
-     * Indicates the view is pressed. States are used with
-     * {@link android.graphics.drawable.Drawable} to change the drawing of the
-     * view depending on its state.
+     * 指出视图已按下。 {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观。
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
@@ -1012,9 +997,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     protected static final int[] PRESSED_STATE_SET = {R.attr.state_pressed};
     /**
-     * Indicates the view's window has focus. States are used with
-     * {@link android.graphics.drawable.Drawable} to change the drawing of the
-     * view depending on its state.
+     * 指出视图的窗口具有焦点。 {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观。
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
@@ -1023,7 +1007,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             {R.attr.state_window_focused};
     // Doubles
     /**
-     * Indicates the view is enabled and has the focus.
+     * 指出视图可用并具有焦点。
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1031,7 +1015,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_STATE_SET, FOCUSED_STATE_SET);
     /**
-     * Indicates the view is enabled and selected.
+     * 指出视图可用并已选中。
      *
      * @see #ENABLED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1039,7 +1023,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_SELECTED_STATE_SET =
             stateSetUnion(ENABLED_STATE_SET, SELECTED_STATE_SET);
     /**
-     * Indicates the view is enabled and that its window has focus.
+     * 指出视图可用并且其窗口具有焦点。
      *
      * @see #ENABLED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1047,7 +1031,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * Indicates the view is focused and selected.
+     * 指出视图具有焦点并且已选中。
      *
      * @see #FOCUSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1055,7 +1039,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] FOCUSED_SELECTED_STATE_SET =
             stateSetUnion(FOCUSED_STATE_SET, SELECTED_STATE_SET);
     /**
-     * Indicates the view has the focus and that its window has the focus.
+     * 指出视图具有焦点并且其窗口也具有焦点。
      *
      * @see #FOCUSED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1063,7 +1047,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] FOCUSED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * Indicates the view is selected and that its window has the focus.
+     * 指出视图已选中并且其窗口具有焦点。
      *
      * @see #SELECTED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1072,7 +1056,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     // Triples
     /**
-     * Indicates the view is enabled, focused and selected.
+     * 指出视图可用、具有焦点并已选中。
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1081,7 +1065,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_FOCUSED_SELECTED_STATE_SET =
             stateSetUnion(ENABLED_FOCUSED_STATE_SET, SELECTED_STATE_SET);
     /**
-     * Indicates the view is enabled, focused and its window has the focus.
+     * 指出视图可用、具有焦点并且其窗口也具有焦点。
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1090,7 +1074,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * Indicates the view is enabled, selected and its window has the focus.
+     * 指出视图可用、已选中并且其窗口具有焦点。
      *
      * @see #ENABLED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1099,7 +1083,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * Indicates the view is focused, selected and its window has the focus.
+     * 指出视图具有焦点、已选中并且其窗口具有焦点。
      *
      * @see #FOCUSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1108,8 +1092,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(FOCUSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * Indicates the view is enabled, focused, selected and its window
-     * has the focus.
+     * 指出视图可用、具有焦点、已选中并且其窗口具有焦点。
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1121,7 +1104,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                           WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed and its window has the focus.
+     * 指出视图已按下并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1130,7 +1113,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed and selected.
+     * 指出视图已按下并已选中。
      *
      * @see #PRESSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1139,7 +1122,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, selected and its window has the focus.
+     * 指出视图已按下、已选中并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1149,7 +1132,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed and focused.
+     * 指出视图已按下并具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1158,7 +1141,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, focused and its window has the focus.
+     * 指出视图已按下、具有焦点并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1168,7 +1151,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, focused and selected.
+     * 质粗视图已按下、具有焦点并已选中。
      *
      * @see #PRESSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1178,7 +1161,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_FOCUSED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, focused, selected and its window has the focus.
+     * 指出视图已按下、具有焦点、已选中并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1189,7 +1172,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_FOCUSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed and enabled.
+     * 指出视图已按下并可用。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1198,7 +1181,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, ENABLED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, enabled and its window has the focus.
+     * 指出视图已按下、可用并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1208,7 +1191,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, enabled and selected.
+     * 指出视图已按下、可用并且已选中。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1218,8 +1201,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, enabled, selected and its window has the
-     * focus.
+     * 指出视图已按下、可用、已选中并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1230,7 +1212,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, enabled and focused.
+     * 指出视图已按下、可用并具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1240,8 +1222,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_STATE_SET, FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, enabled, focused and its window has the
-     * focus.
+     * 指出视图已按下、可用、具有焦点并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1252,7 +1233,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, enabled, focused and selected.
+     * 指出视图可按下、可用、具有焦点并与选中。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1263,8 +1244,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_FOCUSED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * Indicates the view is pressed, enabled, focused, selected and its window
-     * has the focus.
+     * 指出视图已按下、可用、具有焦点并且其窗口具有焦点。
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1276,7 +1256,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * The order here is very important to {@link #getDrawableState()}
+     * 这里的排列顺序对 {@link #getDrawableState()} 很重要。
      */
     private static final int[][] VIEW_STATE_SETS = {
         EMPTY_STATE_SET,                                           // 0 0 0 0 0
@@ -1381,7 +1361,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * The animation currently associated with this view.
-     * @hide
+     * {@hide}
      */
     protected Animation mCurrentAnimation = null;
 
@@ -1552,8 +1532,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static final int AWAKEN_SCROLL_BARS_ON_ATTACH = 0x08000000;
 
     /**
-     * Always allow a user to over-scroll this view, provided it is a
-     * view that can scroll.
+     * 总是允许用户过滚动该视图，用于可以滚动的视图。
      *
      * @see #getOverScrollMode()
      * @see #setOverScrollMode(int)
@@ -1561,8 +1540,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public static final int OVER_SCROLL_ALWAYS = 0;
 
     /**
-     * Allow a user to over-scroll this view only if the content is large
-     * enough to meaningfully scroll, provided it is a view that can scroll.
+     * 允许用户对内容大于滚动区域的视图进行过滚动，用于可以滚动的视图。
      *
      * @see #getOverScrollMode()
      * @see #setOverScrollMode(int)
@@ -1570,7 +1548,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public static final int OVER_SCROLL_IF_CONTENT_SCROLLS = 1;
 
     /**
-     * Never allow a user to over-scroll this view.
+     * 不允许用户对该视图进行过滚动。
      *
      * @see #getOverScrollMode()
      * @see #setOverScrollMode(int)

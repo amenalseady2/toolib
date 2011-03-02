@@ -514,7 +514,7 @@
     <!-- Color of link text (URLs). -->
     <attr name="textColorLink" format="reference|color" />
 
-    <!-- 省略文本的位置。 -->
+    <!-- 省略文本的位置. -->
     <attr name="ellipsize">
         <enum name="none" value="0" />
         <enum name="start" value="1" />
@@ -523,10 +523,10 @@
         <enum name="marquee" value="4" />
     </attr>
 
-    <!-- 文本域中可放置的数据类型，用于帮助输入法决定如何让用户输入文本。
-         使用的常量由 {@link android.text.InputType} 定义。
-         一般使用单一的值，也可以使用组合值来指定。
-         设置 <var>none</var> 以外的值同时意味着文本可编辑。 -->
+    <!-- 文本域中可放置的数据类型，用于帮助输入法决定如何让用户输入文本.
+         使用的常量由 {@link android.text.InputType} 定义.
+         一般使用单一的值，也可以使用组合值来指定.
+         设置 <var>none</var> 以外的值同时意味着文本可编辑. -->
     <attr name="inputType">
         <!-- There is no content type.  The text is not editable. -->
         <flag name="none" value="0x00000000" />
@@ -649,8 +649,8 @@
         <flag name="time" value="0x00000024" />
     </attr>
 
-    <!-- 附近特性，可用于启动输入法与编辑器的关联，以提高你应用程序的集成效果。
-         对应的常量在 {@link android.view.inputmethod.EditorInfo#imeOptions} 定义。 -->
+    <!-- 附近特性，可用于启动输入法与编辑器的关联，以提高你应用程序的集成效果.
+         对应的常量在 {@link android.view.inputmethod.EditorInfo#imeOptions} 定义. -->
     <attr name="imeOptions">
         <!-- There are no special semantics associated with this editor. -->
         <flag name="normal" value="0x00000000" />
@@ -765,7 +765,7 @@
         <flag name="clip_horizontal" value="0x08" />
     </attr>
 
-    <!-- 控制是否自动查找并转换 URL、邮箱地址等链接为可点击链接。默认值为"none"，禁止该属性。 -->
+    <!-- 控制是否自动查找并转换 URL、邮箱地址等链接为可点击链接.默认值为"none"，禁止该属性. -->
     <attr name="autoLink">
         <!-- Match no patterns (default). -->
         <flag name="none" value="0x00" />
@@ -1090,254 +1090,238 @@
     <!-- ============================= -->
     <eat-comment />
 
-    <!-- 可用于 {@link android.view.View} 及其子类的属性。
-         可以通过 {@link #ViewGroup_Layout} 来查看视图父类的属性。 -->
+    <!-- 用于 {@link android.view.View} 或其子类的属性. 
+         可以通过 {@link #ViewGroup_Layout} 查看由视图类的父类来处理的属性. -->
     <declare-styleable name="View">
-        <!-- 为视图提供一个标识，以便可以通过 {@link android.view.View#findViewById View.findViewById()}
-             或 {@link android.app.Activity#findViewById Activity.findViewById()} 函数取得该视图。
-             该属性是对资源的参照，一般你可以用 <code>@+</code> 来创建新的资源 ID。
-             例如：<code>android:id="@+id/my_id"</code> 允许你通过
-             <code>findViewById(R.id.my_id)</code> 来取得该视图。 -->
+        <!-- 为当前视图设置一个标识名，以后可以通过调用
+        {@link android.view.View#findViewById View.findViewById()} 方法或
+        {@link android.app.Activity#findViewById Activity.findViewById()}
+        方法来取得视图. 它应该是对资源的引用，你可以使用 <code>@+</code>
+        语法来创建新的 ID 资源. 例如：<code>android:id="@+id/my_id"</code>
+        允许你以后使用 <code>findViewById(R.id.my_id)</code> 来取得视图	. -->
         <attr name="id" format="reference" />
 
-        <!-- 为视图提供字符串型的标签，用于通过 {@link android.view.View#getTag View.getTag()}
-             或通过 {@link android.view.View#findViewWithTag View.findViewWithTag()}
-             来检索视图。取得视图时，一般用 ID (通过 Android:id 来指定)来代替 tag，
-             因为用 ID 查找更快，并支持编译时类型检查。 -->
+        <!-- 设置一个文本标签，以后可以通过调用
+        {@link android.view.View#getTag View.getTag()} 取得视图或者调用
+        {@link android.view.View#findViewWithTag View.findViewWithTag()}
+        来查找并取得视图.最好使用 ID(通过 android:id 属性定义)来代替
+        文本标签，因为它的速度更快，并且允许编译时类型检查. -->
         <attr name="tag" format="string" />
 
-        <!-- 以像素为单位的横向滚动条初始位置。 -->
+        <!-- 以像数为单位的横向滚动条位置.-->
         <attr name="scrollX" format="dimension" />
 
-        <!-- 以像素为单位的纵向滚动条初始位置。 -->
+        <!-- 以像数为单位的纵向滚动条位置 -->
         <attr name="scrollY" format="dimension" />
 
-        <!-- 作为背景使用的可绘制对象。它可以是对完整得可绘制对象资源
+        <!-- 作为背景使用的可绘制对象.它可以是对完整得可绘制对象资源
              （比如：PNG 图像、9片图、XML 状态列表描述等等）
-             或者是象“#ff000000”（黑色）这样得纯色。 -->
+             或者是象“#ff000000”（黑色）这样得纯色. -->
         <attr name="background" format="reference|color" />
 
-        <!-- 以像素为单位设置四边的内边距。内边距是视图的边到其内容之间的空白。
-             视图的大小，包含其内边距。如果设置了 {@link android.R.attr#background}
-             属性，内边距会初始化为该可绘制对象的内边距（如果没设置内边距则为 0）。
-             明确设置的内边距值会覆盖背景的内边距值。 -->
+        <!-- 以像素为单位设置四条边的内边距. 内边距定义了由边到视图内容之间的空间.
+             视图的大小包括其内边距. 如果为视图设置了 {@link android.R.attr#background}
+             属性，则内边距的初始值为其可绘制属性的内边距(如果其没有设置内边距，则为0).
+             明确设置的内边距的值会覆盖相应的背景中的内边距. -->
         <attr name="padding" format="dimension" />
-        <!-- 以像素为单位设置左侧内边距。参见 {@link android.R.attr#padding}。 -->
+        <!-- 以像素为单位设置左边的内边距. 参见 {@link android.R.attr#padding}. -->
         <attr name="paddingLeft" format="dimension" />
-        <!-- 以像素为单位设置顶部内边距。参见 {@link android.R.attr#padding}。 -->
+        <!-- 以像素为单位设置上边的内边距. 参见 {@link android.R.attr#padding}. -->
         <attr name="paddingTop" format="dimension" />
-        <!-- 以像素为单位设置右侧内边距。参见 {@link android.R.attr#padding}。 -->
+        <!-- 以像素为单位设置右边的内边距. 参见 {@link android.R.attr#padding}. -->
         <attr name="paddingRight" format="dimension" />
-        <!-- 以像素为单位设置底部内边距。参见 {@link android.R.attr#padding}。 -->
+        <!-- 以像素为单位设置下边的内边距. 参见 {@link android.R.attr#padding}. -->
         <attr name="paddingBottom" format="dimension" />
 
-        <!-- 控制视图是否可以得到焦点的布尔值。默认用户不能将焦点移动到视图上，
-             通过设置该属性为真，使视图可以接收焦点。该属性的值不影响直接调用
-             {@link android.view.View#requestFocus} 时的行为，
-             其随时可以使视图获得焦点。它只影响移动焦点时的焦点导航。 -->
+        <!-- 布尔值，用于控制视图是否可以获得焦点. 默认用户不能将焦点移动到视图上.
+             设置该属性为真，则视图可以获得焦点. 该属性值不影响直接调用的
+             {@link android.view.View#requestFocus} 方法, 它无视视图的设置，
+             总是请求焦点. 它只对通过焦点管理器发生的焦点移动有影响. -->
         <attr name="focusable" format="boolean" />
 
-        <!-- 控制视图在触控模式下是否可以获得焦点。如果为真，则在点击该视图时，
-             它可以获得焦点；并且在点击没有设置该属性的视图时，它可以保持的焦点状态。 -->
+        <!-- 布尔值，用于控制在触控模式下视图是否可以获得焦点. 如果视图的该属性为真，
+             点击视图时它将获得焦点；当之后点击该属性不为真的其它视图时，该视图将保持焦点. -->
         <attr name="focusableInTouchMode" format="boolean" />
 
-        <!-- 控制视图的初始可视性。  -->
+        <!-- 控制视图的初始可视性.  -->
         <attr name="visibility">
-            <!-- 在屏幕上可见，默认值。 -->
+            <!-- 在屏幕上可见，默认值. -->
             <enum name="visible" value="0" />
-            <!-- 不显示，但是在布局时为其保留空间。 -->
+            <!-- 不可见，但是布局时保留其位置. -->
             <enum name="invisible" value="1" />
-            <!-- 完全隐藏，看起来和没有添加该视图一样。 -->
+            <!-- 完全隐藏，就像没有添加该视图. -->
             <enum name="gone" value="2" />
         </attr>
 
-        <!-- 布尔型内部属性，基于类似状态栏的系统窗口来调整视图布局。
-             如果为真，调整视图的内边距来为系统窗口留出空间。
-             只影响非嵌入式的活动视图。 -->
+        <!-- 布尔型内部属性，用于设置是否根据系统窗口(比如状态栏)来调整视图的布局.
+             如果为真，则调整视图的内边距，以为系统窗口留出空间. 
+             该属性仅当视图是非嵌入式活动时有效. -->
         <attr name="fitsSystemWindows" format="boolean" />
 
-        <!-- 定义显示那个滚动条，或不显示。 -->
+        <!-- 定义显示那个方向的滚动条. -->
         <attr name="scrollbars">
-            <!-- 不显示滚动条。 -->
+            <!-- 不显示滚动条. -->
             <flag name="none" value="0x00000000" />
-            <!-- 只显示横向滚动条。 -->
+            <!-- 显示横向滚动条. -->
             <flag name="horizontal" value="0x00000100" />
-            <!-- 只显示纵向滚动条。 -->
+            <!-- 显示纵向滚动条. -->
             <flag name="vertical" value="0x00000200" />
         </attr>
 
-        <!-- 控制滚动条的位置和风格。滚动条可以被覆盖或一直显示。当一直显示时，
-             会占用视图的内边距空间。滚动条可以绘制于内边距区域，或视图的边上。
-             例如，如果视图包含背景可绘制对象，
-             你想在可绘制对象的内边距内的指定位置绘制滚动条，
-             你可以使用 insideOverlay 或 insideInset。
-             如果你想忽略内边距，把滚动条绘制在视图的边上，
-             你可以使用 outsideOverlay 或 outsideInset。-->
+        <!-- 控制滚动条的位置和样式. 滚动条可以处于悬浮模式或嵌入模式.
+             嵌入模式时，滚动条显示在视图的内边距区域内. 滚动条可以绘制在内边距内，
+             或者视图的边缘. 例如，当视图具有背景可绘制对象时，
+             你想在其指定的内边距区域内侧绘制滚动条，你可以使用 insideOverlay
+             或 insideInset. 如果你希望它们显示在视图边缘，忽略内边距，你可以使用
+             outsideOverlay 或 outsideInset.-->
         <attr name="scrollbarStyle">
-            <!-- 在内边距内，可覆盖。 -->
+            <!-- 悬浮显示于内边距内部 -->
             <enum name="insideOverlay" value="0x0" />
-            <!-- 在内边距内，一直可见。 -->
+            <!-- 嵌入显示于内边距内部 -->
             <enum name="insideInset" value="0x01000000" />
-            <!-- 在视图的边上，可覆盖。 -->
+            <!-- 悬浮显示于视图边缘 -->
             <enum name="outsideOverlay" value="0x02000000" />
-            <!-- 在视图的边上，一直可见。 -->
+            <!-- 嵌入显示于视图边缘 -->
             <enum name="outsideInset" value="0x03000000" />
         </attr>
 
-        <!-- 如果视图可以作为滚动条容器，可设置该属性。
-             意味着，它可以缩小自己占用的空间，以为输入法提供空间。
-             如果未设置，当存在纵向滚动条时，默认值为真；否则为假。 -->
+        <!-- 如果视图作为滚动容器使用，将该值设为真；
+             这意味它可以缩小占用的空间，以为输入法提供显示的空间.
+             当未设置其值，如果“scrollbars”包含纵向滚动条，则其值默认值为真，
+             否则其值为假. -->
         <attr name="isScrollContainer" format="boolean" />
 
-          <!-- 定义当不使用滚动条时，其是否淡出。 -->
-         <attr name="fadeScrollbars" format="boolean" />
-         <!-- 以毫秒为单位定义滚动条淡出时的延时。 -->
-         <attr name="scrollbarFadeDuration" format="integer" />
-         <!-- 以毫秒为单位定义滚动条淡出之前的延时。 -->
+        <!-- 定义滚动条不是用时是否淡出. -->
+        <attr name="fadeScrollbars" format="boolean" />
+        <!-- 以毫秒为单位定义淡出所用时间. -->
+        <attr name="scrollbarFadeDuration" format="integer" />
+        <!-- 以毫秒为单位定义淡出前等待时间. -->
         <attr name="scrollbarDefaultDelayBeforeFade" format="integer" />
-        <!-- 设置纵向滚动条的宽度和横向滚动条的高度。 -->
+        <!-- 定义纵向滚动条的宽度和横向滚动条的高度. -->
         <attr name="scrollbarSize" format="dimension" />
-        <!-- 定义横向滚动条把手的可绘制对象。 -->
+        <!-- 定义用于横向滚动条把手的可绘制对象. -->
         <attr name="scrollbarThumbHorizontal" format="reference" />
-        <!-- 定义纵向滚动条把手的可绘制对象。 -->
+        <!-- 定义用于纵向滚动条把手的可绘制对象. -->
         <attr name="scrollbarThumbVertical" format="reference" />
-        <!-- 定义横向滚动条滑道的可绘制对象。 -->
+        <!-- 定义用于横向滚动条滑道的可绘制对象. -->
         <attr name="scrollbarTrackHorizontal" format="reference" />
-        <!-- 定义纵向滚动条滑道的可绘制对象。 -->
+        <!-- 定义用于纵向滚动条滑道的可绘制对象. -->
         <attr name="scrollbarTrackVertical" format="reference" />
-        <!-- 定义是否一直绘制横向滚动条滑道。 -->
+        <!-- 定义是否总是绘制横向滚动条滑道. -->
         <attr name="scrollbarAlwaysDrawHorizontalTrack" format="boolean" />
-        <!-- 定义是否一直绘制纵向滚动条滑道。 -->
+        <!-- 定义是否总是绘制纵向滚动条滑道. -->
         <attr name="scrollbarAlwaysDrawVerticalTrack" format="boolean" />
 
-        <!-- Defines which edges should be fadeded on scrolling. -->
+        <!-- 定义滚动时淡出的边. -->
         <attr name="fadingEdge">
-            <!-- No edge is faded. -->
+            <!-- 不做边的淡出处理. -->
             <flag name="none" value="0x00000000" />
-            <!-- Fades horizontal edges only. -->
+            <!-- 只淡出横向的边. -->
             <flag name="horizontal" value="0x00001000" />
-            <!-- Fades vertical edges only. -->
+            <!-- 只淡出纵向的边. -->
             <flag name="vertical" value="0x00002000" />
         </attr>
-        <!-- Defines the length of the fading edges. -->
+        <!-- 定义淡出边的长度. -->
         <attr name="fadingEdgeLength" format="dimension" />
 
-        <!-- Defines the next view to give focus to when the next focus is
-             {@link android.view.View#FOCUS_LEFT}.
+        <!-- 定义焦点移动为 {@link android.view.View#FOCUS_LEFT}
+             时，下一个获得焦点的视图.
 
-             If the reference refers to a view that does not exist or is part
-             of a hierarchy that is invisible, a {@link java.lang.RuntimeException}
-             will result when the reference is accessed.-->
+             如果引用的视图是不可见视图树的一部分，或不存在，
+             当访问该引用时会导致抛出 {@link java.lang.RuntimeException} 异常.-->
         <attr name="nextFocusLeft" format="reference"/>
 
-        <!-- Defines the next view to give focus to when the next focus is
-             {@link android.view.View#FOCUS_RIGHT}
+        <!-- 定义焦点移动为 {@link android.view.View#FOCUS_RIGHT}
+             时，下一个获得焦点的视图.
 
-             If the reference refers to a view that does not exist or is part
-             of a hierarchy that is invisible, a {@link java.lang.RuntimeException}
-             will result when the reference is accessed.-->
+             如果引用的视图是不可见视图树的一部分，或不存在，
+             当访问该引用时会导致抛出 {@link java.lang.RuntimeException} 异常.-->
         <attr name="nextFocusRight" format="reference"/>
 
-        <!-- Defines the next view to give focus to when the next focus is
-             {@link android.view.View#FOCUS_UP}
+        <!-- 定义焦点移动为 {@link android.view.View#FOCUS_UP}
+             时，下一个获得焦点的视图.
 
-             If the reference refers to a view that does not exist or is part
-             of a hierarchy that is invisible, a {@link java.lang.RuntimeException}
-             will result when the reference is accessed.-->
+             如果引用的视图是不可见视图树的一部分，或不存在，
+             当访问该引用时会导致抛出 {@link java.lang.RuntimeException} 异常.-->
         <attr name="nextFocusUp" format="reference"/>
 
-        <!-- Defines the next view to give focus to when the next focus is
-             {@link android.view.View#FOCUS_DOWN}
+        <!-- 定义焦点移动为 {@link android.view.View#FOCUS_DOWN}
+             时，下一个获得焦点的视图.
 
-             If the reference refers to a view that does not exist or is part
-             of a hierarchy that is invisible, a {@link java.lang.RuntimeException}
-             will result when the reference is accessed.-->
+             如果引用的视图是不可见视图树的一部分，或不存在，
+             当访问该引用时会导致抛出 {@link java.lang.RuntimeException} 异常.-->
         <attr name="nextFocusDown" format="reference"/>
 
-        <!-- Defines whether this view reacts to click events. -->
+        <!-- 定义该视图是否响应点击事件. -->
         <attr name="clickable" format="boolean" />
 
-        <!-- Defines whether this view reacts to long click events. -->
+        <!-- 定义该视图是否响应长按事件. -->
         <attr name="longClickable" format="boolean" />
 
-        <!-- If unset, no state will be saved for this view when it is being
-             frozen. The default is true, allowing the view to be saved
-             (however it also must have an ID assigned to it for its
-             state to be saved).  Setting this to false only disables the
-             state for this view, not for its children which may still
-             be saved. -->
+        <!-- 如果取消该设置，冻结视图时不保存视图的任何状态信息.
+             默认值为真，允许视图保存状态信息（不过该视图必须拥有资源ID）.
+             设置该值为假，仅使该视图不保存状态，并不影响其子视图，
+             他们依然可以保存状态信息. -->
         <attr name="saveEnabled" format="boolean" />
 
-        <!-- Specifies whether to filter touches when the view's window is obscured by
-             another visible window.  When set to true, the view will not receive touches
-             whenever a toast, dialog or other window appears above the view's window.
-             Refer to the {@link android.view.View} security documentation for more details. -->
+        <!-- 指定当视图窗口被其他可视视图窗口遮挡时，是否过滤掉触控事件.
+             该值为真时，当小提示、对话框或其他窗口出现在该视图窗口上方时，
+             给视图不会发生触控事件. 进一步信息参见
+             {@link android.view.View 视图} 安全文档. -->
         <attr name="filterTouchesWhenObscured" format="boolean" />
 
-        <!-- Defines the quality of translucent drawing caches. This property is used
-             only when the drawing cache is enabled and translucent. The default value is auto. -->
+        <!-- 定义半透明缓存的质量. 该属性仅用于启用了半透明和缓存功能时.
+             默认值为自动. -->
         <attr name="drawingCacheQuality">
-            <!-- Lets the framework decide what quality level should be used
-                 for the drawing cache. -->
+            <!-- 让框架决定绘图缓存使用的质量等级. -->
             <enum name="auto" value="0" />
-            <!-- Low quality. When set to low quality, the drawing cache uses a lower color
-                 depth, thus losing precision in rendering gradients, but uses less memory. -->
+            <!-- 低质量。设为低质量时，绘图缓存使用较低的颜色深度，
+                 虽然降低了渐变的渲染质量，但使用内存较少. -->
             <enum name="low" value="1" />
-            <!-- High quality. When set to high quality, the drawing cache uses a higher
-                 color depth but uses more memory. -->
+            <!-- 高质量。设为高质量时，绘图缓存使用较高的颜色深度，但使用内存较多. -->
             <enum name="high" value="2" />
         </attr>
 
-        <!-- Controls whether the view's window should keep the screen on
-             while visible. -->
+        <!-- 定义视图窗口可见时，是否保持屏幕始终处于开启状态. -->
         <attr name="keepScreenOn" format="boolean" />
 
-        <!-- When this attribute is set to true, the view gets its drawable state
-             (focused, pressed, etc.) from its direct parent rather than from itself. -->
+        <!-- 当该属性设为真时，视图从它的容器视图取得可绘制状态（比如得焦点状态、
+             按下状态、等），而不是使用它自己的状态.. -->
         <attr name="duplicateParentState" format="boolean" />
 
-        <!-- Defines the minimum height of the view. It is not guaranteed
-             the view will be able to achieve this minimum height (for example,
-             if its parent layout constrains it with less available height). -->
+        <!-- 定义视图的最小高度. 不保证该限制一定成功
+             （比如，它的父容器布局限制其使用更小的可用高度）. -->
         <attr name="minHeight" />
 
-        <!-- Defines the minimum width of the view. It is not guaranteed
-             the view will be able to achieve this minimum width (for example,
-             if its parent layout constrains it with less available width). -->
+        <!-- 定义视图的最小宽度. 不保证该限制一定成功
+             （比如，它的父容器布局限制其使用更小的可用宽度）. -->
         <attr name="minWidth" />
 
-        <!-- Boolean that controls whether a view should have sound effects
-             enabled for events such as clicking and touching. -->
+        <!-- 布尔值，控制发生诸如点击、触控事件时是否使用声效. -->
         <attr name="soundEffectsEnabled" format="boolean" />
 
-        <!-- Boolean that controls whether a view should have haptic feedback
-             enabled for events such as long presses. -->
+        <!-- 布尔值，控制发生诸如长按事件时，是否使用震动反馈. -->
         <attr name="hapticFeedbackEnabled" format="boolean" />
 
-        <!-- Defines text that briefly describes content of the view. This property is used
-             primarily for accessibility. Since some views do not have textual
-             representation this attribute can be used for providing such. -->
+        <!-- 定义对视图内容的简短描述. 该属性主要用于用户辅助accessibility.
+             当视图没有文本内容时，该属性可以提供文本描述. -->
         <attr name="contentDescription" format="string" localization="suggested" />
 
-        <!-- Name of the method in this View's context to invoke when the view is
-             clicked. This name must correspond to a public method that takes
-             exactly one parameter of type View. For instance, if you specify
-             <code>android:onClick="sayHello"</code>, you must declare a
-             <code>public void sayHello(View v)</code> method of your context
-             (typically, your Activity). -->
+        <!-- 单击视图时执行的视图上下文中的方法名. 该名称必须与仅包含一个参数类型为
+             View 的共有方法相匹配. 例如，你指定该值为
+             <code>android:onClick="sayHello"</code>，你应该在你的上下文
+             (一般是在 Activity) 中声明一个
+             <code>public void sayHello(View v)</code> 方法. -->
         <attr name="onClick" format="string" />
 
-        <!-- Defines over-scrolling behavior. This property is used only if the
-             View is scrollable. Over-scrolling is the ability for the user to
-             receive feedback when attempting to scroll beyond meaningful content. -->
+        <!-- 定义过滚动行为. 该属性仅用于可滚动视图.
+             过滚动用于当用户的滚动操作超过有意义的范围时，提供反馈. -->
         <attr name="overScrollMode">
-            <!-- Always show over-scroll effects, even if the content fits entirely
-                 within the available space. -->
+            <!-- 总是显示过滚动效果，即使内容与空间完全匹配. -->
             <enum name="always" value="0" />
-            <!-- Only show over-scroll effects if the content is large
-                 enough to meaningfully scroll. -->
+            <!-- 只有当内容大于滚动范围时，显示过滚动效果. -->
             <enum name="ifContentScrolls" value="1" />
-            <!-- Never show over-scroll effects. -->
+            <!-- 不显示过滚动效果. -->
             <enum name="never" value="2" />
         </attr>
     </declare-styleable>
@@ -1551,8 +1535,7 @@
         <attr name="smoothScrollbar" format="boolean" />
     </declare-styleable>
     <declare-styleable name="AbsSpinner">
-        <!-- Reference to an array resource that will populate the Spinner.  For static content,
-             this is simpler than populating the Spinner programmatically. -->
+        <!-- 对数组资源的引用，用于填充 Spinner. 对于静态内容，这比编程填充要简单. -->
         <attr name="entries" />
     </declare-styleable>
     <declare-styleable name="AnalogClock">
@@ -1677,10 +1660,9 @@
     <declare-styleable name="ImageSwitcher">
     </declare-styleable>
     <declare-styleable name="ImageView">
-        <!-- Sets a drawable as the content of this ImageView. -->
+        <!-- 设置可绘制对象作为 ImageView 显示的内容. -->
         <attr name="src" format="reference|color" />
-        <!-- Controls how the image should be resized or moved to match the size
-             of this ImageView. -->
+        <!-- 控制为了使图片适合 ImageView 的大小，应该如何变更图片大小或移动图片. -->
         <attr name="scaleType">
             <enum name="matrix" value="0" />
             <enum name="fitXY" value="1" />
@@ -1691,21 +1673,19 @@
             <enum name="centerCrop" value="6" />
             <enum name="centerInside" value="7" />
         </attr>
-        <!-- Set this to true if you want the ImageView to adjust its bounds
-             to preserve the aspect ratio of its drawable. -->
+        <!-- 设置该属性为真可以在 ImageView 调整边界时保持图片的纵横比例. -->
         <attr name="adjustViewBounds" format="boolean" />
-        <!-- An optional argument to supply a maximum width for this view.
-             See {see android.widget.ImageView#setMaxWidth} for details. -->
+        <!-- 为视图提供最大宽度的可选参数。详细参见
+         {see android.widget.ImageView#setMaxWidth}. -->
         <attr name="maxWidth" format="dimension" />
-        <!-- An optional argument to supply a maximum height for this view.
-             See {see android.widget.ImageView#setMaxHeight} for details. -->
+        <!-- 为视图提供最大高度的可选参数。详细参见
+             {see android.widget.ImageView#setMaxHeight}. -->
         <attr name="maxHeight" format="dimension" />
-        <!-- Set a tinting color for the image. -->
+        <!-- 为图片设置着色颜色. -->
         <attr name="tint" format="color" />
-        <!-- If true, the image view will be baseline aligned with based on its
-             bottom edge. -->
+        <!-- 如果为真，图片视图以其底边作为对齐的基线. -->
         <attr name="baselineAlignBottom" format="boolean" />
-         <!-- If true, the image will be cropped to fit within its padding. -->
+         <!-- 如果为真，会剪切图片以适应内边距的大小. -->
         <attr name="cropToPadding" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ToggleButton">
@@ -1925,192 +1905,192 @@
     <declare-styleable name="TextSwitcher">
     </declare-styleable>
     <declare-styleable name="TextView">
-        <!-- 决定 getText() 方法返回值的种类。默认值为 "normal"。注意，EditText
-             和 LogTextBox 总是返回 Editable，及时你指定更低的基本也无济于事。 -->
+        <!-- 决定 getText() 方法返回值的种类.默认值为 "normal".注意，EditText
+             和 LogTextBox 总是返回 Editable，及时你指定更低的基本也无济于事. -->
         <attr name="bufferType">
-            <!-- 可以返回任何字符序列，如果源文本是带格式的，也可以返回带格式的文本序列。 -->
+            <!-- 可以返回任何字符序列，如果源文本是带格式的，也可以返回带格式的文本序列. -->
             <enum name="normal" value="0" />
-            <!-- 只能返回带格式的文本序列。 -->
+            <!-- 只能返回带格式的文本序列. -->
             <enum name="spannable" value="1" />
-            <!-- 只能返回带格式的或可编辑的文本序列。 -->
+            <!-- 只能返回带格式的或可编辑的文本序列. -->
             <enum name="editable" value="2" />
         </attr>
         <!-- 用于显示的文本 -->
         <attr name="text" format="string" localization="suggested" />
-        <!-- 当文本为空时显示的提示信息。 -->
+        <!-- 当文本为空时显示的提示信息. -->
         <attr name="hint" format="string" />
         <!-- 文本颜色 -->
         <attr name="textColor" />
-        <!-- 选中文本的高亮部分的颜色。 -->
+        <!-- 选中文本的高亮部分的颜色. -->
         <attr name="textColorHighlight" />
-        <!-- 提示信息的文字颜色。 -->
+        <!-- 提示信息的文字颜色. -->
         <attr name="textColorHint" />
-        <!-- 基本的文字颜色、字体、大小和风格。 -->
+        <!-- 基本的文字颜色、字体、大小和风格. -->
         <attr name="textAppearance" />
-        <!-- 文字的大小。推荐以“sp（可缩放像素）”为单位来设置该值（比如 15sp）。 -->
+        <!-- 文字的大小.推荐以“sp（可缩放像素）”为单位来设置该值（比如 15sp）. -->
         <attr name="textSize" />
-        <!-- 设置文本的横向缩放因子。 -->
+        <!-- 设置文本的横向缩放因子. -->
         <attr name="textScaleX" format="float" />
-        <!-- 字体名称（楷体、宋体、仿宋、黑体等）。 -->
+        <!-- 字体名称（楷体、宋体、仿宋、黑体等）. -->
         <attr name="typeface" />
-        <!-- 文字风格（粗体、斜体、粗斜体等）。 -->
+        <!-- 文字风格（粗体、斜体、粗斜体等）. -->
         <attr name="textStyle" />
-        <!-- 超链接的文字颜色。 -->
+        <!-- 超链接的文字颜色. -->
         <attr name="textColorLink" />
-        <!-- 使光标可见（默认）或隐藏。 -->
+        <!-- 使光标可见（默认）或隐藏. -->
         <attr name="cursorVisible" format="boolean" />
-        <!-- 使 TextView 的最大高度为指定行数的高度。 -->
+        <!-- 使 TextView 的最大高度为指定行数的高度. -->
         <attr name="maxLines" format="integer" min="0" />
-        <!-- 设置 TextView 的最大高度。 -->
+        <!-- 设置 TextView 的最大高度. -->
         <attr name="maxHeight" />
-        <!-- 使 TextView 精确匹配指定行数的高度。 -->
+        <!-- 使 TextView 精确匹配指定行数的高度. -->
         <attr name="lines" format="integer" min="0" />
-        <!-- 精确的设置 TextView 的高度。使用布局参数也可以达到相同效果。 -->
+        <!-- 精确的设置 TextView 的高度.使用布局参数也可以达到相同效果. -->
         <attr name="height" format="dimension" />
-        <!-- 使 TextView 的最小高度为指定行数的高度。 -->
+        <!-- 使 TextView 的最小高度为指定行数的高度. -->
         <attr name="minLines" format="integer" min="0" />
-        <!-- 设置 TextView 的最小高度。 -->
+        <!-- 设置 TextView 的最小高度. -->
         <attr name="minHeight" />
-        <!-- 使 TextView 的最大宽度为指定个数的字符宽度。 -->
+        <!-- 使 TextView 的最大宽度为指定个数的字符宽度. -->
         <attr name="maxEms" format="integer" min="0" />
-        <!-- 设置 TextView 的最大宽度。 -->
+        <!-- 设置 TextView 的最大宽度. -->
         <attr name="maxWidth" />
-        <!-- 使 TextView 精确匹配指定个数的字符宽度。 -->
+        <!-- 使 TextView 精确匹配指定个数的字符宽度. -->
         <attr name="ems" format="integer" min="0" />
-        <!-- 精确的设置 TextView 的宽度。使用布局参数也可以达到相同效果。 -->
+        <!-- 精确的设置 TextView 的宽度.使用布局参数也可以达到相同效果. -->
         <attr name="width" format="dimension" />
-        <!-- 使 TextView 的最小宽度为指定个数的字符宽度。 -->
+        <!-- 使 TextView 的最小宽度为指定个数的字符宽度. -->
         <attr name="minEms" format="integer" min="0" />
-        <!-- 设置 TextView 的最小宽度。 -->
+        <!-- 设置 TextView 的最小宽度. -->
         <attr name="minWidth" />
-        <!-- 指定当显示的文本比视图小时，横向和纵向的对齐方式。 -->
+        <!-- 指定当显示的文本比视图小时，横向和纵向的对齐方式. -->
         <attr name="gravity" />
-        <!-- 是否允许文本比视图宽（允许横向滚动）。 -->
+        <!-- 是否允许文本比视图宽（允许横向滚动）. -->
         <attr name="scrollHorizontally" format="boolean" />
-        <!-- 是否将文本域中的字符显示为代表密码的圆点。
-             {@deprecated 用 inputType 代替。} -->
+        <!-- 是否将文本域中的字符显示为代表密码的圆点.
+             {@deprecated 用 inputType 代替.} -->
         <attr name="password" format="boolean" />
-        <!-- 限制文本显示与一行中，用横向滚动来代替多行显示。
-             当你按下回车时，不是换行而是将文本向前移动。
+        <!-- 限制文本显示与一行中，用横向滚动来代替多行显示.
+             当你按下回车时，不是换行而是将文本向前移动.
              注意：对于可编辑文本视图，用 inputType 属性的
-             textMultiLine 标志来控制该行为。
+             textMultiLine 标志来控制该行为.
              (如果同时设置了 singleLine 和 inputType，
-             inputType 的设置会覆盖 singleLine 的设置。）} -->
+             inputType 的设置会覆盖 singleLine 的设置.）} -->
         <attr name="singleLine" format="boolean" />
-        <!-- 指出 TextView 是否可以操作。 {@deprecated 用 state_enabled 代替}。 -->
+        <!-- Specifies whether the TextView is enabled or not. {@deprecated Use state_enabled instead}. -->
         <attr name="enabled" format="boolean" />
-        <!-- 如果文本可选，当该视图得到焦点时将文本全部选中，而不只将光标移动到开始或结尾处。 -->
+        <!-- 如果文本可选，当该视图得到焦点时将文本全部选中，而不只将光标移动到开始或结尾处. -->
         <attr name="selectAllOnFocus" format="boolean" />
-        <!-- 为上标和下标留出足够的空间，以取代字体上下标。默认为真。 -->
+        <!-- 为上标和下标留出足够的空间，以取代字体上下标.默认为真. -->
         <attr name="includeFontPadding" format="boolean" />
-        <!-- 设置输入过滤器，限制输入的文本最大长度为指定值。 -->
+        <!-- 设置输入过滤器，限制输入的文本最大长度为指定值. -->
         <attr name="maxLength" format="integer" min="0" />
-        <!-- 在文本后面显示指定颜色的阴影。 -->
+        <!-- 在文本后面显示指定颜色的阴影. -->
         <attr name="shadowColor" format="color" />
-        <!-- 阴影横向偏移量。 -->
+        <!-- 阴影横向偏移量. -->
         <attr name="shadowDx" format="float" />
-        <!-- 阴影纵向偏移量。 -->
+        <!-- 阴影纵向偏移量. -->
         <attr name="shadowDy" format="float" />
-        <!-- 设置阴影的范围。 -->
+        <!-- 设置阴影的范围. -->
         <attr name="shadowRadius" format="float" />
         <attr name="autoLink" />
-        <!-- 如果设为假，即使指定的 autoLink 属性正确识别出了链接，点击也不会发生任何动作。 -->
+        <!-- 如果设为假，即使指定的 autoLink 属性正确识别出了链接，点击也不会发生任何动作. -->
         <attr name="linksClickable" format="boolean" />
-        <!-- 如果设置，指定 TextView 使用数值输入法。默认值为假。
-             {@deprecated 用 inputType 代替。} -->
+        <!-- 如果设置，指定 TextView 使用数值输入法.默认值为假.
+             {@deprecated 用 inputType 代替.} -->
         <attr name="numeric">
-            <!-- 可以输入数值。 -->
+            <!-- 可以输入数值. -->
             <flag name="integer" value="0x01" />
-            <!-- 可以输入带符号的数值。 -->
+            <!-- 可以输入带符号的数值. -->
             <flag name="signed" value="0x003" />
-            <!-- 可以输入带小数点的数值。 -->
+            <!-- 可以输入带小数点的数值. -->
             <flag name="decimal" value="0x05" />
         </attr>
-        <!-- 如果设置，则指定该 TextView 使用数字输入法，只接受指定的字符。
-             如果设置该值，数字是可以输入的。
-             默认值为 false。 -->
+        <!-- 如果设置，则指定该 TextView 使用数字输入法，只接受指定的字符.
+             如果设置该值，数字是可以输入的.
+             默认值为 false. -->
         <attr name="digits" format="string" />
-        <!-- 如果设置，则指定 TextView 使用电话号码输入法。默认为假。
-             {@deprecated 用 inputType 代替。} -->
+        <!-- 如果设置，则指定 TextView 使用电话号码输入法.默认为假.
+             {@deprecated 用 inputType 代替.} -->
         <attr name="phoneNumber" format="boolean" />
-        <!-- 如果设置，即指定 TextView 使用指定的输入法（使用完全修饰类名）。
-             {@deprecated 用 inputType 代替。} -->
+        <!-- 如果设置，即指定 TextView 使用指定的输入法（使用完全修饰类名）.
+             {@deprecated 用 inputType 代替.} -->
         <attr name="inputMethod" format="string" />
-        <!-- 如果设置该属性，则指定该 TextView 的文本输入法可以自动改变用户输入的字母为大写。
-             默认值为 "none"。
-             {@deprecated 用 inputType 代替。} -->
+        <!-- 如果设置该属性，则指定该 TextView 的文本输入法可以自动改变用户输入的字母为大写.
+             默认值为 "none".
+             {@deprecated 用 inputType 代替.} -->
         <attr name="capitalize">
-            <!-- 不进行首字母大写转换。 -->
+            <!-- 不进行首字母大写转换. -->
             <enum name="none" value="0" />
-            <!-- 每句的第一个单词首字母转为大写。 -->
+            <!-- 每句的第一个单词首字母转为大写. -->
             <enum name="sentences" value="1" />
-            <!-- 每个单词的首字母大写。 -->
+            <!-- 每个单词的首字母大写. -->
             <enum name="words" value="2" />
-            <!-- 所有字符大写。 -->
+            <!-- 所有字符大写. -->
             <enum name="characters" value="3" />
         </attr>
-        <!-- 如果设置，这表示该 TextView 的文本输入法可以自动更正常见拼写错误。
-             默认值为 "false"。
-             {@deprecated 用 inputType 代替。} -->
+        <!-- 如果设置，这表示该 TextView 的文本输入法可以自动更正常见拼写错误.
+             默认值为 "false".
+             {@deprecated 用 inputType 代替.} -->
         <attr name="autoText" format="boolean" />
-        <!-- 如果设置，则指定该 TextView 有输入法，如果没有特殊指定，其为文本输入状态。
-             对于 TextView，该值默认为 false 。对于 EditText，其默认值为 true 。
-             {@deprecated 用 inputType 代替。} -->
+        <!-- 如果设置，则指定该 TextView 有输入法，如果没有特殊指定，其为文本输入状态.
+             对于 TextView，该值默认为 false .对于 EditText，其默认值为 true .
+             {@deprecated 用 inputType 代替.} -->
         <attr name="editable" format="boolean" />
-        <!-- 如果设置，则文本视图会保持完整的文本内容，以及象当前光标位置这样的附近信息。
+        <!-- 如果设置，则文本视图会保持完整的文本内容，以及象当前光标位置这样的附近信息.
              默认该功能是关闭的，当文本视图的内容不是存储在内容提供者这样的永久资源中时，
-             该功能很有用。 -->
+             该功能很有用. -->
         <attr name="freezesText" format="boolean" />
         <!-- 该值为真时，如果文字长度超过视图宽度，文字不会在中途被截断，
-             而是省略其中一部分。为了将文本作为一个整体显示在一行中，
+             而是省略其中一部分.为了将文本作为一个整体显示在一行中，
              你可能经常使用横向滚动条或者 singleLine 属性，
-             现在你也可以使用本属性，它还允许多行。 -->
+             现在你也可以使用本属性，它还允许多行. -->
         <attr name="ellipsize" />
-        <!-- 在文本上方显示可绘制对象。 -->
+        <!-- 在文本上方显示可绘制对象. -->
         <attr name="drawableTop" format="reference|color" />
-        <!-- 在文本下方显示可绘制对象。 -->
+        <!-- 在文本下方显示可绘制对象. -->
         <attr name="drawableBottom" format="reference|color" />
-        <!-- 在文本左侧显示可绘制对象。 -->
+        <!-- 在文本左侧显示可绘制对象. -->
         <attr name="drawableLeft" format="reference|color" />
-        <!-- 在文本右侧显示可绘制对象。 -->
+        <!-- 在文本右侧显示可绘制对象. -->
         <attr name="drawableRight" format="reference|color" />
-        <!-- 文本和可绘制对象的间距。 -->
+        <!-- 文本和可绘制对象的间距. -->
         <attr name="drawablePadding" format="dimension" />
-        <!-- 文本行间距。 -->
+        <!-- 文本行间距. -->
         <attr name="lineSpacingExtra" format="dimension" />
-        <!-- 用倍数指定的行间距。 -->
+        <!-- 用倍数指定的行间距. -->
         <attr name="lineSpacingMultiplier" format="float" />
-        <!-- 字幕动画的重复次数。仅应用于启动字母动画的 TextView。 -->
+        <!-- 字幕动画的重复次数.仅应用于启动字母动画的 TextView. -->
         <attr name="marqueeRepeatLimit" format="integer">
-            <!-- 表示该字幕动画将一直持续下去。 -->
+            <!-- 表示该字幕动画将一直持续下去. -->
             <enum name="marquee_forever" value="-1" />
         </attr>
         <attr name="inputType" />
         <attr name="imeOptions" />
-        <!-- 附加的内容类型，用于描述文本视图支持的输入法的私有实现。
+        <!-- 附加的内容类型，用于描述文本视图支持的输入法的私有实现.
              它只是当输入法连接到试图时，简单的设置
              {@link android.view.inputmethod.EditorInfo#privateImeOptions
-             EditorInfo.privateImeOptions} 字段。 -->
+             EditorInfo.privateImeOptions} 字段. -->
         <attr name="privateImeOptions" format="string" />
         <!-- 当输入法连接到文本视图时，提供用于
              {@link android.view.inputmethod.EditorInfo#actionLabel EditorInfo.actionLabel}
-             的值。 -->
+             的值. -->
         <attr name="imeActionLabel" format="string" />
         <!-- 当输入法连接到文本视图时，提供用于
              {@link android.view.inputmethod.EditorInfo#actionId EditorInfo.actionId}
-             的值。 -->
+             的值. -->
         <attr name="imeActionId" format="integer" />
         <!-- 指向 {@link android.R.styleable#InputExtras &lt;input-extras&gt;}
-             XML 资源，为输入法的特殊实现提供附加数据。只是当输入法启动时将资源
+             XML 资源，为输入法的特殊实现提供附加数据.只是当输入法启动时将资源
              放入 {@link android.view.inputmethod.EditorInfo#extras
-             EditorInfo.extras} 字段。 -->
+             EditorInfo.extras} 字段. -->
         <attr name="editorExtras" format="reference" />
 
-        <!-- 对可绘制对象的引用，用于显示文本的选择区域左侧的把手。 -->
+        <!-- 对用于绘制选择区域左侧移动把手的可绘制对象的引用. -->
         <attr name="textSelectHandleLeft" />
-        <!-- 对可绘制对象的引用，用于显示文本的选择区域右侧的把手。 -->
+        <!-- 对用于绘制选择区域右侧移动把手的可绘制对象的引用. -->
         <attr name="textSelectHandleRight" />
-        <!-- 对可绘制对象的引用，用于显示文本的选择区域内的光标位置的把手。 -->
+        <!-- 对用于绘制在文本内部定位光标的把手的可绘制对象的引用. -->
         <attr name="textSelectHandle" />
     </declare-styleable>
     <!-- An <code>input-extras</code> is a container for extra data to supply to
@@ -2545,7 +2525,7 @@
              same pixel configuration as the screen (for instance: a ARGB 8888 bitmap with
              an RGB 565 screen). -->
         <attr name="dither" />
-        <!-- 定义内容的显示方式。显示方式指定当可绘制对象小于其容器大小时如何绘制。 -->
+        <!-- 定义内容的显示方式.显示方式指定当可绘制对象小于其容器大小时如何绘制. -->
         <attr name="gravity" />
         <!-- Defines the tile mode. When the tile mode is enabled, the bitmap is repeated.
              Gravity is ignored when the tile mode is enabled. -->
@@ -2946,7 +2926,7 @@
         <!-- This is the user-displayed name of the searchable activity.  <i>Required
             attribute.</i> -->
         <attr name="label" />
-        <!-- 如果设置了该属性，指定的字符串作为提示显示给用户。<i>可选属性。</i> -->
+        <!-- 如果设置了该属性，指定的字符串作为提示显示给用户.<i>可选属性.</i> -->
         <attr name="hint" />
         <!-- If supplied, this string will be displayed as the text of the "Search" button.
           <i>Optional attribute.</i>
