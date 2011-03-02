@@ -7,18 +7,18 @@ home=true
                     <div id="homeMiddle">
                         <div id="topAnnouncement">
                             <div id="homeTitle">
-                                <h2>Developer Announcements</h2>
+                                <h2>开发者公告</h2>
                             </div><!-- end homeTitle -->
                             <div id="announcement-block">
                             <!-- total max width is 520px -->
                                   <img src="{@docRoot}images/home/market-intl.png" alt="Android
-Market" width="104" height="120" style="padding:10px 60px 5px" />
+市场" width="104" height="120" style="padding:10px 60px 5px" />
                                   <div id="announcement" style="width:295px">
-<p>We're pleased to announce that paid apps are available in more locations of the world! Developers
-from 20 more locations can now sell paid apps on Android Market. Users in more locations will also
-soon be able to purchase apps.</p><p><a
+<p>我们高兴的宣布，付费应用程序可以发布到世界上更多的地区了！
+来自 20 个以上的地区的开发者现在可以在 Android 市场上发布付费应用程序了。
+更多地区的用户，也很快就可以购买应用程序了。</p><p><a
 href="http://android-developers.blogspot.com/2010/09/more-countries-more-sellers-more-buyers.html">
-Learn more &raquo;</a></p>
+更多内容 &raquo;</a></p>
                                 </div> <!-- end annoucement -->
                             </div> <!-- end annoucement-block -->
                         </div><!-- end topAnnouncement -->
@@ -48,9 +48,9 @@ Learn more &raquo;</a></p>
                               <tr>
                                       <td class="imageCell"><a href="{@docRoot}sdk/index.html"><img src="{@docRoot}assets/images/icon_download.jpg" style="padding:0" /></a></td>
                                       <td>
-                                              <h2 class="green">Download</h2>
-                                              <p>The Android SDK has the tools, sample code, and docs you need to create great apps.</p>
-                                              <p><a href="{@docRoot}sdk/index.html">Learn more &raquo;</a></p>
+                                              <h2 class="green">下载</h2>
+                                              <p>在这里可以得到创建应用程序所需的 Android SDK、工具、示例代码和相关文档。</p>
+                                              <p><a href="{@docRoot}sdk/index.html">更多内容 &raquo;</a></p>
                                       </td>
                               </tr>
                               <tr>
@@ -59,9 +59,9 @@ Learn more &raquo;</a></p>
                               <tr>
                                       <td class="imageCell"><a href="http://www.android.com/market.html"><img src="{@docRoot}assets/images/icon_market.jpg" style="padding:0" /></a></td>
                                       <td>
-                                              <h2 class="green">Publish</h2>
-                                              <p>Android Market is an open service that lets you distribute your apps to handsets.</p>
-                                              <p><a href="http://www.android.com/market.html">Learn more &raquo;</a></p>
+                                              <h2 class="green">发布</h2>
+                                              <p>Android 市场是可以让你将应用程序发布到手持设备的公开服务。</p>
+                                              <p><a href="http://www.android.com/market.html">更多内容 &raquo;</a></p>
                                       </td>
                               </tr>
                               <tr>
@@ -70,9 +70,9 @@ Learn more &raquo;</a></p>
                               <tr>
                                       <td class="imageCell"><a href="http://source.android.com"><img src="{@docRoot}assets/images/icon_contribute.jpg" style="padding:0" /></a></td>
                                       <td>
-                                              <h2 class="green">Contribute</h2>
-                                              <p>Android Open Source Project gives you access to the entire platform source.</p>
-                                              <p><a href="http://source.android.com">Learn more &raquo;</a></p>
+                                              <h2 class="green">贡献</h2>
+                                              <p>Android 开源项目，是你可以访问的整个Android平台的源代码。</p>
+                                              <p><a href="http://source.android.com">更多内容 &raquo;</a></p>
                                       </td>
                               </tr>
                               <tr>
@@ -83,13 +83,10 @@ Learn more &raquo;</a></p>
 href="{@docRoot}resources/dashboard/platform-versions.html"><img
 src="{@docRoot}images/icon_dashboard.png" style="padding:0" /></a></td>
                                       <td>
-                                              <h2 class="green">Target Devices</h2>
-                                              <p>The Device Dashboard
-provides information about deployed Android devices to
-help you target suitable device configurations as you build and update your
-apps.</p>
+                                              <h2 class="green">目标设备</h2>
+                                              <p>设备面板提供了关于已部署的 Android 设备的信息，以帮助你在构建和更新你的应用程序时，适当的调整您的配置。</p>
                                               <p><a
-href="{@docRoot}resources/dashboard/platform-versions.html">Learn more &raquo;</a></p>
+href="{@docRoot}resources/dashboard/platform-versions.html">更多内容 &raquo;</a></p>
                                       </td>
                               </tr>
 
@@ -132,14 +129,13 @@ href="{@docRoot}resources/dashboard/platform-versions.html">Learn more &raquo;</
       'name':"Android 2.3",
       'img':"gingerdroid.png",
       'title':"Android 2.3 is here!",
-      'desc': "<p>Android 2.3 is now available for the Android SDK. In addition, new "
-+ "tools and documentation are available, plus a new NDK that offers more than ever. "
-+ "For more information about what's in Android 2.3, read the "
-+ "<a href='{@docRoot}sdk/android-2.3.html'>version notes</a>.</p>"
-+ "<p>If you have an existing SDK, add Android 2.3 as an "
+      'desc': "<p>Android SDK 的 Android 2.3 平台已经可以使用了！它包含新的工具、文档和 NDK 开发包。"
++ "新的特性和 API 信息，参见"
++ "<a href='{@docRoot}sdk/android-2.3.html'>版本注释</a>。</p>"
++ "<p>如果你有既存的 SDK，将 Android 2.3 作为"
 + "<a href='{@docRoot}sdk/adding-components.html'>SDK "
-+ "component</a>. If you're new to Android, install the "
-+ "<a href='{@docRoot}sdk/index.html'>SDK starter package</a>."
++ "组件添加即可</a>。如果你是 Android 新手，请安装"
++ "<a href='{@docRoot}sdk/index.html'>SDK 初始包</a>。"
     },
 
     'tv': {
@@ -147,15 +143,11 @@ href="{@docRoot}resources/dashboard/platform-versions.html">Learn more &raquo;</
       'icon':"tv_s.png",
       'name':"Google TV",
       'img':"tv_l.png",
-      'title':"Announcing Google TV!",
-      'desc': "<p><a href='http://www.google.com/tv/'>Google TV</a> is a new platform "
-               + "for television built on Android. Google "
-               + "has partnered with Sony and Logitech to integrate "
-               + "this platform into TVs, blu-ray players, and companion "
-               + "boxes. An add-on for the Android SDK will be "
-               + "available early next year. </p>"
-               + "<p><a href='http://www.google.com/tv/'>Learn more about "
-               + "Google TV &raquo;</a></p>"
+      'title':"Google TV 发布！",
+      'desc': "<p><a href='http://www.google.com/tv/'>Google TV</a> 是基于 Android 开发的针对电视节目的新平台。"
+               + "Google 的合作伙伴索尼和罗技将该平台集成到了他们的电视、蓝光播放机以及机顶盒上。"
+               + "明年初，将公布 Android SDK 用于开发 Google TV 的插件。</p>"
+               + "<p><a href='http://www.google.com/tv/'>关于 Google TV 的更多内容 &raquo;</a></p>"
     },
 
     'devphone': {
@@ -164,12 +156,11 @@ href="{@docRoot}resources/dashboard/platform-versions.html">Learn more &raquo;</
       'name':"Dev Phones",
       'img':"devphone-large.png",
       'title':"Android Dev Phones",
-      'desc': "<p>Run and debug your Android applications directly on one of these "
- + "devices. Modify and rebuild the Android operating system, and flash it onto "
- + "the phone. The Android Dev Phones are carrier-independent, and available for "
- + "purchase by developers through their Android Market publisher accounts.</p><p> "
- + "<a href='http://market.android.com/publish'>Visit Android Market "
- + "to learn more &raquo;</a></p>"
+      'desc': "<p>直接在这些设备中调试和运行你的 Android 应用程序。"
+ + "修改并重新构建 Android 操作系统，并将其写入你的手机。"
+ + "Android Dev Phones 是独立于运营商的，任何注册了 <a "
+ + "href='http://market.android.com/publish'>Android 市场</a>的开发人员都可以购买。</p><p><a "
+ + "href='/guide/developing/device.html#dev-phone-1'>关于 Android Dev Phones 的更多内容 &raquo;</a></p>"
     },
 
     'mapskey': {
@@ -178,7 +169,7 @@ href="{@docRoot}resources/dashboard/platform-versions.html">Learn more &raquo;</
       'name':"Maps API Key",
       'img':"maps-large.png",
       'title':"Maps API Key",
-      'desc':"<p>If you're writing an Android application that uses Google Maps (with MapView), you must register your application to obtain a Maps API Key. Without the key, your maps application will not work on Android devices. Obtaining a key requires just a couple of steps.</p><p><a href='http://code.google.com/android/add-ons/google-apis/maps-overview.html'>Learn more &raquo;</a></p>"
+      'desc':"<p>如果你的应用程序使用了 Google Maps（包含 MapView），你必须注册你的应用程序以取得 Maps API Key、没有 Maps API Key，你的地图应用程序不能在 Android 设备上运行。取得 Maps API Key 只需要简单的几步。</p><p><a href='http://code.google.com/android/add-ons/google-apis/maps-overview.html'>更多内容 &raquo;</a></p>"
     }
 
   }

@@ -2,141 +2,98 @@ page.title=Notepad Tutorial
 @jd:body
 
 
-<p>This tutorial on writing a notepad application gives you a &quot;hands-on&quot; introduction
-to the Android framework and the  tools you use to build  applications on it.
-Starting from a preconfigured project file, it guides you through the process of
-developing a simple notepad application and provides concrete examples of how to
-set up the project,  develop the application logic and user interface, and then
-compile and run the application. </p>
+<p>本节教程以“手把手”的方式向你介绍 Android 框架和在框架上开发应用程序使用的工具。
+让我们从一个预先准备好的项目文件开始，它将引导你完成一个简单的记事本应用程序的开发过程，
+并提供具体的例子说明如何配置项目、开发应用程序逻辑和用户界面以及编译和运行该应用程序。
+</p>
 
-<p>The tutorial presents the application development as a set of 
-exercises (see below), each consisting of several steps. You should follow 
-the steps in each exercise to gradually build and refine your  
-application. The exercises explain each step in detail and provide all the 
-sample code you need to complete the application. </p>
+<p>该教程以一组练习的方式介绍了记事本应用程序开发过程（见下文），每个练习都由多个步骤组成。
+你可以按照每个练习的步骤，逐步建立和完善你的应用程序。
+该练习会详细的解释每一步的含义并提供所有的完成应用程序所必须的示例代码。 </p>
 
-<p>When you are finished with the tutorial, you will have created a functioning
-Android application and will have learned many of the most important
-concepts in Android development. If you want to add more complex features to
-your application, you can examine the code in an alternative implementation
-of a Note Pad application, in the 
-<a href="{@docRoot}resources/samples/index.html">Sample Code</a> section. </p>
+<p>当你完成该教程，你将创建一个正常运行的Android应用程序并深入的了解Android开发的许多重要的概念。
+如果你想给应用程序添加更多复杂的功能，你可以通过
+<a href="{@docRoot}resources/samples/index.html">示例代码</a>文档，
+查看另一个记事本应用程序的实现。
+</p>
 
 
 <a name="who"></a>
-<h2>Who Should Use this Tutorial</h2>
+<h2>谁应该使用此教程</h2>
 
-<p>This tutorial is designed for  experienced developers, especially those with 
-knowledge of the Java programming language. If you haven't written Java
-applications before, you can still use the tutorial, but you might need to work
-at a slower pace. </p>
+<p>本教程面向有经验的开发人员，特别是有 Java 编程知识的人。
+如果你以前没有写过Java应用程序，你仍然可以使用本教程，只是进度可能会比较慢。</p>
 
-<p>Also note that this tutorial uses
-the Eclipse development environment, with the Android plugin installed. If you
-are not using Eclipse, you can  follow  the exercises and build the application,
-but you will need to determine how to accomplish the Eclipse-specific
-steps in your environment. </p>
+<p>要注意，该教程使用安装了 Android 插件的 Eclipse 开发环境。
+如果你不使用 Eclispe，你一样可以继续该练习并构建应用程序，
+只是你需要确定在你的环境下如何完成 Eclipse 插件完成的同样操作。</p>
 
 <a name="preparing"></a>
-<h2>Preparing for the Exercises</h2>
+<h2>准备练习</h2>
 
-<p>The tutorial  assumes that you have some familiarity with basic Android
-application concepts and terminology. If you are not, you
-should read <a href="{@docRoot}guide/topics/fundamentals.html">Application 
-Fundamentals</a> before continuing. </p>
+<p>本教程假定你熟悉基本的Android应用程序概念和术语。
+如果你还不够熟悉，继续之前请首先阅读<a href="{@docRoot}guide/topics/fundamentals.html">
+Android应用程序基础</a>。
+</p>
 
-<p>This tutorial also builds on the introductory information provided in the 
-<a href="{@docRoot}resources/tutorials/hello-world.html">Hello World</a>
-tutorial, which explains how to set up your Eclipse environment
-for building Android applications. We recommend you complete the Hello World
-tutorial before starting this one.</p>
+<p>本教程基于<a href="{@docRoot}resources/tutorials/hello-world.html">
+Hello World</a>文档介绍的内容，并解释了构建 Android 应用程序需要如何设置你的开发环境。
+在开始本教程前，推荐您先完成 Hello World 教程。</p>
 
-<p>To prepare for this lesson:</p>
+<p>课前准备：</p>
 
 <ol>
-  <li>Download the <a href="codelab/NotepadCodeLab.zip">project
-      exercises archive (.zip)</a>.</li>
-  <li>Unpack the archive file to a suitable location on your machine.</li>
-  <li>Open the <code>NotepadCodeLab</code> folder.</li>
+	<li>下载<a href="codelab/NotepadCodeLab.zip">项目练习包（.zip）</a></li>
+	<li>将包中文件释放的适当目录</li>
+	<li>打开<code>NotepadCodeLab</code>文件夹</li>
 </ol>
 
-<p>Inside the <code>NotepadCodeLab</code> folder, you should see six project
-files: <code>Notepadv1</code>,
-    <code>Notepadv2</code>, <code>Notepadv3</code>,
-    <code>Notepadv1Solution</code>, <code>Notepadv2Solution</code>
-    and <code>Notepadv3Solution</code>. The <code>Notepadv#</code> projects are
-the starting points for each of the exercises, while the
-<code>Notepadv#Solution</code> projects are the exercise
-    solutions. If you are having trouble with a particular exercise, you
-    can compare your current work against the exercise solution.</p>
+<p>在<code>NotepadCodeLab</code>文件夹中，你会看到六个项目文件：<code>Notepadv1</code>、<code>Notepadv2
+</code>、<code>Notepadv3</code>、<code>Notepadv1Solution</code>、<code>Notepadv2Solution</code>、
+和<code>Notepadv3Solution</code>。<code>Notepadv#</code>项目是每个练习的起点、<code>Notepadv#Solution
+</code>项目是完成后的结果。如果做练习时有什么问题，你可以用你的版本和完成后的结果比较一下。
+</p>
 
 <a name="exercises"></a>
-<h2> Exercises</h2>
+<h2> 练习</h2>
 
-  <p>The table below lists the tutorial exercises and describes the development
-areas that each covers. Each exercise assumes that you have completed any
-previous exercises.</p>
+  <p>下表列出了本教程的练习并描述了他们覆盖的开发领域。每个练习假设你完成了前面的练习。</p>
 
-  <table border="0" style="padding:4px;spacing:2px;" summary="This
-table lists the
-tutorial examples and describes what each covers. ">
+  <table border="0" style="padding:4px;spacing:2px;" summary="本表列出了本教程的练习并描述了他们覆盖的开发领域。">
     <tr>
-      <th width="120"><a href="{@docRoot}resources/tutorials/notepad/notepad-ex1.html">Exercise
-1</a></th>
-      <td>Start here. Construct a simple notes list that lets the user add new notes but not
-edit them. Demonstrates the basics of <code>ListActivity</code> and creating
-and handling
-      menu options. Uses a SQLite database to store the notes.</td>
+      <th width="120"><a href="{@docRoot}resources/tutorials/notepad/notepad-ex1.html">练习 1</a></th>
+      <td>从这里开始，构造一个简单的记事本，让用户可是添加新记事，但是不能够编辑他们。演示了<code>ListActivity</code>
+		的基础知识以及创建和处理菜单选项，以及使用 SQLite 数据库存储记事。</td>
     </tr>
     <tr>
-      <th><a href="{@docRoot}resources/tutorials/notepad/notepad-ex2.html">Exercise 2</a></th>
-      <td>Add a second Activity to the
-application. Demonstrates constructing a
-new Activity, adding it to the Android manifest, passing data between the
-activities, and using more advanced screen layout. Also shows how to
-invoke another Activity to return a result, using
-<code>startActivityForResult()</code>.</td>
+      <th><a href="{@docRoot}resources/tutorials/notepad/notepad-ex2.html">练习 2</a></th>
+      <td>为应用程序添加第二个活动。演示了构建活动、将活动添加到Android描述文件、在活动之间传递数据和使用更高级的屏幕布局。
+		并展示了通过<code>startActivityForResult()</code>如何使另一个活动返回结果。</td>
     </tr>
     <tr>
-      <th><a href="{@docRoot}resources/tutorials/notepad/notepad-ex3.html">Exercise 3</a></th>
-      <td>Add handling of life-cycle events to
-the application, to let it
-maintain application state across the life cycle. </td>
+      <th><a href="{@docRoot}resources/tutorials/notepad/notepad-ex3.html">练习 3</a></th>
+      <td>为应用程序增加处理生命周期的事件，使其在生命周期内维护应用程序的状态。 </td>
     </tr>
     <tr>
-    <th><a href="{@docRoot}resources/tutorials/notepad/notepad-extra-credit.html">Extra
-Credit</a></th>
-    <td>Demonstrates how to use the Eclipse
-debugger and how you can use it to
-view life-cycle events as they are generated. This section is optional but
-highly recommended.</td>
+    <th><a href="{@docRoot}resources/tutorials/notepad/notepad-extra-credit.html">附加内容</a></th>
+    <td>演示如何使用Eclispe调试器以及如何用它来查看应用程序的生命周期事件。这节是可选的，但是强烈推荐。</td>
     </tr>
 </table>
 
 
 <a name="other"></a>
-<h2>Other Resources and Further Learning</h2>
+<h2>其他资源及进一步的学习</h2>
 <ul>
-<li>For a lighter but broader introduction to concepts not covered in the
-tutorial,
-take a look at <a href="{@docRoot}resources/faq/commontasks.html">Common Android Tasks</a>.</li>
-<li>The Android SDK includes a variety of fully functioning sample applications
-that make excellent opportunities for further learning. You can find the sample
-applications in the <code>samples/</code> directory of your downloaded SDK, or browser them
-here, in the <a href="{@docRoot}resources/samples/index.html">Sample Code</a> section.</li>
-<li>This tutorial draws from the full Notepad application included in the
-<code>samples/</code> directory of the SDK, though it does not match it exactly. 
-When you are done with the tutorial,
-it is highly recommended that you take a closer look at this version of the Notepad
-application, 
-as it demonstrates a variety of interesting additions for your application, 
-such as:</li>
+<li>对于本教程中没有用到的更广泛的概念的简单介绍，参见<a href="{@docRoot}resources/faq/commontasks.html">Android公共任务</a>。
+</li>
+<li>Android SDK包含了适合进一步学习的功能完整的示例应用程序。你可以在你下载的SDK的。<code>samples/</code>
+	目录中找到示例应用程序；或者浏览 <a href="{@docRoot}resources/samples/index.html">示例代码</a>。</li>
+<li>本教程源于SDK的<code>samples/</code>目录下的完整的记事本应用程序，但并非完全一致。
+当你完成本教程后，强烈建议你去看一下该版本的记事本应用程序，因为他演示了大量的你感兴趣的附加功能，就象：</li>
   <ul>
-    <li>Setting up a custom striped list for the list of notes.</li>
-    <li>Creating a custom text edit view that overrides the <code>draw()</code>
-    method to make it look like a lined notepad.</li>
-    <li>Implementing a full <code>ContentProvider</code> for notes.</li>
-    <li>Reverting and discarding edits instead of just automatically saving
-    them.</li>
+		<li>为记事列表设置定制的条纹列表。</li>
+		<li>通过覆盖<code>draw()</code>方法，创建一个带横线的定制的文本编辑视图。</li>
+		<li>为记事本实现了完整的<code>ContentProvider</code>功能。</li>
+		<li>用恢复和放弃修改功能替换了只是自动保存的功能。</li>
   </ul>
 </ul>
