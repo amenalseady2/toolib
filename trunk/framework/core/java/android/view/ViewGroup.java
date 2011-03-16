@@ -968,23 +968,19 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Implement this method to intercept all touch screen motion events.  This
-     * allows you to watch events as they are dispatched to your children, and
-     * take ownership of the current gesture at any point.
+     * 使用此方法可以拦截所有触摸屏动作引发的事件。这意味着你可以监视分派给子项的事件，
+     * 并且可以在当前手势的任何一点获得其控制权。
      *
-     * <p>Using this function takes some care, as it has a fairly complicated
-     * interaction with {@link View#onTouchEvent(MotionEvent)
-     * View.onTouchEvent(MotionEvent)}, and using it requires implementing
-     * that method as well as this one in the correct way.  Events will be
-     * received in the following order:
+     * <p>使用此方法需谨慎。因为它与 {@link View#onTouchEvent(MotionEvent)
+     * View.onTouchEvent(MotionEvent)} 有相当复杂的交互。
+     * 使用它需要像该方法实现一样正确的实现该方法。触控事件是按如下顺序接收的：
      *
      * <ol>
-     * <li> You will receive the down event here.
-     * <li> The down event will be handled either by a child of this view
-     * group, or given to your own onTouchEvent() method to handle; this means
-     * you should implement onTouchEvent() to return true, so you will
-     * continue to see the rest of the gesture (instead of looking for
-     * a parent view to handle it).  Also, by returning true from
+     * <li> 首先可以接收按下事件。
+     * <li> 按下事件会在视图组的子视图及本视图的 onTouchEvent() 方法中处理。
+     * 这意味着你应该实现 onTouchEvent() 方法以返回真，这样才能收到下一个手势
+     * （代替通过父视图来处理该事件）。
+     *   Also, by returning true from
      * onTouchEvent(), you will not receive any following
      * events in onInterceptTouchEvent() and all touch processing must
      * happen in onTouchEvent() like normal.
@@ -1423,15 +1419,14 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Returns the index of the child to draw for this iteration. Override this
-     * if you want to change the drawing order of children. By default, it
-     * returns i.
+     * 返回当前迭代要绘制的子视图的索引。如果要改变绘制子视图的顺序，应该重载该方法。
+     * 默认返回i。
      * <p>
-     * NOTE: In order for this method to be called, you must enable child ordering
-     * first by calling {@link #setChildrenDrawingOrderEnabled(boolean)}.
+     * 注意：为了调用该方法，必须先调用 {@link #setChildrenDrawingOrderEnabled(boolean)}
+     * 方法来启用子视图排序功能。
      *
-     * @param i The current iteration.
-     * @return The index of the child to draw this iteration.
+     * @param i 当前迭代。
+     * @return 要绘制的子视图的迭代。
      * 
      * @see #setChildrenDrawingOrderEnabled(boolean)
      * @see #isChildrenDrawingOrderEnabled()
@@ -3290,7 +3285,7 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         boolean noneOfTheChildrenAreTransparent = true;
         for (int i = 0; i < count; i++) {
             final View child = children[i];
-            if ((child.mViewFlags & VISIBILITY_MASK) != GONE || child.getAnimation() != null) {
+            if ((child.mViewFlags & VISIBILITY_MASK) == VISIBLE || child.getAnimation() != null) {
                 if (!child.gatherTransparentRegion(region)) {
                     noneOfTheChildrenAreTransparent = false;
                 }

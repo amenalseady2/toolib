@@ -57,7 +57,7 @@ import com.android.internal.R;
  *     }
  *
  *     private static final String[] COUNTRIES = new String[] {
- *         "Belgium", "France", "Italy", "Germany", "Spain"
+ *         "比利时", "法国", "意大利", "德国", "西班牙"
  *     };
  * }</pre>
  * @author translate by 颖哥儿

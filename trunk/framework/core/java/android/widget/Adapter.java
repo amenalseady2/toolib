@@ -47,26 +47,25 @@ public interface Adapter {
     void unregisterDataSetObserver(DataSetObserver observer);
 
     /**
-     * How many items are in the data set represented by this Adapter.
+     * 该适配器的数据集中包含多少条目.
      * 
-     * @return Count of items.
+     * @return 项目数.
      */
     int getCount();   
     
     /**
-     * Get the data item associated with the specified position in the data set.
+     * 获取数据集中指定位置的数据项目.
      * 
-     * @param position Position of the item whose data we want within the adapter's 
-     * data set.
-     * @return The data at the specified position.
+     * @param position 要从适配器中取得的条目的位置。
+     * @return 指定位置的数据。
      */
     Object getItem(int position);
     
     /**
-     * Get the row id associated with the specified position in the list.
+     * 取得列表中与指定位置的行关联的ID。
      * 
-     * @param position The position of the item within the adapter's data set whose row id we want.
-     * @return The id of the item at the specified position.
+     * @param position 要从适配器中取得的条目的位置。
+     * @return 指定位置的条目的ID。
      */
     long getItemId(int position);
     
@@ -84,8 +83,7 @@ public interface Adapter {
      * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
      * to specify a root view and to prevent attachment to the root.
      * 
-     * @param position The position of the item within the adapter's data set of the item whose view
-     *        we want.
+     * @param position 要从适配器中取得的视图的位置。
      * @param convertView The old view to reuse, if possible. Note: You should check that this view
      *        is non-null and of an appropriate type before using. If it is not possible to convert
      *        this view to display the correct data, this method can create a new view.

@@ -3238,11 +3238,10 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * Sets the drawable that will be drawn below all other list content.
-     * This area can become visible when the user overscrolls the list,
-     * or when the list's content does not fully fill the container area.
+     * 设置在所有列表内容下部的可绘制对象。当用户过滚动列表时，显示该可绘制对象，
+     * 或者当列表内容不能充满容器时显示该对象。
      *
-     * @param footer The drawable to use
+     * @param footer 设置的可绘制对象。
      */
     public void setOverscrollFooter(Drawable footer) {
         mOverScrollFooter = footer;
@@ -3250,7 +3249,7 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * @return The drawable that will be drawn below all other list content
+     * @return 在所有列表内容下部显示的可绘制对象。
      */
     public Drawable getOverscrollFooter() {
         return mOverScrollFooter;

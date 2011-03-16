@@ -165,45 +165,41 @@ public interface ExpandableListAdapter {
     boolean isEmpty();
 
     /**
-     * Called when a group is expanded.
+     * 分组展开时调用。
      * 
-     * @param groupPosition The group being expanded.
+     * @param groupPosition 展开的分组。
      */
     void onGroupExpanded(int groupPosition);
     
     /**
-     * Called when a group is collapsed.
+     * 分组收起时调用。
      * 
-     * @param groupPosition The group being collapsed.
+     * @param groupPosition 收起的分组。
      */
     void onGroupCollapsed(int groupPosition);
     
     /**
-     * Gets an ID for a child that is unique across any item (either group or
-     * child) that is in this list. Expandable lists require each item (group or
-     * child) to have a unique ID among all children and groups in the list.
-     * This method is responsible for returning that unique ID given a child's
-     * ID and its group's ID. Furthermore, if {@link #hasStableIds()} is true, the
-     * returned ID must be stable as well.
+     * 取得一览中可以唯一识别子条目的 ID（包括分组ID和子条目ID）。可扩展列表要求每个条目
+     * （分组条目和子条目）具有一个可以唯一识别列表中子条目和分组条目的ID。
+     * 该方法根据给定子条目ID和分组条目ID返回唯一识别ID。另外，如果
+     * {@link #hasStableIds()} 为真，该函数返回的ID必须是固定不变的。
      * 
-     * @param groupId The ID of the group that contains this child.
-     * @param childId The ID of the child.
-     * @return The unique (and possibly stable) ID of the child across all
-     *         groups and children in this list.
+     * @param groupId 包含子条目ID的分组条目ID。
+     * @param childId 子条目的ID。
+     * @return 返回可以在所有分组条目和子条目中唯一识别该子条目的ID
+     * （可能是固定不变的）。
      */
     long getCombinedChildId(long groupId, long childId);
 
     /**
-     * Gets an ID for a group that is unique across any item (either group or
-     * child) that is in this list. Expandable lists require each item (group or
-     * child) to have a unique ID among all children and groups in the list.
-     * This method is responsible for returning that unique ID given a group's
-     * ID. Furthermore, if {@link #hasStableIds()} is true, the returned ID must be
-     * stable as well.
+     * 取得一览中可以唯一识别子条目的 ID（包括分组ID和子条目ID）。可扩展列表要求每个条目
+     * （分组条目和子条目）具有一个可以唯一识别列表中子条目和分组条目的ID。
+     * 该方法根据给定子条目ID和分组条目ID返回唯一识别ID。另外，如果
+     * {@link #hasStableIds()} 为真，该函数返回的ID必须是固定不变的。
      * 
-     * @param groupId The ID of the group
-     * @return The unique (and possibly stable) ID of the group across all
-     *         groups and children in this list.
+     * @param groupId 分组条目ID。
+     * @return 返回可以在所有分组条目和子条目中唯一识别该分组条目的ID
+     * （可能是固定不变的）。
      */
     long getCombinedGroupId(long groupId);
 }

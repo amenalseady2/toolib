@@ -45,70 +45,60 @@ public class GestureDetector {
     public interface OnGestureListener {
 
         /**
-         * Notified when a tap occurs with the down {@link MotionEvent}
-         * that triggered it. This will be triggered immediately for
-         * every down event. All other events should be preceded by this.
+         * 当轻触手势按下 {@link MotionEvent} 时发生的事件。
+         * 每当按下时，立即触发该事件。优先于其它事件。
          *
-         * @param e The down motion event.
+         * @param e 按下动作时间。
          */
         boolean onDown(MotionEvent e);
 
         /**
-         * The user has performed a down {@link MotionEvent} and not performed
-         * a move or up yet. This event is commonly used to provide visual
-         * feedback to the user to let them know that their action has been
-         * recognized i.e. highlight an element.
+         * 用户执行按下 {@link MotionEvent} 但没有执行移动或抬起动作时的事件。
+         * 该事件一般用于为用户提供视觉反馈，比如高亮显示操作的元素，
+         * 以通知用户其动作已经被识别。
          *
-         * @param e The down motion event
+         * @param e 按下动作事件。
          */
         void onShowPress(MotionEvent e);
 
         /**
-         * Notified when a tap occurs with the up {@link MotionEvent}
-         * that triggered it.
+         * 当轻触手势抬起 {@link MotionEvent} 时发生的事件。
          *
-         * @param e The up motion event that completed the first tap
-         * @return true if the event is consumed, else false
+         * @param e 结束轻触手势的抬起动作事件。
+         * @return 若已处理，返回真；否则返回假。
          */
         boolean onSingleTapUp(MotionEvent e);
 
         /**
-         * Notified when a scroll occurs with the initial on down {@link MotionEvent} and the
-         * current move {@link MotionEvent}. The distance in x and y is also supplied for
-         * convenience.
+         * 包含开始滚动时的按下 {@link MotionEvent} 和当前移动 {@link MotionEvent}
+         * 的滚动事件。为了方便提供了X轴和Y轴上的滚动距离。
          *
-         * @param e1 The first down motion event that started the scrolling.
-         * @param e2 The move motion event that triggered the current onScroll.
-         * @param distanceX The distance along the X axis that has been scrolled since the last
-         *              call to onScroll. This is NOT the distance between {@code e1}
-         *              and {@code e2}.
-         * @param distanceY The distance along the Y axis that has been scrolled since the last
-         *              call to onScroll. This is NOT the distance between {@code e1}
-         *              and {@code e2}.
-         * @return true if the event is consumed, else false
+         * @param e1 开始滚动时的按下动作事件。
+         * @param e2 触发当前滚动的移动动作事件。
+         * @param distanceX 上次执行onScroll事件后沿x轴方向的移动量。
+         *              不是{@code e1} 和 {@code e2}之间的距离。
+         * @param distanceY 上次执行onScroll事件后沿y轴方向的移动量。
+         *              不是{@code e1} 和 {@code e2}之间的距离。
+         * @return 若事件已处理返回真；否则返回假。
          */
         boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY);
 
         /**
-         * Notified when a long press occurs with the initial on down {@link MotionEvent}
-         * that trigged it.
+         * 触发长按时的通知事件，包含最初按下时的 {@link MotionEvent}。
          *
-         * @param e The initial on down motion event that started the longpress.
+         * @param e 开始长按时的按下动作事件。
          */
         void onLongPress(MotionEvent e);
 
         /**
-         * Notified of a fling event when it occurs with the initial on down {@link MotionEvent}
-         * and the matching up {@link MotionEvent}. The calculated velocity is supplied along
-         * the x and y axis in pixels per second.
+         * 包含初始按下 {@link MotionEvent} 和抬起 {@link MotionEvent} 的快速滑动事件的通知。
+         * 提供x、y两个方向的速度，以每秒像素数为单位。
          *
-         * @param e1 The first down motion event that started the fling.
-         * @param e2 The move motion event that triggered the current onFling.
-         * @param velocityX The velocity of this fling measured in pixels per second
-         *              along the x axis.
-         * @param velocityY The velocity of this fling measured in pixels per second
-         *              along the y axis.
-         * @return true if the event is consumed, else false
+         * @param e1 开始快速滑动时的按下事件。
+         * @param e2 触发当前快速滑动的移动动作事件。
+         * @param velocityX 在x轴方向测定的以每秒像素数为单位的滑动速度。
+         * @param velocityY 在y轴方向测定的以每秒像素数为单位的滑动速度。
+         * @return 若事件已处理返回真；否则返回假。
          */
         boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY);
     }

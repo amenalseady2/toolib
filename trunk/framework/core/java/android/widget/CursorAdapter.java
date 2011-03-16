@@ -27,9 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Adapter that exposes data from a {@link android.database.Cursor Cursor} to a 
- * {@link android.widget.ListView ListView} widget. The Cursor must include 
- * a column named "_id" or this class will not work.
+ * 将 {@link android.database.Cursor 游标}的数据提供给 
+ * {@link android.widget.ListView 列表视图}的适配器。
+ * 游标必须包含列名为“_id”的列，否则该类无法工作。
  */
 public abstract class CursorAdapter extends BaseAdapter implements Filterable,
         CursorFilter.CursorFilterClient {
@@ -80,23 +80,22 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     protected FilterQueryProvider mFilterQueryProvider;
 
     /**
-     * Constructor. The adapter will call requery() on the cursor whenever
-     * it changes so that the most recent data is always displayed.
+     * 构造函数。为了一直显示最近的数据，当数据发生变更时，
+     * 适配器会调用游标的 requery() 方法。
      *
-     * @param c The cursor from which to get the data.
-     * @param context The context
+     * @param c 用于取得数据的游标。
+     * @param context 上下文。
      */
     public CursorAdapter(Context context, Cursor c) {
         init(context, c, true);
     }
 
     /**
-     * Constructor
-     * @param c The cursor from which to get the data.
-     * @param context The context
-     * @param autoRequery If true the adapter will call requery() on the
-     *                    cursor whenever it changes so the most recent
-     *                    data is always displayed.
+     * 构造函数。
+     * @param c 用于取得数据的游标。
+     * @param context 上下文。
+     * @param autoRequery 如果为真，在数据变更时调用游标的  requery()
+     *                    方法，已保持显示最新的数据。
      */
     public CursorAdapter(Context context, Cursor c, boolean autoRequery) {
         init(context, c, autoRequery);
@@ -117,8 +116,8 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * Returns the cursor.
-     * @return the cursor.
+     * 返回游标。
+     * @return 游标。
      */
     public Cursor getCursor() {
         return mCursor;
@@ -205,41 +204,37 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
     
     /**
-     * Makes a new view to hold the data pointed to by cursor.
-     * @param context Interface to application's global information
-     * @param cursor The cursor from which to get the data. The cursor is already
-     * moved to the correct position.
-     * @param parent The parent to which the new view is attached to
-     * @return the newly created view.
+     * 为游标指向的数据创建新视图。
+     * @param context 上下文。访问应用程序全局信息的接口。
+     * @param cursor 用于取得数据的游标。游标已经移到正确的位置。
+     * @param parent 新创建的视图的容器。
+     * @return 新创建的视图。
      */
     public abstract View newView(Context context, Cursor cursor, ViewGroup parent);
 
     /**
-     * Makes a new drop down view to hold the data pointed to by cursor.
-     * @param context Interface to application's global information
-     * @param cursor The cursor from which to get the data. The cursor is already
-     * moved to the correct position.
-     * @param parent The parent to which the new view is attached to
-     * @return the newly created view.
+     * 为游标指向的数据创建新的下拉列表视图。
+     * @param context 上下文。访问应用程序全局信息的接口。
+     * @param cursor 用于取得数据的游标。游标已经移到正确的位置。
+     * @param parent 新创建的视图的容器。
+     * @return 新创建的视图。
      */
     public View newDropDownView(Context context, Cursor cursor, ViewGroup parent) {
         return newView(context, cursor, parent);
     }
 
     /**
-     * Bind an existing view to the data pointed to by cursor
-     * @param view Existing view, returned earlier by newView
-     * @param context Interface to application's global information
-     * @param cursor The cursor from which to get the data. The cursor is already
-     * moved to the correct position.
+     * 绑定游标指向的数据到既存视图。
+     * @param view 之前由 newView 方法创建的视图。
+     * @param context 上下文。访问应用程序全局信息的接口。
+     * @param cursor 用于取得数据的游标。游标已经移到正确的位置。
      */
     public abstract void bindView(View view, Context context, Cursor cursor);
     
     /**
-     * Change the underlying cursor to a new cursor. If there is an existing cursor it will be
-     * closed.
+     * 将底层的游标更改为新的游标。该函数将关闭既存游标。
      * 
-     * @param cursor the new cursor to be used
+     * @param cursor 要使用的新游标。
      */
     public void changeCursor(Cursor cursor) {
         if (cursor == mCursor) {
@@ -267,38 +262,32 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * <p>Converts the cursor into a CharSequence. Subclasses should override this
-     * method to convert their results. The default implementation returns an
-     * empty String for null values or the default String representation of
-     * the value.</p>
+     * <p>将游标转换为 CharSequence。子类应该覆盖该方法来进行结果转换。
+     * 默认实现返回其值对应的字符串，对于空值返回空串。</p>
      *
-     * @param cursor the cursor to convert to a CharSequence
-     * @return a CharSequence representing the value
+     * @param cursor 要转换为 CharSequence 的游标。
+     * @return 代表其值的 CharSequence。
      */
     public CharSequence convertToString(Cursor cursor) {
         return cursor == null ? "" : cursor.toString();
     }
 
     /**
-     * Runs a query with the specified constraint. This query is requested
-     * by the filter attached to this adapter.
+     * 用指定条件查询。查询由关联到适配器的过滤器来执行。
      *
-     * The query is provided by a
-     * {@link android.widget.FilterQueryProvider}.
-     * If no provider is specified, the current cursor is not filtered and returned.
+     * 查询服务由 {@link android.widget.FilterQueryProvider} 执行。
+     * 如果没有指定提供者，返回未经筛选的当前游标。
      *
-     * After this method returns the resulting cursor is passed to {@link #changeCursor(Cursor)}
-     * and the previous cursor is closed.
+     * 该方法返回传入 {@link #changeCursor(Cursor)} 方法的结果游标，
+     * 并关闭之前的游标。
      *
-     * This method is always executed on a background thread, not on the
-     * application's main thread (or UI thread.)
+     * 该方法总在后台执行，不在应用程序的主进程（或者说UI进程）。
      * 
-     * Contract: when constraint is null or empty, the original results,
-     * prior to any filtering, must be returned.
+     * 约定：当检索条件为空或空字符串时，必须返回应用过滤器前的原始结果。 
      *
-     * @param constraint the constraint with which the query must be filtered
+     * @param constraint 检索的约束条件。
      *
-     * @return a Cursor representing the results of the new query
+     * @return 代表新的查询结果的游标。
      *
      * @see #getFilter()
      * @see #getFilterQueryProvider()
@@ -320,10 +309,9 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * Returns the query filter provider used for filtering. When the
-     * provider is null, no filtering occurs.
+     * 返回查询时用于过滤数据的提供者。当提供者为空时，不应用过滤。
      *
-     * @return the current filter query provider or null if it does not exist
+     * @return 当前过滤器的提供者，如果不存在返回空。
      *
      * @see #setFilterQueryProvider(android.widget.FilterQueryProvider)
      * @see #runQueryOnBackgroundThread(CharSequence)
@@ -333,13 +321,12 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * Sets the query filter provider used to filter the current Cursor.
-     * The provider's
+     * 设置用于过滤当前游标的查询过滤器提供者。当该提供者的客户端请求过滤时，
+     * 执行提供者的
      * {@link android.widget.FilterQueryProvider#runQuery(CharSequence)}
-     * method is invoked when filtering is requested by a client of
-     * this adapter.
+     * 方法。
      *
-     * @param filterQueryProvider the filter query provider or null to remove it
+     * @param filterQueryProvider 过滤器查询提供者；空可以清除之前设置的提供者。
      *
      * @see #getFilterQueryProvider()
      * @see #runQueryOnBackgroundThread(CharSequence)
@@ -349,9 +336,8 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * Called when the {@link ContentObserver} on the cursor receives a change notification.
-     * The default implementation provides the auto-requery logic, but may be overridden by
-     * sub classes.
+     * 当游标的 {@link ContentObserver} 收到变更提示时调用该方法。
+     * 缺省实现提供了自动再查询逻辑，但子类可以覆盖该方法。
      * 
      * @see ContentObserver#onChange(boolean)
      */
