@@ -38,26 +38,21 @@ import android.content.res.TypedArray;
 import java.util.List;
 
 /**
- * Layout container for a view hierarchy that can be scrolled by the user,
- * allowing it to be larger than the physical display.  A HorizontalScrollView
- * is a {@link FrameLayout}, meaning you should place one child in it
- * containing the entire contents to scroll; this child may itself be a layout
- * manager with a complex hierarchy of objects.  A child that is often used
- * is a {@link LinearLayout} in a horizontal orientation, presenting a horizontal
- * array of top-level items that the user can scroll through.
+ * 用于布局的容器，可以放置让用户使用滚动条查看的视图层次结构，允许视图结构比手机的屏幕大。
+ * HorizontalScrollView 是一种 {@link FrameLayout 框架布局}，
+ * 这意味着你可以将包含要滚动的完整内容的子视图放入该容器；
+ * 该子视图本身也可以是具有复杂层次结构的布局管理器。一般使用横向的 {@link LinearLayout}
+ * 作为子视图，使用户可以滚动其中显示的条目。
  *
- * <p>You should never use a HorizontalScrollView with a {@link ListView}, since
- * ListView takes care of its own scrolling.  Most importantly, doing this
- * defeats all of the important optimizations in ListView for dealing with
- * large lists, since it effectively forces the ListView to display its entire
- * list of items to fill up the infinite container supplied by HorizontalScrollView.
+ * <p>不要将 HorizontalScrollView 和 {@link ListView 列表视图} 组合使用，
+ * 因为列表视图有自己的滚动处理。更重要的是，组合使用会使列表视图针对大的列表所做的重要优化失效，
+ * 因为 HorizontalScrollView 会强制列表视图显示其所有条目，以使用由 HorizontalScrollView
+ * 提供滚动处理的容器。
  *
- * <p>The {@link TextView} class also
- * takes care of its own scrolling, so does not require a ScrollView, but
- * using the two together is possible to achieve the effect of a text view
- * within a larger container.
+ * <p>{@link TextView 文本视图} 类也有其自身的滚动处理，不需要嵌入滚动视图；
+ * 但二者可以组合使用，其效果与将文本视图放入很大容器中一样。
  *
- * <p>HorizontalScrollView only supports horizontal scrolling.
+ * <p>HorizontalScrollView 只支持水平方向的滚动。
  */
 public class HorizontalScrollView extends FrameLayout {
     private static final int ANIMATED_SCROLL_GAP = ScrollView.ANIMATED_SCROLL_GAP;
@@ -190,8 +185,7 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * @return The maximum amount this scroll view will scroll in response to
-     *   an arrow event.
+     * @return 按左右箭头时视图可以滚动的最大值。
      */
     public int getMaxScrollAmount() {
         return (int) (MAX_SCROLL_FACTOR * (mRight - mLeft));
@@ -260,20 +254,18 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * Indicates whether this ScrollView's content is stretched to fill the viewport.
+     * 表示是否拉伸该滚动视图的内容以适应视口（viewport）的大小。
      *
-     * @return True if the content fills the viewport, false otherwise.
+     * @return 如果内容需要填充视口则返回真，否则返回假。
      */
     public boolean isFillViewport() {
         return mFillViewport;
     }
 
     /**
-     * Indicates this ScrollView whether it should stretch its content width to fill
-     * the viewport or not.
+     * 设置此滚动视图是否将内容宽度拉伸来适应视口（viewport）。
      *
-     * @param fillViewport True to stretch the content's width to the viewport's
-     *        boundaries, false otherwise.
+     * @param fillViewport 拉伸内容宽度时设为真；否则设为假。
      */
     public void setFillViewport(boolean fillViewport) {
         if (fillViewport != mFillViewport) {
@@ -283,15 +275,15 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * @return Whether arrow scrolling will animate its transition.
+     * @return 按方向键滚动时，是否显示平滑的滚动效果。
      */
     public boolean isSmoothScrollingEnabled() {
         return mSmoothScrollingEnabled;
     }
 
     /**
-     * Set whether arrow scrolling will animate its transition.
-     * @param smoothScrollingEnabled whether arrow scrolling will animate its transition
+     * 设置按方向键滚动时，是否显示平滑的滚动效果。
+     * @param smoothScrollingEnabled 按方向键滚动时是否显示平滑的滚动效果。
      */
     public void setSmoothScrollingEnabled(boolean smoothScrollingEnabled) {
         mSmoothScrollingEnabled = smoothScrollingEnabled;
@@ -334,12 +326,10 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * You can call this function yourself to have the scroll view perform
-     * scrolling from a key event, just as if the event had been dispatched to
-     * it by the view hierarchy.
+     * 需要通过按键事件来实现滚动操作时，可以调用此方法。就像由视图层次结构分派事件时一样。
      *
-     * @param event The key event to execute.
-     * @return Return true if the event was handled, else false.
+     * @param event 要执行的事件。
+     * @return 若已处理事件返回真，否则返回假。
      */
     public boolean executeKeyEvent(KeyEvent event) {
         mTempRect.setEmpty();
@@ -502,8 +492,10 @@ public class HorizontalScrollView extends FrameLayout {
 
         switch (action & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN: {
-                final float x = ev.getX();
-                mIsBeingDragged = true;
+                mIsBeingDragged = getChildCount() != 0;
+                if (!mIsBeingDragged) {
+                    return false;
+                }
 
                 /*
                  * If being flinged and user touches, stop the fling. isFinished
@@ -514,7 +506,7 @@ public class HorizontalScrollView extends FrameLayout {
                 }
 
                 // Remember where the motion event started
-                mLastMotionX = x;
+                mLastMotionX = ev.getX();
                 mActivePointerId = ev.getPointerId(0);
                 break;
             }

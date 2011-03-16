@@ -2489,9 +2489,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Bring up the context menu for this view.
+     * 显示该视图上下文菜单。
      *
-     * @return Whether a context menu was displayed.
+     * @return 是否显示了上下文菜单。
      */
     public boolean showContextMenu() {
         return getParent().showContextMenuForChild(this);
@@ -3337,11 +3337,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Dispatch setPressed to all of this View's children.
+     * 为视图的所有子视图调用 setPressed 方法。
      *
      * @see #setPressed(boolean)
      *
-     * @param pressed The new pressed state
+     * @param pressed 新的按下状态。
      */
     protected void dispatchSetPressed(boolean pressed) {
     }
@@ -4328,14 +4328,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Views should implement this if they have extra information to associate
-     * with the context menu. The return result is supplied as a parameter to
-     * the {@link OnCreateContextMenuListener#onCreateContextMenu(ContextMenu, View, ContextMenuInfo)}
-     * callback.
+     * 如果视图要向上下文菜单加入额外信息，就应该实现该方法。返回的结果作为
+     * {@link OnCreateContextMenuListener#onCreateContextMenu(ContextMenu, View, ContextMenuInfo)}
+     * 回调函数的参数。
      *
-     * @return Extra information about the item for which the context menu
-     *         should be shown. This information will vary across different
-     *         subclasses of View.
+     * @return 上下文菜单要显示的条目的额外信息。该信息会根据视图子类的不同而变化。
      */
     protected ContextMenuInfo getContextMenuInfo() {
         return null;
@@ -5550,28 +5547,24 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Returns the strength, or intensity, of the left faded edge. The strength is
-     * a value between 0.0 (no fade) and 1.0 (full fade). The default implementation
-     * returns 0.0 or 1.0 but no value in between.
+     * 返回左渐变边缘的强度或密集度。强度的值介于0.0（无渐变）到1.0（全渐变）之间。
+     * 缺省实现只返回0.0或1.0，而不返回中间值。
      *
-     * Subclasses should override this method to provide a smoother fade transition
-     * when scrolling occurs.
+     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程。
      *
-     * @return the intensity of the left fade as a float between 0.0f and 1.0f
+     * @return 左渐变的强度，即介于0.0f和1.0f之间的浮点值。
      */
     protected float getLeftFadingEdgeStrength() {
         return computeHorizontalScrollOffset() > 0 ? 1.0f : 0.0f;
     }
 
     /**
-     * Returns the strength, or intensity, of the right faded edge. The strength is
-     * a value between 0.0 (no fade) and 1.0 (full fade). The default implementation
-     * returns 0.0 or 1.0 but no value in between.
+     * 返回右渐变边缘的强度或密集度。强度的值介于0.0（无渐变）到1.0（全渐变）之间。
+     * 缺省实现只返回0.0或1.0，而不返回中间值。
      *
-     * Subclasses should override this method to provide a smoother fade transition
-     * when scrolling occurs.
+     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程。
      *
-     * @return the intensity of the right fade as a float between 0.0f and 1.0f
+     * @return 右渐变的强度，即介于0.0f和1.0f之间的浮点值。
      */
     protected float getRightFadingEdgeStrength() {
         return computeHorizontalScrollOffset() + computeHorizontalScrollExtent() <
@@ -5707,17 +5700,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>Compute the horizontal range that the horizontal scrollbar
-     * represents.</p>
+     * <p>计算滚动条水平方向上的滚动范围。</p>
      *
-     * <p>The range is expressed in arbitrary units that must be the same as the
-     * units used by {@link #computeHorizontalScrollExtent()} and
-     * {@link #computeHorizontalScrollOffset()}.</p>
+     * <p>该范围可以使用任意的单位但是必须跟
+     * {@link #computeHorizontalScrollExtent()} 和
+     * {@link #computeHorizontalScrollOffset()} 的单位保持一致。</p>
      *
-     * <p>The default range is the drawing width of this view.</p>
+     * <p>默认范围是视图的可绘制宽度。</p>
      *
-     * @return the total horizontal range represented by the horizontal
-     *         scrollbar
+     * @return 水平滚动条代表的滑动总范围。
      *
      * @see #computeHorizontalScrollExtent()
      * @see #computeHorizontalScrollOffset()
@@ -5728,17 +5719,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>Compute the horizontal offset of the horizontal scrollbar's thumb
-     * within the horizontal range. This value is used to compute the position
-     * of the thumb within the scrollbar's track.</p>
+     * <p>在水平范围内计算滚动条滑块的偏移量。该值用来计算水平滑块的位置。</p>
      *
-     * <p>The range is expressed in arbitrary units that must be the same as the
-     * units used by {@link #computeHorizontalScrollRange()} and
-     * {@link #computeHorizontalScrollExtent()}.</p>
+     * <p>该范围可以使用任意的单位但是必须跟
+     * {@link #computeHorizontalScrollRange()} 和
+     * {@link #computeHorizontalScrollExtent()} 的单位保持一致。</p>
      *
-     * <p>The default offset is the scroll offset of this view.</p>
+     * <p>默认偏移量是视图的偏移量。</p>
      *
-     * @return the horizontal offset of the scrollbar's thumb
+     * @return 滚动条滑块的水平偏移量。
      *
      * @see #computeHorizontalScrollRange()
      * @see #computeHorizontalScrollExtent()
@@ -5749,17 +5738,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>Compute the horizontal extent of the horizontal scrollbar's thumb
-     * within the horizontal range. This value is used to compute the length
-     * of the thumb within the scrollbar's track.</p>
+     * <p>在水平范围内计算滚动条滑块的滚动范围。该值用来计算滚动条滑块的长度。</p>
      *
-     * <p>The range is expressed in arbitrary units that must be the same as the
-     * units used by {@link #computeHorizontalScrollRange()} and
-     * {@link #computeHorizontalScrollOffset()}.</p>
+     * <p>该范围可以使用任意的单位但是必须跟
+     * {@link #computeHorizontalScrollRange()} 和
+     * {@link #computeHorizontalScrollOffset()} 的单位保持一致。</p>
      *
-     * <p>The default extent is the drawing width of this view.</p>
+     * <p>默认范围是视图的宽度。</p>
      *
-     * @return the horizontal extent of the scrollbar's thumb
+     * @return 滚动条滑块的水平滚动范围。
      *
      * @see #computeHorizontalScrollRange()
      * @see #computeHorizontalScrollOffset()
@@ -7274,7 +7261,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * @param who 待校验的可绘制对象。如果是你显示的对象之一，返回真；否则返回调用父类的返回值。
      *
      * @return boolean 如果可绘制对象已经显示在视图上了，返回真；否则返回假，不允许动画效果。
-     *         view; else false and it is not allowed to animate.
      *
      * @see #unscheduleDrawable
      * @see #drawableStateChanged
@@ -7668,11 +7654,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Dispatch setSelected to all of this View's children.
+     * 为视图的所有子视图调用 setSelected 方法。
      *
      * @see #setSelected(boolean)
      *
-     * @param selected The new selected state
+     * @param selected 新的选择状态。
      */
     protected void dispatchSetSelected(boolean selected) {
     }
@@ -7781,8 +7767,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * {@hide}
-     * @param id the id of the view to be found
-     * @return the view of the specified id, null if cannot be found
+     * @param id 要查找的视图的 ID。
+     * @return ID 对应的视图，没找到返回空。
      */
     protected View findViewTraversal(int id) {
         if (id == mID) {
@@ -9020,7 +9006,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
          *
          * @param v 按下并保持的视图。
          *
-         * return 如果回调函数处理了长按事件，返回真；否则返回假。
+         * @return 如果回调函数处理了长按事件，返回真；否则返回假。
          */
         boolean onLongClick(View v);
     }

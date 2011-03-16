@@ -141,15 +141,14 @@ public interface ViewParent {
     public void focusableViewAvailable(View v);
 
     /**
-     * Bring up a context menu for the specified view or its ancestors.
+     * 为指定的视图或者其父类显示上下文菜单。
      * <p>
-     * In most cases, a subclass does not need to override this.  However, if
-     * the subclass is added directly to the window manager (for example,
-     * {@link ViewManager#addView(View, android.view.ViewGroup.LayoutParams)})
-     * then it should override this and show the context menu.
+     * 大部分情况下，子类不需要重写该方法。但是，如果直接将子类添加到窗口管理器（例如：使用
+     * {@link ViewManager#addView(View, android.view.ViewGroup.LayoutParams)}
+     * 函数），此时就需要重写来显示上下文菜单。
      * 
-     * @param originalView The source view where the context menu was first invoked
-     * @return true if a context menu was displayed
+     * @param originalView 首先显示的上下文菜单的原始视图。
+     * @return 如果显示了上下文菜单返回真。
      */
     public boolean showContextMenuForChild(View originalView);
 

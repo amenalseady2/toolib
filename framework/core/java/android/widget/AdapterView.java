@@ -233,17 +233,14 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     public interface OnItemClickListener {
 
         /**
-         * Callback method to be invoked when an item in this AdapterView has
-         * been clicked.
+         * 按下 AdapterView 中的条目时，调用该回调方法。
          * <p>
-         * Implementers can call getItemAtPosition(position) if they need
-         * to access the data associated with the selected item.
+         * 实现的函数中可以调用 getItemAtPosition(position) 方法来访问按下条目的数据。
          *
-         * @param parent The AdapterView where the click happened.
-         * @param view The view within the AdapterView that was clicked (this
-         *            will be a view provided by the adapter)
-         * @param position The position of the view in the adapter.
-         * @param id The row id of the item that was clicked.
+         * @param parent 发生单击事件的 AdapterView.
+         * @param view AdapterView 中发生单击事件的视图（由适配器提供的视图）。
+         * @param position 适配器中视图的位置。
+         * @param id 单击的条目 ID。
          */
         void onItemClick(AdapterView<?> parent, View view, int position, long id);
     }
@@ -251,7 +248,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     /**
      * 注册单击 AdapterView 中的条目时执行的回调函数。
      *
-     * @param listener The callback that will be invoked.
+     * @param listener 执行的回调函数.
      */
     public void setOnItemClickListener(OnItemClickListener listener) {
         mOnItemClickListener = listener;
