@@ -39,17 +39,13 @@ import java.util.Formatter;
 import java.util.Locale;
 
 /**
- * A view containing controls for a MediaPlayer. Typically contains the
- * buttons like "Play/Pause", "Rewind", "Fast Forward" and a progress
- * slider. It takes care of synchronizing the controls with the state
- * of the MediaPlayer.
+ * 一个包含媒体播放器控件的视图。包含了一些典型的按钮，像“播放/暂停”、
+ * “倒退”、“快进”与进度条。它保持媒体播放器与控件的状态同步。
  * <p>
- * The way to use this class is to instantiate it programatically.
- * The MediaController will create a default set of controls
- * and put them in a window floating above your application. Specifically,
- * the controls will float above the view specified with setAnchorView().
- * The window will disappear if left idle for three seconds and reappear
- * when the user touches the anchor view.
+ * 要使用该类，需要通过编程来实例化。媒体控制器会创建默认的控件集合，
+ * 并把它们放到浮在你的应用程序上方的窗口中。具体来说，
+ * 就是这些控件浮在通过 setAnchorView() 方法指定的视图的上方。
+ * 如果这个窗口空闲3秒那么它将消失，直到用户再次触摸该宿主视图时重现。
  * <p>
  * Functions like show() and hide() have no effect when MediaController
  * is created in an xml layout.
