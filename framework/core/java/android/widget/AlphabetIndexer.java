@@ -21,8 +21,8 @@ import android.database.DataSetObserver;
 import android.util.SparseIntArray;
 
 /**
- * 实现了 SectionIndexer 接口的适配器的辅助类。如果适配器使用简单的基于字母的排序方式，
- * 该类提供了使用二进制检索来对项目数巨大的列表进行快速索引的方法。
+ * 实现了 SectionIndexer 接口的适配器的辅助类.如果适配器使用简单的基于字母的排序方式，
+ * 该类提供了使用二进制检索来对项目数巨大的列表进行快速索引的方法.
  * It caches the indices that have been determined through the binary search and also
  * invalidates the cache if changes occur in the cursor.
  * <p/>

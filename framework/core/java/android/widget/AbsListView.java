@@ -1284,7 +1284,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * 子类必须重写此方法，以为其子视图布局。
+     * 子类必须重写此方法，以为其子视图布局.
      */
     protected void layoutChildren() {
     }
@@ -3415,18 +3415,18 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * 返回列表中的列表头视图数量。列表头视图是显示于列表顶部、在布局时不能再利用的特殊视图。
+     * 返回列表中的列表头视图数量.列表头视图是显示于列表顶部、在布局时不能再利用的特殊视图.
      *
-     * @return 列表中的列表头视图数量；缺省实现时，其数量为 0。
+     * @return 列表中的列表头视图数量；缺省实现时，其数量为 0.
      */
     int getHeaderViewsCount() {
         return 0;
     }
 
     /**
-     * 返回列表中的列表尾视图数量。列表尾视图是显示于列表底部、在布局时不能再利用的特殊视图。
+     * 返回列表中的列表尾视图数量.列表尾视图是显示于列表底部、在布局时不能再利用的特殊视图.
      *
-     * @return 列表中的列表尾视图数量；缺省实现时，其数量为 0。
+     * @return 列表中的列表尾视图数量；缺省实现时，其数量为 0.
      */
     int getFooterViewsCount() {
         return 0;
@@ -4141,10 +4141,10 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * 当color的值不为0时，此值表示的颜色将提示使用者，列表正在一片单色不透明的背景上被画出。
-     * 当 color 的值非零时，示意该列表使用实心、单色不透明的背景，可以缓存背景色。
+     * 当color的值不为0时，此值表示的颜色将提示使用者，列表正在一片单色不透明的背景上被画出.
+     * 当 color 的值非零时，示意该列表使用实心、单色不透明的背景，可以缓存背景色.
      *
-     * @param color 背景色。
+     * @param color 背景色.
      */
     public void setCacheColorHint(int color) {
         if (color != mCacheColorHint) {

@@ -82,12 +82,12 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     /**
-     * 设置在 SeekBar 显示的进度的结束位置处显示的手柄的可绘制对象。
+     * 设置在 SeekBar 显示的进度的结束位置处显示的手柄的可绘制对象.
      * <p>
-     * 如果 thumb 是有效的可绘制对象（例如它不是 null），它的宽度的一半将作为新的手柄的绘制位置。
+     * 如果 thumb 是有效的可绘制对象（例如它不是 null），它的宽度的一半将作为新的手柄的绘制位置.
      * @see #setThumbOffset(int)
      * 
-     * @param thumb 代表手柄的可绘制对象。
+     * @param thumb 代表手柄的可绘制对象.
      */
     public void setThumb(Drawable thumb) {
         if (thumb != null) {
@@ -110,9 +110,9 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     /**
-     * 设置手柄的位置。允许手柄的位置超出轨道的范围。
+     * 设置手柄的位置.允许手柄的位置超出轨道的范围.
      * 
-     * @param thumbOffset 像素单位的位置值。
+     * @param thumbOffset 像素单位的位置值.
      */
     public void setThumbOffset(int thumbOffset) {
         mThumbOffset = thumbOffset;
@@ -120,20 +120,20 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     /**
-     * 设置使用方向键更改进度时每次的增量。
+     * 设置使用方向键更改进度时每次的增量.
      * 
-     * @param increment 当用户按下方向键时增加或减少的值。
+     * @param increment 当用户按下方向键时增加或减少的值.
      */
     public void setKeyProgressIncrement(int increment) {
         mKeyProgressIncrement = increment < 0 ? -increment : increment;
     }
 
     /**
-     * 返回使用方向键更改进度时每次的增量。
+     * 返回使用方向键更改进度时每次的增量.
      * <p>
-     * 默认情况下此值是根据最大值算出的。
+     * 默认情况下此值是根据最大值算出的.
      * 
-     * @return 当用户按下方向键时减少或增加的进度值。该值为正数。
+     * @return 当用户按下方向键时减少或增加的进度值.该值为正数.
      */
     public int getKeyProgressIncrement() {
         return mKeyProgressIncrement;
@@ -350,13 +350,13 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
     
     /**
-     * 当用户开始触摸该小部件时发生。
+     * 当用户开始触摸该小部件时发生.
      */
     void onStartTrackingTouch() {
     }
 
     /**
-     * 当用户结束触摸或取消触摸该小部件时发生。
+     * 当用户结束触摸或取消触摸该小部件时发生.
      */
     void onStopTrackingTouch() {
     }

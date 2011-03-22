@@ -36,7 +36,7 @@ import android.view.View.OnClickListener;
 import com.android.internal.R;
 
 /**
- * 该小部件定义了用于显示一个可以显示标准快捷联系人徽章的图片以及点击 图片时的动作。
+ * 该小部件定义了用于显示一个可以显示标准快捷联系人徽章的图片以及点击 图片时的动作.
  * @author translate by 农民伯伯
  * @author review by cnmahj
  * @author convert by cnmahj
@@ -113,8 +113,8 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 设置 QuickContact 窗口的模式。可选项为 {@link QuickContact#MODE_SMALL}、
-     * {@link QuickContact#MODE_MEDIUM} 和 {@link QuickContact#MODE_LARGE}。
+     * 设置 QuickContact 窗口的模式.可选项为 {@link QuickContact#MODE_SMALL}、
+     * {@link QuickContact#MODE_MEDIUM} 和 {@link QuickContact#MODE_LARGE}.
      * @param size
      */
     public void setMode(int size) {
@@ -122,11 +122,11 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 指定与该 QuickContactBadge 相关联的联系人的URI。注意，该方法只用于显示
-     * QuickContact 窗口，并不会为你绑定联系人图片。
+     * 指定与该 QuickContactBadge 相关联的联系人的URI.注意，该方法只用于显示
+     * QuickContact 窗口，并不会为你绑定联系人图片.
      *
      * @param contactUri {@link Contacts#CONTENT_URI} 或者
-     *            {@link Contacts#CONTENT_LOOKUP_URI} 风格的 URI。
+     *            {@link Contacts#CONTENT_LOOKUP_URI} 风格的 URI.
      */
     public void assignContactUri(Uri contactUri) {
         mContactUri = contactUri;
@@ -156,11 +156,11 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 使用电子邮箱地址来指定联系人。该方法应该只在联系人的 URI 未知时，
-     * 作为附加的手段，通过电子邮箱地址来查询联系人的 URI。
+     * 使用电子邮箱地址来指定联系人.该方法应该只在联系人的 URI 未知时，
+     * 作为附加的手段，通过电子邮箱地址来查询联系人的 URI.
      *
-     * @param emailAddress 联系人的电子邮件地址。
-     * @param lazyLookup 如果该值为真，该查询不立即执行，而是在单击视图时才执行。
+     * @param emailAddress 联系人的电子邮件地址.
+     * @param lazyLookup 如果该值为真，该查询不立即执行，而是在单击视图时才执行.
      */
     public void assignContactFromEmail(String emailAddress, boolean lazyLookup) {
         mContactEmail = emailAddress;
@@ -175,11 +175,11 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 使用电话号码来指定联系人。该方法应该只在联系人的 URI 未知时，
-     * 作为附加的手段，通过电话号码来查询联系人的 URI。
+     * 使用电话号码来指定联系人.该方法应该只在联系人的 URI 未知时，
+     * 作为附加的手段，通过电话号码来查询联系人的 URI.
      * 
-     * @param phoneNumber 联系人的电话号码。
-     * @param lazyLookup 如果该值为真，该查询不立即执行，而是在单击视图时才执行。
+     * @param phoneNumber 联系人的电话号码.
+     * @param lazyLookup 如果该值为真，该查询不立即执行，而是在单击视图时才执行.
      */
     public void assignContactFromPhone(String phoneNumber, boolean lazyLookup) {
         mContactPhone = phoneNumber;
@@ -213,9 +213,9 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     }
 
     /**
-     * 设置一组要排除不显示的MIMI类型列表。例如，可以隐藏Contacts.CONTENT_ITEM_TYPE类型的图标。
-     * 设置排除在外的、不显示的 MIME 类型一览。例如，
-     * {@link Contacts#CONTENT_ITEM_TYPE} 用于隐藏个人资料图标。
+     * 设置一组要排除不显示的MIMI类型列表.例如，可以隐藏Contacts.CONTENT_ITEM_TYPE类型的图标.
+     * 设置排除在外的、不显示的 MIME 类型一览.例如，
+     * {@link Contacts#CONTENT_ITEM_TYPE} 用于隐藏个人资料图标.
      */
     public void setExcludeMimes(String[] excludeMimes) {
         mExcludeMimes = excludeMimes;

@@ -1011,24 +1011,24 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * 子类覆盖该方法，已使其可以在默认 XML 选项未指定可编辑时设置 KeyListener。
+     * 子类覆盖该方法，已使其可以在默认 XML 选项未指定可编辑时设置 KeyListener.
      */
     protected boolean getDefaultEditable() {
         return false;
     }
 
     /**
-     * 子类覆盖该方法，以指定默认动作方法。
+     * 子类覆盖该方法，以指定默认动作方法.
      */
     protected MovementMethod getDefaultMovementMethod() {
         return null;
     }
 
     /**
-     * 返回 TextView 显示的文本。如果使用 BufferType.SPANNABLE 或 BufferType.EDITABLE
-     * 参数调用 setText() 方法，你可以将本方法的返回值分别转换为 Spannable 或 Editable。
+     * 返回 TextView 显示的文本.如果使用 BufferType.SPANNABLE 或 BufferType.EDITABLE
+     * 参数调用 setText() 方法，你可以将本方法的返回值分别转换为 Spannable 或 Editable.
      *
-     * 注意：返回值的内容不能修改。如果你需要编辑其中的值，首先你应该生成自己的实例。
+     * 注意：返回值的内容不能修改.如果你需要编辑其中的值，首先你应该生成自己的实例.
      */
     @ViewDebug.CapturedViewProperty
     public CharSequence getText() {
@@ -2583,7 +2583,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     /**
      * 设置该 TextView 显示的文本（参见 {@link #setText(CharSequence)}） 
-     * 以及是否可以保存在 styleable/spannable 缓存中，以及是否可以编辑。
+     * 以及是否可以保存在 styleable/spannable 缓存中，以及是否可以编辑.
      *
      * @attr ref android.R.styleable#TextView_text
      * @attr ref android.R.styleable#TextView_bufferType
@@ -5977,9 +5977,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
     
     /**
-     * 指定当文字的长度超过视图宽度时用何种方式来取代简单的中途截断文本。
+     * 指定当文字的长度超过视图宽度时用何种方式来取代简单的中途截断文本.
      * 你可能想使用 {@link #setSingleLine} 或 {@link #setHorizontallyScrolling}
-     * 使文本显示在一行中，请使用 <code>null</code> 关闭该功能。
+     * 使文本显示在一行中，请使用 <code>null</code> 关闭该功能.
      *
      * @attr ref android.R.styleable#TextView_ellipsize
      */

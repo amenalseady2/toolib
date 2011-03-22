@@ -27,14 +27,14 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 /**
- * <p>这个布局是用在ListView中的，有两个子视图。
+ * <p>这个布局是用在ListView中的，有两个子视图.
  * 该列表项包含两个 {@link android.widget.TextView TextViews} 元素（或其子类），
  * 其 ID 分别为 {@link android.R.id#text1 text1} 和 {@link android.R.id#text2 text2}；
- * 还有可选的第三个视图，其 ID 为 {@link android.R.id#selectedIcon selectedIcon}。
+ * 还有可选的第三个视图，其 ID 为 {@link android.R.id#selectedIcon selectedIcon}.
  * 第三个视图可以是视图类的任何子类（一般使用象 {@link android.widget.ImageView ImageView}
- * 这样的图像视图）。该视图在 TwoLineListItem 得到焦点时显示。
+ * 这样的图像视图）.该视图在 TwoLineListItem 得到焦点时显示.
  * Android 为 TwoLineListView 提供了 {@link android.R.layout#two_line_list_item 标准布局资源}
- * 的支持（不包含选中时显示的图标），你也可以为该对象定制自己的 XML 布局。
+ * 的支持（不包含选中时显示的图标），你也可以为该对象定制自己的 XML 布局.
  * 
  * @attr ref android.R.styleable#TwoLineListItem_mode
  * @author translate by loveshirui（Android中文翻译组）
@@ -73,8 +73,8 @@ public class TwoLineListItem extends RelativeLayout {
     }
     
     /**
-     * 返回 ID 为 text1 的对象。
-     * @return ID 为 text1 的对象。
+     * 返回 ID 为 text1 的对象.
+     * @return ID 为 text1 的对象.
      */
     public TextView getText1() {
         return mText1;
@@ -82,7 +82,7 @@ public class TwoLineListItem extends RelativeLayout {
     
     /**
      * 返回 ID 为 text2 的对象
-     * @return ID 为 text2 的对象。
+     * @return ID 为 text2 的对象.
      */
     public TextView getText2() {
         return mText2;

@@ -37,16 +37,16 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.animation.Transformation;
 
 /**
- * 选中中心条目的横向滚动列表。
+ * 选中中心条目的横向滚动列表.
  * <p>
  * 画廊默认以 {@link android.R.styleable#Theme_galleryItemBackground}
- * 作为从适配器取得的每个视图的背景。如果没有该资源，你需要调整画廊的一些属性，
- * 比如空白等。
+ * 作为从适配器取得的每个视图的背景.如果没有该资源，你需要调整画廊的一些属性，
+ * 比如空白等.
  * <p>
- * 添加到画廊的视图应该使用 {@link Gallery.LayoutParams} 作为其布局参数类型。
+ * 添加到画廊的视图应该使用 {@link Gallery.LayoutParams} 作为其布局参数类型.
  *
  * <p>参见 <a href="{@docRoot}resources/tutorials/views/hello-gallery.html">
- * 画廊教程</a>。</p>
+ * 画廊教程</a>.</p>
  * 
  * @attr ref android.R.styleable#Gallery_animationDuration
  * @attr ref android.R.styleable#Gallery_spacing
@@ -214,11 +214,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     /**
-     * 快速滚动条目时是否调用每个条目的 {@link #getOnItemSelectedListener()}。
-     * 如果设为假，只为最后选中的条目调用回调函数。
-     * 如果设为真，则为从第一个到最后一个，每个条目调用回调函数。
+     * 快速滚动条目时是否调用每个条目的 {@link #getOnItemSelectedListener()}.
+     * 如果设为假，只为最后选中的条目调用回调函数.
+     * 如果设为真，则为从第一个到最后一个，每个条目调用回调函数.
      * 
-     * @param shouldCallback 当快速滚动条目时，是否为每个条目调用监听器的回调函数。
+     * @param shouldCallback 当快速滚动条目时，是否为每个条目调用监听器的回调函数.
      */
     public void setCallbackDuringFling(boolean shouldCallback) {
         mShouldCallbackDuringFling = shouldCallback;
@@ -238,9 +238,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
     
     /**
-     * 设置子视图位置变更时过渡动画的执行时间。仅当打开播放动画功能时有效。
+     * 设置子视图位置变更时过渡动画的执行时间.仅当打开播放动画功能时有效.
      * 
-     * @param animationDurationMillis 过渡动画的持续时间，单位为毫秒。
+     * @param animationDurationMillis 过渡动画的持续时间，单位为毫秒.
      * 
      * @attr ref android.R.styleable#Gallery_animationDuration
      */
@@ -249,9 +249,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     /**
-     * 设置画廊中两个条目之间的空白。
+     * 设置画廊中两个条目之间的空白.
      * 
-     * @param spacing 画廊中两个条目之间的空白，以像素为单位。
+     * @param spacing 画廊中两个条目之间的空白，以像素为单位.
      * 
      * @attr ref android.R.styleable#Gallery_spacing
      */
@@ -260,9 +260,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     /**
-     * 设置画廊中未选中条目的透明度。
+     * 设置画廊中未选中条目的透明度.
      * 
-     * @param unselectedAlpha 未选中条目的透明度。
+     * @param unselectedAlpha 未选中条目的透明度.
      * 
      * @attr ref android.R.styleable#Gallery_unselectedAlpha
      */
@@ -1088,7 +1088,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     /**
-     * 处理左右和按下事件。
+     * 处理左右和按下事件.
      * @see android.view.View#onKeyDown
      */
     @Override
@@ -1217,7 +1217,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
     
     /**
-     * 设置子视图如何对齐。
+     * 设置子视图如何对齐.
      * @param gravity
      * 
      * @attr ref android.R.styleable#Gallery_gravity
@@ -1373,7 +1373,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
     
     /**
-     * 画廊扩展了 LayoutParams 以提供空间来保存现在的变换信息和之前的变换信息。 
+     * 画廊扩展了 LayoutParams 以提供空间来保存现在的变换信息和之前的变换信息. 
      */
     public static class LayoutParams extends ViewGroup.LayoutParams {
         public LayoutParams(Context c, AttributeSet attrs) {

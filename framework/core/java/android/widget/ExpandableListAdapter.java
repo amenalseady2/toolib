@@ -165,41 +165,41 @@ public interface ExpandableListAdapter {
     boolean isEmpty();
 
     /**
-     * 分组展开时调用。
+     * 分组展开时调用.
      * 
-     * @param groupPosition 展开的分组。
+     * @param groupPosition 展开的分组.
      */
     void onGroupExpanded(int groupPosition);
     
     /**
-     * 分组收起时调用。
+     * 分组收起时调用.
      * 
-     * @param groupPosition 收起的分组。
+     * @param groupPosition 收起的分组.
      */
     void onGroupCollapsed(int groupPosition);
     
     /**
-     * 取得一览中可以唯一识别子条目的 ID（包括分组ID和子条目ID）。可扩展列表要求每个条目
-     * （分组条目和子条目）具有一个可以唯一识别列表中子条目和分组条目的ID。
-     * 该方法根据给定子条目ID和分组条目ID返回唯一识别ID。另外，如果
-     * {@link #hasStableIds()} 为真，该函数返回的ID必须是固定不变的。
+     * 取得一览中可以唯一识别子条目的 ID（包括分组ID和子条目ID）.可扩展列表要求每个条目
+     * （分组条目和子条目）具有一个可以唯一识别列表中子条目和分组条目的ID.
+     * 该方法根据给定子条目ID和分组条目ID返回唯一识别ID.另外，如果
+     * {@link #hasStableIds()} 为真，该函数返回的ID必须是固定不变的.
      * 
-     * @param groupId 包含子条目ID的分组条目ID。
-     * @param childId 子条目的ID。
+     * @param groupId 包含子条目ID的分组条目ID.
+     * @param childId 子条目的ID.
      * @return 返回可以在所有分组条目和子条目中唯一识别该子条目的ID
-     * （可能是固定不变的）。
+     * （可能是固定不变的）.
      */
     long getCombinedChildId(long groupId, long childId);
 
     /**
-     * 取得一览中可以唯一识别子条目的 ID（包括分组ID和子条目ID）。可扩展列表要求每个条目
-     * （分组条目和子条目）具有一个可以唯一识别列表中子条目和分组条目的ID。
-     * 该方法根据给定子条目ID和分组条目ID返回唯一识别ID。另外，如果
-     * {@link #hasStableIds()} 为真，该函数返回的ID必须是固定不变的。
+     * 取得一览中可以唯一识别子条目的 ID（包括分组ID和子条目ID）.可扩展列表要求每个条目
+     * （分组条目和子条目）具有一个可以唯一识别列表中子条目和分组条目的ID.
+     * 该方法根据给定子条目ID和分组条目ID返回唯一识别ID.另外，如果
+     * {@link #hasStableIds()} 为真，该函数返回的ID必须是固定不变的.
      * 
-     * @param groupId 分组条目ID。
+     * @param groupId 分组条目ID.
      * @return 返回可以在所有分组条目和子条目中唯一识别该分组条目的ID
-     * （可能是固定不变的）。
+     * （可能是固定不变的）.
      */
     long getCombinedGroupId(long groupId);
 }

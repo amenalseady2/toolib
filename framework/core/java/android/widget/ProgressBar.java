@@ -647,7 +647,7 @@ public class ProgressBar extends View {
     }
 
     /**
-     * <p>将进度条的范围设置为 0…<code>max</code>。</p>
+     * <p>将进度条的范围设置为 0…<code>max</code>.</p>
      *
      * @param max 进度条范围的最大值
      *

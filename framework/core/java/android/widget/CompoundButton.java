@@ -31,7 +31,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 /**
  * <p>
- * 一个包含选中/未选中两个状态的按钮。当按钮按下或单击时自动改变状态。
+ * 一个包含选中/未选中两个状态的按钮.当按钮按下或单击时自动改变状态.
  * </p>
  *
  * <p><strong>XML 属性</strong></p>
@@ -39,7 +39,7 @@ import android.view.accessibility.AccessibilityEvent;
  * 参见 {@link android.R.styleable#CompoundButton
  * CompoundButton 属性}、{@link android.R.styleable#Button Button
  * 属性}、{@link android.R.styleable#TextView TextView 属性} 和 {@link
- * android.R.styleable#View View 属性}。
+ * android.R.styleable#View View 属性}.
  * </p>
  * @author translate by 德罗德
  * @author convert by cnmahj
@@ -106,9 +106,9 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     /**
-     * <p>改变按钮的选中状态。</p>	
+     * <p>改变按钮的选中状态.</p>	
      *
-     * @param checked true 选中按钮，false 取消选中。
+     * @param checked true 选中按钮，false 取消选中.
      */
     public void setChecked(boolean checked) {
         if (mChecked != checked) {
@@ -153,20 +153,20 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     /**
-     * 定义了一个在按钮的选中状态改变时要调用的回调函数的接口。
+     * 定义了一个在按钮的选中状态改变时要调用的回调函数的接口.
      */
     public static interface OnCheckedChangeListener {
         /**
-         * 在按钮选中状态发生改变时被调用。
-         * @param buttonView 选中状态发生改变的那个按钮。
-         * @param isChecked  按钮的选中状态。
+         * 在按钮选中状态发生改变时被调用.
+         * @param buttonView 选中状态发生改变的那个按钮.
+         * @param isChecked  按钮的选中状态.
          */
         void onCheckedChanged(CompoundButton buttonView, boolean isChecked);
     }
 
     /**
-     * 通过资源 ID 给按钮背景设置一个可绘制对象。
-     * @param resid 作为背景可绘制对象的资源 ID。
+     * 通过资源 ID 给按钮背景设置一个可绘制对象.
+     * @param resid 作为背景可绘制对象的资源 ID.
      */
     public void setButtonDrawable(int resid) {
         if (resid != 0 && resid == mButtonResource) {
@@ -183,7 +183,7 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     /**
-     * 通过资源 ID 给按钮背景设置一个可绘制对象。
+     * 通过资源 ID 给按钮背景设置一个可绘制对象.
      *
      * @param d 作为背景的可绘制对象
      */

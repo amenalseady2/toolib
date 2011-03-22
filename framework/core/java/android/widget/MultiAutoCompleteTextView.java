@@ -38,9 +38,9 @@ import com.android.internal.R;
 
 /**
  * 一个继承自 {@link AutoCompleteTextView} 的可编辑的文本视图，
- * 能够根据用户的输入进行自动完成提示，而不需要用户输入整个内容。
+ * 能够根据用户的输入进行自动完成提示，而不需要用户输入整个内容.
  * <p>
- * 用户必须提供 {@link Tokenizer} 用于查找不同的子串。
+ * 用户必须提供 {@link Tokenizer} 用于查找不同的子串.
  *
  * <p>下面的代码片段展示了，如何创建根据用户输入的国家名称进行完成提示的文本视图：</p>
  * <pre class="prettyprint">
@@ -83,7 +83,7 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
     /* package */ void finishInit() { }
 
     /**
-     * 设置用于根据用户输入的文本确定相关范围的分解器。
+     * 设置用于根据用户输入的文本确定相关范围的分解器.
      */
     public void setTokenizer(Tokenizer t) {
         mTokenizer = t;
@@ -91,7 +91,7 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
 
     /**
      * 该方法不筛选编辑框中的所有内容，只筛选 {@link Tokenizer#findTokenStart} 
-     * 到 {@link #getSelectionEnd} 的长度大于等于 {@link #getThreshold} 的内容。
+     * 到 {@link #getSelectionEnd} 的长度大于等于 {@link #getThreshold} 的内容.
      */
     @Override
     protected void performFiltering(CharSequence text, int keyCode) {
@@ -112,7 +112,7 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
 
     /**
      * 该方法不根据编辑框中的文本长度来判断，而是根据 {@link Tokenizer#findTokenStart} 
-     * 到 {@link #getSelectionEnd} 的长度是否大于等于 {@link #getThreshold} 来判断。
+     * 到 {@link #getSelectionEnd} 的长度是否大于等于 {@link #getThreshold} 来判断.
      */
     @Override
     public boolean enoughToFilter() {
@@ -133,7 +133,7 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
     }
 
     /**
-     * 该方法不验证编辑框中的整个文本，而是逐个验证文本标记。空标记将被移除。
+     * 该方法不验证编辑框中的整个文本，而是逐个验证文本标记.空标记将被移除.
      */
     @Override 
     public void performValidation() {
@@ -162,10 +162,10 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
     }
 
     /**
-     * <p>对下拉列表中的内容进行筛选。采用的模式是利用编辑框对指定范围的文本进行筛选。
+     * <p>对下拉列表中的内容进行筛选.采用的模式是利用编辑框对指定范围的文本进行筛选.
      * （The filtering pattern is the specified range of text from the edit box）
-     * 子类可覆盖此方法，以便于采用一个不同的模式。
-     * 例如，使用<code>text</code>的更小的子串进行筛选。</p>
+     * 子类可覆盖此方法，以便于采用一个不同的模式.
+     * 例如，使用<code>text</code>的更小的子串进行筛选.</p>
      */
     protected void performFiltering(CharSequence text, int start, int end,
                                     int keyCode) {
@@ -175,10 +175,10 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
     /**
      * <p>用 {@link Tokenizer#terminateToken} 方法处理完的
      * <code>text</code> 来替换从 {@link Tokenizer#findTokenStart} 
-     * 到 {@link #getSelectionEnd} 之间的内容。
+     * 到 {@link #getSelectionEnd} 之间的内容.
      * 另外，替换后的文本会标记为 AutoText 替换，如果用户立即按下 DEL 键，
-     * 会取消该替换操作。
-     * 子类可覆盖此方法，用于向编辑框中插入其它内容。</p>
+     * 会取消该替换操作.
+     * 子类可覆盖此方法，用于向编辑框中插入其它内容.</p>
      *
      * @param text 选中的下拉列表中的建议文本
      */
@@ -198,24 +198,24 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
 
     public static interface Tokenizer {
         /**
-         * 返回 <code>text</code> 中，到 <code>cursor</code> 结束的标记的开始位置。
+         * 返回 <code>text</code> 中，到 <code>cursor</code> 结束的标记的开始位置.
          */
         public int findTokenStart(CharSequence text, int cursor);
 
         /**
-         * 返回 <code>text</code> 中，从 <code>cursor</code> 开始的标记的结束位置。
-         * 不包含尾随分隔符。
+         * 返回 <code>text</code> 中，从 <code>cursor</code> 开始的标记的结束位置.
+         * 不包含尾随分隔符.
          */
         public int findTokenEnd(CharSequence text, int cursor);
 
         /**
-         * 返回包含分割符的 <code>text</code>，如果不包含，则添加分隔符并返回修改后的值。
+         * 返回包含分割符的 <code>text</code>，如果不包含，则添加分隔符并返回修改后的值.
          */
         public CharSequence terminateToken(CharSequence text);
     }
 
     /**
-     * 这个简易的分解器可用于对由逗号和若干空格分割的列表进行分解。
+     * 这个简易的分解器可用于对由逗号和若干空格分割的列表进行分解.
      */
     public static class CommaTokenizer implements Tokenizer {
         public int findTokenStart(CharSequence text, int cursor) {

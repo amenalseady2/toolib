@@ -24,7 +24,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 
 /**
- * 通过一个带有亮度指示同时默认文本为“ON”或“OFF”的按钮显示选中/未选中状态。
+ * 通过一个带有亮度指示同时默认文本为“ON”或“OFF”的按钮显示选中/未选中状态.
  * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
  * tutorial</a>.</p>
  * 
@@ -81,36 +81,36 @@ public class ToggleButton extends CompoundButton {
     }
 
     /**
-     * 返回按钮选中时的文本。
+     * 返回按钮选中时的文本.
      * 
-     * @return 选中时的文本。
+     * @return 选中时的文本.
      */
     public CharSequence getTextOn() {
         return mTextOn;
     }
 
     /**
-     * 设置按钮选中时显示的文本。
+     * 设置按钮选中时显示的文本.
      *  
-     * @param textOn 要显示的文本。
+     * @param textOn 要显示的文本.
      */
     public void setTextOn(CharSequence textOn) {
         mTextOn = textOn;
     }
 
     /**
-     * 返回按钮未选中时的文本。
+     * 返回按钮未选中时的文本.
      * 
-     * @return 未选中时的文本。
+     * @return 未选中时的文本.
      */
     public CharSequence getTextOff() {
         return mTextOff;
     }
 
     /**
-     * 设置按钮未选中时显示的文本。
+     * 设置按钮未选中时显示的文本.
      * 
-     * @param textOff 要显示的文本。
+     * @param textOff 要显示的文本.
      */
     public void setTextOff(CharSequence textOff) {
         mTextOff = textOff;

@@ -24,10 +24,10 @@ import android.view.animation.Interpolator;
 
 
 /**
- * 这个类封装了滚动操作。滚动的持续时间可以通过构造函数传递，
- * 并且可以指定滚动动作的持续的最长时间。经过这段时间后，
+ * 这个类封装了滚动操作.滚动的持续时间可以通过构造函数传递，
+ * 并且可以指定滚动动作的持续的最长时间.经过这段时间后，
  * 滚动会自动定位到最终位置，并且通过 computeScrollOffset()
- * 会得到的返回值为false，表明滚动动作已经结束。
+ * 会得到的返回值为false，表明滚动动作已经结束.
  * @author translate by pengyouhong
  * @author convert by cnmahj
  */
@@ -76,7 +76,7 @@ public class Scroller  {
     }
 
     /**
-     * 使用缺省的持续持续时间和动画插入器（interpolator）创建 Scroller。
+     * 使用缺省的持续持续时间和动画插入器（interpolator）创建 Scroller.
      */
     public Scroller(Context context) {
         this(context, null);
@@ -84,7 +84,7 @@ public class Scroller  {
 
     /**
      * 根据指定的动画插入器（interpolator）创建 Scroller，如果指定的动画插入器为空，
-     * 则会使用缺省的动画插入器（粘滞viscous）创建。
+     * 则会使用缺省的动画插入器（粘滞viscous）创建.
      */
     public Scroller(Context context, Interpolator interpolator) {
         mFinished = true;
@@ -98,45 +98,45 @@ public class Scroller  {
     
     /**
      * 
-     * 返回 scroller 是否已完成滚动。
+     * 返回 scroller 是否已完成滚动.
      * 
-     * @return 已完成滚动返回真，否则返回假。
+     * @return 已完成滚动返回真，否则返回假.
      */
     public final boolean isFinished() {
         return mFinished;
     }
     
     /**
-     * 强制设置终止状态为特定值。
+     * 强制设置终止状态为特定值.
      *  
-     * @param finished 新的终止状态。
+     * @param finished 新的终止状态.
      */
     public final void forceFinished(boolean finished) {
         mFinished = finished;
     }
     
     /**
-     * 返回滚动事件持续的时间，以毫秒为单位。
+     * 返回滚动事件持续的时间，以毫秒为单位.
      * 
-     * @return 以毫秒为单位的持续的时间。
+     * @return 以毫秒为单位的持续的时间.
      */
     public final int getDuration() {
         return mDuration;
     }
     
     /**
-     * 返回当前滚动 X 方向的偏移。
+     * 返回当前滚动 X 方向的偏移.
      * 
-     * @return 距离原点 X 轴方向的绝对值。
+     * @return 距离原点 X 轴方向的绝对值.
      */
     public final int getCurrX() {
         return mCurrX;
     }
     
     /**
-     * 返回当前滚动 Y 方向的偏移。
+     * 返回当前滚动 Y 方向的偏移.
      * 
-     * @return 距离原点 Y 轴方向的绝对值。
+     * @return 距离原点 Y 轴方向的绝对值.
      */
     public final int getCurrY() {
         return mCurrY;
@@ -154,44 +154,44 @@ public class Scroller  {
     }
 
     /**
-     * 返回滚动起始点的X方向的偏移。
+     * 返回滚动起始点的X方向的偏移.
      *  
-     * @return 起始点在X方向距离原点的绝对距离。
+     * @return 起始点在X方向距离原点的绝对距离.
      */
     public final int getStartX() {
         return mStartX;
     }
     
     /**
-     * 返回滚动起始点的Y方向的偏移。
+     * 返回滚动起始点的Y方向的偏移.
      * 
-     * @return 起始点在Y方向距离原点的绝对距离。
+     * @return 起始点在Y方向距离原点的绝对距离.
      */
     public final int getStartY() {
         return mStartY;
     }
     
     /**
-     * 返回滚动结束位置。仅针对“fling”滚动有效。
+     * 返回滚动结束位置.仅针对“fling”滚动有效.
      * 
-     * @return 最终位置X方向距离原点的绝对距离。
+     * @return 最终位置X方向距离原点的绝对距离.
      */
     public final int getFinalX() {
         return mFinalX;
     }
     
     /**
-     * 返回滚动结束位置。仅针对“fling”滚动有效。
+     * 返回滚动结束位置.仅针对“fling”滚动有效.
      * 
-     * @return 最终位置Y方向距离原点的绝对距离。
+     * @return 最终位置Y方向距离原点的绝对距离.
      */
     public final int getFinalY() {
         return mFinalY;
     }
 
     /**
-     * 当想要知道新的位置时，调用此函数。如果返回真，表示动画还没有结束。
-     * 否则，位置会更新为新的值。
+     * 当想要知道新的位置时，调用此函数.如果返回真，表示动画还没有结束.
+     * 否则，位置会更新为新的值.
      */ 
     public boolean computeScrollOffset() {
         if (mFinished) {
@@ -244,25 +244,25 @@ public class Scroller  {
     }
     
     /**
-     * 以提供的起始点和将要滑动的距离开始滚动。滚动会使用缺省值 250ms 作为持续时间。
+     * 以提供的起始点和将要滑动的距离开始滚动.滚动会使用缺省值 250ms 作为持续时间.
      * 
-     * @param startX 水平方向滚动的偏移值，以像素为单位。负值表示向左滚动。
-     * @param startY 垂直方向滚动的偏移值，以像素为单位。负值表示向上滚动。
-     * @param dx 水平方向滑动的距离，负值表示向左滚动。
-     * @param dy 垂直方向滑动的距离，负值表示向上滚动。
+     * @param startX 水平方向滚动的偏移值，以像素为单位.负值表示向左滚动.
+     * @param startY 垂直方向滚动的偏移值，以像素为单位.负值表示向上滚动.
+     * @param dx 水平方向滑动的距离，负值表示向左滚动.
+     * @param dy 垂直方向滑动的距离，负值表示向上滚动.
      */
     public void startScroll(int startX, int startY, int dx, int dy) {
         startScroll(startX, startY, dx, dy, DEFAULT_DURATION);
     }
 
     /**
-     * 以提供的起始点和将要滑动的距离开始滚动。
+     * 以提供的起始点和将要滑动的距离开始滚动.
      * 
-     * @param startX 水平方向滚动的偏移值，以像素为单位。负值表示向左滚动。
-     * @param startY 垂直方向滚动的偏移值，以像素为单位。负值表示向上滚动。
-     * @param dx 水平方向滑动的距离，负值表示向左滚动。
-     * @param dy 垂直方向滑动的距离，负值表示向上滚动。
-     * @param duration 以毫秒为单位的滚动持续时间。
+     * @param startX 水平方向滚动的偏移值，以像素为单位.负值表示向左滚动.
+     * @param startY 垂直方向滚动的偏移值，以像素为单位.负值表示向上滚动.
+     * @param dx 水平方向滑动的距离，负值表示向左滚动.
+     * @param dy 垂直方向滑动的距离，负值表示向上滚动.
+     * @param duration 以毫秒为单位的滚动持续时间.
      */
     public void startScroll(int startX, int startY, int dx, int dy, int duration) {
         mMode = SCROLL_MODE;
@@ -279,16 +279,16 @@ public class Scroller  {
     }
 
     /**
-     * 开始基于 fling 手势的滚动。滚动的距离取决于 fling 的初速度。
+     * 开始基于 fling 手势的滚动.滚动的距离取决于 fling 的初速度.
      * 
-     * @param startX 滚动起始点X坐标。
+     * @param startX 滚动起始点X坐标.
      * @param startY 滚动起始点Y坐标
-     * @param velocityX 当滑动屏幕时X方向初速度，以每秒像素数计算。
+     * @param velocityX 当滑动屏幕时X方向初速度，以每秒像素数计算.
      * @param velocityY 当滑动屏幕时Y方向初速度，以每秒像素数计算
-     * @param minX X方向的最小值，scroller的滚动不会低于该值。
-     * @param maxX X方向的最大值，scroller的滚动不会高于该值。
-     * @param minY Y方向的最小值，scroller的滚动不会低于该值。
-     * @param maxY Y方向的最大值，scroller的滚动不会高于该值。
+     * @param minX X方向的最小值，scroller的滚动不会低于该值.
+     * @param maxX X方向的最大值，scroller的滚动不会高于该值.
+     * @param minY Y方向的最小值，scroller的滚动不会低于该值.
+     * @param maxY Y方向的最大值，scroller的滚动不会高于该值.
      */
     public void fling(int startX, int startY, int velocityX, int velocityY,
             int minX, int maxX, int minY, int maxY) {
@@ -341,8 +341,8 @@ public class Scroller  {
     }
     
     /**
-     * 停止动画。
-     * 与 {@link #forceFinished(boolean)} 不同，该方法终止动画并滚动到最终的X、Y位置。
+     * 停止动画.
+     * 与 {@link #forceFinished(boolean)} 不同，该方法终止动画并滚动到最终的X、Y位置.
      *
      * @see #forceFinished(boolean)
      */
@@ -353,10 +353,10 @@ public class Scroller  {
     }
     
     /**
-     * 延长滚动动画时间。此函数允许与 {@link #setFinalX(int)} 和  {@link #setFinalY(int)}
-     * 一起使用，延长滚动动画的持续时间和滚动距离。
+     * 延长滚动动画时间.此函数允许与 {@link #setFinalX(int)} 和  {@link #setFinalY(int)}
+     * 一起使用，延长滚动动画的持续时间和滚动距离.
      *
-     * @param extend 延长的以毫秒为单位的时间。
+     * @param extend 延长的以毫秒为单位的时间.
      * @see #setFinalX(int)
      * @see #setFinalY(int)
      */
@@ -368,18 +368,18 @@ public class Scroller  {
     }
 
     /**
-     * 返回自滚动开始经过的时间。
+     * 返回自滚动开始经过的时间.
      *
-     * @return 经过时间以毫秒为单位。
+     * @return 经过时间以毫秒为单位.
      */
     public int timePassed() {
         return (int)(AnimationUtils.currentAnimationTimeMillis() - mStartTime);
     }
 
     /**
-     * 设置 scroller 的 X 方向终止位置。
+     * 设置 scroller 的 X 方向终止位置.
      *
-     * @param newX 新位置在 X 方向距离原点的绝对偏移量。
+     * @param newX 新位置在 X 方向距离原点的绝对偏移量.
      * @see #extendDuration(int)
      * @see #setFinalY(int)
      */
@@ -390,9 +390,9 @@ public class Scroller  {
     }
 
     /**
-     * 设置 scroller 的 Y 方向终止位置。
+     * 设置 scroller 的 Y 方向终止位置.
      *
-     * @param newY 新位置在 Y 方向距离原点的绝对偏移量。
+     * @param newY 新位置在 Y 方向距离原点的绝对偏移量.
      * @see #extendDuration(int)
      * @see #setFinalX(int)
      */

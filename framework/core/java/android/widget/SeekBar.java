@@ -22,11 +22,11 @@ import android.util.AttributeSet;
 
 
 /**
- * SeekBar 是 ProgressBar 的扩展，在其基础上增加了一个可滑动的滑片(注：就是那个可拖动的图标)。
- * 用户可以触摸滑片并向左或向右拖动，再或者可以使用方向键都可以设置当前的进度等级。
- * 不建议把可以获取焦点的小部件放在 SeekBar 的左边或右边。
+ * SeekBar 是 ProgressBar 的扩展，在其基础上增加了一个可滑动的滑片(注：就是那个可拖动的图标).
+ * 用户可以触摸滑片并向左或向右拖动，再或者可以使用方向键都可以设置当前的进度等级.
+ * 不建议把可以获取焦点的小部件放在 SeekBar 的左边或右边.
  * <p>
- * SeekBar 可以附加一个 {@link SeekBar.OnSeekBarChangeListener} 以获得用户操作的通知。
+ * SeekBar 可以附加一个 {@link SeekBar.OnSeekBarChangeListener} 以获得用户操作的通知.
  *
  * @attr ref android.R.styleable#SeekBar_thumb
  * @author translate by madgoat（Android中文翻译组）
@@ -35,30 +35,30 @@ import android.util.AttributeSet;
 public class SeekBar extends AbsSeekBar {
 
     /**
-     * 当进度改变后用于通知客户端的回调函数。
-     * 这包括用户通过手势、方向键或轨迹球触发的改变， 以及编程触发的改变。
+     * 当进度改变后用于通知客户端的回调函数.
+     * 这包括用户通过手势、方向键或轨迹球触发的改变， 以及编程触发的改变.
      */
     public interface OnSeekBarChangeListener {
         
         /**
-         * 通知进度已经被修改。客户端可以使用 fromUser 参数区分用户触发的改变还是编程触发的改变。
+         * 通知进度已经被修改.客户端可以使用 fromUser 参数区分用户触发的改变还是编程触发的改变.
          * 
-         * @param seekBar 当前被修改进度的 SeekBar。
-         * @param progress 	当前的进度值。此值的取值范围为 0 到 max 之间。
-         * Max为用户通过 {@link ProgressBar#setMax(int)} 设置的值，默认为100。
-         * @param fromUser 如果是用户触发的改变则返回 True。
+         * @param seekBar 当前被修改进度的 SeekBar.
+         * @param progress 	当前的进度值.此值的取值范围为 0 到 max 之间.
+         * Max为用户通过 {@link ProgressBar#setMax(int)} 设置的值，默认为100.
+         * @param fromUser 如果是用户触发的改变则返回 True.
          */
         void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser);
     
         /**
-         * 通知用户已经开始一个触摸拖动手势。客户端可能需要使用这个来禁用 seekbar 的滑动功能。
-         * @param seekBar 触摸手势开始的 SeekBar。
+         * 通知用户已经开始一个触摸拖动手势.客户端可能需要使用这个来禁用 seekbar 的滑动功能.
+         * @param seekBar 触摸手势开始的 SeekBar.
          */
         void onStartTrackingTouch(SeekBar seekBar);
         
         /**
-         * 通知用户触摸手势已经结束。户端可能需要使用这个来启用 seekbar 的滑动功能。
-         * @param seekBar 触摸手势开始了的 SeekBar。
+         * 通知用户触摸手势已经结束.户端可能需要使用这个来启用 seekbar 的滑动功能.
+         * @param seekBar 触摸手势开始了的 SeekBar.
          */
         void onStopTrackingTouch(SeekBar seekBar);
     }
@@ -87,8 +87,8 @@ public class SeekBar extends AbsSeekBar {
     }
 
     /**
-     * 设置一个监听器以接受 seekbar 进度改变时的通知。
-     * 同时提供用户在 SeekBar 上开始和停止触摸手势时的通知。
+     * 设置一个监听器以接受 seekbar 进度改变时的通知.
+     * 同时提供用户在 SeekBar 上开始和停止触摸手势时的通知.
      * 
      * @param l SeekBar 的通知监听者
      * 

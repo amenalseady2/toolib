@@ -92,9 +92,9 @@ public final class ViewTreeObserver {
      */
     public interface OnTouchModeChangeListener {
         /**
-         * 触摸模式发生改变时调用的回调函数。
+         * 触摸模式发生改变时调用的回调函数.
          *
-         * @param isInTouchMode 如果视图结构当前处于触摸模式，参数为真；否则为假。
+         * @param isInTouchMode 如果视图结构当前处于触摸模式，参数为真；否则为假.
          */
         public void onTouchModeChanged(boolean isInTouchMode);
     }

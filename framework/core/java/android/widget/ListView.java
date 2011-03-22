@@ -55,7 +55,7 @@ import java.util.ArrayList;
 
 
 /**
- * 用于显示多个条目的纵向滚动列表视图。条目数据来自于与该类关联的 {@link ListAdapter}。
+ * 用于显示多个条目的纵向滚动列表视图.条目数据来自于与该类关联的 {@link ListAdapter}.
  *
  * @attr ref android.R.styleable#ListView_entries
  * @attr ref android.R.styleable#ListView_divider
@@ -74,17 +74,17 @@ public class ListView extends AbsListView {
     static final int NO_POSITION = -1;
 
     /**
-     * 普通列表，无选择状态。
+     * 普通列表，无选择状态.
      */
     public static final int CHOICE_MODE_NONE = 0;
 
     /**
-     * 最多允许选择一项的列表。
+     * 最多允许选择一项的列表.
      */
     public static final int CHOICE_MODE_SINGLE = 1;
 
     /**
-     * 允许选择多项的列表。
+     * 允许选择多项的列表.
      */
     public static final int CHOICE_MODE_MULTIPLE = 2;
 
@@ -102,14 +102,14 @@ public class ListView extends AbsListView {
     private static final int MIN_SCROLL_PREVIEW_PIXELS = 2;
 
     /**
-     * 在列表中呈现固定的视图的类，例如顶部的列表头、底部的列表尾。
+     * 在列表中呈现固定的视图的类，例如顶部的列表头、底部的列表尾.
      */
     public class FixedViewInfo {
-        /** 加入列表中的视图。 */
+        /** 加入列表中的视图. */
         public View view;
-        /** 视图背后的数据。由 {@link ListAdapter#getItem(int)} 返回。 */
+        /** 视图背后的数据.由 {@link ListAdapter#getItem(int)} 返回. */
         public Object data;
-        /** 如果列表中的固定视图允许选择，该值为 <code>true</code>。 */
+        /** 如果列表中的固定视图允许选择，该值为 <code>true</code>. */
         public boolean isSelectable;
     }
 
@@ -204,7 +204,7 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * @return 响应箭头事件时，列表视图可以滚动的最大值。
+     * @return 响应箭头事件时，列表视图可以滚动的最大值.
      */
     public int getMaxScrollAmount() {
         return (int) (MAX_SCROLL_FACTOR * (mBottom - mTop));
@@ -258,11 +258,11 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 添加一个固定显示于列表顶部的视图。如果多次调用该方法，
-     * 视图将按照它们添加的顺序排列。如果需要，添加的视图可以获得焦点。
+     * 添加一个固定显示于列表顶部的视图.如果多次调用该方法，
+     * 视图将按照它们添加的顺序排列.如果需要，添加的视图可以获得焦点.
      * <p>
-     * 注意：要在调用 setAdapter 之前调用此方法。
-     * 这样 ListView 可以将提供的游标与列表头尾结合起来。
+     * 注意：要在调用 setAdapter 之前调用此方法.
+     * 这样 ListView 可以将提供的游标与列表头尾结合起来.
      * （This is so ListView can wrap the supplied cursor with one
      * that will also account for header and footer views.）
      * </p>
@@ -286,11 +286,11 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 添加一个固定显示于列表顶部的视图。如果多次调用该方法，
-     * 视图将按照它们添加的顺序排列。如果需要，添加的视图可以获得焦点。
+     * 添加一个固定显示于列表顶部的视图.如果多次调用该方法，
+     * 视图将按照它们添加的顺序排列.如果需要，添加的视图可以获得焦点.
      * <p>
-     * 注意：要在调用 setAdapter 之前调用此方法。
-     * 这样 ListView 可以将提供的游标与列表头尾结合起来。
+     * 注意：要在调用 setAdapter 之前调用此方法.
+     * 这样 ListView 可以将提供的游标与列表头尾结合起来.
      * （This is so ListView can wrap the supplied cursor with one
      * that will also account for header and footer views.）
      * </p>
@@ -306,10 +306,10 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 移除之前添加的某个列表头视图。
+     * 移除之前添加的某个列表头视图.
      *
      * @param v 要移除的视图
-     * @return 若成功移除视图，则返回 true；若此视图不是列表头视图，则返回 false。
+     * @return 若成功移除视图，则返回 true；若此视图不是列表头视图，则返回 false.
      */
     public boolean removeHeaderView(View v) {
         if (mHeaderViewInfos.size() > 0) {
@@ -336,11 +336,11 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 添加一个固定显示于列表底部的视图。如果多次调用该方法，
-     * 视图将按照它们添加的顺序排列。如果需要，添加的视图可以获得焦点。
+     * 添加一个固定显示于列表底部的视图.如果多次调用该方法，
+     * 视图将按照它们添加的顺序排列.如果需要，添加的视图可以获得焦点.
      * <p>
-     * 注意：要在调用 setAdapter 之前调用此方法。
-     * 这样 ListView 可以将提供的游标与列表头尾结合起来。
+     * 注意：要在调用 setAdapter 之前调用此方法.
+     * 这样 ListView 可以将提供的游标与列表头尾结合起来.
      * （This is so ListView can wrap the supplied cursor with one
      * that will also account for header and footer views.）
      * </p>
@@ -364,11 +364,11 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 添加一个固定显示于列表底部的视图。如果多次调用该方法，
-     * 视图将按照它们添加的顺序排列。如果需要，添加的视图可以获得焦点。
+     * 添加一个固定显示于列表底部的视图.如果多次调用该方法，
+     * 视图将按照它们添加的顺序排列.如果需要，添加的视图可以获得焦点.
      * <p>
-     * 注意：要在调用 setAdapter 之前调用此方法。
-     * 这样 ListView 可以将提供的游标与列表头尾结合起来。
+     * 注意：要在调用 setAdapter 之前调用此方法.
+     * 这样 ListView 可以将提供的游标与列表头尾结合起来.
      * （This is so ListView can wrap the supplied cursor with one
      * that will also account for header and footer views.）
      * </p>
@@ -385,10 +385,10 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 移除之前添加的列表尾视图。
+     * 移除之前添加的列表尾视图.
      *
      * @param v 要移除的视图
-     * @return 若成功移除视图，则返回 true；若此视图不是列表尾视图，则返回 false。
+     * @return 若成功移除视图，则返回 true；若此视图不是列表尾视图，则返回 false.
      */
     public boolean removeFooterView(View v) {
         if (mFooterViewInfos.size() > 0) {
@@ -404,10 +404,10 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 返回 ListView 的当前适配器。返回的适配器可能不是传入的
-     * {@link #setAdapter(ListAdapter)}，而是 {@link WrapperListAdapter}。
+     * 返回 ListView 的当前适配器.返回的适配器可能不是传入的
+     * {@link #setAdapter(ListAdapter)}，而是 {@link WrapperListAdapter}.
      *
-     * @return 当前用于显示 ListView 数据的适配器。
+     * @return 当前用于显示 ListView 数据的适配器.
      *
      * @see #setAdapter(ListAdapter)
      */
@@ -417,12 +417,12 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 设置 ListView 后端的数据。
+     * 设置 ListView 后端的数据.
      *
      * 根据当前 ListView 使用的特性，传入方法的 <code>adapter</code> 
-     * 可能被装入 WrapperListAdapter 中。
-     * 例如：添加列表头或列表尾会导致封包动作的发生。
-     * @param adapter 负责维护列表后端数据，并提供显示视图用的数据集的 ListAdapter。
+     * 可能被装入 WrapperListAdapter 中.
+     * 例如：添加列表头或列表尾会导致封包动作的发生.
+     * @param adapter 负责维护列表后端数据，并提供显示视图用的数据集的 ListAdapter.
      *
      * @see #getAdapter() 
      */
@@ -1842,9 +1842,9 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 设置当前选中条目。在触摸模式下，并不会选中条目，只是适当的调整其位置。
-     * 若指定的选择位置小于 0，则会选择位置 0 的条目。
-     * @param position 要选中的条目的索引（下标从 0 开始）。
+     * 设置当前选中条目.在触摸模式下，并不会选中条目，只是适当的调整其位置.
+     * 若指定的选择位置小于 0，则会选择位置 0 的条目.
+     * @param position 要选中的条目的索引（下标从 0 开始）.
      */
     @Override
     public void setSelection(int position) {
@@ -1852,10 +1852,10 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 选中指定的条目，并将所选条目置于距离 ListView 顶端 y 像素处。
-     * （在触摸模式下，并不会选中条目，只是适当的调整其位置。）
-     * @param position 要选中的条目的索引（下标从 0 开始）。
-     * @param y 条目与 ListView 顶端的距离（包含内边距）。
+     * 选中指定的条目，并将所选条目置于距离 ListView 顶端 y 像素处.
+     * （在触摸模式下，并不会选中条目，只是适当的调整其位置.）
+     * @param position 要选中的条目的索引（下标从 0 开始）.
+     * @param y 条目与 ListView 顶端的距离（包含内边距）.
      */
     public void setSelectionFromTop(int position, int y) {
         if (mAdapter == null) {
@@ -1986,7 +1986,7 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * setSelectionAfterHeaderView 选中第一个非列表头条目。
+     * setSelectionAfterHeaderView 选中第一个非列表头条目.
      */
     public void setSelectionAfterHeaderView() {
         final int count = mHeaderViewInfos.size();
@@ -2908,8 +2908,8 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 表明在由 ListAdapter 创建的视图中，可包含能获得焦点的条目。
-     * @param itemsCanFocus 若条目可以获得焦点，则设为 true；否则设为 false。
+     * 表明在由 ListAdapter 创建的视图中，可包含能获得焦点的条目.
+     * @param itemsCanFocus 若条目可以获得焦点，则设为 true；否则设为 false.
      */
     public void setItemsCanFocus(boolean itemsCanFocus) {
         mItemsCanFocus = itemsCanFocus;
@@ -2919,7 +2919,7 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * @return ListAdapter 生成的视图是否包含能获得焦点的项目。
+     * @return ListAdapter 生成的视图是否包含能获得焦点的项目.
      */
     public boolean getItemsCanFocus() {
         return mItemsCanFocus;
@@ -3153,18 +3153,18 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 返回每个列表条目间的可绘制对象。
+     * 返回每个列表条目间的可绘制对象.
      *
-     * @return 当前列表元素间的可绘制对象。
+     * @return 当前列表元素间的可绘制对象.
      */
     public Drawable getDivider() {
         return mDivider;
     }
 
     /**
-     * 设置每个列表条目间的可绘制对象。若可绘制对象没有设置高度，应该调用
-     * {@link #setDividerHeight(int)} 方法设置其高度。
-     * @param divider 将用作分隔符的可绘制对象。
+     * 设置每个列表条目间的可绘制对象.若可绘制对象没有设置高度，应该调用
+     * {@link #setDividerHeight(int)} 方法设置其高度.
+     * @param divider 将用作分隔符的可绘制对象.
      */
     public void setDivider(Drawable divider) {
         if (divider != null) {
@@ -3180,15 +3180,15 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * @return 返回每个列表条目间的分隔符的高度。
+     * @return 返回每个列表条目间的分隔符的高度.
      */
     public int getDividerHeight() {
         return mDividerHeight;
     }
     
     /**
-     * 设置每个列表条目间的分隔符的高度。调用该方法将覆盖由 setDivider(Drawable) 设置的高度。
-     * @param height 分隔符的新高度，单位为像素。
+     * 设置每个列表条目间的分隔符的高度.调用该方法将覆盖由 setDivider(Drawable) 设置的高度.
+     * @param height 分隔符的新高度，单位为像素.
      */
     public void setDividerHeight(int height) {
         mDividerHeight = height;
@@ -3196,8 +3196,8 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 设置是否为列表头绘制分隔符。
-     * @param headerDividersEnabled 设为 true，绘制分隔符；设为 false，不绘制。
+     * 设置是否为列表头绘制分隔符.
+     * @param headerDividersEnabled 设为 true，绘制分隔符；设为 false，不绘制.
      * @see #setFooterDividersEnabled(boolean)
      * @see #addHeaderView(android.view.View)
      */
@@ -3207,8 +3207,8 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 设置是否为列表尾绘制分隔符。
-     * @param footerDividersEnabled 设为 true，绘制分隔符；设为 false，不绘制。
+     * 设置是否为列表尾绘制分隔符.
+     * @param footerDividersEnabled 设为 true，绘制分隔符；设为 false，不绘制.
      * @see #setHeaderDividersEnabled(boolean)
      * @see #addFooterView(android.view.View)
      */
@@ -3238,10 +3238,10 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 设置在所有列表内容下部的可绘制对象。当用户过滚动列表时，显示该可绘制对象，
-     * 或者当列表内容不能充满容器时显示该对象。
+     * 设置在所有列表内容下部的可绘制对象.当用户过滚动列表时，显示该可绘制对象，
+     * 或者当列表内容不能充满容器时显示该对象.
      *
-     * @param footer 设置的可绘制对象。
+     * @param footer 设置的可绘制对象.
      */
     public void setOverscrollFooter(Drawable footer) {
         mOverScrollFooter = footer;
@@ -3249,7 +3249,7 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * @return 在所有列表内容下部显示的可绘制对象。
+     * @return 在所有列表内容下部显示的可绘制对象.
      */
     public Drawable getOverscrollFooter() {
         return mOverScrollFooter;
@@ -3434,12 +3434,12 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 设置列表的选择模式。缺省情况下，列表不能选择（{@link #CHOICE_MODE_NONE}）。
-     * 将选择模式设为 {@link #CHOICE_MODE_SINGLE}，允许最多选择一个列表条目。
-     * 将选择模式设为 {@link #CHOICE_MODE_MULTIPLE}，可以选择任意个列表条目。
+     * 设置列表的选择模式.缺省情况下，列表不能选择（{@link #CHOICE_MODE_NONE}）.
+     * 将选择模式设为 {@link #CHOICE_MODE_SINGLE}，允许最多选择一个列表条目.
+     * 将选择模式设为 {@link #CHOICE_MODE_MULTIPLE}，可以选择任意个列表条目.
      * 
      * @param choiceMode {@link #CHOICE_MODE_NONE}、{@link #CHOICE_MODE_SINGLE}、
-     * {@link #CHOICE_MODE_MULTIPLE} 中的任何一个值。
+     * {@link #CHOICE_MODE_MULTIPLE} 中的任何一个值.
      */
     public void setChoiceMode(int choiceMode) {
         mChoiceMode = choiceMode;
@@ -3493,8 +3493,8 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 设置指定条目的选择状态。当选择模式为 {@link #CHOICE_MODE_SINGLE} 
-     * 或者 {@link #CHOICE_MODE_MULTIPLE} 时有效。
+     * 设置指定条目的选择状态.当选择模式为 {@link #CHOICE_MODE_SINGLE} 
+     * 或者 {@link #CHOICE_MODE_MULTIPLE} 时有效.
      * @param position 需要改变选择状态的条目的索引
      * @param value 条目的选择状态
      */
@@ -3541,11 +3541,11 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 返回指定条目的选择状态。当选择模式为 {@link #CHOICE_MODE_SINGLE} 
-     * 或者 {@link #CHOICE_MODE_MULTIPLE} 时有效。
+     * 返回指定条目的选择状态.当选择模式为 {@link #CHOICE_MODE_SINGLE} 
+     * 或者 {@link #CHOICE_MODE_MULTIPLE} 时有效.
      *
      * @param position 要取得选择状态的条目的索引
-     * @return 条目的选中状态；若选择模式无效，则返回 <code>false</code>。
+     * @return 条目的选中状态；若选择模式无效，则返回 <code>false</code>.
      *
      * @see #setChoiceMode(int)
      */
@@ -3558,9 +3558,9 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 返回当前选中的条目。当选择模式为 {@link #CHOICE_MODE_SINGLE} 时有效。
+     * 返回当前选中的条目.当选择模式为 {@link #CHOICE_MODE_SINGLE} 时有效.
      * 
-     * @return 当前选中条目的索引，无选中条目时返回 {@link #INVALID_POSITION} 。
+     * @return 当前选中条目的索引，无选中条目时返回 {@link #INVALID_POSITION} .
      *
      * @see #setChoiceMode(int)
      */
@@ -3573,10 +3573,10 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 返回当前选中的条目。当选择模式不是 {@link #CHOICE_MODE_NONE} 时有效。
+     * 返回当前选中的条目.当选择模式不是 {@link #CHOICE_MODE_NONE} 时有效.
      *
-     * @return  由选中的条目的索引和 true 构成的 SparseBooleanArray。
-     *          若选择模式为 {@link #CHOICE_MODE_NONE}，则返回 <code>null</code>。
+     * @return  由选中的条目的索引和 true 构成的 SparseBooleanArray.
+     *          若选择模式为 {@link #CHOICE_MODE_NONE}，则返回 <code>null</code>.
      */
     public SparseBooleanArray getCheckedItemPositions() {
         if (mChoiceMode != CHOICE_MODE_NONE) {
@@ -3586,11 +3586,11 @@ public class ListView extends AbsListView {
     }
 
     /**
-     * 返回当前选中的条目的 ID 数组。当选择模式不是 {@link #CHOICE_MODE_NONE} 时有效。
+     * 返回当前选中的条目的 ID 数组.当选择模式不是 {@link #CHOICE_MODE_NONE} 时有效.
      *
-     * @return 包含列表中所有选中条目的 ID 的数组。
+     * @return 包含列表中所有选中条目的 ID 的数组.
      *         
-     * @deprecated 请用 {@link #getCheckedItemIds()} 代替。
+     * @deprecated 请用 {@link #getCheckedItemIds()} 代替.
      */
     @Deprecated
     public long[] getCheckItemIds() {
@@ -3629,11 +3629,11 @@ public class ListView extends AbsListView {
     }
     
     /**
-     * 返回当前选中的条目的 ID 数组。当选择模式不是 {@link #CHOICE_MODE_NONE}，
-     * 并且适配器中保存有固定的 ID 时有效。
+     * 返回当前选中的条目的 ID 数组.当选择模式不是 {@link #CHOICE_MODE_NONE}，
+     * 并且适配器中保存有固定的 ID 时有效.
      * （{@link ListAdapter#hasStableIds()} == {@code true}）
      * 
-     * @return 包含列表中所有选中条目的 ID 的数组。
+     * @return 包含列表中所有选中条目的 ID 的数组.
      */
     public long[] getCheckedItemIds() {
         if (mChoiceMode == CHOICE_MODE_NONE || mCheckedIdStates == null || mAdapter == null) {

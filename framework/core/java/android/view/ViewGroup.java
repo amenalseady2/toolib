@@ -205,7 +205,7 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     public static final int FOCUS_BEFORE_DESCENDANTS = 0x20000;
 
     /**
-     * 只有当没有子节点可以获得焦点时，该视图获得焦点。
+     * 只有当没有子节点可以获得焦点时，该视图获得焦点.
      * @author translate by cnmahj
      */
     public static final int FOCUS_AFTER_DESCENDANTS = 0x40000;
@@ -258,7 +258,7 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
 
     /**
      * 当 FLAG_CLIP_TO_PADDING 和 FLAG_PADDING_NOT_NULL
-     * 同时设置时，绘图将剪切掉在内边距区域内的图像。
+     * 同时设置时，绘图将剪切掉在内边距区域内的图像.
      * @author translate by cnmahj
      */
     protected static final int CLIP_TO_PADDING_MASK = FLAG_CLIP_TO_PADDING | FLAG_PADDING_NOT_NULL;
@@ -553,9 +553,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 如果该视图或其包含的视图具有焦点则返回真。
+     * 如果该视图或其包含的视图具有焦点则返回真.
      *
-     * @return 如果该视图或其包含的视图具有焦点则返回真。
+     * @return 如果该视图或其包含的视图具有焦点则返回真.
      */
     @Override
     public boolean hasFocus() {
@@ -968,18 +968,18 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 使用此方法可以拦截所有触摸屏动作引发的事件。这意味着你可以监视分派给子项的事件，
-     * 并且可以在当前手势的任何一点获得其控制权。
+     * 使用此方法可以拦截所有触摸屏动作引发的事件.这意味着你可以监视分派给子项的事件，
+     * 并且可以在当前手势的任何一点获得其控制权.
      *
-     * <p>使用此方法需谨慎。因为它与 {@link View#onTouchEvent(MotionEvent)
-     * View.onTouchEvent(MotionEvent)} 有相当复杂的交互。
-     * 使用它需要像该方法实现一样正确的实现该方法。触控事件是按如下顺序接收的：
+     * <p>使用此方法需谨慎.因为它与 {@link View#onTouchEvent(MotionEvent)
+     * View.onTouchEvent(MotionEvent)} 有相当复杂的交互.
+     * 使用它需要像该方法实现一样正确的实现该方法.触控事件是按如下顺序接收的：
      *
      * <ol>
-     * <li> 首先可以接收按下事件。
-     * <li> 按下事件会在视图组的子视图及本视图的 onTouchEvent() 方法中处理。
+     * <li> 首先可以接收按下事件.
+     * <li> 按下事件会在视图组的子视图及本视图的 onTouchEvent() 方法中处理.
      * 这意味着你应该实现 onTouchEvent() 方法以返回真，这样才能收到下一个手势
-     * （代替通过父视图来处理该事件）。
+     * （代替通过父视图来处理该事件）.
      *   Also, by returning true from
      * onTouchEvent(), you will not receive any following
      * events in onInterceptTouchEvent() and all touch processing must
@@ -1419,14 +1419,14 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 返回当前迭代要绘制的子视图的索引。如果要改变绘制子视图的顺序，应该重载该方法。
-     * 默认返回i。
+     * 返回当前迭代要绘制的子视图的索引.如果要改变绘制子视图的顺序，应该重载该方法.
+     * 默认返回i.
      * <p>
      * 注意：为了调用该方法，必须先调用 {@link #setChildrenDrawingOrderEnabled(boolean)}
-     * 方法来启用子视图排序功能。
+     * 方法来启用子视图排序功能.
      *
-     * @param i 当前迭代。
-     * @return 要绘制的子视图的迭代。
+     * @param i 当前迭代.
+     * @return 要绘制的子视图的迭代.
      * 
      * @see #setChildrenDrawingOrderEnabled(boolean)
      * @see #isChildrenDrawingOrderEnabled()
@@ -1795,9 +1795,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 添加子视图。如果子视图没有设置布局参数，则使用视图组的布局参数为该视图布局。
+     * 添加子视图.如果子视图没有设置布局参数，则使用视图组的布局参数为该视图布局.
      *
-     * @param child 添加的子视图。
+     * @param child 添加的子视图.
      *
      * @see #generateDefaultLayoutParams()
      */
@@ -1806,10 +1806,10 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 添加子视图。如果子视图没有设置布局参数，则使用视图组的布局参数为该视图布局。
+     * 添加子视图.如果子视图没有设置布局参数，则使用视图组的布局参数为该视图布局.
      *
-     * @param child 添加的子视图。
-     * @param index 子视图加入的位置索引。
+     * @param child 添加的子视图.
+     * @param index 子视图加入的位置索引.
      *
      * @see #generateDefaultLayoutParams()
      */
@@ -1825,9 +1825,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 以指定的宽度和高度，以及视图组的默认布局参数添加子视图。
+     * 以指定的宽度和高度，以及视图组的默认布局参数添加子视图.
      *
-     * @param child 添加的子视图。
+     * @param child 添加的子视图.
      */
     public void addView(View child, int width, int height) {
         final LayoutParams params = generateDefaultLayoutParams();
@@ -1837,21 +1837,21 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 使用指定的布局参数添加子视图。
+     * 使用指定的布局参数添加子视图.
      *
-     * @param child 添加的子视图。
-     * @param params 设置到子视图上的布局参数。
+     * @param child 添加的子视图.
+     * @param params 设置到子视图上的布局参数.
      */
     public void addView(View child, LayoutParams params) {
         addView(child, -1, params);
     }
 
     /**
-     * 用指定的布局参数添加一个子视图。
+     * 用指定的布局参数添加一个子视图.
      *
-     * @param child 添加的子视图。
-     * @param index 添加的子视图的索引。
-     * @param params 为子视图指定得布局参数。
+     * @param child 添加的子视图.
+     * @param index 添加的子视图的索引.
+     * @param params 为子视图指定得布局参数.
      */
     public void addView(View child, int index, LayoutParams params) {
         if (DBG) {
@@ -1910,9 +1910,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 注册当从视图中添加或移除子视图时发生的回调函数。
+     * 注册当从视图中添加或移除子视图时发生的回调函数.
      *
-     * @param listener 层次结构变更时执行的回调函数。
+     * @param listener 层次结构变更时执行的回调函数.
      */
     public void setOnHierarchyChangeListener(OnHierarchyChangeListener listener) {
         mOnHierarchyChangeListener = listener;
@@ -2100,12 +2100,12 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 子类应该重写该方法，以设置为子视图提供的布局动画参数。
+     * 子类应该重写该方法，以设置为子视图提供的布局动画参数.
      *
-     * @param child 与布局动画参数关联的子视图。
-     * @param params 保存了动画参数的子视图布局参数。
-     * @param index 视图组中的子视图索引。
-     * @param count 视图组中的子视图数。
+     * @param child 与布局动画参数关联的子视图.
+     * @param params 保存了动画参数的子视图布局参数.
+     * @param index 视图组中的子视图索引.
+     * @param count 视图组中的子视图数.
      */
     protected void attachLayoutAnimationParameters(View child,
             LayoutParams params, int index, int count) {
@@ -2130,28 +2130,28 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 在布局期间移除视图。用于在 onLayout() 方法中移除指定的视图。
+     * 在布局期间移除视图.用于在 onLayout() 方法中移除指定的视图.
      *
-     * @param view 要从视图组中移除的视图。
+     * @param view 要从视图组中移除的视图.
      */
     public void removeViewInLayout(View view) {
         removeViewInternal(view);
     }
 
     /**
-     * 在布局期间移除指定索引范围的视图。用于在 onLayout() 方法中移除指定的视图。
+     * 在布局期间移除指定索引范围的视图.用于在 onLayout() 方法中移除指定的视图.
      *
-     * @param start 要移除的视图索引范围的起始位置。
-     * @param count 要移除的视图个数。
+     * @param start 要移除的视图索引范围的起始位置.
+     * @param count 要移除的视图个数.
      */
     public void removeViewsInLayout(int start, int count) {
         removeViewsInternal(start, count);
     }
 
     /**
-     * 移除视图组中指定位置的视图。
+     * 移除视图组中指定位置的视图.
      *
-     * @param index 要移除的视图在视图组中的位置。
+     * @param index 要移除的视图在视图组中的位置.
      */
     public void removeViewAt(int index) {
         removeViewInternal(index, getChildAt(index));
@@ -2160,10 +2160,10 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 从视图组中移除指定索引范围的视图。
+     * 从视图组中移除指定索引范围的视图.
      *
-     * @param start 要移除的视图索引范围的起始位置。
-     * @param count 要移除的视图个数。
+     * @param start 要移除的视图索引范围的起始位置.
+     * @param count 要移除的视图个数.
      */
     public void removeViews(int start, int count) {
         removeViewsInternal(start, count);
@@ -2243,7 +2243,7 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 调用此方法可以从视图组中移除所有视图。
+     * 调用此方法可以从视图组中移除所有视图.
      */
     public void removeAllViews() {
         removeAllViewsInLayout();
@@ -2664,9 +2664,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
             int l, int t, int r, int b);
 
     /**
-     * 指示视图组是否能够在首次布局后为其子视图提供动画效果的显示。
+     * 指示视图组是否能够在首次布局后为其子视图提供动画效果的显示.
      *
-     * @return 如果子视图可以使用动画效果则返回真，否则返回假。
+     * @return 如果子视图可以使用动画效果则返回真，否则返回假.
      */
     protected boolean canAnimate() {
         return mLayoutAnimationController != null;
@@ -2887,34 +2887,34 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * 返回一组基于提供的属性集合的布局参数集合。
+     * 返回一组基于提供的属性集合的布局参数集合.
      *
-     * @param attrs 用于生成布局参数的属性集。
+     * @param attrs 用于生成布局参数的属性集.
      *
-     * @return {@link android.view.ViewGroup.LayoutParams} 或其子类的实例。
+     * @return {@link android.view.ViewGroup.LayoutParams} 或其子类的实例.
      */
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams(getContext(), attrs);
     }
 
     /**
-     * 基于提供的布局参数返回一组安全的布局参数集合。当传入 ViewGroup 的视图的参数没有通过
-     * {@link #checkLayoutParams(android.view.ViewGroup.LayoutParams)} 的检测时，调用该方法。
-     * 该方法会返回适合 ViewGroup 的新的布局参数，可能从指定的布局参数中复制适当的属性。
+     * 基于提供的布局参数返回一组安全的布局参数集合.当传入 ViewGroup 的视图的参数没有通过
+     * {@link #checkLayoutParams(android.view.ViewGroup.LayoutParams)} 的检测时，调用该方法.
+     * 该方法会返回适合 ViewGroup 的新的布局参数，可能从指定的布局参数中复制适当的属性.
      *
-     * @param p 要转换为适合于 ViewGroup 的布局参数的集合。
+     * @param p 要转换为适合于 ViewGroup 的布局参数的集合.
      *
-     * @return {@link android.view.ViewGroup.LayoutParams} 或其子类的实例。
+     * @return {@link android.view.ViewGroup.LayoutParams} 或其子类的实例.
      */
     protected LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         return p;
     }
 
     /**
-     * 返回默认布局参数集合。当使用没有设置布局参数的视图调用 {@link #addView(View)}
-     * 时，这些参数是必须的。如果返回空，addView 方法会抛出异常。
+     * 返回默认布局参数集合.当使用没有设置布局参数的视图调用 {@link #addView(View)}
+     * 时，这些参数是必须的.如果返回空，addView 方法会抛出异常.
      *
-     * @return 默认布局参数集合或空。
+     * @return 默认布局参数集合或空.
      */
     protected LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -3581,9 +3581,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         }
 
         /**
-         * Returns 字符串形式的布局参数集合。
+         * Returns 字符串形式的布局参数集合.
          *
-         * @param output 内部表现形式的前导字符串。
+         * @param output 内部表现形式的前导字符串.
          * @return 下面格式的字符串：output +
          *         "ViewGroup.LayoutParams={ width=WIDTH, height=HEIGHT }"
          *

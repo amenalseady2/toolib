@@ -32,7 +32,7 @@ import com.android.internal.R;
  * 译者：<a href="http://android.toolib.net/blog/">cnmahj@toolib.cn</a><br>
  * 整理：<a href="http://android.toolib.net/blog/">cnmahj@toolib.cn</a><br>
  *
- * {@code ZoomControls} 显示一组简单的控件集合用于缩放，并可以注册事件发生时执行的回调函数。
+ * {@code ZoomControls} 显示一组简单的控件集合用于缩放，并可以注册事件发生时执行的回调函数.
  */
 @Widget
 public class ZoomControls extends LinearLayout {
@@ -66,7 +66,7 @@ public class ZoomControls extends LinearLayout {
     }
     
     /**
-     * 设置当用户按住缩放按钮不放时，发生缩放事件的时间间隔(毫秒)。
+     * 设置当用户按住缩放按钮不放时，发生缩放事件的时间间隔(毫秒).
      * @param speed 时间间隔(毫秒)
      */
     public void setZoomSpeed(long speed) {

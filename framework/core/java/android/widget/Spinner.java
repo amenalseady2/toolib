@@ -29,8 +29,8 @@ import android.view.ViewGroup;
 
 
 /**
- * 下拉列表（Spinner）是一个每次只能选择所有项中一项的部件。
- * 它的项目来自于与之相关联的 {@link Adapter}。
+ * 下拉列表（Spinner）是一个每次只能选择所有项中一项的部件.
+ * 它的项目来自于与之相关联的 {@link Adapter}.
  * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-spinner.html">Spinner
  * tutorial</a>.</p>
  * 
@@ -92,9 +92,9 @@ public class Spinner extends AbsSpinner implements OnClickListener {
     }
 
     /**
-     * <p>Spinner 不支持条目的点击事件，调用此方法将引发异常。</p>
+     * <p>Spinner 不支持条目的点击事件，调用此方法将引发异常.</p>
      *
-     * @param l 这个监听器将被忽略。
+     * @param l 这个监听器将被忽略.
      */
     @Override
     public void setOnItemClickListener(OnItemClickListener l) {
@@ -278,7 +278,7 @@ public class Spinner extends AbsSpinner implements OnClickListener {
 
     /**
      * 设置对话框弹出的时候显示的提示（译者注：设置弹出视图上的标题）
-     * @param promptId 用于对话框提示的资源 ID。
+     * @param promptId 用于对话框提示的资源 ID.
      */
     public void setPromptId(int promptId) {
         mPrompt = getContext().getText(promptId);

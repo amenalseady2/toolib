@@ -32,12 +32,12 @@ import java.util.IllegalFormatException;
 import java.util.Locale;
 
 /**
- * 简单的计时器类。
+ * 简单的计时器类.
  * <p>
- * 你可以给他设定基于 {@link SystemClock#elapsedRealtime} 的基准（开始）时间，用于计时。
- * 如果你没有设置该时间，该类将从你调用 {@link #start} 方法的时间开始计时。
+ * 你可以给他设定基于 {@link SystemClock#elapsedRealtime} 的基准（开始）时间，用于计时.
+ * 如果你没有设置该时间，该类将从你调用 {@link #start} 方法的时间开始计时.
  * 默认以“MM:SS”或“H:MM:SS”形式显示计时器的值，你可以使用 {@link #setFormat}
- * 方法使其显示任意字符串。
+ * 方法使其显示任意字符串.
  * @attr ref android.R.styleable#Chronometer_format
  * @author translate by 德罗德
  * @author review by cnmahj
@@ -48,12 +48,12 @@ public class Chronometer extends TextView {
     private static final String TAG = "Chronometer";
 
     /**
-     * 定义计时器递增通知回调函数的监听器接口。
+     * 定义计时器递增通知回调函数的监听器接口.
      */
     public interface OnChronometerTickListener {
 
         /**
-         * 在计时器变化时的通知。
+         * 在计时器变化时的通知.
          */
         void onChronometerTick(Chronometer chronometer);
 
@@ -75,21 +75,21 @@ public class Chronometer extends TextView {
     private static final int TICK_WHAT = 2;
     
     /**
-     * 初始化计时器对象。设置当前时间为基准（开始）时间。
+     * 初始化计时器对象.设置当前时间为基准（开始）时间.
      */
     public Chronometer(Context context) {
         this(context, null, 0);
     }
 
     /**
-     * 使用标准视图布局信息初始化计时器。设置当前时间为基准（开始）时间。
+     * 使用标准视图布局信息初始化计时器.设置当前时间为基准（开始）时间.
      */
     public Chronometer(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     /**
-     * 使用标准视图布局信息和风格初始化计时器。设置当前时间为基准（开始）时间。
+     * 使用标准视图布局信息和风格初始化计时器.设置当前时间为基准（开始）时间.
      */
     public Chronometer(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -109,9 +109,9 @@ public class Chronometer extends TextView {
     }
 
     /**
-     * 设置计时器计时的基准（开始）时间。
+     * 设置计时器计时的基准（开始）时间.
      *
-     * @param base 基于 {@link SystemClock#elapsedRealtime} 的基准（开始）时间。
+     * @param base 基于 {@link SystemClock#elapsedRealtime} 的基准（开始）时间.
      */
     @android.view.RemotableViewMethod
     public void setBase(long base) {
@@ -121,17 +121,17 @@ public class Chronometer extends TextView {
     }
 
     /**
-     * 返回通过 {@link #setBase} 设置的基准（开始）时间。
+     * 返回通过 {@link #setBase} 设置的基准（开始）时间.
      */
     public long getBase() {
         return mBase;
     }
 
     /**
-     * 设置用于格式化显示格式的字符串。计时器将用“MM:SS”或“H:MM:SS”
-     * 形式的值替换格式化字符串中的第一个“%s”。
+     * 设置用于格式化显示格式的字符串.计时器将用“MM:SS”或“H:MM:SS”
+     * 形式的值替换格式化字符串中的第一个“%s”.
      * 如果格式化字符串为空，或者你从未调用过 setFormat() 方法，
-     * 计时器将以“MM:SS”或“H:MM:SS”形式显示其值。
+     * 计时器将以“MM:SS”或“H:MM:SS”形式显示其值.
      * @param format 格式化字符串
      */
     @android.view.RemotableViewMethod
@@ -143,33 +143,33 @@ public class Chronometer extends TextView {
     }
 
     /**
-     * 返回通过 {@link #setFormat} 设置的格式化字符串。
+     * 返回通过 {@link #setFormat} 设置的格式化字符串.
      */
     public String getFormat() {
         return mFormat;
     }
 
     /**
-     * 设置计时器变化时调用的监听器。
+     * 设置计时器变化时调用的监听器.
      * 
-     * @param listener 监听器。
+     * @param listener 监听器.
      */
     public void setOnChronometerTickListener(OnChronometerTickListener listener) {
         mOnChronometerTickListener = listener;
     }
 
     /**
-     * @return 监听计时器变化的监听器（可能为空）。
+     * @return 监听计时器变化的监听器（可能为空）.
      */
     public OnChronometerTickListener getOnChronometerTickListener() {
         return mOnChronometerTickListener;
     }
 
     /**
-     * 开始计时。该操作不会影响到由 {@link #setBase} 设置的基准（开始）时间，仅影响显示的视图。
+     * 开始计时.该操作不会影响到由 {@link #setBase} 设置的基准（开始）时间，仅影响显示的视图.
      * 
-     * 即使小部件不可见，计时器也会通过定期处理消息来工作。为了确保不发生资源泄漏，
-     * 用户应确保针对每个 start() 方法调用，都调用了相应的 {@link #stop} 方法。
+     * 即使小部件不可见，计时器也会通过定期处理消息来工作.为了确保不发生资源泄漏，
+     * 用户应确保针对每个 start() 方法调用，都调用了相应的 {@link #stop} 方法.
      */
     public void start() {
         mStarted = true;
@@ -177,8 +177,8 @@ public class Chronometer extends TextView {
     }
 
     /**
-     * 停止计时。不会影响用 {@link #setBase} 方法设置的基准（开始）时间，只影响视图的显示。
-     * 这将停止消息发送，有效地释放计时器通过 {@link #start} 运行时占用的资源。
+     * 停止计时.不会影响用 {@link #setBase} 方法设置的基准（开始）时间，只影响视图的显示.
+     * 这将停止消息发送，有效地释放计时器通过 {@link #start} 运行时占用的资源.
      */
     public void stop() {
         mStarted = false;

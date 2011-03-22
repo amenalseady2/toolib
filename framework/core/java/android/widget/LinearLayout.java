@@ -1328,11 +1328,11 @@ public class LinearLayout extends ViewGroup {
     }
 
     /**
-     * 返回一组包含宽度和高度的布局参数的集合。当视图为纵向布局 （{@link #VERTICAL}）
+     * 返回一组包含宽度和高度的布局参数的集合.当视图为纵向布局 （{@link #VERTICAL}）
      * 时，返回的宽度为 {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}、
-     * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。
+     * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.
      * 当视图为横向布局（{@link #HORIZONTAL}）时，宽度为 {@link LayoutParams#WRAP_CONTENT}、
-     * 高度为 {@link LayoutParams#WRAP_CONTENT}。
+     * 高度为 {@link LayoutParams#WRAP_CONTENT}.
      */
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
