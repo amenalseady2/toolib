@@ -976,29 +976,24 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
      * 使用它需要像该方法实现一样正确的实现该方法.触控事件是按如下顺序接收的：
      *
      * <ol>
-     * <li> 首先可以接收按下事件.
-     * <li> 按下事件会在视图组的子视图及本视图的 onTouchEvent() 方法中处理.
-     * 这意味着你应该实现 onTouchEvent() 方法以返回真，这样才能收到下一个手势
-     * （代替通过父视图来处理该事件）.
-     *   Also, by returning true from
-     * onTouchEvent(), you will not receive any following
-     * events in onInterceptTouchEvent() and all touch processing must
-     * happen in onTouchEvent() like normal.
-     * <li> For as long as you return false from this function, each following
-     * event (up to and including the final up) will be delivered first here
-     * and then to the target's onTouchEvent().
-     * <li> If you return true from here, you will not receive any
-     * following events: the target view will receive the same event but
-     * with the action {@link MotionEvent#ACTION_CANCEL}, and all further
-     * events will be delivered to your onTouchEvent() method and no longer
-     * appear here.
+     * <li> 首先该函数收到按下事件.
+     * <li> 按下事件会在视图组的子视图以及本视图的 onTouchEvent() 方法中处理.
+     * 这意味着若要处理之后的手势（代替父视图来处理该事件），你应该实现
+     * onTouchEvent() 方法并返回真.另外，如果你的 onTouchEvent() 方法返回真，
+     * onInterceptTouchEvent() 方法将不会收到接下来发生的事件，
+     * 整个触控处理必须在 onTouchEvent() 方法中进行.
+     * <li> 如果该方法返回假，接下来的每个事件（直到最后的抬起事件）
+     * 都会首先由该函数来处理，之后传给目标对象的 onTouchEvent() 方法.
+     * <li> 如果该函数返回真，你不会收到接下来的任何事件：
+     * 目标视图会接收到该事件，但其动作被标记为
+     * {@link MotionEvent#ACTION_CANCEL}，之后的事件都会交由你的
+     * onTouchEvent() 方法来处理，不再出现在该方法中.
      * </ol>
      *
-     * @param ev The motion event being dispatched down the hierarchy.
-     * @return Return true to steal motion events from the children and have
-     * them dispatched to this ViewGroup through onTouchEvent().
-     * The current target will receive an ACTION_CANCEL event, and no further
-     * messages will be delivered here.
+     * @param ev 沿着层次结构向下分派的动作事件.
+     * @return 若将动作事件从子视图中截获并通过 onTouchEvent() 
+     * 将他们分派给当前视图组，则返回真.当前目标将收到 ACTION_CANCEL
+     * 事件，并且不再会有其他消息传入该函数.
      */
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         return false;

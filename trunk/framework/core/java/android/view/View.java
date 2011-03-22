@@ -8763,13 +8763,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called by {@link #overScrollBy(int, int, int, int, int, int, int, int, boolean)} to
-     * respond to the results of an over-scroll operation.
+     * 由 {@link #overScrollBy(int, int, int, int, int, int, int, int, boolean)}
+     * 调用，用于响应过滚动操作.
      *
-     * @param scrollX New X scroll value in pixels
-     * @param scrollY New Y scroll value in pixels
-     * @param clampedX True if scrollX was clamped to an over-scroll boundary
-     * @param clampedY True if scrollY was clamped to an over-scroll boundary
+     * @param scrollX 新的 X 轴滚动位置，以像素为单位.
+     * @param scrollY 新的 Y 轴滚动位置，以像素为单位.
+     * @param clampedX 当 scrollX 被限制在过滚动边界时，为真.
+     * @param clampedY 当 scrollY 被限制在过滚动边界时，为真.
      */
     protected void onOverScrolled(int scrollX, int scrollY,
             boolean clampedX, boolean clampedY) {
