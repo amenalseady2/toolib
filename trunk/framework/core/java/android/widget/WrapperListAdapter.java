@@ -17,17 +17,17 @@
 package android.widget;
 
 /**
- * 封装了另一个列表适配器的列表适配器。调用 {@link #getWrappedAdapter()}
- * 可以取得封装在其中的适配器。
+ * 封装了另一个列表适配器的列表适配器.调用 {@link #getWrappedAdapter()}
+ * 可以取得封装在其中的适配器.
  *
  * @see ListView
  * @author translate by cnmahj
  */
 public interface WrapperListAdapter extends ListAdapter {
     /**
-     * 返回封装在列表适配器中的适配器。
+     * 返回封装在列表适配器中的适配器.
      *
-     * @return 封装在该适配器中的 {@link android.widget.ListAdapter}。
+     * @return 封装在该适配器中的 {@link android.widget.ListAdapter}.
      */
     public ListAdapter getWrappedAdapter();
 }

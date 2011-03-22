@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 
 /**
  * 用于 {@link ListView} (实现了 {@link ListAdapter} 接口)和 {@link Spinner}
- * (实现了 {@link SpinnerAdapter} 接口)的共同实现的一个公共基类。
+ * (实现了 {@link SpinnerAdapter} 接口)的共同实现的一个公共基类.
  * @author translate by 德罗德
  * @author review by cnmahj
  * @author convert by cnmahj
@@ -44,7 +44,7 @@ public abstract class BaseAdapter implements ListAdapter, SpinnerAdapter {
     }
     
     /**
-     * 通知关联的视图，后台数据已经改变，视图需要刷新。
+     * 通知关联的视图，后台数据已经改变，视图需要刷新.
      */
     public void notifyDataSetChanged() {
         mDataSetObservable.notifyChanged();

@@ -28,8 +28,8 @@ import android.view.ViewGroup;
 
 /**
  * 将 {@link android.database.Cursor 游标}的数据提供给 
- * {@link android.widget.ListView 列表视图}的适配器。
- * 游标必须包含列名为“_id”的列，否则该类无法工作。
+ * {@link android.widget.ListView 列表视图}的适配器.
+ * 游标必须包含列名为“_id”的列，否则该类无法工作.
  */
 public abstract class CursorAdapter extends BaseAdapter implements Filterable,
         CursorFilter.CursorFilterClient {
@@ -80,22 +80,22 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     protected FilterQueryProvider mFilterQueryProvider;
 
     /**
-     * 构造函数。为了一直显示最近的数据，当数据发生变更时，
-     * 适配器会调用游标的 requery() 方法。
+     * 构造函数.为了一直显示最近的数据，当数据发生变更时，
+     * 适配器会调用游标的 requery() 方法.
      *
-     * @param c 用于取得数据的游标。
-     * @param context 上下文。
+     * @param c 用于取得数据的游标.
+     * @param context 上下文.
      */
     public CursorAdapter(Context context, Cursor c) {
         init(context, c, true);
     }
 
     /**
-     * 构造函数。
-     * @param c 用于取得数据的游标。
-     * @param context 上下文。
+     * 构造函数.
+     * @param c 用于取得数据的游标.
+     * @param context 上下文.
      * @param autoRequery 如果为真，在数据变更时调用游标的  requery()
-     *                    方法，已保持显示最新的数据。
+     *                    方法，已保持显示最新的数据.
      */
     public CursorAdapter(Context context, Cursor c, boolean autoRequery) {
         init(context, c, autoRequery);
@@ -116,8 +116,8 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * 返回游标。
-     * @return 游标。
+     * 返回游标.
+     * @return 游标.
      */
     public Cursor getCursor() {
         return mCursor;
@@ -204,37 +204,37 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
     
     /**
-     * 为游标指向的数据创建新视图。
-     * @param context 上下文。访问应用程序全局信息的接口。
-     * @param cursor 用于取得数据的游标。游标已经移到正确的位置。
-     * @param parent 新创建的视图的容器。
-     * @return 新创建的视图。
+     * 为游标指向的数据创建新视图.
+     * @param context 上下文.访问应用程序全局信息的接口.
+     * @param cursor 用于取得数据的游标.游标已经移到正确的位置.
+     * @param parent 新创建的视图的容器.
+     * @return 新创建的视图.
      */
     public abstract View newView(Context context, Cursor cursor, ViewGroup parent);
 
     /**
-     * 为游标指向的数据创建新的下拉列表视图。
-     * @param context 上下文。访问应用程序全局信息的接口。
-     * @param cursor 用于取得数据的游标。游标已经移到正确的位置。
-     * @param parent 新创建的视图的容器。
-     * @return 新创建的视图。
+     * 为游标指向的数据创建新的下拉列表视图.
+     * @param context 上下文.访问应用程序全局信息的接口.
+     * @param cursor 用于取得数据的游标.游标已经移到正确的位置.
+     * @param parent 新创建的视图的容器.
+     * @return 新创建的视图.
      */
     public View newDropDownView(Context context, Cursor cursor, ViewGroup parent) {
         return newView(context, cursor, parent);
     }
 
     /**
-     * 绑定游标指向的数据到既存视图。
-     * @param view 之前由 newView 方法创建的视图。
-     * @param context 上下文。访问应用程序全局信息的接口。
-     * @param cursor 用于取得数据的游标。游标已经移到正确的位置。
+     * 绑定游标指向的数据到既存视图.
+     * @param view 之前由 newView 方法创建的视图.
+     * @param context 上下文.访问应用程序全局信息的接口.
+     * @param cursor 用于取得数据的游标.游标已经移到正确的位置.
      */
     public abstract void bindView(View view, Context context, Cursor cursor);
     
     /**
-     * 将底层的游标更改为新的游标。该函数将关闭既存游标。
+     * 将底层的游标更改为新的游标.该函数将关闭既存游标.
      * 
-     * @param cursor 要使用的新游标。
+     * @param cursor 要使用的新游标.
      */
     public void changeCursor(Cursor cursor) {
         if (cursor == mCursor) {
@@ -262,32 +262,32 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * <p>将游标转换为 CharSequence。子类应该覆盖该方法来进行结果转换。
-     * 默认实现返回其值对应的字符串，对于空值返回空串。</p>
+     * <p>将游标转换为 CharSequence.子类应该覆盖该方法来进行结果转换.
+     * 默认实现返回其值对应的字符串，对于空值返回空串.</p>
      *
-     * @param cursor 要转换为 CharSequence 的游标。
-     * @return 代表其值的 CharSequence。
+     * @param cursor 要转换为 CharSequence 的游标.
+     * @return 代表其值的 CharSequence.
      */
     public CharSequence convertToString(Cursor cursor) {
         return cursor == null ? "" : cursor.toString();
     }
 
     /**
-     * 用指定条件查询。查询由关联到适配器的过滤器来执行。
+     * 用指定条件查询.查询由关联到适配器的过滤器来执行.
      *
-     * 查询服务由 {@link android.widget.FilterQueryProvider} 执行。
-     * 如果没有指定提供者，返回未经筛选的当前游标。
+     * 查询服务由 {@link android.widget.FilterQueryProvider} 执行.
+     * 如果没有指定提供者，返回未经筛选的当前游标.
      *
      * 该方法返回传入 {@link #changeCursor(Cursor)} 方法的结果游标，
-     * 并关闭之前的游标。
+     * 并关闭之前的游标.
      *
-     * 该方法总在后台执行，不在应用程序的主进程（或者说UI进程）。
+     * 该方法总在后台执行，不在应用程序的主进程（或者说UI进程）.
      * 
-     * 约定：当检索条件为空或空字符串时，必须返回应用过滤器前的原始结果。 
+     * 约定：当检索条件为空或空字符串时，必须返回应用过滤器前的原始结果. 
      *
-     * @param constraint 检索的约束条件。
+     * @param constraint 检索的约束条件.
      *
-     * @return 代表新的查询结果的游标。
+     * @return 代表新的查询结果的游标.
      *
      * @see #getFilter()
      * @see #getFilterQueryProvider()
@@ -309,9 +309,9 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * 返回查询时用于过滤数据的提供者。当提供者为空时，不应用过滤。
+     * 返回查询时用于过滤数据的提供者.当提供者为空时，不应用过滤.
      *
-     * @return 当前过滤器的提供者，如果不存在返回空。
+     * @return 当前过滤器的提供者，如果不存在返回空.
      *
      * @see #setFilterQueryProvider(android.widget.FilterQueryProvider)
      * @see #runQueryOnBackgroundThread(CharSequence)
@@ -321,12 +321,12 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * 设置用于过滤当前游标的查询过滤器提供者。当该提供者的客户端请求过滤时，
+     * 设置用于过滤当前游标的查询过滤器提供者.当该提供者的客户端请求过滤时，
      * 执行提供者的
      * {@link android.widget.FilterQueryProvider#runQuery(CharSequence)}
-     * 方法。
+     * 方法.
      *
-     * @param filterQueryProvider 过滤器查询提供者；空可以清除之前设置的提供者。
+     * @param filterQueryProvider 过滤器查询提供者；空可以清除之前设置的提供者.
      *
      * @see #getFilterQueryProvider()
      * @see #runQueryOnBackgroundThread(CharSequence)
@@ -336,8 +336,8 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable,
     }
 
     /**
-     * 当游标的 {@link ContentObserver} 收到变更提示时调用该方法。
-     * 缺省实现提供了自动再查询逻辑，但子类可以覆盖该方法。
+     * 当游标的 {@link ContentObserver} 收到变更提示时调用该方法.
+     * 缺省实现提供了自动再查询逻辑，但子类可以覆盖该方法.
      * 
      * @see ContentObserver#onChange(boolean)
      */

@@ -23,13 +23,13 @@ import android.os.Message;
 import android.util.Log;
 
 /**
- * <p>根据过滤模式限制数据的过滤器。</p>
- * <p>过滤器通常由实现了 {@link android.widget.Filterable} 接口的子类来生成。</p>
+ * <p>根据过滤模式限制数据的过滤器.</p>
+ * <p>过滤器通常由实现了 {@link android.widget.Filterable} 接口的子类来生成.</p>
  *
  * <p>过滤操作是通过调用 {@link #filter(CharSequence)} 或
  * {@link #filter(CharSequence, android.widget.Filter.FilterListener)}
- * 这些异步方法来完成的。调用方法后，过滤请求会递交到请求队列中等待处理。
- * 任何对以上方法的调用，都将取消之前未执行的过滤请求。</p>
+ * 这些异步方法来完成的.调用方法后，过滤请求会递交到请求队列中等待处理.
+ * 任何对以上方法的调用，都将取消之前未执行的过滤请求.</p>
  * @see android.widget.Filterable
  * @author translate by henly.zhang
  * @author translate by cnmahj
@@ -50,7 +50,7 @@ public abstract class Filter {
     private final Object mLock = new Object();
 
     /**
-     * <p>创建一个新的异步过滤器。</p>	
+     * <p>创建一个新的异步过滤器.</p>	
      */
     public Filter() {
         mResultHandler = new ResultsHandler();
@@ -71,8 +71,8 @@ public abstract class Filter {
     }
 
     /**
-     * <p>启动异步过滤操作。对该方法的调用将取消之前队列中等待处理的过滤请求，
-     * 并递交新的过滤请求等待执行。</p>
+     * <p>启动异步过滤操作.对该方法的调用将取消之前队列中等待处理的过滤请求，
+     * 并递交新的过滤请求等待执行.</p>
      *
      * @param constraint 过滤数据的约束条件
      *
@@ -83,9 +83,9 @@ public abstract class Filter {
     }
 
     /**
-     * <p>启动异步过滤操作。对该方法的调用将取消之前队列中等待处理的过滤请求，
-     * 并递交新的过滤请求等待执行。</p>
-     * <p>完成过滤操作之后，通知监听器。</p> 
+     * <p>启动异步过滤操作.对该方法的调用将取消之前队列中等待处理的过滤请求，
+     * 并递交新的过滤请求等待执行.</p>
+     * <p>完成过滤操作之后，通知监听器.</p> 
      *
      * @param constraint 过滤数据的约束条件
      * @param listener 过滤操作完成后发出的通知的监听器
@@ -121,12 +121,12 @@ public abstract class Filter {
     }
 
     /**
-     * <p>根据约束条件调用工作线程过滤数据。子类必须实现该方法来执行过滤操作。
+     * <p>根据约束条件调用工作线程过滤数据.子类必须实现该方法来执行过滤操作.
      * 过滤结果以 {@link android.widget.Filter.FilterResults} 形式返回，
      * 通过 {@link #publishResults(CharSequence, android.widget.Filter.FilterResults)}
-     * 发布到 UI 线程。</p>
+     * 发布到 UI 线程.</p>
      *
-     * <p><strong>约定：</strong> 当约束条件为 null 时，必须恢复原始数据。</p>
+     * <p><strong>约定：</strong> 当约束条件为 null 时，必须恢复原始数据.</p>
      *
      * @param constraint 用于过滤数据的约束条件
      * @return 过滤结果
@@ -138,8 +138,8 @@ public abstract class Filter {
     protected abstract FilterResults performFiltering(CharSequence constraint);
 
     /**
-     * <p>在 UI 线程中执行，用于向用户接口发布过滤结果。子类必须实现该方法，
-     * 用于发布 {@link #performFiltering} 的处理结果。</p>
+     * <p>在 UI 线程中执行，用于向用户接口发布过滤结果.子类必须实现该方法，
+     * 用于发布 {@link #performFiltering} 的处理结果.</p>
      * @param constraint 用于过滤数据的约束条件
      * @param results 过滤操作的结果
      *
@@ -151,17 +151,17 @@ public abstract class Filter {
             FilterResults results);
 
     /**
-     * 将已过滤的集合的内容转换为 CharSequence。子类必须实现该方法，以转换处理结果。
-     * <p>默认实现是对于 null 返回空字符串，其他的返回参数的默认字符串。</p>
+     * 将已过滤的集合的内容转换为 CharSequence.子类必须实现该方法，以转换处理结果.
+     * <p>默认实现是对于 null 返回空字符串，其他的返回参数的默认字符串.</p>
      * @param resultValue 要转换为 CharSequence 文本的对象
-     * @return 代表转换结果的	CharSequence。
+     * @return 代表转换结果的	CharSequence.
      */
     public CharSequence convertResultToString(Object resultValue) {
         return resultValue == null ? "" : resultValue.toString();
     }
 
     /**
-     * <p>用于保持过滤操作的结果。结果包含过滤操作的结果及其个数。</p>
+     * <p>用于保持过滤操作的结果.结果包含过滤操作的结果及其个数.</p>
      */
     protected static class FilterResults {
         public FilterResults() {
@@ -169,25 +169,25 @@ public abstract class Filter {
         }
 
         /**
-         * <p>包含过滤操作的所有结果。</p>
+         * <p>包含过滤操作的所有结果.</p>
          * 
          */
         public Object values;
 
         /**
-         * <p>包含过滤操作的结果数量。</p>	
+         * <p>包含过滤操作的结果数量.</p>	
          */
         public int count;
     }
 
     /**
-     * <p>用于接受过滤操作完成后发出的通知的监听器。</p>
+     * <p>用于接受过滤操作完成后发出的通知的监听器.</p>
      */
     public static interface FilterListener {
         /**
-         * <p>过滤操作结束的通知。</p>	
+         * <p>过滤操作结束的通知.</p>	
          *
-         * @param count 过滤结果的数量。
+         * @param count 过滤结果的数量.
          */
         public void onFilterComplete(int count);
     }

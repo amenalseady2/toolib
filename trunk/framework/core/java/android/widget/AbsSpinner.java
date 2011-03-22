@@ -30,7 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * spinner小部件的抽象基类。SDK 用户可能不需要使用该类。
+ * spinner小部件的抽象基类.SDK 用户可能不需要使用该类.
  * 
  * @attr ref android.R.styleable#AbsSpinner_entries
  * @author translate by 思考的狼
@@ -93,9 +93,9 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
 
     /**
-     * 该适配器为 Spinner 提供后端数据。
-     * 他还提供了基于选中条目的相对位置来改变 spinner 条目的方法。
-     * @param adapter 用于 Spinner 的 SpinnerAdapter。
+     * 该适配器为 Spinner 提供后端数据.
+     * 他还提供了基于选中条目的相对位置来改变 spinner 条目的方法.
+     * @param adapter 用于 Spinner 的 SpinnerAdapter.
      */
     @Override
     public void setAdapter(SpinnerAdapter adapter) {
@@ -156,8 +156,8 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     /** 
      * @see android.view.View#measure(int, int)
      * 
-     * 计算 Spinner 的尺寸。宽度来自于 widthMeasureSpec 属性，当 Spinnner
-     * 没有设置宽度时，返回 UNSPECIFIED；高度是在选中条目高度加上内边距。
+     * 计算 Spinner 的尺寸.宽度来自于 widthMeasureSpec 属性，当 Spinnner
+     * 没有设置宽度时，返回 UNSPECIFIED；高度是在选中条目高度加上内边距.
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -259,7 +259,7 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
 
     /**
-     * 直接跳到数据适配器中指定条目。
+     * 直接跳到数据适配器中指定条目.
      */
     public void setSelection(int position, boolean animate) {
         // Animate only if requested position is already on screen somewhere
@@ -305,7 +305,7 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
    
     /**
-     * 重写以防止调整自身布局时出现的无用布局请求。
+     * 重写以防止调整自身布局时出现的无用布局请求.
      * 
      * @see android.view.View#requestLayout()
      */
@@ -327,11 +327,11 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     }
 
     /**
-     * 将一个坐标点变换为列表的索引。
+     * 将一个坐标点变换为列表的索引.
      * 
-     * @param x 本地坐标系的 X。
-     * @param y 本地坐标系的 Y。
-     * @return 指定点所在条目的索引。如果这个点不在任何条目上则返回 {@link #INVALID_POSITION}。
+     * @param x 本地坐标系的 X.
+     * @param y 本地坐标系的 Y.
+     * @return 指定点所在条目的索引.如果这个点不在任何条目上则返回 {@link #INVALID_POSITION}.
      */
     public int pointToPosition(int x, int y) {
         Rect frame = mTouchFrame;

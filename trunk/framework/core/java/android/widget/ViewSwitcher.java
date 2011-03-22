@@ -22,9 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * {@link ViewAnimator} 在两个视图间切换，并包含创建这些视图的工厂类。
- * 你可以用工厂类来创建这些视图，也可以自己添加视图。
- * ViewSwitcher 只允许包含两个子视图，且一次仅能显示其中一个。
+ * {@link ViewAnimator} 在两个视图间切换，并包含创建这些视图的工厂类.
+ * 你可以用工厂类来创建这些视图，也可以自己添加视图.
+ * ViewSwitcher 只允许包含两个子视图，且一次仅能显示其中一个.
  * @author translate by ivanlee
  * @author convert by cnmahj
  */
@@ -35,19 +35,19 @@ public class ViewSwitcher extends ViewAnimator {
     ViewFactory mFactory;
 
     /**
-     * 创建一个空的视图切换器(ViewSwitcher)。
+     * 创建一个空的视图切换器(ViewSwitcher).
      *
-     * @param context 应用程序上下文。
+     * @param context 应用程序上下文.
      */
     public ViewSwitcher(Context context) {
         super(context);
     }
 
     /**
-     * 使用指定的上下文和属性集合创建一个空的视图切换器(ViewSwitcher)。
+     * 使用指定的上下文和属性集合创建一个空的视图切换器(ViewSwitcher).
      *
-     * @param context 应用程序上下文。
-     * @param attrs 属性集合。
+     * @param context 应用程序上下文.
+     * @param attrs 属性集合.
      */
     public ViewSwitcher(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -56,7 +56,7 @@ public class ViewSwitcher extends ViewAnimator {
     /**
      * {@inheritDoc}
      *
-     * @throws IllegalStateException 当切换器中已经包含两个视图时。
+     * @throws IllegalStateException 当切换器中已经包含两个视图时.
      */
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
@@ -67,9 +67,9 @@ public class ViewSwitcher extends ViewAnimator {
     }
 
     /**
-     * 返回下一个要显示的视图。
+     * 返回下一个要显示的视图.
      *
-     * @return 视图切换之后将要显示出的下一个视图。
+     * @return 视图切换之后将要显示出的下一个视图.
      */
     public View getNextView() {
         int which = mWhichChild == 0 ? 1 : 0;
@@ -87,11 +87,11 @@ public class ViewSwitcher extends ViewAnimator {
     }
 
     /**
-     * 设置用来生成将在视图切换器中切换的两个视图的工厂类对象。也可以调用两次 
+     * 设置用来生成将在视图切换器中切换的两个视图的工厂类对象.也可以调用两次 
      * {@link #addView(android.view.View, int, android.view.ViewGroup.LayoutParams)}
-     * 来代替工厂类对象。
+     * 来代替工厂类对象.
      *
-     * @param factory 用来生成切换器内容的视图工厂。
+     * @param factory 用来生成切换器内容的视图工厂.
      */
     public void setFactory(ViewFactory factory) {
         mFactory = factory;
@@ -101,7 +101,7 @@ public class ViewSwitcher extends ViewAnimator {
 
     /**
      * 重置视图切换器(ViewSwitcher）来隐藏所有存在的视图，
-     * 并使切换器达到一次动画都还没有播放的状态。
+     * 并使切换器达到一次动画都还没有播放的状态.
      */
     public void reset() {
         mFirstTime = true;
@@ -117,7 +117,7 @@ public class ViewSwitcher extends ViewAnimator {
     }
 
     /**
-     * 用于在视图切换器(ViewSwitcher)中创建视图。
+     * 用于在视图切换器(ViewSwitcher)中创建视图.
      */
     public interface ViewFactory {
         /**

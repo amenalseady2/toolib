@@ -617,12 +617,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static final boolean DBG = false;
 
     /**
-     * 在该类中使用 android.util.Log 输出日志时的标签。
+     * 在该类中使用 android.util.Log 输出日志时的标签.
      */
     protected static final String VIEW_LOG_TAG = "View";
 
     /**
-     * 用于识别没有 ID 的视图。
+     * 用于识别没有 ID 的视图.
      */
     public static final int NO_ID = -1;
 
@@ -649,17 +649,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static final int FITS_SYSTEM_WINDOWS = 0x00000002;
 
     /**
-     * 视图可见。用于 {@link #setVisibility}。
+     * 视图可见.用于 {@link #setVisibility}.
      */
     public static final int VISIBLE = 0x00000000;
 
     /**
-     * 视图不可见，但为其保留布局时所占用的空间。用于 {@link #setVisibility}。
+     * 视图不可见，但为其保留布局时所占用的空间.用于 {@link #setVisibility}.
      */
     public static final int INVISIBLE = 0x00000004;
 
     /**
-     * 视图不可见，并且不占用布局时的空间。用于 {@link #setVisibility}。
+     * 视图不可见，并且不占用布局时的空间.用于 {@link #setVisibility}.
      */
     public static final int GONE = 0x00000008;
 
@@ -806,17 +806,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int FOCUSABLE_IN_TOUCH_MODE = 0x00040000;
 
     /**
-     * <p>为绘图缓存启用低质量控制模式。</p>
+     * <p>为绘图缓存启用低质量控制模式.</p>
      */
     public static final int DRAWING_CACHE_QUALITY_LOW = 0x00080000;
 
     /**
-     * <p>为绘图缓存启用高质量控制模式。</p>
+     * <p>为绘图缓存启用高质量控制模式.</p>
      */
     public static final int DRAWING_CACHE_QUALITY_HIGH = 0x00100000;
 
     /**
-     * <p>为绘图缓存启用自动质量控制模式。</p>
+     * <p>为绘图缓存启用自动质量控制模式.</p>
      */
     public static final int DRAWING_CACHE_QUALITY_AUTO = 0x00000000;
 
@@ -850,26 +850,26 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int DUPLICATE_PARENT_STATE = 0x00400000;
 
     /**
-     * 用于在内容区域显示滚动条的滚动条风格，不增加内边距。
-     * 滚动条以半透明的形式覆盖在视图内容上面。
+     * 用于在内容区域显示滚动条的滚动条风格，不增加内边距.
+     * 滚动条以半透明的形式覆盖在视图内容上面.
      */
     public static final int SCROLLBARS_INSIDE_OVERLAY = 0;
 
     /**
-     * 用于在内边距内显示滚动条的滚动条风格，增加视图的内边距。
-     * 滚动条不覆盖视图内容。
+     * 用于在内边距内显示滚动条的滚动条风格，增加视图的内边距.
+     * 滚动条不覆盖视图内容.
      */
     public static final int SCROLLBARS_INSIDE_INSET = 0x01000000;
 
     /**
-     * 用于在视图边上显示滚动条的滚动条风格，不增加内边距。
-     * 滚动条以半透明的形式显示在边上。
+     * 用于在视图边上显示滚动条的滚动条风格，不增加内边距.
+     * 滚动条以半透明的形式显示在边上.
      */
     public static final int SCROLLBARS_OUTSIDE_OVERLAY = 0x02000000;
 
     /**
-     * 用于在视图边上显示滚动条的滚动条风格，增加视图的内边距。
-     * 如果有背景，滚动条会覆盖背景部分。
+     * 用于在视图边上显示滚动条的滚动条风格，增加视图的内边距.
+     * 如果有背景，滚动条会覆盖背景部分.
      */
     public static final int SCROLLBARS_OUTSIDE_INSET = 0x03000000;
 
@@ -892,62 +892,62 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int SCROLLBARS_STYLE_MASK = 0x03000000;
 
     /**
-     * 视图标志位，用于指明当窗口包含对用户可见的该视图时，屏幕应该一直处于开启状态。
+     * 视图标志位，用于指明当窗口包含对用户可见的该视图时，屏幕应该一直处于开启状态.
      * 该效果通过自动设置  WindowManager 的
-     * {@link WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON} 实现。
+     * {@link WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON} 实现.
      */
     public static final int KEEP_SCREEN_ON = 0x04000000;
 
     /**
-     * 视图标志位，指示发生诸如单击、触控事件时视图是否播放声音效果。
+     * 视图标志位，指示发生诸如单击、触控事件时视图是否播放声音效果.
      */
     public static final int SOUND_EFFECTS_ENABLED = 0x08000000;
 
     /**
-     * 视图标志位，指示发生诸如长按事件时视图是否执行震动反馈。
+     * 视图标志位，指示发生诸如长按事件时视图是否执行震动反馈.
      */
     public static final int HAPTIC_FEEDBACK_ENABLED = 0x10000000;
 
     /**
      * 视图标志位，指出无论是否处于触控模式下，以及触控模式下是否可以获得焦点，
      *  {@link #addFocusables(ArrayList, int, int)}
-     * 函数都会添加该视图。
+     * 函数都会添加该视图.
      */
     public static final int FOCUSABLES_ALL = 0x00000000;
 
     /**
      * 视图标志位，指出 {@link #addFocusables(ArrayList, int, int)}
-     * 函数只添加在触控模式下可以获得焦点的视图。
+     * 函数只添加在触控模式下可以获得焦点的视图.
      */
     public static final int FOCUSABLES_TOUCH_MODE = 0x00000001;
 
     /**
-     * 用于 {@link #focusSearch}。移动焦点到前一个可选择条目。
+     * 用于 {@link #focusSearch}.移动焦点到前一个可选择条目.
      */
     public static final int FOCUS_BACKWARD = 0x00000001;
 
     /**
-     * 用于 {@link #focusSearch}。移动焦点到下一个可选择条目。
+     * 用于 {@link #focusSearch}.移动焦点到下一个可选择条目.
      */
     public static final int FOCUS_FORWARD = 0x00000002;
 
     /**
-     * 用于 {@link #focusSearch}。向左移动焦点。
+     * 用于 {@link #focusSearch}.向左移动焦点.
      */
     public static final int FOCUS_LEFT = 0x00000011;
 
     /**
-     * 用于 {@link #focusSearch}。向上移动焦点。
+     * 用于 {@link #focusSearch}.向上移动焦点.
      */
     public static final int FOCUS_UP = 0x00000021;
 
     /**
-     * 用于 {@link #focusSearch}。向右移动焦点。
+     * 用于 {@link #focusSearch}.向右移动焦点.
      */
     public static final int FOCUS_RIGHT = 0x00000042;
 
     /**
-     * 用于 {@link #focusSearch}。向下移动焦点。
+     * 用于 {@link #focusSearch}.向下移动焦点.
      */
     public static final int FOCUS_DOWN = 0x00000082;
 
@@ -956,40 +956,40 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     // Singles
     /**
-     * 指出视图没有设置状态。 {@link android.graphics.drawable.Drawable}
-     * 根据不同的状态变更视图的外观。
+     * 指出视图没有设置状态. {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观.
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] EMPTY_STATE_SET = {};
     /**
-     * 指出视图时可用的。{@link android.graphics.drawable.Drawable}
-     * 根据不同的状态变更视图的外观。
+     * 指出视图时可用的.{@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观.
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] ENABLED_STATE_SET = {R.attr.state_enabled};
     /**
-     * 指出视图得到焦点。 {@link android.graphics.drawable.Drawable}
-     * 根据不同的状态变更视图的外观。
+     * 指出视图得到焦点. {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观.
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] FOCUSED_STATE_SET = {R.attr.state_focused};
     /**
-     * 指出视图已选中。 {@link android.graphics.drawable.Drawable}
-     * 根据不同的状态变更视图的外观。
+     * 指出视图已选中. {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观.
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
      */
     protected static final int[] SELECTED_STATE_SET = {R.attr.state_selected};
     /**
-     * 指出视图已按下。 {@link android.graphics.drawable.Drawable}
-     * 根据不同的状态变更视图的外观。
+     * 指出视图已按下. {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观.
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
@@ -997,8 +997,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     protected static final int[] PRESSED_STATE_SET = {R.attr.state_pressed};
     /**
-     * 指出视图的窗口具有焦点。 {@link android.graphics.drawable.Drawable}
-     * 根据不同的状态变更视图的外观。
+     * 指出视图的窗口具有焦点. {@link android.graphics.drawable.Drawable}
+     * 根据不同的状态变更视图的外观.
      *
      * @see android.graphics.drawable.Drawable
      * @see #getDrawableState()
@@ -1007,7 +1007,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             {R.attr.state_window_focused};
     // Doubles
     /**
-     * 指出视图可用并具有焦点。
+     * 指出视图可用并具有焦点.
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1015,7 +1015,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_STATE_SET, FOCUSED_STATE_SET);
     /**
-     * 指出视图可用并已选中。
+     * 指出视图可用并已选中.
      *
      * @see #ENABLED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1023,7 +1023,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_SELECTED_STATE_SET =
             stateSetUnion(ENABLED_STATE_SET, SELECTED_STATE_SET);
     /**
-     * 指出视图可用并且其窗口具有焦点。
+     * 指出视图可用并且其窗口具有焦点.
      *
      * @see #ENABLED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1031,7 +1031,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * 指出视图具有焦点并且已选中。
+     * 指出视图具有焦点并且已选中.
      *
      * @see #FOCUSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1039,7 +1039,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] FOCUSED_SELECTED_STATE_SET =
             stateSetUnion(FOCUSED_STATE_SET, SELECTED_STATE_SET);
     /**
-     * 指出视图具有焦点并且其窗口也具有焦点。
+     * 指出视图具有焦点并且其窗口也具有焦点.
      *
      * @see #FOCUSED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1047,7 +1047,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] FOCUSED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * 指出视图已选中并且其窗口具有焦点。
+     * 指出视图已选中并且其窗口具有焦点.
      *
      * @see #SELECTED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1056,7 +1056,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     // Triples
     /**
-     * 指出视图可用、具有焦点并已选中。
+     * 指出视图可用、具有焦点并已选中.
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1065,7 +1065,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_FOCUSED_SELECTED_STATE_SET =
             stateSetUnion(ENABLED_FOCUSED_STATE_SET, SELECTED_STATE_SET);
     /**
-     * 指出视图可用、具有焦点并且其窗口也具有焦点。
+     * 指出视图可用、具有焦点并且其窗口也具有焦点.
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1074,7 +1074,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * 指出视图可用、已选中并且其窗口具有焦点。
+     * 指出视图可用、已选中并且其窗口具有焦点.
      *
      * @see #ENABLED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1083,7 +1083,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(ENABLED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * 指出视图具有焦点、已选中并且其窗口具有焦点。
+     * 指出视图具有焦点、已选中并且其窗口具有焦点.
      *
      * @see #FOCUSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1092,7 +1092,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET =
             stateSetUnion(FOCUSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
     /**
-     * 指出视图可用、具有焦点、已选中并且其窗口具有焦点。
+     * 指出视图可用、具有焦点、已选中并且其窗口具有焦点.
      *
      * @see #ENABLED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1104,7 +1104,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                           WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下并且其窗口具有焦点。
+     * 指出视图已按下并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #WINDOW_FOCUSED_STATE_SET
@@ -1113,7 +1113,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下并已选中。
+     * 指出视图已按下并已选中.
      *
      * @see #PRESSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1122,7 +1122,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * 指出视图已按下、已选中并且其窗口具有焦点。
+     * 指出视图已按下、已选中并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1132,7 +1132,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下并具有焦点。
+     * 指出视图已按下并具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1141,7 +1141,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下、具有焦点并且其窗口具有焦点。
+     * 指出视图已按下、具有焦点并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1151,7 +1151,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 质粗视图已按下、具有焦点并已选中。
+     * 质粗视图已按下、具有焦点并已选中.
      *
      * @see #PRESSED_STATE_SET
      * @see #SELECTED_STATE_SET
@@ -1161,7 +1161,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_FOCUSED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * 指出视图已按下、具有焦点、已选中并且其窗口具有焦点。
+     * 指出视图已按下、具有焦点、已选中并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #FOCUSED_STATE_SET
@@ -1172,7 +1172,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_FOCUSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下并可用。
+     * 指出视图已按下并可用.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1181,7 +1181,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_STATE_SET, ENABLED_STATE_SET);
 
     /**
-     * 指出视图已按下、可用并且其窗口具有焦点。
+     * 指出视图已按下、可用并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1191,7 +1191,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下、可用并且已选中。
+     * 指出视图已按下、可用并且已选中.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1201,7 +1201,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * 指出视图已按下、可用、已选中并且其窗口具有焦点。
+     * 指出视图已按下、可用、已选中并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1212,7 +1212,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下、可用并具有焦点。
+     * 指出视图已按下、可用并具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1222,7 +1222,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_STATE_SET, FOCUSED_STATE_SET);
 
     /**
-     * 指出视图已按下、可用、具有焦点并且其窗口具有焦点。
+     * 指出视图已按下、可用、具有焦点并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1233,7 +1233,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_FOCUSED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 指出视图可按下、可用、具有焦点并与选中。
+     * 指出视图可按下、可用、具有焦点并与选中.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1244,7 +1244,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_FOCUSED_STATE_SET, SELECTED_STATE_SET);
 
     /**
-     * 指出视图已按下、可用、具有焦点并且其窗口具有焦点。
+     * 指出视图已按下、可用、具有焦点并且其窗口具有焦点.
      *
      * @see #PRESSED_STATE_SET
      * @see #ENABLED_STATE_SET
@@ -1256,7 +1256,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             stateSetUnion(PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET, WINDOW_FOCUSED_STATE_SET);
 
     /**
-     * 这里的排列顺序对 {@link #getDrawableState()} 很重要。
+     * 这里的排列顺序对 {@link #getDrawableState()} 很重要.
      */
     private static final int[][] VIEW_STATE_SETS = {
         EMPTY_STATE_SET,                                           // 0 0 0 0 0
@@ -1532,7 +1532,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static final int AWAKEN_SCROLL_BARS_ON_ATTACH = 0x08000000;
 
     /**
-     * 总是允许用户过滚动该视图，用于可以滚动的视图。
+     * 总是允许用户过滚动该视图，用于可以滚动的视图.
      *
      * @see #getOverScrollMode()
      * @see #setOverScrollMode(int)
@@ -1540,7 +1540,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public static final int OVER_SCROLL_ALWAYS = 0;
 
     /**
-     * 允许用户对内容大于滚动区域的视图进行过滚动，用于可以滚动的视图。
+     * 允许用户对内容大于滚动区域的视图进行过滚动，用于可以滚动的视图.
      *
      * @see #getOverScrollMode()
      * @see #setOverScrollMode(int)
@@ -1548,7 +1548,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public static final int OVER_SCROLL_IF_CONTENT_SCROLLS = 1;
 
     /**
-     * 不允许用户对该视图进行过滚动。
+     * 不允许用户对该视图进行过滚动.
      *
      * @see #getOverScrollMode()
      * @see #setOverScrollMode(int)
@@ -2407,9 +2407,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 注册点击该视图时执行的回调函数。如果该视图不可点击，会将其改为可以点击的状态。
+     * 注册点击该视图时执行的回调函数.如果该视图不可点击，会将其改为可以点击的状态.
      *
-     * @param l 事件发生时运行的回调函数。
+     * @param l 事件发生时运行的回调函数.
      *
      * @see #setClickable(boolean)
      */
@@ -2450,9 +2450,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 如果该视图定义了 OnClickListener，则调用它。
+     * 如果该视图定义了 OnClickListener，则调用它.
      *
-     * @return 调用了 OnClickListener 则返回真；否则返回假。
+     * @return 调用了 OnClickListener 则返回真；否则返回假.
      */
     public boolean performClick() {
         sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
@@ -2489,9 +2489,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 显示该视图上下文菜单。
+     * 显示该视图上下文菜单.
      *
-     * @return 是否显示了上下文菜单。
+     * @return 是否显示了上下文菜单.
      */
     public boolean showContextMenu() {
         return getParent().showContextMenuForChild(this);
@@ -2677,17 +2677,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 当视图的焦点改变时调用。由定向导航导致的焦点变更时， {@code direction} 和
-     * {@code previouslyFocusedRect} 提供了焦点是从那里来的进一步信息。
+     * 当视图的焦点改变时调用.由定向导航导致的焦点变更时， {@code direction} 和
+     * {@code previouslyFocusedRect} 提供了焦点是从那里来的进一步信息.
      *
-     * @param gainFocus 如果视图具有焦点，值为真；否则为假。
-     * @param direction 当调用 requestFocus() 为该视图设置焦点时，该值为焦点移动的方向。
+     * @param gainFocus 如果视图具有焦点，值为真；否则为假.
+     * @param direction 当调用 requestFocus() 为该视图设置焦点时，该值为焦点移动的方向.
      *                  其值为 {@link #FOCUS_UP}、{@link #FOCUS_DOWN}、
-     *                  {@link #FOCUS_LEFT} 或者 {@link #FOCUS_RIGHT}。
-     *                  当使用无参数的 requestFocus() 时，可能无值。
-     * @param previouslyFocusedRect 失去焦点的视图的矩形坐标，使用该视图的坐标系统。如果指定了，
-     *        它将传入可以知道焦点来自哪里的详细信息（作为对 {@code direction} 的补充）。
-     *        否则，其值为 <code>null</code>。
+     *                  {@link #FOCUS_LEFT} 或者 {@link #FOCUS_RIGHT}.
+     *                  当使用无参数的 requestFocus() 时，可能无值.
+     * @param previouslyFocusedRect 失去焦点的视图的矩形坐标，使用该视图的坐标系统.如果指定了，
+     *        它将传入可以知道焦点来自哪里的详细信息（作为对 {@code direction} 的补充）.
+     *        否则，其值为 <code>null</code>.
      */
     protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
         if (gainFocus) {
@@ -2751,11 +2751,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 分发 {@link AccessibilityEvent} 事件到 {@link View 该视图} 的子视图中。
+     * 分发 {@link AccessibilityEvent} 事件到 {@link View 该视图} 的子视图中.
      *
-     * @param event 事件。
+     * @param event 事件.
      *
-     * @return 如果事件分发完成，返回真。
+     * @return 如果事件分发完成，返回真.
      */
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         return false;
@@ -3100,9 +3100,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 设置视图的可用状态。由子类决定视图的各可用状态如何显示。
+     * 设置视图的可用状态.由子类决定视图的各可用状态如何显示.
      *
-     * @param enabled 为真时视图可用，否则不可用。
+     * @param enabled 为真时视图可用，否则不可用.
      */
     @RemotableViewMethod
     public void setEnabled(boolean enabled) {
@@ -3122,11 +3122,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 设置该视图是否可以获取焦点。
+     * 设置该视图是否可以获取焦点.
      *
-     * 设为假时，可以确保在触控模式中该视图不能得到焦点。
+     * 设为假时，可以确保在触控模式中该视图不能得到焦点.
      *
-     * @param focusable 设为真时，该视图可以得到焦点。
+     * @param focusable 设为真时，该视图可以得到焦点.
      *
      * @see #setFocusableInTouchMode(boolean)
      * @attr ref android.R.styleable#View_focusable
@@ -3139,11 +3139,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 设置在触控模式下该视图是否可以获取焦点。
+     * 设置在触控模式下该视图是否可以获取焦点.
      *
-     * 设为真时，可以保证视图可以得到焦点。
+     * 设为真时，可以保证视图可以得到焦点.
      *
-     * @param focusableInTouchMode 设为真时，该视图在触控模式下可以得到焦点。
+     * @param focusableInTouchMode 设为真时，该视图在触控模式下可以得到焦点.
      *
      * @see #setFocusable(boolean)
      * @attr ref android.R.styleable#View_focusableInTouchMode
@@ -3337,11 +3337,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 为视图的所有子视图调用 setPressed 方法。
+     * 为视图的所有子视图调用 setPressed 方法.
      *
      * @see #setPressed(boolean)
      *
-     * @param pressed 新的按下状态。
+     * @param pressed 新的按下状态.
      */
     protected void dispatchSetPressed(boolean pressed) {
     }
@@ -3466,13 +3466,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 对于具有焦点的视图及其祖先，该方法是处理箭头事件最后的机会。
+     * 对于具有焦点的视图及其祖先，该方法是处理箭头事件最后的机会.
      * 当具有焦点的视图内部没有处理键盘事件，
-     * 视图系统也无法在指定的方向上找到可以赋予焦点的新的视图时调用该方法。
+     * 视图系统也无法在指定的方向上找到可以赋予焦点的新的视图时调用该方法.
      *
-     * @param focused 当前具有焦点的视图。
-     * @param direction 焦点移动的方向：FOCUS_UP、FOCUS_DOWN、FOCUS_LEFT 或 FOCUS_RIGHT。
-     * @return 如果视图处理了该未处理的移动，返回真。
+     * @param focused 当前具有焦点的视图.
+     * @param direction 焦点移动的方向：FOCUS_UP、FOCUS_DOWN、FOCUS_LEFT 或 FOCUS_RIGHT.
+     * @return 如果视图处理了该未处理的移动，返回真.
      */
     public boolean dispatchUnhandledMove(View focused, int direction) {
         return false;
@@ -3796,12 +3796,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 按照焦点路径分发键盘事件到下一个视图。
-     * 该路径由视图树的顶端开始，到当前拥有焦点的视图结束。如果该类拥有焦点，事件会分发给自己；
-     * 否则会分发给焦点路径的下一个节点。该方法同时触发所有的键盘事件监听器。
+     * 按照焦点路径分发键盘事件到下一个视图.
+     * 该路径由视图树的顶端开始，到当前拥有焦点的视图结束.如果该类拥有焦点，事件会分发给自己；
+     * 否则会分发给焦点路径的下一个节点.该方法同时触发所有的键盘事件监听器.
      *
-     * @param event 分发的键盘事件。
-     * @return 如果事件已经处理，返回真；否则返回假。
+     * @param event 分发的键盘事件.
+     * @return 如果事件已经处理，返回真；否则返回假.
      */
     public boolean dispatchKeyEvent(KeyEvent event) {
         // If any attached key listener a first crack at the event.
@@ -3878,10 +3878,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 当包含的此视图的窗口获得或失去焦点时调用此方法。视图组应该重写此方法，
-     * 将消息传递到他的子视图。
+     * 当包含的此视图的窗口获得或失去焦点时调用此方法.视图组应该重写此方法，
+     * 将消息传递到他的子视图.
      *
-     * @param hasFocus 当包含的此视图的窗口具有焦点时，参数为真；否则为假。
+     * @param hasFocus 当包含的此视图的窗口具有焦点时，参数为真；否则为假.
      */
     public void dispatchWindowFocusChanged(boolean hasFocus) {
         onWindowFocusChanged(hasFocus);
@@ -3992,8 +3992,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * 当窗口中内容的可视性在 {@link #GONE} 、 {@link #INVISIBLE} 和 {@link #VISIBLE}
-     * 之间变更时调用。注意，该可视性代表你的窗口在窗口管理器中是否可见；并<em>不</em>
-     * 会告诉你属性为 {@link #VISIBLE} 的窗口在屏幕上是否可见。
+     * 之间变更时调用.注意，该可视性代表你的窗口在窗口管理器中是否可见；并<em>不</em>
+     * 会告诉你属性为 {@link #VISIBLE} 的窗口在屏幕上是否可见.
      *
      * @param visibility 窗口的新的可视性
      */
@@ -4146,12 +4146,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()} 的默认实现。 如果视图可用并可按，
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 如果视图可用并可按，
      * 当按下 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
-     * 时执行视图的按下事件。
+     * 时执行视图的按下事件.
      *
-     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码。
-     * @param event   KeyEvent 对象，定义了按钮动作。
+     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
+     * @param event   KeyEvent 对象，定义了按钮动作.
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         boolean result = false;
@@ -4189,12 +4189,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()} 的默认实现。 
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 
      * 当释放 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
-     * 时执行视图的单击事件。
+     * 时执行视图的单击事件.
      *
-     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码。
-     * @param event   KeyEvent 对象，定义了按钮动作。
+     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
+     * @param event   KeyEvent 对象，定义了按钮动作.
      */
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         boolean result = false;
@@ -4223,11 +4223,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()} 的默认实现。 不处理该事件，总是返回假。
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 不处理该事件，总是返回假.
      *
-     * @param keyCode     表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码。
-     * @param repeatCount 按键次数。
-     * @param event       KeyEvent 对象，定义了按钮动作。
+     * @param keyCode     表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
+     * @param repeatCount 按键次数.
+     * @param event       KeyEvent 对象，定义了按钮动作.
      */
     public boolean onKeyMultiple(int keyCode, int repeatCount, KeyEvent event) {
         return false;
@@ -4328,11 +4328,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 如果视图要向上下文菜单加入额外信息，就应该实现该方法。返回的结果作为
+     * 如果视图要向上下文菜单加入额外信息，就应该实现该方法.返回的结果作为
      * {@link OnCreateContextMenuListener#onCreateContextMenu(ContextMenu, View, ContextMenuInfo)}
-     * 回调函数的参数。
+     * 回调函数的参数.
      *
-     * @return 上下文菜单要显示的条目的额外信息。该信息会根据视图子类的不同而变化。
+     * @return 上下文菜单要显示的条目的额外信息.该信息会根据视图子类的不同而变化.
      */
     protected ContextMenuInfo getContextMenuInfo() {
         return null;
@@ -4364,10 +4364,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 实现该方法来处理触屏事件。
+     * 实现该方法来处理触屏事件.
      *
-     * @param event 触屏事件。
-     * @return 如果事件已经处理返回真；否则返回假。
+     * @param event 触屏事件.
+     * @return 如果事件已经处理返回真；否则返回假.
      */
     public boolean onTouchEvent(MotionEvent event) {
         final int viewFlags = mViewFlags;
@@ -4690,21 +4690,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 布局时该视图的大小发生改变时调用该方法。如果是刚加入的视图，变更前的值为 0。
+     * 布局时该视图的大小发生改变时调用该方法.如果是刚加入的视图，变更前的值为 0.
      *
-     * @param w 视图的当前宽度。
-     * @param h 视图的当前高度。
-     * @param oldw 视图变更前的宽度。
-     * @param oldh 视图变更前的高度。
+     * @param w 视图的当前宽度.
+     * @param h 视图的当前高度.
+     * @param oldw 视图变更前的宽度.
+     * @param oldh 视图变更前的高度.
      */
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     }
 
     /**
-     * 调用此方法来绘出子视图。可被衍生类重写，以便在其子项被画出之前取得控制权。
-     * 此方法由 draw 方法在绘制子视图时调用。
-     * 子类可以重写该方法，在绘制其子视图之前获得控制权。（但是在绘制其自身的视图之后。）
-     * @param canvas 绘制视图的画布。
+     * 调用此方法来绘出子视图.可被衍生类重写，以便在其子项被画出之前取得控制权.
+     * 此方法由 draw 方法在绘制子视图时调用.
+     * 子类可以重写该方法，在绘制其子视图之前获得控制权.（但是在绘制其自身的视图之后.）
+     * @param canvas 绘制视图的画布.
      */
     protected void dispatchDraw(Canvas canvas) {
     }
@@ -5547,24 +5547,24 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 返回左渐变边缘的强度或密集度。强度的值介于0.0（无渐变）到1.0（全渐变）之间。
-     * 缺省实现只返回0.0或1.0，而不返回中间值。
+     * 返回左渐变边缘的强度或密集度.强度的值介于0.0（无渐变）到1.0（全渐变）之间.
+     * 缺省实现只返回0.0或1.0，而不返回中间值.
      *
-     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程。
+     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程.
      *
-     * @return 左渐变的强度，即介于0.0f和1.0f之间的浮点值。
+     * @return 左渐变的强度，即介于0.0f和1.0f之间的浮点值.
      */
     protected float getLeftFadingEdgeStrength() {
         return computeHorizontalScrollOffset() > 0 ? 1.0f : 0.0f;
     }
 
     /**
-     * 返回右渐变边缘的强度或密集度。强度的值介于0.0（无渐变）到1.0（全渐变）之间。
-     * 缺省实现只返回0.0或1.0，而不返回中间值。
+     * 返回右渐变边缘的强度或密集度.强度的值介于0.0（无渐变）到1.0（全渐变）之间.
+     * 缺省实现只返回0.0或1.0，而不返回中间值.
      *
-     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程。
+     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程.
      *
-     * @return 右渐变的强度，即介于0.0f和1.0f之间的浮点值。
+     * @return 右渐变的强度，即介于0.0f和1.0f之间的浮点值.
      */
     protected float getRightFadingEdgeStrength() {
         return computeHorizontalScrollOffset() + computeHorizontalScrollExtent() <
@@ -5700,15 +5700,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>计算滚动条水平方向上的滚动范围。</p>
+     * <p>计算滚动条水平方向上的滚动范围.</p>
      *
      * <p>该范围可以使用任意的单位但是必须跟
      * {@link #computeHorizontalScrollExtent()} 和
-     * {@link #computeHorizontalScrollOffset()} 的单位保持一致。</p>
+     * {@link #computeHorizontalScrollOffset()} 的单位保持一致.</p>
      *
-     * <p>默认范围是视图的可绘制宽度。</p>
+     * <p>默认范围是视图的可绘制宽度.</p>
      *
-     * @return 水平滚动条代表的滑动总范围。
+     * @return 水平滚动条代表的滑动总范围.
      *
      * @see #computeHorizontalScrollExtent()
      * @see #computeHorizontalScrollOffset()
@@ -5719,15 +5719,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>在水平范围内计算滚动条滑块的偏移量。该值用来计算水平滑块的位置。</p>
+     * <p>在水平范围内计算滚动条滑块的偏移量.该值用来计算水平滑块的位置.</p>
      *
      * <p>该范围可以使用任意的单位但是必须跟
      * {@link #computeHorizontalScrollRange()} 和
-     * {@link #computeHorizontalScrollExtent()} 的单位保持一致。</p>
+     * {@link #computeHorizontalScrollExtent()} 的单位保持一致.</p>
      *
-     * <p>默认偏移量是视图的偏移量。</p>
+     * <p>默认偏移量是视图的偏移量.</p>
      *
-     * @return 滚动条滑块的水平偏移量。
+     * @return 滚动条滑块的水平偏移量.
      *
      * @see #computeHorizontalScrollRange()
      * @see #computeHorizontalScrollExtent()
@@ -5738,15 +5738,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>在水平范围内计算滚动条滑块的滚动范围。该值用来计算滚动条滑块的长度。</p>
+     * <p>在水平范围内计算滚动条滑块的滚动范围.该值用来计算滚动条滑块的长度.</p>
      *
      * <p>该范围可以使用任意的单位但是必须跟
      * {@link #computeHorizontalScrollRange()} 和
-     * {@link #computeHorizontalScrollOffset()} 的单位保持一致。</p>
+     * {@link #computeHorizontalScrollOffset()} 的单位保持一致.</p>
      *
-     * <p>默认范围是视图的宽度。</p>
+     * <p>默认范围是视图的宽度.</p>
      *
-     * @return 滚动条滑块的水平滚动范围。
+     * @return 滚动条滑块的水平滚动范围.
      *
      * @see #computeHorizontalScrollRange()
      * @see #computeHorizontalScrollOffset()
@@ -5757,14 +5757,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>计算滚动条代表的纵向范围。</p>
+     * <p>计算滚动条代表的纵向范围.</p>
      *
      * <p>范围使用与 {@link #computeVerticalScrollExtent()}
-     * 和 {@link #computeVerticalScrollOffset()} 相同的任意单位。</p>
+     * 和 {@link #computeVerticalScrollOffset()} 相同的任意单位.</p>
      *
-     * @return 纵向滚动条代表的整个纵向范围。
+     * @return 纵向滚动条代表的整个纵向范围.
      *
-     * <p>默认纵向范围时视图的绘制高度。</p>
+     * <p>默认纵向范围时视图的绘制高度.</p>
      *
      * @see #computeVerticalScrollExtent()
      * @see #computeVerticalScrollOffset()
@@ -5775,12 +5775,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>计算滚动条把手在纵向滚动范围内的位置。该值用于计算滚动条把手在滚动条滑道中的位置。</p>
+     * <p>计算滚动条把手在纵向滚动范围内的位置.该值用于计算滚动条把手在滚动条滑道中的位置.</p>
      *
      * <p>范围使用与 {@link #computeVerticalScrollRange()}
-     * 和 {@link #computeVerticalScrollExtent()} 相同的任意单位。</p>
+     * 和 {@link #computeVerticalScrollExtent()} 相同的任意单位.</p>
      *
-     * <p>默认位置是视图的滚动条位置。</p>
+     * <p>默认位置是视图的滚动条位置.</p>
      *
      * @return 滚动条把手的纵向位置
      *
@@ -5793,14 +5793,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>计算滚动条把手在纵向滚动范围内占用的幅度。该值用于计算滚动条把手在滚动条滑道中的长度。</p>
+     * <p>计算滚动条把手在纵向滚动范围内占用的幅度.该值用于计算滚动条把手在滚动条滑道中的长度.</p>
      *
      * <p>范围使用与 {@link #computeVerticalScrollRange()}
-     * 和 {@link #computeVerticalScrollOffset()} 相同的任意单位。</p>
+     * 和 {@link #computeVerticalScrollOffset()} 相同的任意单位.</p>
      *
-     * <p>默认的长度是视图的可绘制高度。</p>
+     * <p>默认的长度是视图的可绘制高度.</p>
      *
-     * @return 滚动条把手在纵向滚动范围内占用的幅度。
+     * @return 滚动条把手在纵向滚动范围内占用的幅度.
      *
      * @see #computeVerticalScrollRange()
      * @see #computeVerticalScrollOffset()
@@ -5969,9 +5969,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 实现该方法，用于自己绘制内容。
+     * 实现该方法，用于自己绘制内容.
      *
-     * @param canvas 用于绘制背景的画布。
+     * @param canvas 用于绘制背景的画布.
      */
     protected void onDraw(Canvas canvas) {
     }
@@ -5992,9 +5992,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 当视图附加到窗体上时调用该方法。在这个时点，视图拥有了用于显示的表面，将开始绘制。
+     * 当视图附加到窗体上时调用该方法.在这个时点，视图拥有了用于显示的表面，将开始绘制.
      * 注意，系统保证在调用 {@link #onDraw} 之前调用该方法，但可能在调用 {@link #onDraw}
-     * 之前的任何时刻，包括调用 {@link #onMeasure} 之前或之后。
+     * 之前的任何时刻，包括调用 {@link #onMeasure} 之前或之后.
      *
      * @see #onDetachedFromWindow()
      */
@@ -6009,7 +6009,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 将视图从屏幕上分离的时候调用该方法。这个时点视图已经不具有可绘制部分。
+     * 将视图从屏幕上分离的时候调用该方法.这个时点视图已经不具有可绘制部分.
      *
      * @see #onAttachedToWindow()
      */
@@ -6127,7 +6127,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * May be overridden to modify how freezing happens to a view's children; for example, some
      * views may want to not store state for their children.
      *
-     * @param container 保存视图状态的 SparseArray。
+     * @param container 保存视图状态的 SparseArray.
      *
      * @see #dispatchRestoreInstanceState
      * @see #saveHierarchyState
@@ -6150,15 +6150,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 允许视图保存其内部状态的回调函数，以便于之后使用相同状态创建新实例。
-     * 该状态应该只包含非持久的或者之后不可重现的信息。例如，你不能保存视图在屏幕上的位置，
-     * 因为在创建新视图时，会在视图得层次结构中重新计算它的位置。
+     * 允许视图保存其内部状态的回调函数，以便于之后使用相同状态创建新实例.
+     * 该状态应该只包含非持久的或者之后不可重现的信息.例如，你不能保存视图在屏幕上的位置，
+     * 因为在创建新视图时，会在视图得层次结构中重新计算它的位置.
      * <p>
      * 这里是一些可以保存的信息的例子：文本框中当前光标的位置（通常不是文字内容本身，
-     * 因为文字内容一般保存在内容提供者或其他持久的储存器中），列表视图中的当前选中条目等等。
+     * 因为文字内容一般保存在内容提供者或其他持久的储存器中），列表视图中的当前选中条目等等.
      *
-     * @return 返回包含视图当前状态的 Parcelable 对象，当不想保存状态时返回空。
-     *         默认实现返回空。
+     * @return 返回包含视图当前状态的 Parcelable 对象，当不想保存状态时返回空.
+     *         默认实现返回空.
      * @see #onRestoreInstanceState
      * @see #saveHierarchyState
      * @see #dispatchSaveInstanceState
@@ -6187,7 +6187,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * children. May be overridden to modify how restoreing happens to a view's children; for
      * example, some views may want to not store state for their children.
      *
-     * @param container 保存有之前存储的状态信息的 SparseArray。
+     * @param container 保存有之前存储的状态信息的 SparseArray.
      *
      * @see #dispatchSaveInstanceState
      * @see #restoreHierarchyState
@@ -6210,10 +6210,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 允许视图重新应用之前由 {@link #onSaveInstanceState} 保存的内部状态的回调函数。
-     * 该方法得 state 参数不可能为空。
+     * 允许视图重新应用之前由 {@link #onSaveInstanceState} 保存的内部状态的回调函数.
+     * 该方法得 state 参数不可能为空.
      *
-     * @param state 之前由 {@link #onSaveInstanceState} 返回的状态信息。
+     * @param state 之前由 {@link #onSaveInstanceState} 返回的状态信息.
      *
      * @see #onSaveInstanceState
      * @see #restoreHierarchyState
@@ -7102,12 +7102,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 该视图设置其子视图的大小及位置时调用。派生类可以重写此方法，并为其子类布局。
-     * @param changed 是否为视图设置了新的大小和位置。
-     * @param left 相对于父视图的左侧的位置。
-     * @param top 相对于父视图的顶部的位置。
-     * @param right 相对于父视图的右侧的位置。
-     * @param bottom 相对于父视图的底部的位置。
+     * 该视图设置其子视图的大小及位置时调用.派生类可以重写此方法，并为其子类布局.
+     * @param changed 是否为视图设置了新的大小和位置.
+     * @param left 相对于父视图的左侧的位置.
+     * @param top 相对于父视图的顶部的位置.
+     * @param right 相对于父视图的右侧的位置.
+     * @param bottom 相对于父视图的底部的位置.
      */
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
     }
@@ -7179,9 +7179,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 根据 XML 生成视图工作完成。该函数在生成视图的最后调用，在所有子视图添加完之后。
+     * 根据 XML 生成视图工作完成.该函数在生成视图的最后调用，在所有子视图添加完之后.
      *
-     * <p>即使子类覆盖了 onFinishInflate 方法，也应该调用父类的方法，使该方法得以执行。
+     * <p>即使子类覆盖了 onFinishInflate 方法，也应该调用父类的方法，使该方法得以执行.
      */
     protected void onFinishInflate() {
     }
@@ -7253,14 +7253,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 如果你的视图子类显示自己的可绘制对象，他应该重写此方法并为自己的每个可绘制对象返回真。
-     * 该函数允许为这些可绘制对象准备动画效果。
+     * 如果你的视图子类显示自己的可绘制对象，他应该重写此方法并为自己的每个可绘制对象返回真.
+     * 该函数允许为这些可绘制对象准备动画效果.
      *
-     * <p>重写此方法时，要保证调用其父类的该方法。
+     * <p>重写此方法时，要保证调用其父类的该方法.
      *
-     * @param who 待校验的可绘制对象。如果是你显示的对象之一，返回真；否则返回调用父类的返回值。
+     * @param who 待校验的可绘制对象.如果是你显示的对象之一，返回真；否则返回调用父类的返回值.
      *
-     * @return boolean 如果可绘制对象已经显示在视图上了，返回真；否则返回假，不允许动画效果。
+     * @return boolean 如果可绘制对象已经显示在视图上了，返回真；否则返回假，不允许动画效果.
      *
      * @see #unscheduleDrawable
      * @see #drawableStateChanged
@@ -7270,9 +7270,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 在视图状态的变化影响到所显示可绘制对象的状态时调用该方法。
+     * 在视图状态的变化影响到所显示可绘制对象的状态时调用该方法.
      *
-     * <p>覆盖该方法时，要确保调用了父类的该方法。
+     * <p>覆盖该方法时，要确保调用了父类的该方法.
      *
      * @see Drawable#setState
      */
@@ -7322,13 +7322,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 为当前视图生成新的 {@link android.graphics.drawable.Drawable} 状态时发生。
-     * 当视图系统检测到缓存的可绘制对象失效时，调用该方法。你可以使用 {@link #getDrawableState} 
-     * 方法重新取得当前的状态。
+     * 为当前视图生成新的 {@link android.graphics.drawable.Drawable} 状态时发生.
+     * 当视图系统检测到缓存的可绘制对象失效时，调用该方法.你可以使用 {@link #getDrawableState} 
+     * 方法重新取得当前的状态.
      *
-     * @param extraSpace 如果为非零，该值为你要在返回值的数组中存放的你自己的状态信息的数量。
+     * @param extraSpace 如果为非零，该值为你要在返回值的数组中存放的你自己的状态信息的数量.
      *
-     * @return 返回保存了视图的当前 {@link Drawable} 状态的数组。
+     * @return 返回保存了视图的当前 {@link Drawable} 状态的数组.
      *
      * @see #mergeDrawableStates
      */
@@ -7442,11 +7442,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 将指定的可绘制对象设为背景；或删除背景。如果指定的可绘制对象有内边距，
-     * 则这个视图的内边距就会设为可绘制对象的内边距。然而，当背景被移除时，视图的内边距不变。
-     * 如果想设置内边距，请调用 {@link #setPadding(int, int, int, int)} 方法。
+     * 将指定的可绘制对象设为背景；或删除背景.如果指定的可绘制对象有内边距，
+     * 则这个视图的内边距就会设为可绘制对象的内边距.然而，当背景被移除时，视图的内边距不变.
+     * 如果想设置内边距，请调用 {@link #setPadding(int, int, int, int)} 方法.
      *
-     * @param d 作为背景使用的可绘制对象，如果是空将移除背景。
+     * @param d 作为背景使用的可绘制对象，如果是空将移除背景.
      */
     public void setBackgroundDrawable(Drawable d) {
         boolean requestLayout = false;
@@ -7536,9 +7536,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 设置内边距。视图可能会根据滚动条的样式和可视性，增加一些必要的用于显示滚动条的空间。
+     * 设置内边距.视图可能会根据滚动条的样式和可视性，增加一些必要的用于显示滚动条的空间.
      * 因此，{@link #getPaddingLeft}、{@link #getPaddingTop}、{@link #getPaddingRight}
-     * 和 {@link #getPaddingBottom} 返回的结果可能与该方法设置的值不同。
+     * 和 {@link #getPaddingBottom} 返回的结果可能与该方法设置的值不同.
      *
      * @attr ref android.R.styleable#View_padding
      * @attr ref android.R.styleable#View_paddingBottom
@@ -7654,11 +7654,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 为视图的所有子视图调用 setSelected 方法。
+     * 为视图的所有子视图调用 setSelected 方法.
      *
      * @see #setSelected(boolean)
      *
-     * @param selected 新的选择状态。
+     * @param selected 新的选择状态.
      */
     protected void dispatchSetSelected(boolean selected) {
     }
@@ -7767,8 +7767,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * {@hide}
-     * @param id 要查找的视图的 ID。
-     * @return ID 对应的视图，没找到返回空。
+     * @param id 要查找的视图的 ID.
+     * @return ID 对应的视图，没找到返回空.
      */
     protected View findViewTraversal(int id) {
         if (id == mID) {
@@ -7779,8 +7779,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * {@hide}
-     * @param tag 查找视图用的标签。
-     * @return 标签对应的视图；未找到返回空。
+     * @param tag 查找视图用的标签.
+     * @return 标签对应的视图；未找到返回空.
      */
     protected View findViewWithTagTraversal(Object tag) {
         if (tag != null && tag.equals(mTag)) {
@@ -8136,9 +8136,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * <p>返回小部件顶端到文本基线的偏移量。如果小部件不支持基线对齐，该方法返回 -1。</p>
+     * <p>返回小部件顶端到文本基线的偏移量.如果小部件不支持基线对齐，该方法返回 -1.</p>
      *
-     * @return 小部件顶端到文本基线的偏移量；或者是 -1 当小部件不支持基线对齐时。 
+     * @return 小部件顶端到文本基线的偏移量；或者是 -1 当小部件不支持基线对齐时. 
      */
     @ViewDebug.ExportedProperty(category = "layout")
     public int getBaseline() {
@@ -8146,7 +8146,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 当某些变更导致视图的布局失效时调用该方法。该方法按照视图树的顺序调用。
+     * 当某些变更导致视图的布局失效时调用该方法.该方法按照视图树的顺序调用.
      */
     public void requestLayout() {
         if (ViewDebug.TRACE_HIERARCHY) {
@@ -8221,31 +8221,31 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * <p>
-     * 评估视图及其内容，以决定其宽度和高度。此方法由 {@link #measure(int, int)}
-     * 调用，子类可以重载以提供更精确、更有效率的衡量其内容尺寸的方法。
+     * 评估视图及其内容，以决定其宽度和高度.此方法由 {@link #measure(int, int)}
+     * 调用，子类可以重载以提供更精确、更有效率的衡量其内容尺寸的方法.
      * </p>
      *
      * <p>
      * <strong>约定：</strong> 覆盖该方法时，<em>必须</em>调用 {@link #setMeasuredDimension(int, int)}
-     * 方法来保存评估结果的视图的宽度和高度。如果忘记将导致 {@link #measure(int, int)}
-     * 方法抛出<code>IllegalStateException</code>异常。要有效的利用父类的
-     * {@link #onMeasure(int, int)}方法。
+     * 方法来保存评估结果的视图的宽度和高度.如果忘记将导致 {@link #measure(int, int)}
+     * 方法抛出<code>IllegalStateException</code>异常.要有效的利用父类的
+     * {@link #onMeasure(int, int)}方法.
      * </p>
      *
      * <p>
-     * 基类测量的是背景的大小，除非 MeasureSpec 允许超过背景。子类应该重写
-     * {@link #onMeasure(int, int)} 方法，以为其内容提供更适合的大小。
+     * 基类测量的是背景的大小，除非 MeasureSpec 允许超过背景.子类应该重写
+     * {@link #onMeasure(int, int)} 方法，以为其内容提供更适合的大小.
      * </p>
      *
      * <p>
-     * 如果重写了该方法，子类要确保其高度和宽度大于等于视图的最小高度和宽度。
+     * 如果重写了该方法，子类要确保其高度和宽度大于等于视图的最小高度和宽度.
      * （{@link #getSuggestedMinimumHeight()} 和 {@link #getSuggestedMinimumWidth()}）
      * </p>
      *
-     * @param widthMeasureSpec 父视图要求的横向空间大小。该要求由
-     *                         {@link android.view.View.MeasureSpec} 进行了编码处理。
-     * @param heightMeasureSpec 父视图要求的纵向空间大小。该要求由
-     *                         {@link android.view.View.MeasureSpec} 进行了编码处理。
+     * @param widthMeasureSpec 父视图要求的横向空间大小.该要求由
+     *                         {@link android.view.View.MeasureSpec} 进行了编码处理.
+     * @param heightMeasureSpec 父视图要求的纵向空间大小.该要求由
+     *                         {@link android.view.View.MeasureSpec} 进行了编码处理.
      *
      * @see #getMeasuredWidth()
      * @see #getMeasuredHeight()
@@ -8471,12 +8471,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 执行阿尔法变换时执行。子类可以使用该方法指定阿尔法值，然后返回真；
-     * 在调用 onDraw() 时，使用该阿尔法值。如果返回假，则先在不可见的缓存中绘制视图，
-     * 完成该请求；看起来不错，但是可能相对于在子类中绘制要慢。默认实现返回假。
+     * 执行阿尔法变换时执行.子类可以使用该方法指定阿尔法值，然后返回真；
+     * 在调用 onDraw() 时，使用该阿尔法值.如果返回假，则先在不可见的缓存中绘制视图，
+     * 完成该请求；看起来不错，但是可能相对于在子类中绘制要慢.默认实现返回假.
      *
-     * @param alpha 应用到视图的阿尔法值 (0…255)。
-     * @return 如果该类可以绘制该阿尔法值返回真。
+     * @param alpha 应用到视图的阿尔法值 (0…255).
+     * @return 如果该类可以绘制该阿尔法值返回真.
      */
     protected boolean onSetAlpha(int alpha) {
         return false;
@@ -9002,11 +9002,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      */
     public interface OnLongClickListener {
         /**
-         * 当按下视图并保持时调用的回调函数。
+         * 当按下视图并保持时调用的回调函数.
          *
-         * @param v 按下并保持的视图。
+         * @param v 按下并保持的视图.
          *
-         * @return 如果回调函数处理了长按事件，返回真；否则返回假。
+         * @return 如果回调函数处理了长按事件，返回真；否则返回假.
          */
         boolean onLongClick(View v);
     }

@@ -26,7 +26,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 /**
- * {@link FrameLayout} 容器类的基类，用于在变换视图时显示动画效果。
+ * {@link FrameLayout} 容器类的基类，用于在变换视图时显示动画效果.
  *
  * @attr ref android.R.styleable#ViewAnimator_inAnimation
  * @attr ref android.R.styleable#ViewAnimator_outAnimation
@@ -86,9 +86,9 @@ public class ViewAnimator extends FrameLayout {
     }
     
     /**
-     * 设置要显示的子视图。
+     * 设置要显示的子视图.
      * 
-     * @param whichChild 要显示的子视图的索引。
+     * @param whichChild 要显示的子视图的索引.
      */
     public void setDisplayedChild(int whichChild) {
         mWhichChild = whichChild;
@@ -107,21 +107,21 @@ public class ViewAnimator extends FrameLayout {
     }
     
     /**
-     * 返回当前显示的子视图的索引。
+     * 返回当前显示的子视图的索引.
      */
     public int getDisplayedChild() {
         return mWhichChild;
     }
     
     /**
-     * 显示下一个视图。
+     * 显示下一个视图.
      */
     public void showNext() {
         setDisplayedChild(mWhichChild + 1);
     }
 
     /**
-     * 显示前一个视图。
+     * 显示前一个视图.
      */
     public void showPrevious() {
         setDisplayedChild(mWhichChild - 1);
@@ -216,9 +216,9 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 返回当前显示的子视图。
+     * 返回当前显示的子视图.
      *
-     * @return 当前显示的子视图。
+     * @return 当前显示的子视图.
      *
      * @see #getDisplayedChild()
      */
@@ -227,9 +227,9 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 返回用于绘制视图进入屏幕时动画的动画对象。
+     * 返回用于绘制视图进入屏幕时动画的动画对象.
      *
-     * @return 动画对象；未设定时返回空。
+     * @return 动画对象；未设定时返回空.
      *
      * @see #setInAnimation(android.view.animation.Animation)
      * @see #setInAnimation(android.content.Context, int)
@@ -239,9 +239,9 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 设置用于绘制视图进入屏幕时动画的动画对象。
+     * 设置用于绘制视图进入屏幕时动画的动画对象.
      *
-     * @param inAnimation 视图进入屏幕时显示动画用的动画对象。
+     * @param inAnimation 视图进入屏幕时显示动画用的动画对象.
      *
      * @see #getInAnimation()
      * @see #setInAnimation(android.content.Context, int)
@@ -251,9 +251,9 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 返回用于绘制视图退出屏幕时动画的动画对象。
+     * 返回用于绘制视图退出屏幕时动画的动画对象.
      *
-     * @return 动画对象；未设定时返回空。
+     * @return 动画对象；未设定时返回空.
      *
      * @see #setOutAnimation(android.view.animation.Animation)
      * @see #setOutAnimation(android.content.Context, int)
@@ -263,9 +263,9 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 设置用于绘制视图退出屏幕时动画的动画对象。
+     * 设置用于绘制视图退出屏幕时动画的动画对象.
      *
-     * @param outAnimation 视图退出屏幕时显示动画用的动画对象。
+     * @param outAnimation 视图退出屏幕时显示动画用的动画对象.
      *
      * @see #getOutAnimation()
      * @see #setOutAnimation(android.content.Context, int)
@@ -275,10 +275,10 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 设置用于绘制视图进入屏幕时动画的动画对象。
+     * 设置用于绘制视图进入屏幕时动画的动画对象.
      *
-     * @param context 应用程序上下文。
-     * @param resourceID 动画对象的资源 ID。
+     * @param context 应用程序上下文.
+     * @param resourceID 动画对象的资源 ID.
      *
      * @see #getInAnimation()
      * @see #setInAnimation(android.view.animation.Animation)
@@ -288,10 +288,10 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 设置用于绘制视图退出屏幕时动画的动画对象。
+     * 设置用于绘制视图退出屏幕时动画的动画对象.
      *
-     * @param context 应用程序上下文。
-     * @param resourceID 动画对象的资源 ID。
+     * @param context 应用程序上下文.
+     * @param resourceID 动画对象的资源 ID.
      *
      * @see #getOutAnimation()
      * @see #setOutAnimation(android.view.animation.Animation)
@@ -301,9 +301,9 @@ public class ViewAnimator extends FrameLayout {
     }
 
     /**
-     * 设置视图动画对象首次显示时，是否为当前视图显示动画。
+     * 设置视图动画对象首次显示时，是否为当前视图显示动画.
      *
-     * @param animate 视图动画对象首次显示时为当前视图显示动画时为真；否则为假。
+     * @param animate 视图动画对象首次显示时为当前视图显示动画时为真；否则为假.
      */
     public void setAnimateFirstView(boolean animate) {
         mAnimateFirstTime = animate;

@@ -25,19 +25,19 @@ import android.util.AttributeSet;
 import com.android.internal.R;
 
 /**
- * RatingBar 是基于 SeekBar 和 ProgressBar 的扩展，用星型来显示等级评定。
- * 使用 RatingBar 的默认大小时，用户可以触摸、拖动或使用方向键来设置评分。
+ * RatingBar 是基于 SeekBar 和 ProgressBar 的扩展，用星型来显示等级评定.
+ * 使用 RatingBar 的默认大小时，用户可以触摸、拖动或使用方向键来设置评分.
  * 它有小 RatingBar 样式（{@link android.R.attr#ratingBarStyleSmall}）
- * 和大的（{@link android.R.attr#ratingBarStyleIndicator}）只用于显示的两种样式。
- * 大的样式不支持用户交互，仅能用于显示。
+ * 和大的（{@link android.R.attr#ratingBarStyleIndicator}）只用于显示的两种样式.
+ * 大的样式不支持用户交互，仅能用于显示.
  * <p>
- * 当使用可以支持用户交互的 RatingBar 时，无论将小部件放在它的左边还是右边都是不合适的。
+ * 当使用可以支持用户交互的 RatingBar 时，无论将小部件放在它的左边还是右边都是不合适的.
  * <p>
  * 只有当布局的宽被设置为“<code>wrap content</code>”时，设置的星星数量
  * （通过函数 {@link #setNumStars(int)} 或者在 XML 布局文件中定义）将显示出来
- * （如果宽度设置为其他布局模式，结果不可预知）。
+ * （如果宽度设置为其他布局模式，结果不可预知）.
  * <p>
- * 次级进度一般不应该被修改，因为他仅仅是被当作星型部分内部的填充背景。
+ * 次级进度一般不应该被修改，因为他仅仅是被当作星型部分内部的填充背景.
  * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-formstuff.html">Form Stuff
  * tutorial</a>.</p>
  * 
@@ -52,19 +52,19 @@ import com.android.internal.R;
 public class RatingBar extends AbsSeekBar {
 
     /**
-     * 当评分等级改变时通知客户端的回调函数。
-     * 这包括用户通过手势、方向键或轨迹球触发的改变，以及编程触发的改变。
+     * 当评分等级改变时通知客户端的回调函数.
+     * 这包括用户通过手势、方向键或轨迹球触发的改变，以及编程触发的改变.
      */
     public interface OnRatingBarChangeListener {
         
         /**
-         * 通知评分等级已经被修改。
-         * 客户端可以使用 fromUser 参数区分用户触发的改变还是编程触发的改变。
-         * 当用户拖拽时，将不会连续不断的被调用，仅仅当用户最终离开触摸结束评分时调用。
+         * 通知评分等级已经被修改.
+         * 客户端可以使用 fromUser 参数区分用户触发的改变还是编程触发的改变.
+         * 当用户拖拽时，将不会连续不断的被调用，仅仅当用户最终离开触摸结束评分时调用.
          * 
-         * @param ratingBar 评分修改的 RatingBar。
-         * @param rating 当前评分分数。取值范围为0到星型的数量。
-         * @param fromUser 如果评分改变是由用户触摸手势、方向键或轨迹球移动触发的，则返回 true。
+         * @param ratingBar 评分修改的 RatingBar.
+         * @param rating 当前评分分数.取值范围为0到星型的数量.
+         * @param fromUser 如果评分改变是由用户触摸手势、方向键或轨迹球移动触发的，则返回 true.
          */
         void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser);
 
@@ -115,16 +115,16 @@ public class RatingBar extends AbsSeekBar {
     }
     
     /**
-     * 设置当评分等级发生改变时回调的监听器。
+     * 设置当评分等级发生改变时回调的监听器.
      * 
-     * @param listener 监听器。
+     * @param listener 监听器.
      */
     public void setOnRatingBarChangeListener(OnRatingBarChangeListener listener) {
         mOnRatingBarChangeListener = listener;
     }
     
     /**
-     * @return 监听评分改变事件的监听器（可能为空）。
+     * @return 监听评分改变事件的监听器（可能为空）.
      */
     public OnRatingBarChangeListener getOnRatingBarChangeListener() {
         return mOnRatingBarChangeListener;
@@ -133,7 +133,7 @@ public class RatingBar extends AbsSeekBar {
     /**
      * 设置当前的评分条是否仅仅是个指示器（这样用户就不能进行修改操作了）
      * 
-     * @param isIndicator 是否是一个指示器。
+     * @param isIndicator 是否是一个指示器.
      */
     public void setIsIndicator(boolean isIndicator) {
         mIsUserSeekable = !isIndicator;
@@ -141,17 +141,17 @@ public class RatingBar extends AbsSeekBar {
     }
     
     /**
-     * @return 判断当前的评分条是否仅仅是一个指示器（注：即能否被修改）。
+     * @return 判断当前的评分条是否仅仅是一个指示器（注：即能否被修改）.
      */
     public boolean isIndicator() {
         return !mIsUserSeekable;
     }
     
     /**
-     * 设置显示的星型的数量。为了能够正常显示它们，建议将当前小部件的布局宽度设置为
-     * “<code>wrap content</code>”。
+     * 设置显示的星型的数量.为了能够正常显示它们，建议将当前小部件的布局宽度设置为
+     * “<code>wrap content</code>”.
      * 
-     * @param numStars 星型的数量。
+     * @param numStars 星型的数量.
      */
     public void setNumStars(final int numStars) {
         if (numStars <= 0) {
@@ -165,35 +165,35 @@ public class RatingBar extends AbsSeekBar {
     }
 
     /**
-     * 返回显示的星型数量。
-     * @return 显示的星型数量。
+     * 返回显示的星型数量.
+     * @return 显示的星型数量.
      */
     public int getNumStars() {
         return mNumStars;
     }
     
     /**
-     * 设置分数（星型的数量）。
+     * 设置分数（星型的数量）.
      * 
-     * @param rating 设置的分数。
+     * @param rating 设置的分数.
      */
     public void setRating(float rating) {
         setProgress(Math.round(rating * getProgressPerStar()));
     }
 
     /**
-     * 获取当前的评分（填充的星型的数量）。
+     * 获取当前的评分（填充的星型的数量）.
      * 
-     * @return 当前的评分。
+     * @return 当前的评分.
      */
     public float getRating() {
         return getProgress() / getProgressPerStar();        
     }
 
     /**
-     * 设置当前评分条的步长（粒度）。
+     * 设置当前评分条的步长（粒度）.
      * 
-     * @param stepSize 评分条的步进。例如：如果想要半个星星的粒度，则它的值为 0.5。
+     * @param stepSize 评分条的步进.例如：如果想要半个星星的粒度，则它的值为 0.5.
      */
     public void setStepSize(float stepSize) {
         if (stepSize <= 0) {
@@ -207,9 +207,9 @@ public class RatingBar extends AbsSeekBar {
     }
 
     /**
-     * 获取评分条的步长。
+     * 获取评分条的步长.
      * 
-     * @return 步长。
+     * @return 步长.
      */
     public float getStepSize() {
         return (float) getNumStars() / getMax();

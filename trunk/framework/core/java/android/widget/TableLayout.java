@@ -28,36 +28,36 @@ import android.view.ViewGroup;
 import java.util.regex.Pattern;
 
 /**
- * <p>按照行列来组织子视图的布局。表格布局包含一系列的 {@link android.widget.TableRow
- * 表格行}对象，用于定义行（实际上你也可以使用其它子对象，将在后面进行解释）。
- * 表格布局不为它的行、列和单元格显示表格线。每个行可以包含0个以上（包括0）的单元格；
- * 每个单元格可以设置一个{@link android.view.View 视图}对象。与行包含很多单元格一样，
- * 表格包含很多列。表格的单元格可以为空。单元格可以象 HTML 那样跨列。</p>
+ * <p>按照行列来组织子视图的布局.表格布局包含一系列的 {@link android.widget.TableRow
+ * 表格行}对象，用于定义行（实际上你也可以使用其它子对象，将在后面进行解释）.
+ * 表格布局不为它的行、列和单元格显示表格线.每个行可以包含0个以上（包括0）的单元格；
+ * 每个单元格可以设置一个{@link android.view.View 视图}对象.与行包含很多单元格一样，
+ * 表格包含很多列.表格的单元格可以为空.单元格可以象 HTML 那样跨列.</p>
  *
- * <p>列的宽度由该列所有行中最宽的一个单元格决定。不过表格布局可以通过
+ * <p>列的宽度由该列所有行中最宽的一个单元格决定.不过表格布局可以通过
  * {@link #setColumnShrinkable(int, boolean) setColumnShrinkable()} 方法或者
  * {@link #setColumnStretchable(int, boolean) setColumnStretchable()} 
- * 方法来标记某些列可以收缩或可以拉伸。
- * 如果标记为可以收缩，列宽可以收缩以使表格适合容器的大小。如果标记为可以拉伸，
- * 列宽可以拉伸以占用多余的空间。表格的总宽度由其父容器决定。
- * 记住列可以同时具有可拉伸和可收缩标记是很重要的。在列可以调整其宽度以占用可用空间，
- * 但不能超过限度时是很有用的。最后，你可以通过调用
- * {@link #setColumnCollapsed(int,boolean) setColumnCollapsed()} 方法来隐藏列。
+ * 方法来标记某些列可以收缩或可以拉伸.
+ * 如果标记为可以收缩，列宽可以收缩以使表格适合容器的大小.如果标记为可以拉伸，
+ * 列宽可以拉伸以占用多余的空间.表格的总宽度由其父容器决定.
+ * 记住列可以同时具有可拉伸和可收缩标记是很重要的.在列可以调整其宽度以占用可用空间，
+ * 但不能超过限度时是很有用的.最后，你可以通过调用
+ * {@link #setColumnCollapsed(int,boolean) setColumnCollapsed()} 方法来隐藏列.
  * </p>
  *
- * <p>表格布局的子对象不能指定 <code>layout_width</code> 属性。宽度永远是
- * <code>MATCH_PARENT</code>。不过子对象可以定义 <code>layout_height</code>
- * 属性；其默认值是 {@link android.widget.TableLayout.LayoutParams#WRAP_CONTENT}。
+ * <p>表格布局的子对象不能指定 <code>layout_width</code> 属性.宽度永远是
+ * <code>MATCH_PARENT</code>.不过子对象可以定义 <code>layout_height</code>
+ * 属性；其默认值是 {@link android.widget.TableLayout.LayoutParams#WRAP_CONTENT}.
  * 如果子对象是 {@link android.widget.TableRow 表格行}，其高度永远是
- * {@link android.widget.TableLayout.LayoutParams#WRAP_CONTENT}。</p>
+ * {@link android.widget.TableLayout.LayoutParams#WRAP_CONTENT}.</p>
  *
- * <p>无论是在代码还是在 XML 布局文件中，单元格必须安装索引顺序加入表格行。
- * 列号是从 0 开始的。如果你不为子单元格指定列号，其将自动增值，使用下一个可用列号。
- * 如果你跳过某个列号，他在表格行中作为空可以改对待。参见 ApiDemos
- * 中通过 XML 创建表格的布局示例。</p>
+ * <p>无论是在代码还是在 XML 布局文件中，单元格必须安装索引顺序加入表格行.
+ * 列号是从 0 开始的.如果你不为子单元格指定列号，其将自动增值，使用下一个可用列号.
+ * 如果你跳过某个列号，他在表格行中作为空可以改对待.参见 ApiDemos
+ * 中通过 XML 创建表格的布局示例.</p>
  *
  * <p>虽然表格布局典型的子对象是表格行，实际上你可以使用任何视图类的子类，
- * 作为表格视图的直接子对象。视图会作为只有一行并结合了所有列的单元格显示。</p>
+ * 作为表格视图的直接子对象.视图会作为只有一行并结合了所有列的单元格显示.</p>
  * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-tablelayout.html">Table
  * Layout tutorial</a>.</p>
  * @author translate by cnmahj
@@ -76,9 +76,9 @@ public class TableLayout extends LinearLayout {
     private boolean mInitialized;
 
     /**
-     * <p>为给定的上下文创建表格布局。</p>
+     * <p>为给定的上下文创建表格布局.</p>
      *
-     * @param context 应用程序上下文。
+     * @param context 应用程序上下文.
      */
     public TableLayout(Context context) {
         super(context);
@@ -86,10 +86,10 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>使用指定的属性集合为给定的上下文创建表格布局。</p>
+     * <p>使用指定的属性集合为给定的上下文创建表格布局.</p>
      *
-     * @param context 应用程序上下文。
-     * @param attrs 属性集合。
+     * @param context 应用程序上下文.
+     * @param attrs 属性集合.
      */
     public TableLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -217,18 +217,18 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>指示，是否所有的列都是可收缩的。</p>
+     * <p>指示，是否所有的列都是可收缩的.</p>
      *
-     * @return 如果所有列都可收缩，返回真；否则返回假。
+     * @return 如果所有列都可收缩，返回真；否则返回假.
      */
     public boolean isShrinkAllColumns() {
         return mShrinkAllColumns;
     }
 
     /**
-     * <p>标记所有列为可收缩的便利的方法。</p>
+     * <p>标记所有列为可收缩的便利的方法.</p>
      *
-     * @param shrinkAllColumns 如果标记所有列为可收缩时为真。
+     * @param shrinkAllColumns 如果标记所有列为可收缩时为真.
      *
      * @attr ref android.R.styleable#TableLayout_shrinkColumns
      */
@@ -237,18 +237,18 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>指示，是否所有的列都是可拉伸的。</p>
+     * <p>指示，是否所有的列都是可拉伸的.</p>
      *
-     * @return 如果所有列都可拉伸，返回真；否则返回假。
+     * @return 如果所有列都可拉伸，返回真；否则返回假.
      */
     public boolean isStretchAllColumns() {
         return mStretchAllColumns;
     }
 
     /**
-     * <p>标记所有列为可拉伸的便利的方法。</p>
+     * <p>标记所有列为可拉伸的便利的方法.</p>
      *
-     * @param stretchAllColumns 如果标记所有列为可拉伸时为真。
+     * @param stretchAllColumns 如果标记所有列为可拉伸时为真.
      *
      * @attr ref android.R.styleable#TableLayout_stretchColumns
      */
@@ -257,13 +257,13 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>折叠或回复给定列。折叠时，列从屏幕上消失，其空间由其它列占用。
-     * 当列属于 {@link android.widget.TableRow} 时才可以进行折叠/回复操作。</p>
+     * <p>折叠或回复给定列.折叠时，列从屏幕上消失，其空间由其它列占用.
+     * 当列属于 {@link android.widget.TableRow} 时才可以进行折叠/回复操作.</p>
      *
-     * <p>调用该方法会请求布局操作。</p>
+     * <p>调用该方法会请求布局操作.</p>
      *
-     * @param columnIndex 列索引。
-     * @param isCollapsed 折叠时为真；否则为假。
+     * @param columnIndex 列索引.
+     * @param isCollapsed 折叠时为真；否则为假.
      *
      * @attr ref android.R.styleable#TableLayout_collapseColumns
      */
@@ -283,22 +283,22 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>返回指定列的折叠状态。</p>
+     * <p>返回指定列的折叠状态.</p>
      *
-     * @param columnIndex 列索引。
-     * @return 折叠时为真；否则为假。
+     * @param columnIndex 列索引.
+     * @return 折叠时为真；否则为假.
      */
     public boolean isColumnCollapsed(int columnIndex) {
         return mCollapsedColumns.get(columnIndex);
     }
 
     /**
-     * <p>设置指定列是否可拉伸。可拉伸时，列会尽可能多的占用行中的可用空间。</p>
+     * <p>设置指定列是否可拉伸.可拉伸时，列会尽可能多的占用行中的可用空间.</p>
      *
-     * <p>调用该方法会请求布局操作。</p>
+     * <p>调用该方法会请求布局操作.</p>
      *
-     * @param columnIndex 列的索引。
-     * @param isStretchable 如果列可以拉伸，设为真；否则设为假。默认是假。
+     * @param columnIndex 列的索引.
+     * @param isStretchable 如果列可以拉伸，设为真；否则设为假.默认是假.
      *
      * @attr ref android.R.styleable#TableLayout_stretchColumns
      */
@@ -308,22 +308,22 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>返回指定的列是否可拉伸。</p>
+     * <p>返回指定的列是否可拉伸.</p>
      *
-     * @param columnIndex 列的索引。
-     * @return 如果列可以拉伸，返回真；否则返回假。
+     * @param columnIndex 列的索引.
+     * @return 如果列可以拉伸，返回真；否则返回假.
      */
     public boolean isColumnStretchable(int columnIndex) {
         return mStretchAllColumns || mStretchableColumns.get(columnIndex);
     }
 
     /**
-     * <p>设置指定列是否可收缩。当行太宽时，表格可以收缩该列以提供更多空间。</p>
+     * <p>设置指定列是否可收缩.当行太宽时，表格可以收缩该列以提供更多空间.</p>
      *
-     * <p>调用该方法会请求布局操作。</p>
+     * <p>调用该方法会请求布局操作.</p>
      *
-     * @param columnIndex 列的索引。
-     * @param isShrinkable 如果列可以拉伸，设为真；否则设为假。默认是假。
+     * @param columnIndex 列的索引.
+     * @param isShrinkable 如果列可以拉伸，设为真；否则设为假.默认是假.
      *
      * @attr ref android.R.styleable#TableLayout_shrinkColumns
      */
@@ -333,10 +333,10 @@ public class TableLayout extends LinearLayout {
     }
 
     /**
-     * <p>返回指定的列是否可收缩。</p>
+     * <p>返回指定的列是否可收缩.</p>
      *
-     * @param columnIndex 列的索引。
-     * @return 如果列可以收缩，返回真；否则返回假。
+     * @param columnIndex 列的索引.
+     * @return 如果列可以收缩，返回真；否则返回假.
      */
     public boolean isColumnShrinkable(int columnIndex) {
         return mShrinkAllColumns || mShrinkableColumns.get(columnIndex);
@@ -619,7 +619,7 @@ public class TableLayout extends LinearLayout {
     /**
      * 返回宽度为 {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}，
      * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
-     * 的布局参数集合。
+     * 的布局参数集合.
      */
     @Override
     protected LinearLayout.LayoutParams generateDefaultLayoutParams() {
@@ -644,7 +644,7 @@ public class TableLayout extends LinearLayout {
 
     /**
      * <p>该类强制将子视图的宽度设为 {@link #MATCH_PARENT}，
-     * 将没有设置高度的子视图的高度设为 {@link #WRAP_CONTENT}。</p>
+     * 将没有设置高度的子视图的高度设为 {@link #WRAP_CONTENT}.</p>
      */
     @SuppressWarnings({"UnusedDeclaration"})
     public static class LayoutParams extends LinearLayout.LayoutParams {
@@ -671,7 +671,7 @@ public class TableLayout extends LinearLayout {
 
         /**
          * <p>将子视图的宽度设为 {@link android.view.ViewGroup.LayoutParams}，
-         * 高度设为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。</p>
+         * 高度设为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.</p>
          */
         public LayoutParams() {
             super(MATCH_PARENT, WRAP_CONTENT);
@@ -694,11 +694,11 @@ public class TableLayout extends LinearLayout {
         /**
          * <p>如果没有指定布局高度，则修改行的宽度为
          * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}；
-         * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。</p>
+         * 高度为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.</p>
          *
-         * @param a 特定风格的属性集合。
-         * @param widthAttr 查询宽度属性用的索引。
-         * @param heightAttr 查询高度属性用的索引。
+         * @param a 特定风格的属性集合.
+         * @param widthAttr 查询宽度属性用的索引.
+         * @param heightAttr 查询高度属性用的索引.
          */
         @Override
         protected void setBaseAttributes(TypedArray a,

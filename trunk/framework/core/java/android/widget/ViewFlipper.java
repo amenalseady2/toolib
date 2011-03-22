@@ -28,8 +28,8 @@ import android.util.Log;
 import android.widget.RemoteViews.RemoteView;
 
 /**
- * 在添加到该类的两个或两个以上的视图之间绘制动画的简单的 ViewAnimator 。
- * 一次仅能显示一个子视图。如果需要，可以设置间隔时间使子视图像幻灯片一样自动显示。
+ * 在添加到该类的两个或两个以上的视图之间绘制动画的简单的 ViewAnimator .
+ * 一次仅能显示一个子视图.如果需要，可以设置间隔时间使子视图像幻灯片一样自动显示.
  * 
  * @attr ref android.R.styleable#ViewFlipper_flipInterval
  * @attr ref android.R.styleable#ViewFlipper_autoStart
@@ -114,10 +114,10 @@ public class ViewFlipper extends ViewAnimator {
     }
 
     /**
-     * 设置视图间切换的时间间隔。
+     * 设置视图间切换的时间间隔.
      *
      * @param milliseconds
-     *            以毫秒为单位的时间间隔。
+     *            以毫秒为单位的时间间隔.
      */
     @android.view.RemotableViewMethod
     public void setFlipInterval(int milliseconds) {
@@ -125,7 +125,7 @@ public class ViewFlipper extends ViewAnimator {
     }
 
     /**
-     * 开始在子视图间定时循环切换。
+     * 开始在子视图间定时循环切换.
      */
     public void startFlipping() {
         mStarted = true;
@@ -133,7 +133,7 @@ public class ViewFlipper extends ViewAnimator {
     }
 
     /**
-     * 停止切换。
+     * 停止切换.
      */
     public void stopFlipping() {
         mStarted = false;
@@ -163,21 +163,21 @@ public class ViewFlipper extends ViewAnimator {
     }
 
     /**
-     * 如果已启动子视图定时切换，则返回真。
+     * 如果已启动子视图定时切换，则返回真.
      */
     public boolean isFlipping() {
         return mStarted;
     }
 
     /**
-     * 设置视图显示到窗口上时是否自动调用 {@link #startFlipping()} 方法。
+     * 设置视图显示到窗口上时是否自动调用 {@link #startFlipping()} 方法.
      */
     public void setAutoStart(boolean autoStart) {
         mAutoStart = autoStart;
     }
 
     /**
-     * 如果视图显示到窗口上时自动调用 {@link #startFlipping()} 方法，则返回真。
+     * 如果视图显示到窗口上时自动调用 {@link #startFlipping()} 方法，则返回真.
      */
     public boolean isAutoStart() {
         return mAutoStart;

@@ -26,21 +26,21 @@ import android.view.ViewGroup;
 
 
 /**
- * <p>这个类用于创建一组单选按钮之间多重排斥的范围。
- * 在同一个单选按钮组中勾选一个按钮则会取消该组中其它已经勾选的按钮的选中状态。</p>
+ * <p>这个类用于创建一组单选按钮之间多重排斥的范围.
+ * 在同一个单选按钮组中勾选一个按钮则会取消该组中其它已经勾选的按钮的选中状态.</p>
  *
- * <p>初始状态下，所有的单选按钮都出于未选中状态。虽然不能取消一个特定的单选按钮的选中状态，
- * 但可以通过单选按钮组来移除它的选中状态。</p>
+ * <p>初始状态下，所有的单选按钮都出于未选中状态.虽然不能取消一个特定的单选按钮的选中状态，
+ * 但可以通过单选按钮组来移除它的选中状态.</p>
  *
- * <p>选中的单选按钮是通过在 XML 布局文件中定义的唯一 ID 来识别的。</p>
+ * <p>选中的单选按钮是通过在 XML 布局文件中定义的唯一 ID 来识别的.</p>
  *
  * <p><strong>XML 属性</strong></p>
  * <p>参见 {@link android.R.styleable#RadioGroup RadioGroup 属性}、
  * {@link android.R.styleable#LinearLayout LinearLayout 属性}、
  * {@link android.R.styleable#ViewGroup ViewGroup 属性} 和
- * {@link android.R.styleable#View View 属性}。</p>
+ * {@link android.R.styleable#View View 属性}.</p>
  * <p>更多的布局属性，参见
- * {@link android.widget.LinearLayout.LayoutParams LinearLayout.LayoutParams}。</p>
+ * {@link android.widget.LinearLayout.LayoutParams LinearLayout.LayoutParams}.</p>
  * 
  * @see RadioButton
  * @author translate by 首当其冲
@@ -138,9 +138,9 @@ public class RadioGroup extends LinearLayout {
     }
 
     /**
-     * <p>将通过参数传入的 ID 所对应的单选按钮设置为选中状态。
-     * 用 -1 作为选择标识符，将清除按钮组的选择状态，相当于执行 {@link #clearCheck()} 方法。</p>
-     * @param id 该组中所要勾选的单选按钮的唯一标识符（id）。
+     * <p>将通过参数传入的 ID 所对应的单选按钮设置为选中状态.
+     * 用 -1 作为选择标识符，将清除按钮组的选择状态，相当于执行 {@link #clearCheck()} 方法.</p>
+     * @param id 该组中所要勾选的单选按钮的唯一标识符（id）.
      *
      * @see #getCheckedRadioButtonId()
      * @see #clearCheck()
@@ -177,9 +177,9 @@ public class RadioGroup extends LinearLayout {
     }
 
     /**
-     * <p>返回该单选按钮组中所选择的单选按钮的标识 ID，如果没有选中的单选按钮则返回 -1。</p>
+     * <p>返回该单选按钮组中所选择的单选按钮的标识 ID，如果没有选中的单选按钮则返回 -1.</p>
      *
-     * @return 单选按钮组中选中的单选按钮的标识 ID。
+     * @return 单选按钮组中选中的单选按钮的标识 ID.
      *
      * @see #check(int)
      * @see #clearCheck()
@@ -189,8 +189,8 @@ public class RadioGroup extends LinearLayout {
     }
 
     /**
-     * <p>清除选择状态。清除选择状态后，该单选按钮组中没有选中的按钮，
-     * 调用 {@link #getCheckedRadioButtonId()} 函数返回 -1（原文为null）。</p>
+     * <p>清除选择状态.清除选择状态后，该单选按钮组中没有选中的按钮，
+     * 调用 {@link #getCheckedRadioButtonId()} 函数返回 -1（原文为null）.</p>
      *
      * @see #check(int)
      * @see #getCheckedRadioButtonId()
@@ -200,9 +200,9 @@ public class RadioGroup extends LinearLayout {
     }
 
     /**
-     * <p>注册一个当该单选按钮组中的单选按钮勾选状态发生改变时所要调用的回调函数。</p>
+     * <p>注册一个当该单选按钮组中的单选按钮勾选状态发生改变时所要调用的回调函数.</p>
      *
-     * @param listener 当单选按钮勾选状态发生改变时所要调用的回调函数。
+     * @param listener 当单选按钮勾选状态发生改变时所要调用的回调函数.
      */
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         mOnCheckedChangeListener = listener;
@@ -231,10 +231,10 @@ public class RadioGroup extends LinearLayout {
 
     /**
      * <p>当 XML 文件中没有指定该视图的子控件的高度和宽度时，
-     * 该类将其设为默认值 {@link #WRAP_CONTENT}；指定了则使用指定的值。</p>
+     * 该类将其设为默认值 {@link #WRAP_CONTENT}；指定了则使用指定的值.</p>
      *
      * <p>本类支持的所有子视图属性的一览表，参见
-     * {@link android.R.styleable#LinearLayout_Layout LinearLayout 属性}。</p>
+     * {@link android.R.styleable#LinearLayout_Layout LinearLayout 属性}.</p>
      *
      */
     public static class LayoutParams extends LinearLayout.LayoutParams {
@@ -276,7 +276,7 @@ public class RadioGroup extends LinearLayout {
         /**
          * <p>当 XML 文件中未指定时，将子视图的宽度设为
          * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}、高度设为
-         * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。</p>
+         * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.</p>
          *
          * @param a 命名的属性集合
          * @param widthAttr 从集合 a 中取得宽度属性用的索引
@@ -301,14 +301,14 @@ public class RadioGroup extends LinearLayout {
     }
 
     /**
-     * <p>当单选按钮组中的单选按钮的勾选状态发生改变时，所要调用的回调函数的接口类。</p>
+     * <p>当单选按钮组中的单选按钮的勾选状态发生改变时，所要调用的回调函数的接口类.</p>
      */
     public interface OnCheckedChangeListener {
         /**
-         * <p>变更选中的单选按钮时，调用该方法。清除选择状态时，<code>checkedId</code> 为 -1。</p>
+         * <p>变更选中的单选按钮时，调用该方法.清除选择状态时，<code>checkedId</code> 为 -1.</p>
          *
-         * @param group 选中状态发生变化的按钮组。
-         * @param checkedId 新选中的单选按钮的标识符。
+         * @param group 选中状态发生变化的按钮组.
+         * @param checkedId 新选中的单选按钮的标识符.
          */
         public void onCheckedChanged(RadioGroup group, int checkedId);
     }

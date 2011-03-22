@@ -22,7 +22,7 @@ import android.util.AttributeSet;
 
 /**
  * <p>
- * 复选框是包含选中和未选中两种状态的特殊的双状态按钮。如下是在活动中使用复选框的例子：
+ * 复选框是包含选中和未选中两种状态的特殊的双状态按钮.如下是在活动中使用复选框的例子：
  * </p>
  *
  * <pre class="prettyprint">
@@ -45,7 +45,7 @@ import android.util.AttributeSet;
  * 参见 {@link android.R.styleable#CompoundButton CompoundButton 属性}、
  * {@link android.R.styleable#Button Button 属性}、
  * {@link android.R.styleable#TextView TextView 属性} 和
- * {@link android.R.styleable#View View Attributes}。
+ * {@link android.R.styleable#View View Attributes}.
  * </p>
  * @author translate by 农民伯伯
  * @author convert by cnmahj

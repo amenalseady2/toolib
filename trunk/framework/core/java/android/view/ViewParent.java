@@ -25,7 +25,7 @@ import android.graphics.Rect;
  */
 public interface ViewParent {
     /**
-     * 当某些变更导致该父视图的子视图的布局失效时调用该方法。该方法按照视图树的顺序调用。
+     * 当某些变更导致该父视图的子视图的布局失效时调用该方法.该方法按照视图树的顺序调用.
      */
     public void requestLayout();
 
@@ -139,14 +139,14 @@ public interface ViewParent {
     public void focusableViewAvailable(View v);
 
     /**
-     * 为指定的视图或者其父类显示上下文菜单。
+     * 为指定的视图或者其父类显示上下文菜单.
      * <p>
-     * 大部分情况下，子类不需要重写该方法。但是，如果直接将子类添加到窗口管理器（例如：使用
+     * 大部分情况下，子类不需要重写该方法.但是，如果直接将子类添加到窗口管理器（例如：使用
      * {@link ViewManager#addView(View, android.view.ViewGroup.LayoutParams)}
-     * 函数），此时就需要重写来显示上下文菜单。
+     * 函数），此时就需要重写来显示上下文菜单.
      * 
-     * @param originalView 首先显示的上下文菜单的原始视图。
-     * @return 如果显示了上下文菜单返回真。
+     * @param originalView 首先显示的上下文菜单的原始视图.
+     * @return 如果显示了上下文菜单返回真.
      */
     public boolean showContextMenuForChild(View originalView);
 
@@ -181,23 +181,23 @@ public interface ViewParent {
     public void requestDisallowInterceptTouchEvent(boolean disallowIntercept);
     
     /**
-     * 当视图组里的某个子视图需要定位到屏幕上的特定矩形区域时，调用此方法。
+     * 当视图组里的某个子视图需要定位到屏幕上的特定矩形区域时，调用此方法.
      * {@link ViewGroup} 重写此方法时可以认为：
      * <ul>
-     *   <li>child 是该视图的直接子视图。</li>
-     *   <li>rectangle 使用子视图的坐标系。</li>
+     *   <li>child 是该视图的直接子视图.</li>
+     *   <li>rectangle 使用子视图的坐标系.</li>
      * </ul>
      *
      * <p>{@link ViewGroup}重写此方法时应该遵守如下约定：</p>
      * <ul>
-     *   <li>如果矩形可见，不做任何变更。</li>
-     *   <li>视窗滚动到矩形可见即可。</li>
+     *   <li>如果矩形可见，不做任何变更.</li>
+     *   <li>视窗滚动到矩形可见即可.</li>
      * <ul>
      *
-     * @param child 发出请求的直接子视图。
-     * @param rectangle 子视图希望显示在屏幕上的、基于子视图坐标系的矩形。
-     * @param immediate 设为真时，禁止动画形式或延迟的滚动；设为假时不禁止。
-     * @return 该方法是否滚动了屏幕。
+     * @param child 发出请求的直接子视图.
+     * @param rectangle 子视图希望显示在屏幕上的、基于子视图坐标系的矩形.
+     * @param immediate 设为真时，禁止动画形式或延迟的滚动；设为假时不禁止.
+     * @return 该方法是否滚动了屏幕.
      */
     public boolean requestChildRectangleOnScreen(View child, Rect rectangle,
             boolean immediate);

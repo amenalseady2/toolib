@@ -17,8 +17,8 @@
 package android.widget;
 
 /**
- * <p>定义一个可过滤的行为。一个可过滤的类可以通过一个过滤器筛选它的数据。
- * 过滤类通常由{@link android.widget.Adapter 适配器}实现。</p>
+ * <p>定义一个可过滤的行为.一个可过滤的类可以通过一个过滤器筛选它的数据.
+ * 过滤类通常由{@link android.widget.Adapter 适配器}实现.</p>
  *
  * @see android.widget.Filter
  * @author translate by 德罗德
@@ -26,9 +26,9 @@ package android.widget;
  */
 public interface Filterable {
     /**
-     * <p>返回可以根据过滤模式限制数据的过滤器。</p>
+     * <p>返回可以根据过滤模式限制数据的过滤器.</p>
      *
-     * <p>该方法一般由 {@link android.widget.Adapter} 实现。</p>
+     * <p>该方法一般由 {@link android.widget.Adapter} 实现.</p>
      *
      * @return 用于限制数据的过滤器
      */
