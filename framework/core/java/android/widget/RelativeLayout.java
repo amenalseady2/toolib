@@ -1028,8 +1028,7 @@ public class RelativeLayout extends ViewGroup {
         private int mLeft, mTop, mRight, mBottom;
 
         /**
-         * When true, uses the parent as the anchor if the anchor doesn't exist or if
-         * the anchor's visibility is GONE.
+         * 为真时，如果对齐目标不存在或无空间（GONE），则相对于父容器布局。
          */
         @ViewDebug.ExportedProperty(category = "layout")
         public boolean alignWithParent;
@@ -1128,15 +1127,13 @@ public class RelativeLayout extends ViewGroup {
         }
 
         /**
-         * Adds a layout rule to be interpreted by the RelativeLayout. This
-         * method should only be used for constraints that don't refer to another sibling
-         * (e.g., CENTER_IN_PARENT) or take a boolean value ({@link RelativeLayout#TRUE}
-         * for true or - for false). To specify a verb that takes a subject, use
-         * {@link #addRule(int, int)} instead.
+         * 添加相对布局可用的布局规则。该方法只用于相对兄弟以外的布局
+         * （比如 CENTER_IN_PARENT）或者保持布尔值
+         * （真为{@link RelativeLayout#TRUE}，假为0）。
+         * 指定相对目标时请使用 {@link #addRule(int, int)} 函数。
          *
-         * @param verb One of the verbs defined by
-         *        {@link android.widget.RelativeLayout RelativeLayout}, such as
-         *        ALIGN_WITH_PARENT_LEFT.
+         * @param verb 在 {@link android.widget.RelativeLayout RelativeLayout}
+         * 	      中定义的常量，比如 ALIGN_WITH_PARENT_LEFT。
          * @see #addRule(int, int)
          */
         public void addRule(int verb) {
@@ -1144,17 +1141,15 @@ public class RelativeLayout extends ViewGroup {
         }
 
         /**
-         * Adds a layout rule to be interpreted by the RelativeLayout. Use this for
-         * verbs that take a target, such as a sibling (ALIGN_RIGHT) or a boolean
-         * value (VISIBLE).
+         * 添加相对布局可用的布局规则。该方法用于相对于其他兄弟视图的布局
+         * （比如 ALIGN_RIGHT）或者表示可视性的布尔值。
          *
-         * @param verb One of the verbs defined by
-         *        {@link android.widget.RelativeLayout RelativeLayout}, such as
-         *         ALIGN_WITH_PARENT_LEFT.
-         * @param anchor The id of another view to use as an anchor,
-         *        or a boolean value(represented as {@link RelativeLayout#TRUE})
-         *        for true or 0 for false).  For verbs that don't refer to another sibling
-         *        (for example, ALIGN_WITH_PARENT_BOTTOM) just use -1.
+         * @param verb 在 {@link android.widget.RelativeLayout RelativeLayout}
+         * 	      中定义的常量，比如 ALIGN_WITH_PARENT_LEFT。
+         * @param anchor 作为参照物使用的另一个视图，或者布尔值
+         *               （以 {@link RelativeLayout#TRUE}代表真，0代表假）。
+         *               对于不需要参照兄弟的常量（比如 ALIGN_WITH_PARENT_BOTTOM）
+         *               该值设为 -1 即可。
          * @see #addRule(int)
          */
         public void addRule(int verb, int anchor) {
@@ -1162,11 +1157,9 @@ public class RelativeLayout extends ViewGroup {
         }
 
         /**
-         * Retrieves a complete list of all supported rules, where the index is the rule
-         * verb, and the element value is the value specified, or "false" if it was never
-         * set.
+         * 取得所有支持的布局规则列表，索引是规则的常量，值为设置的值，若未设置时返回假。
          *
-         * @return the supported rules
+         * @return 支持的规则。
          * @see #addRule(int, int)
          */
         public int[] getRules() {
