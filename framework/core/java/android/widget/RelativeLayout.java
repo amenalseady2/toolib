@@ -44,22 +44,19 @@ import java.util.HashSet;
 import java.util.ArrayList;
 
 /**
- * A Layout where the positions of the children can be described in relation to each other or to the
- * parent.
+ * 子视图的位置可以用相对于其它子视图或父视图的位置来描述的布局。
  *
  * <p>
- * Note that you cannot have a circular dependency between the size of the RelativeLayout and the
- * position of its children. For example, you cannot have a RelativeLayout whose height is set to
- * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT WRAP_CONTENT} and a child set to
- * {@link #ALIGN_PARENT_BOTTOM}.
+ * 注意，不能在 RelativeLayout 容器和他的子元素之间产生循环依赖。比如说，不能在将 RelativeLayout
+ * 的高设置为{@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT WRAP_CONTENT}
+ * 的时候，将子元素的高设置为 {@link #ALIGN_PARENT_BOTTOM}。
  * </p>
  *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-relativelayout.html">Relative
- * Layout tutorial</a>.</p>
- *
+ * <p>参见 <a href="{@docRoot}resources/tutorials/views/hello-relativelayout.html">
+ * 相对视图教程</a>。</p>
+ * 
  * <p>
- * Also see {@link android.widget.RelativeLayout.LayoutParams RelativeLayout.LayoutParams} for
- * layout attributes
+ * 布局属性参见 {@link android.widget.RelativeLayout.LayoutParams RelativeLayout.LayoutParams}。
  * </p>
  *
  * @attr ref android.R.styleable#RelativeLayout_gravity
@@ -74,77 +71,70 @@ public class RelativeLayout extends ViewGroup {
     public static final int TRUE = -1;
 
     /**
-     * Rule that aligns a child's right edge with another child's left edge.
+     * 布局规则：将子视图的右边线与另外子视图的左边线对齐。
      */
     public static final int LEFT_OF                  = 0;
     /**
-     * Rule that aligns a child's left edge with another child's right edge.
+     * 布局规则：将子视图的左边线与另外子视图的右边线对齐。
      */
     public static final int RIGHT_OF                 = 1;
     /**
-     * Rule that aligns a child's bottom edge with another child's top edge.
+     * 布局规则：将子视图的底边线与另外子视图的顶边线对齐。
      */
     public static final int ABOVE                    = 2;
     /**
-     * Rule that aligns a child's top edge with another child's bottom edge.
+     * 布局规则：将子视图的顶边线与另外子视图的底边线对齐。
      */
     public static final int BELOW                    = 3;
 
     /**
-     * Rule that aligns a child's baseline with another child's baseline.
+     * 布局规则：将子视图的基线与另外子视图的基线对齐。
      */
     public static final int ALIGN_BASELINE           = 4;
     /**
-     * Rule that aligns a child's left edge with another child's left edge.
+     * 布局规则：将子视图的左边线与另外子视图的左边线对齐。
      */
     public static final int ALIGN_LEFT               = 5;
     /**
-     * Rule that aligns a child's top edge with another child's top edge.
+     * 布局规则：将子视图的顶边线与另外子视图的顶边线对齐。
      */
     public static final int ALIGN_TOP                = 6;
     /**
-     * Rule that aligns a child's right edge with another child's right edge.
+     * 布局规则：将子视图的右边线与另外子视图的右边线对齐。
      */
     public static final int ALIGN_RIGHT              = 7;
     /**
-     * Rule that aligns a child's bottom edge with another child's bottom edge.
+     * 布局规则：将子视图的底边线与另外子视图的底边线对齐。
      */
     public static final int ALIGN_BOTTOM             = 8;
 
     /**
-     * Rule that aligns the child's left edge with its RelativeLayout
-     * parent's left edge.
+     * 布局规则：将子视图的左边线与相对布局容器的左边线对齐。
      */
     public static final int ALIGN_PARENT_LEFT        = 9;
     /**
-     * Rule that aligns the child's top edge with its RelativeLayout
-     * parent's top edge.
+     * 布局规则：将子视图的左边线与相对布局容器的顶边线对齐。
      */
     public static final int ALIGN_PARENT_TOP         = 10;
     /**
-     * Rule that aligns the child's right edge with its RelativeLayout
-     * parent's right edge.
+     * 布局规则：将子视图的左边线与相对布局容器的右边线对齐。
      */
     public static final int ALIGN_PARENT_RIGHT       = 11;
     /**
-     * Rule that aligns the child's bottom edge with its RelativeLayout
-     * parent's bottom edge.
+     * 布局规则：将子视图的左边线与相对布局容器的底边线对齐。
      */
     public static final int ALIGN_PARENT_BOTTOM      = 12;
 
     /**
-     * Rule that centers the child with respect to the bounds of its
-     * RelativeLayout parent.
+     * 布局规则：将子视图相对于相对布局容器居中对齐。
      */
     public static final int CENTER_IN_PARENT         = 13;
     /**
-     * Rule that centers the child horizontally with respect to the
-     * bounds of its RelativeLayout parent.
+     * 布局规则：将子视图相对于相对布局容器横向居中对齐。
      */
     public static final int CENTER_HORIZONTAL        = 14;
     /**
-     * Rule that centers the child vertically with respect to the
-     * bounds of its RelativeLayout parent.
+     * 布局规则：将子视图相对于相对布局容器纵向居中对齐。
      */
     public static final int CENTER_VERTICAL          = 15;
 
@@ -187,11 +177,10 @@ public class RelativeLayout extends ViewGroup {
     }
 
     /**
-     * Defines which View is ignored when the gravity is applied. This setting has no
-     * effect if the gravity is <code>Gravity.LEFT | Gravity.TOP</code>.
+     * 定义应用对齐方式时忽略的视图。当对齐方式为 <code>Gravity.LEFT | Gravity.TOP</code>
+     * 时，该设置没有影响。
      *
-     * @param viewId The id of the View to be ignored by gravity, or 0 if no View
-     *        should be ignored.
+     * @param viewId 对齐时忽略的视图 ID，为 0 时不忽略任何视图。
      *
      * @see #setGravity(int)
      *
@@ -203,10 +192,9 @@ public class RelativeLayout extends ViewGroup {
     }
 
     /**
-     * Describes how the child views are positioned. Defaults to
-     * <code>Gravity.LEFT | Gravity.TOP</code>.
+     * 描述子视图如何定位。默认值为 <code>Gravity.LEFT | Gravity.TOP</code>。
      *
-     * @param gravity See {@link android.view.Gravity}
+     * @param gravity 参见 {@link android.view.Gravity}。
      *
      * @see #setHorizontalGravity(int)
      * @see #setVerticalGravity(int)
@@ -993,7 +981,7 @@ public class RelativeLayout extends ViewGroup {
     }
 
     /**
-     * Per-child layout information associated with RelativeLayout.
+     * 与相对视图关联的子视图的布局信息。
      *
      * @attr ref android.R.styleable#RelativeLayout_Layout_layout_alignWithParentIfMissing
      * @attr ref android.R.styleable#RelativeLayout_Layout_layout_toLeftOf

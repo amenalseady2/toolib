@@ -1698,7 +1698,7 @@
     </declare-styleable>
     <declare-styleable name="RelativeLayout">
         <attr name="gravity" />
-        <!-- Indicates what view should not be affected by gravity. -->
+        <!-- 指定不受对齐方式影响的视图. -->
         <attr name="ignoreGravity" format="reference" />
     </declare-styleable>
     <declare-styleable name="LinearLayout">
