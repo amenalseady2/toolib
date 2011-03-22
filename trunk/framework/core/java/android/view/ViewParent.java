@@ -25,9 +25,7 @@ import android.graphics.Rect;
  */
 public interface ViewParent {
     /**
-     * Called when something has changed which has invalidated the layout of a
-     * child of this view parent. This will schedule a layout pass of the view
-     * tree.
+     * 当某些变更导致该父视图的子视图的布局失效时调用该方法。该方法按照视图树的顺序调用。
      */
     public void requestLayout();
 
