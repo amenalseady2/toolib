@@ -730,38 +730,33 @@
     <!-- A coordinate in the Y dimension. -->
     <attr name="y" format="dimension" />
 
-    <!-- Specifies how to place the content of an object, both
-         on the x- and y-axis, within the object itself. -->
+    <!-- 指定在对象内部，横纵方向上如何放置对象的内容. -->
     <attr name="gravity">
-        <!-- Push object to the top of its container, not changing its size. -->
+        <!-- 将对象放在其容器的顶部，不改变其大小. -->
         <flag name="top" value="0x30" />
-        <!-- Push object to the bottom of its container, not changing its size. -->
+        <!-- 将对象放在其容器的底部，不改变其大小. -->
         <flag name="bottom" value="0x50" />
-        <!-- Push object to the left of its container, not changing its size. -->
+        <!-- 将对象放在其容器的左侧，不改变其大小. -->
         <flag name="left" value="0x03" />
-        <!-- Push object to the right of its container, not changing its size. -->
+        <!-- 将对象放在其容器的右侧，不改变其大小. -->
         <flag name="right" value="0x05" />
-        <!-- Place object in the vertical center of its container, not changing its size. -->
+        <!-- 将对象纵向居中，不改变其大小. -->
         <flag name="center_vertical" value="0x10" />
-        <!-- Grow the vertical size of the object if needed so it completely fills its container. -->
+        <!-- 必要的时候增加对象的纵向大小，以完全充满其容器. -->
         <flag name="fill_vertical" value="0x70" />
-        <!-- Place object in the horizontal center of its container, not changing its size. -->
+        <!-- 将对象横向居中，不改变其大小. -->
         <flag name="center_horizontal" value="0x01" />
-        <!-- Grow the horizontal size of the object if needed so it completely fills its container. -->
+        <!-- 必要的时候增加对象的横向大小，以完全充满其容器. -->
         <flag name="fill_horizontal" value="0x07" />
-        <!-- Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+        <!-- 将对象横纵居中，不改变其大小. -->
         <flag name="center" value="0x11" />
-        <!-- Grow the horizontal and vertical size of the object if needed so it completely fills its container. -->
+        <!-- 必要的时候增加对象的横纵向大小，以完全充满其容器. -->
         <flag name="fill" value="0x77" />
-        <!-- Additional option that can be set to have the top and/or bottom edges of
-             the child clipped to its container's bounds.
-             The clip will be based on the vertical gravity: a top gravity will clip the bottom
-             edge, a bottom gravity will clip the top edge, and neither will clip both edges. -->
+        <!-- 附加选项，用于按照容器的边来剪切对象的顶部和/或底部的内容.
+             剪切基于其纵向对齐设置：顶部对齐时，剪切底部；底部对齐时剪切顶部；除此之外剪切顶部和底部. -->
         <flag name="clip_vertical" value="0x80" />
-        <!-- Additional option that can be set to have the left and/or right edges of
-             the child clipped to its container's bounds.
-             The clip will be based on the horizontal gravity: a left gravity will clip the right
-             edge, a right gravity will clip the left edge, and neither will clip both edges. -->
+        <!-- 附加选项，用于按照容器的边来剪切对象的左侧和/或右侧的内容.
+             剪切基于其横向对齐设置：左侧对齐时，剪切右侧；右侧对齐时剪切左侧；除此之外剪切左侧和右侧. -->
         <flag name="clip_horizontal" value="0x08" />
     </attr>
 
@@ -1546,11 +1541,9 @@
     <declare-styleable name="Button">
     </declare-styleable>
     <declare-styleable name="Chronometer">
-        <!-- Format string: if specified, the Chronometer will display this
-             string, with the first "%s" replaced by the current timer value
-             in "MM:SS" or "H:MM:SS" form.
-             If no format string is specified, the Chronometer will simply display
-             "MM:SS" or "H:MM:SS". -->
+        <!-- 格式化字符串:如果指定，计时器将显示该字符串，并根据计时器的当前时间，
+            以“MM:SS”或“H:MM:SS”形式的字符串来代替格式字符串中的第一个“%s”.
+            没有指定格式化字符串时，计时器只是简单的以“MM:SS”或“H:MM:SS”形式显示. -->
         <attr name="format" format="string" localization="suggested" />
     </declare-styleable>
     <declare-styleable name="CompoundButton">
@@ -1635,11 +1628,10 @@
     </declare-styleable>
     <declare-styleable name="Gallery">
         <attr name="gravity" />
-        <!-- Sets how long a transition animation should run (in milliseconds)
-             when layout has changed.  Only relevant if animation is turned on. -->
+        <!-- 设置布局变更时过渡动画的执行时间（以毫秒为单位）.仅当打开播放动画功能时有效. -->
         <attr name="animationDuration" format="integer" min="0" />
         <attr name="spacing" format="dimension" />
-        <!-- Sets the alpha on the items that are not selected. -->
+        <!-- 设置为选中项目的透明度. -->
         <attr name="unselectedAlpha" format="float" />
     </declare-styleable>
     <declare-styleable name="GridView">
@@ -1689,11 +1681,11 @@
         <attr name="cropToPadding" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ToggleButton">
-        <!-- The text for the button when it is checked. -->
+        <!-- 选中时按钮的文本. -->
         <attr name="textOn" format="string" />
-        <!-- The text for the button when it is not checked. -->
+        <!-- 未选择时按钮的文本. -->
         <attr name="textOff" format="string" />
-        <!-- The alpha to apply to the indicator when disabled. -->
+        <!-- 设为真时，不对指示器应用阿尔法处理. -->
         <attr name="disabledAlpha" />
     </declare-styleable>
     <declare-styleable name="RelativeLayout">
@@ -1727,35 +1719,29 @@
         <attr name="useLargestChild" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ListView">
-        <!-- Reference to an array resource that will populate the ListView.  For static content,
-             this is simpler than populating the ListView programmatically. -->
+        <!-- 对用于在列表视图中显示的数组资源的引用。对于静态对象，这样赋值比用程序处理要简单. -->
         <attr name="entries" />
-        <!-- Drawable or color to draw between list items. -->
+        <!-- 在列表条目之间显示的可绘制对象或颜色. -->
         <attr name="divider" format="reference|color" />
-        <!-- Height of the divider. Will use the intrinsic height of the divider if this
-             is not specified. -->
+        <!-- 分隔符的高度。如果未指定，使用分隔符的固有高度. -->
         <attr name="dividerHeight" format="dimension" />
-        <!-- Defines the choice behavior for the ListView. By default, lists do not have
-             any choice behavior. By setting the choiceMode to singleChoice, the List
-             allows up to one item to be in a chosen state. By setting the choiceMode to
-             multipleChoice, the list allows any number of items to be chosen. -->
+        <!-- 为列表视图设置选择时的行为。默认列表被选择时没有任何行为。设置选择模式为单选时，
+             列表中只能有一个条目处于选择状态。设置为多选时，列表允许选择多个条目. -->
         <attr name="choiceMode">
-            <!-- Normal list that does not indicate choices. -->
+            <!-- 普通列表不显示选择状态. -->
             <enum name="none" value="0" />
-            <!-- The list allows up to one choice. -->
+            <!-- 列表允许选择一个条目. -->
             <enum name="singleChoice" value="1" />
-            <!-- The list allows multiple choices. -->
+            <!-- 列表允许选择多个条目. -->
             <enum name="multipleChoice" value="2" />
         </attr>
-        <!-- When set to false, the ListView will not draw the divider after each header view.
-             The default value is true. -->
+        <!-- 设为假时，列表视图在表头视图间不绘制分隔符。默认值为真. -->
         <attr name="headerDividersEnabled" format="boolean" />
-        <!-- When set to false, the ListView will not draw the divider before each footer view.
-             The default value is true. -->
+        <!-- 设为假时，列表视图在表尾视图间不绘制分隔符。默认值为真. -->
         <attr name="footerDividersEnabled" format="boolean" />
-        <!-- Drawable to draw above list content. -->
+        <!-- 过滚动时在列表内容上部显示的可绘制对象. -->
         <attr name="overScrollHeader" format="reference|color" />
-        <!-- Drawable to draw below list content. -->
+        <!-- 过滚动时在列表内容下部显示的可绘制对象. -->
         <attr name="overScrollFooter" format="reference|color" />
     </declare-styleable>
     <declare-styleable name="MenuView">
@@ -1823,9 +1809,9 @@
     </declare-styleable>
 
     <declare-styleable name="SeekBar">
-        <!-- Draws the thumb on a seekbar. -->
+        <!-- 在 SeekBar 上绘制的把手. -->
         <attr name="thumb" format="reference" />
-        <!-- An offset for the thumb that allows it to extend out of the range of the track. -->
+        <!-- 把手的位置，允许超出滑道的范围. -->
         <attr name="thumbOffset" format="dimension" />
     </declare-styleable>
 
@@ -2159,7 +2145,7 @@
     </declare-styleable>
     <declare-styleable name="ViewFlipper">
         <attr name="flipInterval" format="integer" min="0" />
-        <!-- When true, automatically start animating -->
+        <!-- 为真时自动启动动画. -->
         <attr name="autoStart" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ViewSwitcher">
@@ -2173,7 +2159,7 @@
         <attr name="fillViewport" />
     </declare-styleable>
     <declare-styleable name="Spinner">
-        <!-- The prompt to display when the spinner's dialog is shown. -->
+        <!-- 当 Spinner 对话框显示时显示的提示. -->
         <attr name="prompt" format="reference" />
     </declare-styleable>
     <declare-styleable name="DatePicker">
@@ -2185,12 +2171,11 @@
 
     <declare-styleable name="TwoLineListItem">
         <attr name="mode">
-            <!-- Always show only the first line. -->
+            <!-- 只显示第一行. -->
             <enum name="oneLine" value="1" />
-            <!-- When selected show both lines, otherwise show only the first line.
-                 This is the default mode. -->
+            <!-- 选中时显示两行，否则只显示第一行。默认为该模式. -->
             <enum name="collapsing" value="2" />
-            <!-- Always show both lines. -->
+            <!-- 总是显示两行. -->
             <enum name="twoLine" value="3" />
         </attr>
     </declare-styleable>
@@ -2611,8 +2596,7 @@
             <!-- Clip the drawable vertically. -->
             <flag name="vertical" value="2" />
         </attr>
-        <!-- Specifies where to clip within the drawable. The default value is
-             left. -->
+        <!-- 指定切掉可绘制对象的那部分. 默认为左侧. -->
         <attr name="gravity" />
         <!-- Reference to a drawable resource to draw with the specified scale. -->
         <attr name="drawable" />

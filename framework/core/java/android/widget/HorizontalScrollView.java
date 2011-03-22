@@ -767,16 +767,14 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * <p>Handles scrolling in response to a "page up/down" shortcut press. This
-     * method will scroll the view by one page left or right and give the focus
-     * to the leftmost/rightmost component in the new visible area. If no
-     * component is a good candidate for focus, this scrollview reclaims the
-     * focus.</p>
+     * <p>处理按下翻页键时的滚动操作.该方法将视图向左或向右滚动一页，
+     * 并将焦点设在新的可视领域的最左边或最右边的组件上.
+     * 如果没有组件可以得到焦点，该视图将撤销焦点.</p>
      *
-     * @param direction the scroll direction: {@link android.view.View#FOCUS_LEFT}
-     *                  to go one page left or {@link android.view.View#FOCUS_RIGHT}
-     *                  to go one page right
-     * @return true if the key event is consumed by this method, false otherwise
+     * @param direction 滚动方向：{@link android.view.View#FOCUS_LEFT}
+     *                  向左滚动一页、{@link android.view.View#FOCUS_RIGHT}
+     *                  向右滚动一页.
+     * @return 若该方法处理了键盘事件，应该返回真，否则返回假.
      */
     public boolean pageScroll(int direction) {
         boolean right = direction == View.FOCUS_RIGHT;
@@ -803,16 +801,14 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * <p>Handles scrolling in response to a "home/end" shortcut press. This
-     * method will scroll the view to the left or right and give the focus
-     * to the leftmost/rightmost component in the new visible area. If no
-     * component is a good candidate for focus, this scrollview reclaims the
-     * focus.</p>
+     * <p>处理按下“home/end”键时的滚动操作.该方法将视图向左或向右滚动，
+     * 并将焦点设在新的可视领域的最左边或最右边的组件上.
+     * 如果没有组件可以得到焦点，该视图将撤销焦点.</p>
      *
-     * @param direction the scroll direction: {@link android.view.View#FOCUS_LEFT}
-     *                  to go the left of the view or {@link android.view.View#FOCUS_RIGHT}
-     *                  to go the right
-     * @return true if the key event is consumed by this method, false otherwise
+     * @param direction 滚动方向：{@link android.view.View#FOCUS_LEFT}
+     *                  向左滚动一页、{@link android.view.View#FOCUS_RIGHT}
+     *                  向右滚动一页.
+     * @return 若该方法处理了键盘事件，应该返回真，否则返回假.
      */
     public boolean fullScroll(int direction) {
         boolean right = direction == View.FOCUS_RIGHT;
@@ -874,11 +870,10 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * Handle scrolling in response to a left or right arrow click.
+     * 处理左右箭头按下时的滚动响应.
      *
-     * @param direction The direction corresponding to the arrow key that was
-     *                  pressed
-     * @return True if we consumed the event, false otherwise
+     * @param direction 按下的响应的箭头键.
+     * @return 若该方法处理了该事件，返回真，否则返回假.
      */
     public boolean arrowScroll(int direction) {
 
@@ -968,10 +963,10 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * Like {@link View#scrollBy}, but scroll smoothly instead of immediately.
+     * 与 {@link View#scrollBy} 相似，只是相对平滑的滚动，而不是立刻滚动到位.
      *
-     * @param dx the number of pixels to scroll by on the X axis
-     * @param dy the number of pixels to scroll by on the Y axis
+     * @param dx X 轴方向滚动的像素数.
+     * @param dy Y 轴方向滚动的像素数.
      */
     public final void smoothScrollBy(int dx, int dy) {
         if (getChildCount() == 0) {
@@ -998,18 +993,17 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * Like {@link #scrollTo}, but scroll smoothly instead of immediately.
+     * 与 {@link #scrollTo} 相似，只是相对平滑的滚动，而不是立刻滚动到位.
      *
-     * @param x the position where to scroll on the X axis
-     * @param y the position where to scroll on the Y axis
+     * @param x X 轴上滚动到的位置的像素数.
+     * @param y Y 轴上滚动到的位置的像素数.
      */
     public final void smoothScrollTo(int x, int y) {
         smoothScrollBy(x - mScrollX, y - mScrollY);
     }
 
     /**
-     * <p>The scroll range of a scroll view is the overall width of all of its
-     * children.</p>
+     * <p>滚动视图的滚动范围是其子视图的整个宽度.</p>
      */
     @Override
     protected int computeHorizontalScrollRange() {

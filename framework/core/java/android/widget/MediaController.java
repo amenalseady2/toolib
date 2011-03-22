@@ -52,10 +52,6 @@ import java.util.Locale;
  *
  * 媒体播放器将根据如下规则来显示和隐藏其按钮：
  * <ul>
-•	
-•	
-•	
-
  * <li> 在调用 setPrevNextListeners() 函数之前，
  * “上一首”和“下一首”按钮都是隐藏的.
  * <li> 如果调用 setPrevNextListeners() 函数时监听器参数为空，
