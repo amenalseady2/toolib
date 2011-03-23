@@ -24,8 +24,8 @@ import android.view.LayoutInflater;
 
 
 /**
- * An easy adapter that creates views defined in an XML file. You can specify
- * the XML file that defines the appearance of the views.
+ * 根据XML文件的定义创建视图的简单适配器.
+ * 你可以 指定定义了视图外观的XML文件.
  */
 public abstract class ResourceCursorAdapter extends CursorAdapter {
     private int mLayout;
@@ -35,13 +35,12 @@ public abstract class ResourceCursorAdapter extends CursorAdapter {
     private LayoutInflater mInflater;
     
     /**
-     * Constructor.
+     * 构造函数.
      * 
-     * @param context The context where the ListView associated with this
-     *            SimpleListItemFactory is running
-     * @param layout resource identifier of a layout file that defines the views
-     *            for this list item.  Unless you override them later, this will
-     *            define both the item views and the drop down views.
+     * @param context 与正在运行的 SimpleListItemFactory 关联的列表视图的上下文。
+     * @param layout 为该列表条目定义视图的布局文件资源标识。除非你之后重载它们，
+     *               否则会同时生成列表条目视图和下拉视图。
+     * @param c 用于取得数据的游标
      */
     public ResourceCursorAdapter(Context context, int layout, Cursor c) {
         super(context, c);
@@ -50,17 +49,14 @@ public abstract class ResourceCursorAdapter extends CursorAdapter {
     }
     
     /**
-     * Constructor.
+     * 构造函数.
      * 
-     * @param context The context where the ListView associated with this
-     *            SimpleListItemFactory is running
-     * @param layout resource identifier of a layout file that defines the views
-     *            for this list item.  Unless you override them later, this will
-     *            define both the item views and the drop down views.
-     * @param c The cursor from which to get the data.
-     * @param autoRequery If true the adapter will call requery() on the
-     *                    cursor whenever it changes so the most recent
-     *                    data is always displayed.
+     * @param context 与正在运行的 SimpleListItemFactory 关联的列表视图的上下文。
+     * @param layout 为该列表条目定义视图的布局文件资源标识。除非你之后重载它们，
+     *               否则会同时生成列表条目视图和下拉视图。
+     * @param c 用于取得数据的游标
+     * @param autoRequery 如果此参数为真，当适配器的数据发生变化的时，
+     *                    适配器会调用游标的 requery()方法，保持显示最新数据。
      */
     public ResourceCursorAdapter(Context context, int layout, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
@@ -69,7 +65,7 @@ public abstract class ResourceCursorAdapter extends CursorAdapter {
     }
 
     /**
-     * Inflates view(s) from the specified XML file.
+     * 根据指定的 xml 文件创建视图
      * 
      * @see android.widget.CursorAdapter#newView(android.content.Context,
      *      android.database.Cursor, ViewGroup)
@@ -85,18 +81,18 @@ public abstract class ResourceCursorAdapter extends CursorAdapter {
     }
 
     /**
-     * <p>Sets the layout resource of the item views.</p>
+     * <p>设置列表条目视图的布局资源.</p>
      *
-     * @param layout the layout resources used to create item views
+     * @param layout 用于创建列表条目视图的布局资源。
      */
     public void setViewResource(int layout) {
         mLayout = layout;
     }
     
     /**
-     * <p>Sets the layout resource of the drop down views.</p>
+     * <p>设置下拉视图的布局资源.</p>
      *
-     * @param dropDownLayout the layout resources used to create drop down views
+     * @param dropDownLayout 用于创建下拉视图的布局资源。
      */
     public void setDropDownViewResource(int dropDownLayout) {
         mDropDownLayout = dropDownLayout;

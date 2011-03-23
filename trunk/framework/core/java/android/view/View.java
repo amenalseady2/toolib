@@ -4952,11 +4952,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Set the scrolled position of your view. This will cause a call to
-     * {@link #onScrollChanged(int, int, int, int)} and the view will be
-     * invalidated.
-     * @param x the x position to scroll to
-     * @param y the y position to scroll to
+     * 设置视图的滚动位置。会触发 {@link #onScrollChanged(int, int, int, int)}
+     * 事件，并使视图失效重绘。
+     * @param x 滚动到的横向位置
+     * @param y 滚动到的纵向位置
      */
     public void scrollTo(int x, int y) {
         if (mScrollX != x || mScrollY != y) {
@@ -5439,10 +5438,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called by a parent to request that a child update its values for mScrollX
-     * and mScrollY if necessary. This will typically be done if the child is
-     * animating a scroll using a {@link android.widget.Scroller Scroller}
-     * object.
+     * 由父视图调用，用于通知子视图在必要时更新 mScrollX 和 mScrollY 的值。
+     * 该操作主要用于子视图使用 {@link android.widget.Scroller Scroller}
+     * 进行动画滚动时。
      */
     public void computeScroll() {
     }
@@ -5518,28 +5516,24 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Returns the strength, or intensity, of the top faded edge. The strength is
-     * a value between 0.0 (no fade) and 1.0 (full fade). The default implementation
-     * returns 0.0 or 1.0 but no value in between.
+     * 返回顶部渐变边缘的强度或密集度.强度的值介于0.0（无渐变）到1.0（全渐变）之间.
+     * 缺省实现只返回0.0或1.0，而不返回中间值.
      *
-     * Subclasses should override this method to provide a smoother fade transition
-     * when scrolling occurs.
+     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程.
      *
-     * @return the intensity of the top fade as a float between 0.0f and 1.0f
+     * @return 顶部渐变的强度，即介于0.0f和1.0f之间的浮点值.
      */
     protected float getTopFadingEdgeStrength() {
         return computeVerticalScrollOffset() > 0 ? 1.0f : 0.0f;
     }
 
     /**
-     * Returns the strength, or intensity, of the bottom faded edge. The strength is
-     * a value between 0.0 (no fade) and 1.0 (full fade). The default implementation
-     * returns 0.0 or 1.0 but no value in between.
+     * 返回底部渐变边缘的强度或密集度.强度的值介于0.0（无渐变）到1.0（全渐变）之间.
+     * 缺省实现只返回0.0或1.0，而不返回中间值.
      *
-     * Subclasses should override this method to provide a smoother fade transition
-     * when scrolling occurs.
+     * 子类应该重载此方法来给滚动时提供更平滑的渐变过程.
      *
-     * @return the intensity of the bottom fade as a float between 0.0f and 1.0f
+     * @return 底部渐变的强度，即介于0.0f和1.0f之间的浮点值.
      */
     protected float getBottomFadingEdgeStrength() {
         return computeVerticalScrollOffset() + computeVerticalScrollExtent() <
@@ -6741,12 +6735,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Manually render this view (and all of its children) to the given Canvas.
-     * The view must have already done a full layout before this function is
-     * called.  When implementing a view, do not override this method; instead,
-     * you should implement {@link #onDraw}.
+     * 在指定的画布上手动绘制视图（及其子视图）.
+     * 调用该函数之前，视图必须已经完成整个布局过程。
+     * 当实现一个视图时，不需要继承这个方法；而是实现{@link #onDraw}方法。
      *
-     * @param canvas The Canvas to which the View is rendered.
+     * @param canvas 要绘制视图的画布
      */
     public void draw(Canvas canvas) {
         if (ViewDebug.TRACE_HIERARCHY) {
@@ -8789,15 +8782,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Set the over-scroll mode for this view. Valid over-scroll modes are
-     * {@link #OVER_SCROLL_ALWAYS} (default), {@link #OVER_SCROLL_IF_CONTENT_SCROLLS}
-     * (allow over-scrolling only if the view content is larger than the container),
-     * or {@link #OVER_SCROLL_NEVER}.
+     * 为视图设置过滚动模式。有效的过滚动模式有
+     * {@link #OVER_SCROLL_ALWAYS}（默认值）、
+     * {@link #OVER_SCROLL_IF_CONTENT_SCROLLS}（视图内容大于容器时允许过滚动）、
+     * 和 {@link #OVER_SCROLL_NEVER}.
      *
-     * Setting the over-scroll mode of a view will have an effect only if the
-     * view is capable of scrolling.
+     * 只有当视图可以滚动时，才可以设置视图的过滚动模式.
      *
-     * @param overScrollMode The new over-scroll mode for this view.
+     * @param overScrollMode 视图的新的过滚动模式
      */
     public void setOverScrollMode(int overScrollMode) {
         if (overScrollMode != OVER_SCROLL_ALWAYS &&
