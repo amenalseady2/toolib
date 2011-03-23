@@ -1146,12 +1146,11 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * Compute the amount to scroll in the X direction in order to get
-     * a rectangle completely on the screen (or, if taller than the screen,
-     * at least the first screen size chunk of it).
+     * 计算X方向滚动的距离，以便在屏幕上显示子视图的完整矩形
+     * （或者，若矩形宽度超过屏幕宽度，至少要填满第一个屏幕大小）。
      *
-     * @param rect The rect.
-     * @return The scroll delta.
+     * @param rect 矩形
+     * @return 滚动距离
      */
     protected int computeScrollDeltaToGetChildRectOnScreen(Rect rect) {
         if (getChildCount() == 0) return 0;
@@ -1226,11 +1225,9 @@ public class HorizontalScrollView extends FrameLayout {
 
 
     /**
-     * When looking for focus in children of a scroll view, need to be a little
-     * more careful not to give focus to something that is scrolled off screen.
-     *
-     * This is more expensive than the default {@link android.view.ViewGroup}
-     * implementation, otherwise this behavior might have been made the default.
+     * 在为滚动视图设置焦点时一定要小心，不能将焦点设置到屏幕上不可见的组件上。
+     * 
+     * 这比 ViewGroup 的缺省实现代价更高，否则此代码就作为缺省代码了。
      */
     @Override
     protected boolean onRequestFocusInDescendants(int direction,
@@ -1321,11 +1318,9 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     /**
-     * Fling the scroll view
+     * 快速滑动滚动视图。
      *
-     * @param velocityX The initial velocity in the X direction. Positive
-     *                  numbers mean that the finger/curor is moving down the screen,
-     *                  which means we want to scroll towards the left.
+     * @param velocityX 横向初始速度。负数意味着手指或光标向左移动，意味着应该向左滚动。
      */
     public void fling(int velocityX) {
         if (getChildCount() > 0) {
@@ -1357,7 +1352,7 @@ public class HorizontalScrollView extends FrameLayout {
     /**
      * {@inheritDoc}
      *
-     * <p>This version also clamps the scrolling to the bounds of our child.
+     * <p>该版本的滚动将在子视图的边界处停止。
      */
     public void scrollTo(int x, int y) {
         // we rely on the fact the View.scrollBy calls scrollTo.

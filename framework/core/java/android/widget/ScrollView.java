@@ -38,20 +38,17 @@ import android.view.animation.AnimationUtils;
 import java.util.List;
 
 /**
- * Layout container for a view hierarchy that can be scrolled by the user,
- * allowing it to be larger than the physical display.  A ScrollView
- * is a {@link FrameLayout}, meaning you should place one child in it
- * containing the entire contents to scroll; this child may itself be a layout
- * manager with a complex hierarchy of objects.  A child that is often used
- * is a {@link LinearLayout} in a vertical orientation, presenting a vertical
- * array of top-level items that the user can scroll through.
- *
- * <p>The {@link TextView} class also
- * takes care of its own scrolling, so does not require a ScrollView, but
- * using the two together is possible to achieve the effect of a text view
- * within a larger container.
+ * <p>允许用户滚动的，可以放置超过物理显示器大小的视图层次的布局容器.
+ * ScrollView 是一种 {@link FrameLayout}，
+ * 这意味着需要在其上放置一个包含整个滚动内容的子元素。
+ * 该子元素自身也可以是一个拥有复杂对象层次的布局管理器。
+ * 常用的子元素为垂直方向的{@link LinearLayout}，
+ * 用于呈现用户可以滚动的顶层条目的数组。
  * 
- * <p>ScrollView only supports vertical scrolling.
+ * <p>{@link TextView}类有自己的滚动功能，所以不需要使用ScrollView，
+ * 将两者结合使用可以达到在一个大容器中显示文本视图的效果。
+ * 
+ * <p>ScrollView 仅支持纵向滚动。
  */
 public class ScrollView extends FrameLayout {
     static final int ANIMATED_SCROLL_GAP = 250;
@@ -184,8 +181,7 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * @return The maximum amount this scroll view will scroll in response to
-     *   an arrow event.
+     * @return 返回滚动视图响应箭头事件时滚动的最大值。
      */
     public int getMaxScrollAmount() {
         return (int) (MAX_SCROLL_FACTOR * (mBottom - mTop));
@@ -254,20 +250,19 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * Indicates whether this ScrollView's content is stretched to fill the viewport.
+     * 指示当前ScrollView的内容是否被拉伸以填充视图的可视范围。
      *
-     * @return True if the content fills the viewport, false otherwise.
+     * @return 若内容填满了可视范围，返回真；否则返回假。
      */
     public boolean isFillViewport() {
         return mFillViewport;
     }
 
     /**
-     * Indicates this ScrollView whether it should stretch its content height to fill
-     * the viewport or not.
+     * 设置当前ScrollView的内容是否被拉伸以填充视图的可视范围。
      *
-     * @param fillViewport True to stretch the content's height to the viewport's
-     *        boundaries, false otherwise.
+     * @param fillViewport 设为真表示拉伸内容的高度，以适应可是范围的边界。
+     *                     否则设为假。
      */
     public void setFillViewport(boolean fillViewport) {
         if (fillViewport != mFillViewport) {
@@ -277,15 +272,15 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * @return Whether arrow scrolling will animate its transition.
+     * @return 指示滚动时是否显示过渡动画。
      */
     public boolean isSmoothScrollingEnabled() {
         return mSmoothScrollingEnabled;
     }
 
     /**
-     * Set whether arrow scrolling will animate its transition.
-     * @param smoothScrollingEnabled whether arrow scrolling will animate its transition
+     * 设置滚动时是否显示过渡动画。
+     * @param smoothScrollingEnabled 滚动时是否显示过渡动画。
      */
     public void setSmoothScrollingEnabled(boolean smoothScrollingEnabled) {
         mSmoothScrollingEnabled = smoothScrollingEnabled;
@@ -329,12 +324,11 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * You can call this function yourself to have the scroll view perform
-     * scrolling from a key event, just as if the event had been dispatched to
-     * it by the view hierarchy.
+     * 当接收到键盘事件时，用户可以调用此函数来使滚动视图执行滚动，
+     * 类似于处理由视图体系发送的事件。
      *
-     * @param event The key event to execute.
-     * @return Return true if the event was handled, else false.
+     * @param event 执行的键盘事件。
+     * @return 如果处理了事件，返回真；否则返回假。
      */
     public boolean executeKeyEvent(KeyEvent event) {
         mTempRect.setEmpty();

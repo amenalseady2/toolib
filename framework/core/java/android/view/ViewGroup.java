@@ -3065,13 +3065,12 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Ask one of the children of this view to measure itself, taking into
-     * account both the MeasureSpec requirements for this view and its padding.
-     * The heavy lifting is done in getChildMeasureSpec.
+     * 传入本视图必要的宽度和高度及其内边距，要求子视图调整自身设置。
+     * 主要操作都是在 getChildMeasureSpec 函数中完成的。
      *
-     * @param child The child to measure
-     * @param parentWidthMeasureSpec The width requirements for this view
-     * @param parentHeightMeasureSpec The height requirements for this view
+     * @param child 需要调整的子视图
+     * @param parentWidthMeasureSpec 本视图必要的宽度
+     * @param parentHeightMeasureSpec 本视图必要的高度
      */
     protected void measureChild(View child, int parentWidthMeasureSpec,
             int parentHeightMeasureSpec) {
@@ -3086,18 +3085,14 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Ask one of the children of this view to measure itself, taking into
-     * account both the MeasureSpec requirements for this view and its padding
-     * and margins. The child must have MarginLayoutParams The heavy lifting is
-     * done in getChildMeasureSpec.
+     * 传入已占用的宽度和高度、本视图必要的宽度和高度及其内边距，要求子视图调整自身设置。
+     * 主要操作都是在 getChildMeasureSpec 函数中完成的。
      *
-     * @param child The child to measure
-     * @param parentWidthMeasureSpec The width requirements for this view
-     * @param widthUsed Extra space that has been used up by the parent
-     *        horizontally (possibly by other children of the parent)
-     * @param parentHeightMeasureSpec The height requirements for this view
-     * @param heightUsed Extra space that has been used up by the parent
-     *        vertically (possibly by other children of the parent)
+     * @param child 需要调整的子视图
+     * @param parentWidthMeasureSpec 本视图必要的宽度
+     * @param widthUsed 已经被父视图使用的宽度（可能是被其他子视图使用）
+     * @param parentHeightMeasureSpec 本视图必要的高度
+     * @param heightUsed 已经被父视图使用的高度（可能是被其他子视图使用）
      */
     protected void measureChildWithMargins(View child,
             int parentWidthMeasureSpec, int widthUsed,

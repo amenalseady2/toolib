@@ -87,13 +87,10 @@ public interface ViewParent {
     public ViewParent getParent();
 
     /**
-     * Called when a child of this parent wants focus
+     * 当父视图的子视图请求获得焦点时，调用此方法。
      * 
-     * @param child The child of this ViewParent that wants focus. This view
-     *        will contain the focused view. It is not necessarily the view that
-     *        actually has focus.
-     * @param focused The view that is a descendant of child that actually has
-     *        focus
+     * @param child 请求获得焦点的子视图。此视图将包含具有焦点视图，但其本身不一定具有焦点。
+     * @param focused 事实上拥有焦点的子视图，他可能是 child 的下层视图。
      */
     public void requestChildFocus(View child, View focused);
 
