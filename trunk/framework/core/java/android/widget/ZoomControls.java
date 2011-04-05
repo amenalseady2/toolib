@@ -28,10 +28,6 @@ import com.android.internal.R;
 
 
 /**
- * 译者：jiahuibin<br>
- * 译者：<a href="http://android.toolib.net/blog/">cnmahj@toolib.cn</a><br>
- * 整理：<a href="http://android.toolib.net/blog/">cnmahj@toolib.cn</a><br>
- *
  * {@code ZoomControls} 显示一组简单的控件集合用于缩放，并可以注册事件发生时执行的回调函数.
  */
 @Widget

@@ -768,16 +768,13 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * <p>Handles scrolling in response to a "page up/down" shortcut press. This
-     * method will scroll the view by one page up or down and give the focus
-     * to the topmost/bottommost component in the new visible area. If no
-     * component is a good candidate for focus, this scrollview reclaims the
-     * focus.</p>
+     * <p>响应按下“page up/down”快捷键时的滚动处理。该方法将向上或者向下滚动一页，
+     * 并且将焦点置于新可视区域的最上或最下的组件上。如果没有适合的组件放置焦点，
+     * 滚动视图将收回焦点。</p>
      *
-     * @param direction the scroll direction: {@link android.view.View#FOCUS_UP}
-     *                  to go one page up or
-     *                  {@link android.view.View#FOCUS_DOWN} to go one page down
-     * @return true if the key event is consumed by this method, false otherwise
+     * @param direction 滚动方向：向上翻页 {@link android.view.View#FOCUS_UP}、
+     *                  向下翻页{@link android.view.View#FOCUS_DOWN}
+     * @return 若已处理该事件返回真，否则返回假。
      */
     public boolean pageScroll(int direction) {
         boolean down = direction == View.FOCUS_DOWN;
@@ -804,16 +801,13 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * <p>Handles scrolling in response to a "home/end" shortcut press. This
-     * method will scroll the view to the top or bottom and give the focus
-     * to the topmost/bottommost component in the new visible area. If no
-     * component is a good candidate for focus, this scrollview reclaims the
-     * focus.</p>
+     * <p>响应按下“home/end”快捷键时的滚动处理。该方法将滚动到内容顶部或底部，
+     * 并且将焦点置于新可视区域的最上或最下的组件上。如果没有适合的组件放置焦点，
+     * 滚动视图将收回焦点。</p>
      *
-     * @param direction the scroll direction: {@link android.view.View#FOCUS_UP}
-     *                  to go the top of the view or
-     *                  {@link android.view.View#FOCUS_DOWN} to go the bottom
-     * @return true if the key event is consumed by this method, false otherwise
+     * @param direction 滚动方向：向上翻页 {@link android.view.View#FOCUS_UP}、
+     *                  向下翻页{@link android.view.View#FOCUS_DOWN}
+     * @return 若已处理该事件返回真，否则返回假。
      */
     public boolean fullScroll(int direction) {
         boolean down = direction == View.FOCUS_DOWN;
@@ -876,11 +870,10 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * Handle scrolling in response to an up or down arrow click.
+     * 响应点击上下箭头时对滚动条滚动的处理。
      *
-     * @param direction The direction corresponding to the arrow key that was
-     *                  pressed
-     * @return True if we consumed the event, false otherwise
+     * @param direction 按下的方向键的方向
+     * @return 若已处理该事件返回真，否则返回假。
      */
     public boolean arrowScroll(int direction) {
 
@@ -971,10 +964,10 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * Like {@link View#scrollBy}, but scroll smoothly instead of immediately.
+     * 与 {@link View#scrollBy}类似，只是用平滑滚动代替立即滚动。
      *
-     * @param dx the number of pixels to scroll by on the X axis
-     * @param dy the number of pixels to scroll by on the Y axis
+     * @param dx X轴方向的以像素为单位的滚动距离
+     * @param dy Y轴方向的以像素为单位的滚动距离
      */
     public final void smoothScrollBy(int dx, int dy) {
         if (getChildCount() == 0) {
@@ -1001,18 +994,17 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * Like {@link #scrollTo}, but scroll smoothly instead of immediately.
+     * 与 {@link View#scrollTo}类似，只是用平滑滚动代替立即滚动。
      *
-     * @param x the position where to scroll on the X axis
-     * @param y the position where to scroll on the Y axis
+     * @param x X轴方向滚动到的以像素为单位位置
+     * @param y Y轴方向滚动到的以像素为单位位置
      */
     public final void smoothScrollTo(int x, int y) {
         smoothScrollBy(x - mScrollX, y - mScrollY);
     }
 
     /**
-     * <p>The scroll range of a scroll view is the overall height of all of its
-     * children.</p>
+     * <p>计算滚动视图的可滚动范围，该值为所有子元素的高度之和。</p>
      */
     @Override
     protected int computeVerticalScrollRange() {
@@ -1155,12 +1147,11 @@ public class ScrollView extends FrameLayout {
     }
 
     /**
-     * Compute the amount to scroll in the Y direction in order to get
-     * a rectangle completely on the screen (or, if taller than the screen,
-     * at least the first screen size chunk of it).
+     * 计算纵向滚动的距离，以便在屏幕上取得显示子视图的完整矩形
+     * （或者，若矩形宽度超过屏幕宽度，至少要填满第一个屏幕大小）。
      *
-     * @param rect The rect.
-     * @return The scroll delta.
+     * @param rect 矩形
+     * @return 滚动的距离
      */
     protected int computeScrollDeltaToGetChildRectOnScreen(Rect rect) {
         if (getChildCount() == 0) return 0;
@@ -1235,11 +1226,10 @@ public class ScrollView extends FrameLayout {
 
 
     /**
-     * When looking for focus in children of a scroll view, need to be a little
-     * more careful not to give focus to something that is scrolled off screen.
-     *
-     * This is more expensive than the default {@link android.view.ViewGroup}
-     * implementation, otherwise this behavior might have been made the default.
+     * 当在滚动视图的子视图中查找焦点视图时，需要注意不要将焦点设置在滚出屏幕外的控件上。
+     * 
+     * 此方法会比执行缺省的{@link android.view.ViewGroup 视图组}代价高，
+     * 否则此行为会作为缺省动作。
      */
     @Override
     protected boolean onRequestFocusInDescendants(int direction,
@@ -1331,11 +1321,10 @@ public class ScrollView extends FrameLayout {
     }    
 
     /**
-     * Fling the scroll view
+     * 快速滑动滚动视图。
      *
-     * @param velocityY The initial velocity in the Y direction. Positive
-     *                  numbers mean that the finger/cursor is moving down the screen,
-     *                  which means we want to scroll towards the top.
+     * @param velocityY Y轴方向的初始速度。负值是指手指或光标在向下移动，
+     *                  意味着要将内容向上滚动。
      */
     public void fling(int velocityY) {
         if (getChildCount() > 0) {
@@ -1366,7 +1355,7 @@ public class ScrollView extends FrameLayout {
     /**
      * {@inheritDoc}
      *
-     * <p>This version also clamps the scrolling to the bounds of our child.
+     * <p>该版本的滚动将在子视图的边界处停止。
      */
     @Override
     public void scrollTo(int x, int y) {

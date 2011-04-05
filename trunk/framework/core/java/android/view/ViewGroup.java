@@ -1040,15 +1040,13 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * Look for a descendant to call {@link View#requestFocus} on.
-     * Called by {@link ViewGroup#requestFocus(int, android.graphics.Rect)}
-     * when it wants to request focus within its children.  Override this to
-     * customize how your {@link ViewGroup} requests focus within its children.
-     * @param direction One of FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, and FOCUS_RIGHT
-     * @param previouslyFocusedRect The rectangle (in this View's coordinate system)
-     *        to give a finer grained hint about where focus is coming from.  May be null
-     *        if there is no hint.
-     * @return Whether focus was taken.
+     * 寻找调用 {@link View#requestFocus} 的子视图。当要使子视图得到焦点时，由
+     * {@link ViewGroup#requestFocus(int, android.graphics.Rect)} 调用。
+     * 重写该方法可以定制你的 {@link ViewGroup 视图组}如何为其子视图取得焦点。
+     * @param direction 焦点移动方向：FOCUS_UP、FOCUS_DOWN、FOCUS_LEFT、FOCUS_RIGHT之一。
+     * @param previouslyFocusedRect 描述失焦点的具体矩形信息（在视图坐标系中的坐标）。
+     *        如果没有则应该设为空。
+     * @return 是否得到焦点。
      */
     @SuppressWarnings({"ConstantConditions"})
     protected boolean onRequestFocusInDescendants(int direction,
