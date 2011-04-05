@@ -61,7 +61,7 @@ href="http://android-developers.blogspot.com/2010/09/more-countries-more-sellers
                                       <td>
                                               <h2 class="green">发布</h2>
                                               <p>Android 市场是可以让你将应用程序发布到手持设备的公开服务。</p>
-                                              <p><a href="http://www.android.com/market.html">更多内容 &raquo;</a></p>
+                                              <p><a href="http://market.android.com/publish">更多内容 &raquo;</a></p>
                                       </td>
                               </tr>
                               <tr>
@@ -126,16 +126,14 @@ href="{@docRoot}resources/dashboard/platform-versions.html">更多内容 &raquo;
     'sdk': {
       'layout':"imgLeft",
       'icon':"sdk-small.png",
-      'name':"Android 2.3",
+      'name':"Android 2.3.3",
       'img':"gingerdroid.png",
-      'title':"Android 2.3 is here!",
-      'desc': "<p>Android SDK 的 Android 2.3 平台已经可以使用了！它包含新的工具、文档和 NDK 开发包。"
-+ "新的特性和 API 信息，参见"
-+ "<a href='{@docRoot}sdk/android-2.3.html'>版本注释</a>。</p>"
-+ "<p>如果你有既存的 SDK，将 Android 2.3 作为"
-+ "<a href='{@docRoot}sdk/adding-components.html'>SDK "
-+ "组件添加即可</a>。如果你是 Android 新手，请安装"
-+ "<a href='{@docRoot}sdk/index.html'>SDK 初始包</a>。"
+      'title':"Android 2.3.3, more NFC!",
+      'desc': "<p>Android SDK 的 Android 2.3.3 平台已经可以使用了！ "
++ "该更新为开发者提供了 NFC 功能，包括高级标签分发API和写入标签的能力。</p>"
++ "<p>新的API允许执行新的应用程序，比如订票、评级、办手续、"
++ "广告以及与其他设备进行数据交换的程序。关于 Android 2.3.3 的更多信息，"
++ "请阅读 <a href='/sdk/android-2.3.3.html'>版本注释</a>。</p>"
     },
 
     'tv': {

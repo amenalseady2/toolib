@@ -1,20 +1,19 @@
-page.title=Using aapt
+page.title=使用 aapt
 @jd:body
 
-<p><strong>aapt</strong> stands for Android Asset Packaging Tool and is included in the <code>tools/</code> directory of the SDK. This tool allows you to view, create, and update Zip-compatible archives (zip, jar, apk). It can also compile resources into binary assets.
+<p><strong>aapt</strong> 是包含在 SDK的<code>tools/</code>目录中的Android资产打包工具。该工具允许查看、创建或更新Zip兼容格式（zip,jar,apk）的压缩包。它还可以将资源文件编译成二进制的资产。
 </p>
 <p>
-Though you probably won't often use <strong>aapt</strong> directly, build scripts and IDE plugins can utilize this tool to package the apk file that constitutes an Android application.
+通常不需要直接使用<strong>aapt</strong>工具，编译脚本和IDE插件会利用它将构成应用程序的文件打包成apk形式。
 </p>
 <p>
-For more usage details, open a terminal, go to the <code>tools/</code> directory, and run the command:
+更多用法可以启动终端，在<code>tools/</code>目录下运行如下命令：
 </p>
 <ul>
-  <li><p>Linux or Mac OS X:</p>
+  <li><p>Linux 或 Mac OS X:</p>
 	<pre>./aapt</pre>
   </li>
   <li><p>Windows:</p>
 	<pre>aapt.exe</pre>
   </li>
 </ul>
-
