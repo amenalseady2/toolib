@@ -19,9 +19,7 @@ package android.view;
 import android.graphics.Rect;
 
 /**
- * Defines the responsibilities for a class that will be a parent of a View.
- * This is the API that a view sees when it wants to interact with its parent.
- * 
+ * 定义了作为父视图应有功能的类. 是视图与父视图交互的接口。
  */
 public interface ViewParent {
     /**
@@ -30,59 +28,52 @@ public interface ViewParent {
     public void requestLayout();
 
     /**
-     * Indicates whether layout was requested on this view parent.
+     * 指出该父视图是否请求了布局操作。
      *
-     * @return true if layout was requested, false otherwise
+     * @return 如果请求了布局，返回真；否则返回假。
      */
     public boolean isLayoutRequested();
 
     /**
-     * Called when a child wants the view hierarchy to gather and report
-     * transparent regions to the window compositor. Views that "punch" holes in
-     * the view hierarchy, such as SurfaceView can use this API to improve
-     * performance of the system. When no such a view is present in the
-     * hierarchy, this optimization in unnecessary and might slightly reduce the
-     * view hierarchy performance.
+     * 当子视图需要收集视图层次中透明区域并报告给窗口排版组件时调用。
+     * 需要在视图层次中“打洞”的视图，比如SurfaceView可以利用该API
+     * 来提高系统性能。当视图层次中没有这样的视图时，不需要该优化，
+     * 使用它会稍微降低一些视图层次的性能。
      * 
-     * @param child the view requesting the transparent region computation
+     * @param child 请求计算透明区域的视图。
      * 
      */
     public void requestTransparentRegion(View child);
 
     /**
-     * All or part of a child is dirty and needs to be redrawn.
+     * 需要重绘子视图的部分或全部区域。
      * 
-     * @param child The child which is dirty
-     * @param r The area within the child that is invalid
+     * @param child 需要重绘的视图。
+     * @param r 子视图需要重绘的区域。
      */
     public void invalidateChild(View child, Rect r);
 
     /**
-     * All or part of a child is dirty and needs to be redrawn.
+     * 需要重绘子视图的部分或全部区域。
      *
-     * The location array is an array of two int values which respectively
-     * define the left and the top position of the dirty child.
+     * 位置数组中分别保存了待绘制子视图的左上位置的整型数组。
      *
-     * This method must return the parent of this ViewParent if the specified
-     * rectangle must be invalidated in the parent. If the specified rectangle
-     * does not require invalidation in the parent or if the parent does not
-     * exist, this method must return null.
+     * 如果指定的区域的父视图被设为无效，则返回父视图；如果指定矩形不会导致父视图无效，
+     * 或者不存在父视图，该方法返回空。
      *
-     * When this method returns a non-null value, the location array must
-     * have been updated with the left and top coordinates of this ViewParent.
+     * 当返回非空值时，必须将位置数组中的值更新为本ViewParent的左上坐标。
      *
-     * @param location An array of 2 ints containing the left and top
-     *        coordinates of the child to invalidate
-     * @param r The area within the child that is invalid
+     * @param location 包含设置无效区域的子视图左上坐标的双元素整型数组。
+     * @param r 子视图中设为无效的区域。
      *
-     * @return the parent of this ViewParent or null
+     * @return 该ViewParent的父视图或空。
      */
     public ViewParent invalidateChildInParent(int[] location, Rect r);
 
     /**
-     * Returns the parent if it exists, or null.
+     * 如果存在父视图，返回真，否则返回假。
      *
-     * @return a ViewParent or null if this ViewParent does not have a parent
+     * @return 父视图或者在没有父视图时返回空。
      */
     public ViewParent getParent();
 
@@ -95,43 +86,41 @@ public interface ViewParent {
     public void requestChildFocus(View child, View focused);
 
     /**
-     * Tell view hierarchy that the global view attributes need to be
-     * re-evaluated.
+     * 告诉视图层次，全局视图属性需要重新评价。
      * 
-     * @param child View whose attributes have changed.
+     * @param child 属性变更的视图。
      */
     public void recomputeViewAttributes(View child);
     
     /**
-     * Called when a child of this parent is giving up focus
+     * 当该视图的子视图需要放弃焦点时调用。
      * 
-     * @param child The view that is giving up focus
+     * @param child 放弃焦点的视图。
      */
     public void clearChildFocus(View child);
 
     public boolean getChildVisibleRect(View child, Rect r, android.graphics.Point offset);
 
     /**
-     * Find the nearest view in the specified direction that wants to take focus
+     * 在指定的方向找到最近的可以获得焦点的视图。
      * 
-     * @param v The view that currently has focus
-     * @param direction One of FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, and FOCUS_RIGHT
+     * @param v 当前具有焦点的视图。
+     * @param direction FOCUS_UP、FOCUS_DOWN、FOCUS_LEFT、FOCUS_RIGHT之一。
      */
     public View focusSearch(View v, int direction);
 
     /**
-     * Change the z order of the child so it's on top of all other children
+     * 改变子视图的前后顺序，将其移动到所有视图的最前面。
      * 
      * @param child
      */
     public void bringChildToFront(View child);
 
     /**
-     * Tells the parent that a new focusable view has become available. This is
-     * to handle transitions from the case where there are no focusable views to
-     * the case where the first focusable view appears.
+     * 告诉父视图，一个新的可得焦点视图可用了。该方法用于处理，
+     * 从没有的可焦点的视图，到出现第一个可得焦点视图时的转变。
      * 
-     * @param v The view that has become newly focusable
+     * @param v 新的可得焦点视图。
      */
     public void focusableViewAvailable(View v);
 
@@ -148,32 +137,29 @@ public interface ViewParent {
     public boolean showContextMenuForChild(View originalView);
 
     /**
-     * Have the parent populate the specified context menu if it has anything to
-     * add (and then recurse on its parent).
+     * 通知父类，如果有必要可以向指定的上下文菜单中添加菜单项
+     * （递归通知其父类）。
      * 
-     * @param menu The menu to populate
+     * @param menu 被填充的菜单。
      */
     public void createContextMenu(ContextMenu menu);
 
     /**
-     * This method is called on the parent when a child's drawable state
-     * has changed.
+     * 当子视图的可绘制对象状态发生改变时调用该方法。
      *
-     * @param child The child whose drawable state has changed.
+     * @param child 可绘制对象发生改变的子视图。
      */
     public void childDrawableStateChanged(View child);
     
     /**
-     * Called when a child does not want this parent and its ancestors to
-     * intercept touch events with
-     * {@link ViewGroup#onInterceptTouchEvent(MotionEvent)}.
+     * 当子视图不希望他的父类及其祖先使用
+     * {@link ViewGroup#onInterceptTouchEvent(MotionEvent)}
+     * 打断触控事件时调用。
      * <p>
-     * This parent should pass this call onto its parents. This parent must obey
-     * this request for the duration of the touch (that is, only clear the flag
-     * after this parent has received an up or a cancel.
+     * 父视图应该调用其父类的该方法。父类必须在触控事件期间遵守该请求，
+     * 就是说，父类只有在收到抬起事件或取消事件时才可以清楚该标志。
      * 
-     * @param disallowIntercept True if the child does not want the parent to
-     *            intercept touch events.
+     * @param disallowIntercept 如果子视图不希望父类打断触控事件，设为真。
      */
     public void requestDisallowInterceptTouchEvent(boolean disallowIntercept);
     

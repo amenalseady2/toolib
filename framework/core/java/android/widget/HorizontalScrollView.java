@@ -1320,7 +1320,7 @@ public class HorizontalScrollView extends FrameLayout {
     /**
      * 快速滑动滚动视图。
      *
-     * @param velocityX 横向初始速度。负数意味着手指或光标向左移动，意味着应该向左滚动。
+     * @param velocityX 横向初始速度。负数意味着手指或光标向右移动，意味着内容应该向左滚动。
      */
     public void fling(int velocityX) {
         if (getChildCount() > 0) {
