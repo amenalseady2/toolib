@@ -53,12 +53,10 @@ public interface InputConnection {
      * respond with the text (it is given a couple seconds to return).
      * In either case, a null is returned.
      * 
-     * @param n The expected length of the text.
-     * @param flags Supplies additional options controlling how the text is
-     * returned.  May be either 0 or {@link #GET_TEXT_WITH_STYLES}.
+     * @param n 要取得的文本长度。
+     * @param flags 用于控制如何返回文本的附加选项。为0或则{@link #GET_TEXT_WITH_STYLES}。
      * 
-     * @return Returns the text before the cursor position; the length of the
-     * returned text might be less than <var>n</var>.
+     * @return 返回光标前面的文本，长度可能小于<var>n</var>。
      */
     public CharSequence getTextBeforeCursor(int n, int flags);
 
@@ -70,12 +68,10 @@ public interface InputConnection {
      * respond with the text (it is given a couple seconds to return).
      * In either case, a null is returned.
      * 
-     * @param n The expected length of the text.
-     * @param flags Supplies additional options controlling how the text is
-     * returned.  May be either 0 or {@link #GET_TEXT_WITH_STYLES}.
+     * @param n 要取得的文本长度。
+     * @param flags 用于控制如何返回文本的附加选项。为0或则{@link #GET_TEXT_WITH_STYLES}。
      * 
-     * @return Returns the text after the cursor position; the length of the
-     * returned text might be less than <var>n</var>.
+     * @return 返回光标后面的文本，长度可能小于<var>n</var>。
      */
     public CharSequence getTextAfterCursor(int n, int flags);
 
@@ -87,10 +83,8 @@ public interface InputConnection {
      * long to respond with the text (it is given a couple of seconds to return).
      * In either case, a null is returned.
      *
-     * @param flags Supplies additional options controlling how the text is
-     * returned.  May be either 0 or {@link #GET_TEXT_WITH_STYLES}.
-     * @return Returns the text that is currently selected, if any, or null if
-     * no text is selected.
+     * @param flags 用于控制如何返回文本的附加选项。为0或则{@link #GET_TEXT_WITH_STYLES}。
+     * @return 返回当前选中的文本，若无选择文本则返回空。
      */
     public CharSequence getSelectedText(int flags);
 
@@ -105,13 +99,11 @@ public interface InputConnection {
      * respond with the text (it is given a couple seconds to return).
      * In either case, a 0 is returned.
      * 
-     * @param reqModes The desired modes to retrieve, as defined by
-     * {@link android.text.TextUtils#getCapsMode TextUtils.getCapsMode}.  These
-     * constants are defined so that you can simply pass the current
-     * {@link EditorInfo#inputType TextBoxAttribute.contentType} value
-     * directly in to here.
+     * @param reqModes 要取得的模式，该模式由{@link android.text.TextUtils#getCapsMode
+     *        TextUtils.getCapsMode}定义。你简单的传递由
+     *        {@link EditorInfo#inputType}返回的常量值即可。
      * 
-     * @return Returns the caps mode flags that are in effect.
+     * @return 返回有影响的大小写模式标志。
      */
     public int getCursorCapsMode(int reqModes);
     
@@ -126,12 +118,10 @@ public interface InputConnection {
      * respond with the text (it is given a couple seconds to return).
      * In either case, a null is returned.
      * 
-     * @param request Description of how the text should be returned.
-     * @param flags Additional options to control the client, either 0 or
-     * {@link #GET_EXTRACTED_TEXT_MONITOR}.
+     * @param request 描述如何返回文本。
+     * @param flags 控制客户端的附加选项，其值为0或{@link #GET_EXTRACTED_TEXT_MONITOR}。
      * 
-     * @return Returns an ExtractedText object describing the state of the
-     * text view and containing the extracted text itself.
+     * @return 返回描述文本视图的状态和附加文本的ExtractedText对象。
      */
     public ExtractedText getExtractedText(ExtractedTextRequest request,
             int flags);
@@ -141,50 +131,40 @@ public interface InputConnection {
      * position, and delete <var>rightLength</var> characters of text after the
      * current cursor position, excluding composing text.
      * 
-     * @param leftLength The number of characters to be deleted before the
-     *        current cursor position.
-     * @param rightLength The number of characters to be deleted after the
-     *        current cursor position.
+     * @param leftLength 当前光标位置左侧要删除的字符数。
+     * @param rightLength 当前光标位置右侧要删除的字符数。
      *        
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean deleteSurroundingText(int leftLength, int rightLength);
 
     /**
-     * Set composing text around the current cursor position with the given text,
-     * and set the new cursor position.  Any composing text set previously will
-     * be removed automatically.
+     * 将指定的文本作为编辑中文本，设置到当前光标位置，并重新设置光标位置。
+     * 该操作会清除之前设置的编辑中文本。
      * 
-     * @param text The composing text with styles if necessary. If no style
-     *        object attached to the text, the default style for composing text
-     *        is used. See {#link android.text.Spanned} for how to attach style
-     *        object to the text. {#link android.text.SpannableString} and
-     *        {#link android.text.SpannableStringBuilder} are two
-     *        implementations of the interface {#link android.text.Spanned}.
-     * @param newCursorPosition The new cursor position around the text.  If
-     *        > 0, this is relative to the end of the text - 1; if <= 0, this
-     *        is relative to the start of the text.  So a value of 1 will
-     *        always advance you to the position after the full text being
-     *        inserted.  Note that this means you can't position the cursor
-     *        within the text, because the editor can make modifications to
-     *        the text you are providing so it is not possible to correctly
-     *        specify locations there.
+     * @param text 编辑中文本，如果必要可以包含样式。如果文本中不包含样式，
+     *        则为编辑中文本使用默认样式。如何为文本附加样式信息参见
+     *        {#link android.text.Spanned}。
+     *        {#link android.text.SpannableString}和
+     *        {#link android.text.SpannableStringBuilder}是
+     *        {#link android.text.Spanned}接口的两种实现。
+     * @param newCursorPosition 文本中的新光标位置。如果＞0，该值为相对于插入文本位置-1
+     *        的偏移量；如果≤0，该值为相对插入文本起始位置的偏移量。
+     *        因此，值为1时光标会落在插入文本的后面。
+     *        注意，这意味着你不能将光标定位在插入的文本中。因为编辑器会编辑你提供的文本，
+     *        因此在这里不可能正确的指定光标位置。
      * 
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean setComposingText(CharSequence text, int newCursorPosition);
 
     /**
-     * Mark a certain region of text as composing text. Any composing text set
-     * previously will be removed automatically. The default style for composing
-     * text is used.
+     * 将指定区域的文本标记为编辑中。该操作会自动移除之前设置的编辑中文本。
+     * 使用编辑中文本的默认样式。
      *
-     * @param start the position in the text at which the composing region begins
-     * @param end the position in the text at which the composing region ends
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @param start 编辑中文本的开始位置。
+     * @param end 编辑中文本的结束位置。
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean setComposingRegion(int start, int end);
 
@@ -212,8 +192,7 @@ public interface InputConnection {
      *        specify locations there.
      * 
      *        
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean commitText(CharSequence text, int newCursorPosition);
 
@@ -226,28 +205,24 @@ public interface InputConnection {
      * 
      * @param text The committed completion.
      *        
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean commitCompletion(CompletionInfo text);
 
     /**
      * Set the selection of the text editor.  To set the cursor position,
      * start and end should have the same value.
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean setSelection(int start, int end);
     
     /**
-     * Have the editor perform an action it has said it can do.
+     * 执行编辑器可以执行的动作。
      * 
-     * @param editorAction This must be one of the action constants for
-     * {@link EditorInfo#imeOptions EditorInfo.editorType}, such as
-     * {@link EditorInfo#IME_ACTION_GO EditorInfo.EDITOR_ACTION_GO}.
+     * @param editorAction 该值必须为可用于{@link EditorInfo#imeOptions}
+     *        的常量之一，比如{@link EditorInfo#IME_ACTION_GO}。
      * 
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean performEditorAction(int editorAction);
     
@@ -297,8 +272,7 @@ public interface InputConnection {
      * 
      * @param event The key event.
      *        
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      * 
      * @see KeyEvent
      * @see KeyCharacterMap#NUMERIC
@@ -313,8 +287,7 @@ public interface InputConnection {
      * @param states The states to be cleared, may be one or more bits as
      * per {@link KeyEvent#getMetaState() KeyEvent.getMetaState()}.
      * 
-     * @return Returns true on success, false if the input connection is no longer
-     * valid.
+     * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean clearMetaKeyStates(int states);
     
