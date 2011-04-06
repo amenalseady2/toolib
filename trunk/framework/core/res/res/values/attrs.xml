@@ -814,11 +814,11 @@
         <flag name="clip_horizontal" value="0x08" />
     </attr>
 
-    <!-- Standard orientation constant. -->
+    <!-- 标准方向常量. -->
     <attr name="orientation">
-        <!-- Defines an horizontal widget. -->
+        <!-- 定义为横向小部件. -->
         <enum name="horizontal" value="0" />
-        <!-- Defines a vertical widget. -->
+        <!-- 定义为纵向小部件. -->
         <enum name="vertical" value="1" />
     </attr>
 
@@ -2180,25 +2180,22 @@
         </attr>
     </declare-styleable>
 
-    <!-- SlidingDrawer specific attributes. These attributes are used to configure
-         a SlidingDrawer from XML. -->
+    <!-- SlidingDrawer的特定属性. 这些属性用于在XML中配置SlidingDrawer. -->
     <declare-styleable name="SlidingDrawer">
-        <!-- Identifier for the child that represents the drawer's handle. -->
+        <!-- 用于呈现抽屉把手的子视图的标识. -->
         <attr name="handle" format="reference" />
-        <!-- Identifier for the child that represents the drawer's content. -->
+        <!-- 用于呈现抽屉内容的子视图的标识. -->
         <attr name="content" format="reference" />
-        <!-- Orientation of the SlidingDrawer. -->
+        <!-- SlidingDrawer的方向. -->
         <attr name="orientation" />
-        <!-- Extra offset for the handle at the bottom of the SlidingDrawer. -->
+        <!-- 把手与SlidingDrawer底边的额外偏移量. -->
         <attr name="bottomOffset" format="dimension"  />
-        <!-- Extra offset for the handle at the top of the SlidingDrawer. -->
+        <!-- 把手与SlidingDrawer顶边的额外偏移量. -->
         <attr name="topOffset" format="dimension"  />
-        <!-- Indicates whether the drawer can be opened/closed by a single tap
-             on the handle.  (If false, the user must drag or fling, or click
-             using the trackball, to open/close the drawer.)  Default is true. -->
+        <!-- 指示抽屉是否可以通过轻触把手来开闭. (如果为假，用户必须通过拖拽、
+             快速滑动或者用轨迹球单击才能实现抽屉的开闭操作.)默认为真. -->
         <attr name="allowSingleTap" format="boolean" />
-        <!-- Indicates whether the drawer should be opened/closed with an animation
-             when the user clicks the handle. Default is true. -->
+        <!-- 指示用户单击把手时，是否已动画的形式执行抽屉的开闭操作. 默认为真. -->
         <attr name="animateOnClick" format="boolean" />
     </declare-styleable>
 

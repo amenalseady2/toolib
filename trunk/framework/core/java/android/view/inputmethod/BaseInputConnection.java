@@ -40,10 +40,8 @@ class ComposingText implements NoCopySpan {
 }
 
 /**
- * Base class for implementors of the InputConnection interface, taking care
- * of most of the common behavior for providing a connection to an Editable.
- * Implementors of this class will want to be sure to implement
- * {@link #getEditable} to provide access to their own editable object.
+ * 实现了InputConnection接口的基类，小心的处理了针对与可编辑控件连接的大多数公共行为.
+ * 实现该类要保证实现了{@link #getEditable}方法，用于提供对自己定制的可编辑对象的访问处理。
  */
 public class BaseInputConnection implements InputConnection {
     private static final boolean DEBUG = false;
@@ -124,10 +122,8 @@ public class BaseInputConnection implements InputConnection {
     }
     
     /**
-     * Return the target of edit operations.  The default implementation
-     * returns its own fake editable that is just used for composing text;
-     * subclasses that are real text editors should override this and
-     * supply their own.
+     * 返回编辑操作的对象。默认实现是返回自己的虚拟可编辑对象，用于输入文本；
+     * 实现文本编辑的子类应该重写该方法并返回可编辑控件本身。
      */
     public Editable getEditable() {
         if (mEditable == null) {
@@ -138,23 +134,23 @@ public class BaseInputConnection implements InputConnection {
     }
     
     /**
-     * Default implementation does nothing.
+     * 默认实现，什么都不做。
      */
     public boolean beginBatchEdit() {
         return false;
     }
 
     /**
-     * Default implementation does nothing.
+     * 默认实现，什么都不做。
      */
     public boolean endBatchEdit() {
         return false;
     }
 
     /**
-     * Default implementation uses
+     * 默认实现，通过
      * {@link MetaKeyKeyListener#clearMetaKeyState(long, int)
-     * MetaKeyKeyListener.clearMetaKeyState(long, int)} to clear the state.
+     * MetaKeyKeyListener.clearMetaKeyState(long, int)}方法清除状态。
      */
     public boolean clearMetaKeyStates(int states) {
         final Editable content = getEditable();
@@ -164,16 +160,15 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * Default implementation does nothing.
+     * 默认实现，什么都不做。
      */
     public boolean commitCompletion(CompletionInfo text) {
         return false;
     }
 
     /**
-     * Default implementation replaces any existing composing text with
-     * the given text.  In addition, only if dummy mode, a key event is
-     * sent for the new text and the current editable buffer cleared.
+     * 默认实现，使用指定的文本替换输入中的文本。另外，仅当处于虚拟模式时，
+     * 函数会清空可编辑对象的缓存并为新文本发送键盘事件。
      */
     public boolean commitText(CharSequence text, int newCursorPosition) {
         if (DEBUG) Log.v(TAG, "commitText " + text);
@@ -183,8 +178,7 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation performs the deletion around the current
-     * selection position of the editable text.
+     * 默认实现，将删除可编辑对象当前选择位置附近的文本。
      */
     public boolean deleteSurroundingText(int leftLength, int rightLength) {
         if (DEBUG) Log.v(TAG, "deleteSurroundingText " + leftLength
@@ -240,9 +234,8 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation removes the composing state from the
-     * current editable text.  In addition, only if dummy mode, a key event is
-     * sent for the new text and the current editable buffer cleared.
+     * 默认实现，取消当前可编辑对象文本的编辑状态。另外，仅当处于虚拟模式时，
+     * 函数会清空可编辑对象的缓存并为新文本发送键盘事件。
      */
     public boolean finishComposingText() {
         if (DEBUG) Log.v(TAG, "finishComposingText");
@@ -257,7 +250,7 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation uses TextUtils.getCapsMode to get the
+     * 默认实现，The default implementation uses TextUtils.getCapsMode to get the
      * cursor caps mode for the current selection position in the editable
      * text, unless in dummy mode in which case 0 is always returned.
      */
