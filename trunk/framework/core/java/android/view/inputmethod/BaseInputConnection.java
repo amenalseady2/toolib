@@ -250,9 +250,8 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * 默认实现，The default implementation uses TextUtils.getCapsMode to get the
-     * cursor caps mode for the current selection position in the editable
-     * text, unless in dummy mode in which case 0 is always returned.
+     * 默认实现，使用TextUtils.getCapsMode方法来取得可编辑文本中，
+     * 当前选择位置的光标处的大小写模式。 只有出于虚拟模式时总返回0。
      */
     public int getCursorCapsMode(int reqModes) {
         if (mDummyMode) return 0;
@@ -273,15 +272,14 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation always returns null.
+     * 默认实现，总是返回空。
      */
     public ExtractedText getExtractedText(ExtractedTextRequest request, int flags) {
         return null;
     }
 
     /**
-     * The default implementation returns the given amount of text from the
-     * current cursor position in the buffer.
+     * 默认实现，返回缓冲区中截止到当前光标位置之前的指定长度的字符串。
      */
     public CharSequence getTextBeforeCursor(int length, int flags) {
         final Editable content = getEditable();
@@ -311,8 +309,7 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation returns the text currently selected, or null if none is
-     * selected.
+     * 默认实现，返回当前选中的文本，如果无选中文本则返回空。
      */
     public CharSequence getSelectedText(int flags) {
         final Editable content = getEditable();
@@ -336,8 +333,7 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation returns the given amount of text from the
-     * current cursor position in the buffer.
+     * 默认实现，返回从缓冲区的当前光标位置开始的指定长度的字符串。
      */
     public CharSequence getTextAfterCursor(int length, int flags) {
         final Editable content = getEditable();
@@ -369,7 +365,7 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation turns this into the enter key.
+     * 默认实现，该函数相当于输入回车。
      */
     public boolean performEditorAction(int actionCode) {
         long eventTime = SystemClock.uptimeMillis();
@@ -385,23 +381,21 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation does nothing.
+     * 默认实现，什么都不做。
      */
     public boolean performContextMenuAction(int id) {
         return false;
     }
 
     /**
-     * The default implementation does nothing.
+     * 默认实现，什么都不做。
      */
     public boolean performPrivateCommand(String action, Bundle data) {
         return false;
     }
 
     /**
-     * The default implementation places the given text into the editable,
-     * replacing any existing composing text.  The new text is marked as
-     * in a composing state with the composing style.
+     * 默认实现，用给定字符串替换可编辑对象中编辑中的文本。新文本仍然出于编辑中状态。
      */
     public boolean setComposingText(CharSequence text, int newCursorPosition) {
         if (DEBUG) Log.v(TAG, "setComposingText " + text);
