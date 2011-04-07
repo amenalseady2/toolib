@@ -181,15 +181,12 @@ public interface InputConnection {
      * Any composing text set previously will be removed
      * automatically.
      * 
-     * @param text The committed text.
-     * @param newCursorPosition The new cursor position around the text.  If
-     *        > 0, this is relative to the end of the text - 1; if <= 0, this
-     *        is relative to the start of the text.  So a value of 1 will
-     *        always advance you to the position after the full text being
-     *        inserted.  Note that this means you can't position the cursor
-     *        within the text, because the editor can make modifications to
-     *        the text you are providing so it is not possible to correctly
-     *        specify locations there.
+     * @param text 提交的文本。
+     * @param newCursorPosition 在提交的文本周围的新的光标位置。如果＞0，
+     *        该值为相对于插入文本位置-1的偏移量；如果≤0，
+     *        该值为相对插入文本起始位置的偏移量。因此，值为1时光标会落在插入文本的后面。
+     *        注意，这意味着你不能将光标定位在插入的文本中。因为编辑器会编辑你提供的文本，
+     *        因此在这里不可能正确的指定光标位置。
      * 
      *        
      * @return 操作成功返回真；返回假意味着输入连接不可用。
@@ -203,7 +200,7 @@ public interface InputConnection {
      * same behavior as if the user had selected the completion from the
      * actual UI.
      * 
-     * @param text The committed completion.
+     * @param text 提交完成的文本。
      *        
      * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
@@ -270,7 +267,7 @@ public interface InputConnection {
      * key event objects you give to this API; the flag will not be set
      * for you.
      * 
-     * @param event The key event.
+     * @param event 键盘事件。
      *        
      * @return 操作成功返回真；返回假意味着输入连接不可用。
      * 
@@ -284,8 +281,8 @@ public interface InputConnection {
     /**
      * Clear the given meta key pressed states in the given input connection.
      * 
-     * @param states The states to be cleared, may be one or more bits as
-     * per {@link KeyEvent#getMetaState() KeyEvent.getMetaState()}.
+     * @param states 要清除的状态。应该是{@link KeyEvent#getMetaState()
+     * KeyEvent.getMetaState()}函数返回值中的一个或以上的二进制位。
      * 
      * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
@@ -307,13 +304,11 @@ public interface InputConnection {
      * can use the information in {@link EditorInfo} to determine if
      * a client supports a particular command.
      * 
-     * @param action Name of the command to be performed.  This <em>must</em>
-     * be a scoped name, i.e. prefixed with a package name you own, so that
-     * different developers will not create conflicting commands.
-     * @param data Any data to include with the command.
-     * @return Returns true if the command was sent (whether or not the
-     * associated editor understood it), false if the input connection is no longer
-     * valid.
+     * @param action 要执行的命令名。该参数<em>必须</em>指定完全限定名。
+     *        例如，指定你自己的包名作为前缀，以避免不同开发者创建可能发生冲突的命令。
+     * @param data 命令需要的任何数据。
+     * @return 若命令已发送则返回真（无论关联的编辑器是否可以接受）；
+     *         返回假意味着输入连接不可用。
      */
     public boolean performPrivateCommand(String action, Bundle data);
 }
