@@ -440,8 +440,7 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * The default implementation changes the selection position in the
-     * current editable text.
+     * 默认实现，在当前可编辑文本中改变选中位置。
      */
     public boolean setSelection(int start, int end) {
         if (DEBUG) Log.v(TAG, "setSelection " + start + ", " + end);
@@ -467,8 +466,7 @@ public class BaseInputConnection implements InputConnection {
     }
 
     /**
-     * Provides standard implementation for sending a key event to the window
-     * attached to the input connection's view.
+     * 向关联到该输入连接视图的窗口发送键盘事件的标准实现。
      */
     public boolean sendKeyEvent(KeyEvent event) {
         synchronized (mIMM.mH) {
@@ -487,7 +485,7 @@ public class BaseInputConnection implements InputConnection {
     }
     
     /**
-     * Updates InputMethodManager with the current fullscreen mode.
+     * 更新InputMethodManager中的当前全屏模式标志。
      */
     public boolean reportFullscreenMode(boolean enabled) {
         mIMM.setFullscreenMode(enabled);
