@@ -21,27 +21,21 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
 /**
- * The InputConnection interface is the communication channel from an
- * {@link InputMethod} back to the application that is receiving its input. It
- * is used to perform such things as reading text around the cursor,
- * committing text to the text box, and sending raw key events to the application.
+ * InputConnection接口是{@link InputMethod 输入法}与接收其输入内容的应用程序的通信管道.
+ * 用于执行比如读取光标周围的文本、向文本框提交文本以及向应用程序发送键盘事件等操作。
  * 
- * <p>Implementations of this interface should generally be done by
- * subclassing {@link BaseInputConnection}.
+ * <p>实现该接口一般可以通过写{@link BaseInputConnection}的子类来实现。
  */
 public interface InputConnection {
     /**
-     * Flag for use with {@link #getTextAfterCursor} and
-     * {@link #getTextBeforeCursor} to have style information returned along
-     * with the text.  If not set, you will receive only the raw text.  If
-     * set, you may receive a complex CharSequence of both text and style
-     * spans.
+     * 用于{@link #getTextAfterCursor}和{@link #getTextBeforeCursor}的标志，
+     * 表示返回的文本包含样式信息。若未设置，仅返回原始文本。若设置该标志，
+     * 你会收到包含文本及其样式的复杂的CharSequence对象。
      */
     static final int GET_TEXT_WITH_STYLES = 0x0001;
     
     /**
-     * Flag for use with {@link #getExtractedText} to indicate you would
-     * like to receive updates when the extracted text changes.
+     * 用于{@link #getExtractedText}的标志，指示是否在额外的文本变更时接收通知。
      */
     public static final int GET_EXTRACTED_TEXT_MONITOR = 0x0001;
     
