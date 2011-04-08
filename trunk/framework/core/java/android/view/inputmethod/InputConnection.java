@@ -40,12 +40,10 @@ public interface InputConnection {
     public static final int GET_EXTRACTED_TEXT_MONITOR = 0x0001;
     
     /**
-     * Get <var>n</var> characters of text before the current cursor position.
+     * 取得文本当前光标位置之前的<var>n</var>个字符。
      * 
-     * <p>This method may fail either if the input connection has become invalid
-     * (such as its process crashing) or the client is taking too long to
-     * respond with the text (it is given a couple seconds to return).
-     * In either case, a null is returned.
+     * <p>该方法在输入连接不可用（比如进程崩溃）或客户端返回文本超时
+     * （有几秒钟等待时间）时会失败，这时返回空。
      * 
      * @param n 要取得的文本长度。
      * @param flags 用于控制如何返回文本的附加选项。为0或则{@link #GET_TEXT_WITH_STYLES}。
@@ -55,12 +53,10 @@ public interface InputConnection {
     public CharSequence getTextBeforeCursor(int n, int flags);
 
     /**
-     * Get <var>n</var> characters of text after the current cursor position.
+     * 取得文本当前光标位置之后的<var>n</var>个字符。
      * 
-     * <p>This method may fail either if the input connection has become invalid
-     * (such as its process crashing) or the client is taking too long to
-     * respond with the text (it is given a couple seconds to return).
-     * In either case, a null is returned.
+     * <p>该方法在输入连接不可用（比如进程崩溃）或客户端返回文本超时
+     * （有几秒钟等待时间）时会失败，这时返回空。
      * 
      * @param n 要取得的文本长度。
      * @param flags 用于控制如何返回文本的附加选项。为0或则{@link #GET_TEXT_WITH_STYLES}。
@@ -70,12 +66,10 @@ public interface InputConnection {
     public CharSequence getTextAfterCursor(int n, int flags);
 
     /**
-     * Gets the selected text, if any.
+     * 如果存在，取得选中的文本。
      *
-     * <p>This method may fail if either the input connection has become
-     * invalid (such as its process crashing) or the client is taking too
-     * long to respond with the text (it is given a couple of seconds to return).
-     * In either case, a null is returned.
+     * <p>该方法在输入连接不可用（比如进程崩溃）或客户端返回文本超时
+     * （有几秒钟等待时间）时会失败，这时返回空。
      *
      * @param flags 用于控制如何返回文本的附加选项。为0或则{@link #GET_TEXT_WITH_STYLES}。
      * @return 返回当前选中的文本，若无选择文本则返回空。
@@ -83,15 +77,11 @@ public interface InputConnection {
     public CharSequence getSelectedText(int flags);
 
     /**
-     * Retrieve the current capitalization mode in effect at the current
-     * cursor position in the text.  See
-     * {@link android.text.TextUtils#getCapsMode TextUtils.getCapsMode} for
-     * more information.
+     * 取得影响文本中当前光标位置的当前大小写模式。更多信息参见
+     * {@link android.text.TextUtils#getCapsMode TextUtils.getCapsMode}。
      * 
-     * <p>This method may fail either if the input connection has become invalid
-     * (such as its process crashing) or the client is taking too long to
-     * respond with the text (it is given a couple seconds to return).
-     * In either case, a 0 is returned.
+     * <p>该方法在输入连接不可用（比如进程崩溃）或客户端返回文本超时
+     * （有几秒钟等待时间）时会失败，这时返回0。
      * 
      * @param reqModes 要取得的模式，该模式由{@link android.text.TextUtils#getCapsMode
      *        TextUtils.getCapsMode}定义。你简单的传递由
@@ -102,15 +92,11 @@ public interface InputConnection {
     public int getCursorCapsMode(int reqModes);
     
     /**
-     * Retrieve the current text in the input connection's editor, and monitor
-     * for any changes to it.  This function returns with the current text,
-     * and optionally the input connection can send updates to the
-     * input method when its text changes.
+     * 返回输入连接的编辑器中的当前文本，并监视对其进行的更改。该函数返回当前文本，
+     * 并可以选择在文本变更时输入连接是否向输入法发送该更新。
      * 
-     * <p>This method may fail either if the input connection has become invalid
-     * (such as its process crashing) or the client is taking too long to
-     * respond with the text (it is given a couple seconds to return).
-     * In either case, a null is returned.
+     * <p>该方法在输入连接不可用（比如进程崩溃）或客户端返回文本超时
+     * （有几秒钟等待时间）时会失败，这时返回空。
      * 
      * @param request 描述如何返回文本。
      * @param flags 控制客户端的附加选项，其值为0或{@link #GET_EXTRACTED_TEXT_MONITOR}。
@@ -121,9 +107,8 @@ public interface InputConnection {
             int flags);
 
     /**
-     * Delete <var>leftLength</var> characters of text before the current cursor
-     * position, and delete <var>rightLength</var> characters of text after the
-     * current cursor position, excluding composing text.
+     * 删除文本中当前光标前面的<var>leftLength</var>个字符，以及当前光标后面的
+     * <var>rightLength</var>个字符；其中不包含编辑中的文本。
      * 
      * @param leftLength 当前光标位置左侧要删除的字符数。
      * @param rightLength 当前光标位置右侧要删除的字符数。
@@ -163,17 +148,13 @@ public interface InputConnection {
     public boolean setComposingRegion(int start, int end);
 
     /**
-     * Have the text editor finish whatever composing text is currently
-     * active.  This simply leaves the text as-is, removing any special
-     * composing styling or other state that was around it.  The cursor
-     * position remains unchanged.
+     * 使文本编辑器结束编辑，即使编辑中文本出于激活状态。该操作使文本保持原样，
+     * 移除编辑中文本的特殊修饰及其它状态。光标位置保存不变。
      */
     public boolean finishComposingText();
     
     /**
-     * Commit text to the text box and set the new cursor position.
-     * Any composing text set previously will be removed
-     * automatically.
+     * 将文本提交到文本框，并设置新的光标位置。自动移除之前编辑中的文本。
      * 
      * @param text 提交的文本。
      * @param newCursorPosition 在提交的文本周围的新的光标位置。如果＞0，
@@ -188,21 +169,22 @@ public interface InputConnection {
     public boolean commitText(CharSequence text, int newCursorPosition);
 
     /**
-     * Commit a completion the user has selected from the possible ones
-     * previously reported to {@link InputMethodSession#displayCompletions
-     * InputMethodSession.displayCompletions()}.  This will result in the
-     * same behavior as if the user had selected the completion from the
-     * actual UI.
+     * 提交来自{@link InputMethodSession#displayCompletions
+     * InputMethodSession.displayCompletions()}的，由用户选中的确定的文本。
+     * 其行为与用户从实际的UI中选择确定的文本时是一致的。
      * 
-     * @param text 提交完成的文本。
+     * @param text 确定的文本。
      *        
      * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean commitCompletion(CompletionInfo text);
 
     /**
-     * Set the selection of the text editor.  To set the cursor position,
-     * start and end should have the same value.
+     * 设置文本编辑器的选中范围。若要设置光标位置，将start和end设为相同值即可。
+     * 
+     * @param start 选择范围的开始位置。
+     * @param end 选择范围的结束位置。
+     * 
      * @return 操作成功返回真；返回假意味着输入连接不可用。
      */
     public boolean setSelection(int start, int end);
@@ -218,48 +200,39 @@ public interface InputConnection {
     public boolean performEditorAction(int editorAction);
     
     /**
-     * Perform a context menu action on the field.  The given id may be one of:
-     * {@link android.R.id#selectAll},
-     * {@link android.R.id#startSelectingText}, {@link android.R.id#stopSelectingText},
-     * {@link android.R.id#cut}, {@link android.R.id#copy},
-     * {@link android.R.id#paste}, {@link android.R.id#copyUrl},
-     * or {@link android.R.id#switchInputMethod}
+     * 执行上下文菜单动作。id的取值范围如下：
+     * {@link android.R.id#selectAll}、
+     * {@link android.R.id#startSelectingText}、{@link android.R.id#stopSelectingText}、
+     * {@link android.R.id#cut}、{@link android.R.id#copy}、
+     * {@link android.R.id#paste}、{@link android.R.id#copyUrl}、
+     * 以及{@link android.R.id#switchInputMethod}。
      */
     public boolean performContextMenuAction(int id);
     
     /**
-     * Tell the editor that you are starting a batch of editor operations.
-     * The editor will try to avoid sending you updates about its state
-     * until {@link #endBatchEdit} is called.
+     * 通知编辑器，你将开始进行批量编辑操作。编辑器会在收到{@link #endBatchEdit}
+     * 通知之前避免向你发送关于其状态的通知。
      */
     public boolean beginBatchEdit();
     
     /**
-     * Tell the editor that you are done with a batch edit previously
-     * initiated with {@link #endBatchEdit}.
+     * 通知编辑器，之前由{@link #beginBatchEdit}开始的批量编辑操作已经结束。
      */
     public boolean endBatchEdit();
     
     /**
-     * Send a key event to the process that is currently attached through
-     * this input connection.  The event will be dispatched like a normal
-     * key event, to the currently focused; this generally is the view that
-     * is providing this InputConnection, but due to the asynchronous nature
-     * of this protocol that can not be guaranteed and the focus may have
-     * changed by the time the event is received.
+     * 向当前与输入连接关联的进程发送键盘事件。该事件通过正常的事件分派方式，
+     * 到达当前焦点处，一般是实现了InputConnection的视图。由于事件处理的异步性，
+     * 无法保证收到该事件时，焦点没有改变。
      * 
      * <p>
-     * This method can be used to send key events to the application. For
-     * example, an on-screen keyboard may use this method to simulate a hardware
-     * keyboard. There are three types of standard keyboards, numeric (12-key),
-     * predictive (20-key) and ALPHA (QWERTY). You can specify the keyboard type
-     * by specify the device id of the key event.
+     * 该方法用于向应用程序发送键盘事件。例如，虚拟键盘可以使用该方法来模拟真正的键盘。
+     * 有三种标准的键盘，它们是数字键盘（12键）、预测键盘（20键）、字母键盘（QWERTY键盘）。
+     * 你可以通过指定键盘事件的设备标识来指定键盘类型。
      * 
      * <p>
-     * You will usually want to set the flag
-     * {@link KeyEvent#FLAG_SOFT_KEYBOARD KeyEvent.FLAG_SOFT_KEYBOARD} on all
-     * key event objects you give to this API; the flag will not be set
-     * for you.
+     * 你可能需要为所有传入该方法的键盘事件设置{@link KeyEvent#FLAG_SOFT_KEYBOARD
+     * KeyEvent.FLAG_SOFT_KEYBOARD}标志。因为该函数不会为你自动设置它。
      * 
      * @param event 键盘事件。
      *        
@@ -273,7 +246,7 @@ public interface InputConnection {
     public boolean sendKeyEvent(KeyEvent event);
 
     /**
-     * Clear the given meta key pressed states in the given input connection.
+     * 清除输入连接的给定功能键的按键状态。
      * 
      * @param states 要清除的状态。应该是{@link KeyEvent#getMetaState()
      * KeyEvent.getMetaState()}函数返回值中的一个或以上的二进制位。
@@ -283,20 +256,16 @@ public interface InputConnection {
     public boolean clearMetaKeyStates(int states);
     
     /**
-     * Called by the IME to tell the client when it switches between fullscreen
-     * and normal modes.  This will normally be called for you by the standard
-     * implementation of {@link android.inputmethodservice.InputMethodService}.
+     * 由IME调用，用于通知客户端它在全屏和正常模式之间的切换事件。该事件一般由
+     * {@link android.inputmethodservice.InputMethodService}的标准实现来调用。
      */
     public boolean reportFullscreenMode(boolean enabled);
     
     /**
-     * API to send private commands from an input method to its connected
-     * editor.  This can be used to provide domain-specific features that are
-     * only known between certain input methods and their clients.  Note that
-     * because the InputConnection protocol is asynchronous, you have no way
-     * to get a result back or know if the client understood the command; you
-     * can use the information in {@link EditorInfo} to determine if
-     * a client supports a particular command.
+     * 输入法向连接到它的编辑器发送私有命令的API。该方法可用于提供特定域特性，
+     * 仅用于某些输入发及其对应的客户端。注意，由于InputConnection协议的异步性，
+     * 你无法取得返回结果，以及客户端是否可以处理该命令。你可以使用
+     * {@link EditorInfo}提供的信息来检测客户端支持的命令集。
      * 
      * @param action 要执行的命令名。该参数<em>必须</em>指定完全限定名。
      *        例如，指定你自己的包名作为前缀，以避免不同开发者创建可能发生冲突的命令。
