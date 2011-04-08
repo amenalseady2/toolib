@@ -23,53 +23,41 @@ import android.os.IBinder;
 import android.os.ResultReceiver;
 
 /**
- * The InputMethod interface represents an input method which can generate key
- * events and text, such as digital, email addresses, CJK characters, other
- * language characters, and etc., while handling various input events, and send
- * the text back to the application that requests text input.  See
- * {@link InputMethodManager} for more general information about the
- * architecture.
+ * InputMethod接口呈现了可以生成键盘事件、文本（包括数字、电子邮件地址、CJK字符、
+ * 以及其它语言的字符等等），处理各种输入事件，
+ * 以及向需要输入文本的应用程序发送文本的输入法需要的接口. 关于其体系结构的内容，
+ * 参见{@link InputMethodManager}。
  *
- * <p>Applications will not normally use this interface themselves, instead
- * relying on the standard interaction provided by
- * {@link android.widget.TextView} and {@link android.widget.EditText}.
+ * <p>应用程序一般不直接使用这些接口，只是通过{@link android.widget.TextView}
+ * 或{@link android.widget.EditText}提供的标准接口来使用它。
  * 
- * <p>Those implementing input methods should normally do so by deriving from
- * {@link InputMethodService} or one of its subclasses.  When implementing
- * an input method, the service component containing it must also supply
- * a {@link #SERVICE_META_DATA} meta-data field, referencing an XML resource
- * providing details about the input method.  All input methods also must
- * require that clients hold the
- * {@link android.Manifest.permission#BIND_INPUT_METHOD} in order to interact
- * with the service; if this is not required, the system will not use that
- * input method, because it can not trust that it is not compromised.
+ * <p>输入法一般是通过派生{@link InputMethodService}或其子类来实现的。实现输入法时，
+ * 其服务组件必须为{@link #SERVICE_META_DATA}元数据字段，
+ * 提供一个引用了包含输入法详细信息的XML资源。为了与服务交互，
+ * 所有的输入法都要求其客户端具有
+ * {@link android.Manifest.permission#BIND_INPUT_METHOD}权限。如果没有，
+ * 系统将不使用该输入法，因为无法确信是否得到了用户的认可。
  * 
- * <p>The InputMethod interface is actually split into two parts: the interface
- * here is the top-level interface to the input method, providing all
- * access to it, which only the system can access (due to the BIND_INPUT_METHOD
- * permission requirement).  In addition its method
+ * <p>InputMethod接口实际上分为两部分：对于输入法来说，这里的接口是顶级接口，
+ * 提供了对输入法的所有访问控制，只有系统才可以访问（需要BIND_INPUT_METHOD
+ * 权限）。另外，通过调用接口的
  * {@link #createSession(android.view.inputmethod.InputMethod.SessionCallback)}
- * can be called to instantate a secondary {@link InputMethodSession} interface
- * which is what clients use to communicate with the input method.
+ * 方法，可以实例化第二级接口{@link InputMethodSession}，用于与客户端与输入法通信。
  */
 public interface InputMethod {
     /**
-     * This is the interface name that a service implementing an input
-     * method should say that it supports -- that is, this is the action it
-     * uses for its intent filter.
-     * To be supported, the service must also require the
-     * {@link android.Manifest.permission#BIND_INPUT_METHOD} permission so
-     * that other applications can not abuse it.
+     * 这是实现了输入法的服务的接口名，表示其支持该动作——用于意图过滤器。
+     * 为了防止其它应用程序随意使用该动作，它需要拥有
+     * {@link android.Manifest.permission#BIND_INPUT_METHOD}权限。
      */
     @SdkConstant(SdkConstantType.SERVICE_ACTION)
     public static final String SERVICE_INTERFACE = "android.view.InputMethod";
     
     /**
-     * Name under which an InputMethod service component publishes information
-     * about itself.  This meta-data must reference an XML resource containing
-     * an
+     * 包含在InputMethod服务组件，关于其自身的发布信息中。
+     * 该元数据必须引用一个包含
      * <code>&lt;{@link android.R.styleable#InputMethod input-method}&gt;</code>
-     * tag.
+     * 标签的XML资源。
      */
     public static final String SERVICE_META_DATA = "android.view.im";
     
@@ -78,7 +66,8 @@ public interface InputMethod {
     }
     
     /**
-     * Called first thing after an input method is created, this supplies a
+     * 输入法创建后首先执行的方法，用于为输入法与系统服务的会话提供唯一的令牌。
+     * 为了验证其服务的操作，这是必须的。
      * unique token for the session it has with the system service.  It is
      * needed to identify itself with the service to validate its operations.
      * This token <strong>must not</strong> be passed to applications, since
