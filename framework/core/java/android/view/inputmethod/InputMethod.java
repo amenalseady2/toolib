@@ -67,26 +67,19 @@ public interface InputMethod {
     
     /**
      * 输入法创建后首先执行的方法，用于为输入法与系统服务的会话提供唯一的令牌。
-     * 为了验证其服务的操作，这是必须的。
-     * unique token for the session it has with the system service.  It is
-     * needed to identify itself with the service to validate its operations.
-     * This token <strong>must not</strong> be passed to applications, since
-     * it grants special priviledges that should not be given to applications.
+     * 为了与服务验证其操作，必须用该令牌来标识其自身。该令牌<strong>一定不要
+     * </strong>传给应用程序，因其会赋予应用程序不应有的权限。
      * 
-     * <p>Note: to protect yourself from malicious clients, you should only
-     * accept the first token given to you.  Any after that may come from the
-     * client.
+     * <p>注意：为了保护你的程序不受恶意客户端影响，你应该只接受受到的第一张令牌。
+     * 其它令牌可能来自客户端。
      */
     public void attachToken(IBinder token);
     
     /**
-     * Bind a new application environment in to the input method, so that it
-     * can later start and stop input processing.
-     * Typically this method is called when this input method is enabled in an
-     * application for the first time.
+     * 将输入法绑定到新的应用程序环境，使其之后可以启动或停止输入过程。
+     * 通常在应用程序第一次启用输入法时调用此方法。
      * 
-     * @param binding Information about the application window that is binding
-     * to the input method.
+     * @param binding 要与输入法绑定的应用程序窗口信息。
      * 
      * @see InputBinding
      * @see #unbindInput()
@@ -94,118 +87,101 @@ public interface InputMethod {
     public void bindInput(InputBinding binding);
 
     /**
-     * Unbind an application environment, called when the information previously
-     * set by {@link #bindInput} is no longer valid for this input method.
+     * 与应用程序环境解除绑定，当之前由{@link #bindInput}绑定的信息对该输入法不在有效时调用。
      * 
      * <p>
-     * Typically this method is called when the application changes to be
-     * non-foreground.
+     * 通常在应用程序变为非前台应用程序时调用该方法。
      */
     public void unbindInput();
 
     /**
-     * This method is called when the application starts to receive text and it
-     * is ready for this input method to process received events and send result
-     * text back to the application.
+     * 该方法在应用程序开始接受文本，并且输入法已经准备好处理收到的事件、
+     * 并将结果文本发送回应用程序时调用。
      * 
-     * @param inputConnection Optional specific input connection for
-     * communicating with the text box; if null, you should use the generic
-     * bound input connection.
-     * @param info Information about the text box (typically, an EditText)
-     *        that requests input.
+     * @param inputConnection 可以选择指定与文本框通信的输入连接；
+     *        为空则使用通常绑定的输入连接。
+     * @param info 关于请求输入的文本框（一般是EditText）的属性信息。
      * 
      * @see EditorInfo
      */
     public void startInput(InputConnection inputConnection, EditorInfo info);
 
     /**
-     * This method is called when the state of this input method needs to be
-     * reset.
+     * 该方法在输入法状态需要复位时调用。
      * 
      * <p>
-     * Typically, this method is called when the input focus is moved from one
-     * text box to another.
+     * 一般该方法在输入焦点从一个文本框移到另一个文本框时调用。
      * 
-     * @param inputConnection Optional specific input connection for
-     * communicating with the text box; if null, you should use the generic
-     * bound input connection.
-     * @param attribute The attribute of the text box (typically, a EditText)
-     *        that requests input.
+     * @param inputConnection 可以选择指定与文本框通信的输入连接；
+     *        为空则使用通常绑定的输入连接。
+     * @param attribute 关于请求输入的文本框（一般是EditText）的属性信息。
      * 
      * @see EditorInfo
      */
     public void restartInput(InputConnection inputConnection, EditorInfo attribute);
 
     /**
-     * Create a new {@link InputMethodSession} that can be handed to client
-     * applications for interacting with the input method.  You can later
-     * use {@link #revokeSession(InputMethodSession)} to destroy the session
-     * so that it can no longer be used by any clients.
+     * 创建一个新的用于应用程序处理与输入法交互的{@link InputMethodSession}。
+     * 当不需要任何客户端使用时，可以使用{@link #revokeSession(InputMethodSession)}
+     * 来销毁该会话。
      * 
-     * @param callback Interface that is called with the newly created session.
+     * @param callback 新建会话调用的接口。
      */
     public void createSession(SessionCallback callback);
     
     /**
-     * Control whether a particular input method session is active.
+     * 控制特定的输入法会话的活性。
      * 
-     * @param session The {@link InputMethodSession} previously provided through
-     * SessionCallback.sessionCreated() that is to be changed.
+     * @param session 要改变的由SessionCallback.sessionCreated()提供的
+     * {@link InputMethodSession}。
      */
     public void setSessionEnabled(InputMethodSession session, boolean enabled);
     
     /**
-     * Disable and destroy a session that was previously created with
-     * {@link #createSession(android.view.inputmethod.InputMethod.SessionCallback)}.
-     * After this call, the given session interface is no longer active and
-     * calls on it will fail.
+     * 停用并销毁之前通过
+     * {@link #createSession(android.view.inputmethod.InputMethod.SessionCallback)}
+     * 创建的会话。调用该方法后，指定的会话接口不在可用，调用它会失败。
      * 
-     * @param session The {@link InputMethodSession} previously provided through
-     * SessionCallback.sessionCreated() that is to be revoked.
+     * @param session 要改变的由SessionCallback.sessionCreated()提供的
+     * {@link InputMethodSession}。
      */
     public void revokeSession(InputMethodSession session);
     
     /**
-     * Flag for {@link #showSoftInput}: this show has been explicitly
-     * requested by the user.  If not set, the system has decided it may be
-     * a good idea to show the input method based on a navigation operation
-     * in the UI.
+     * 用于{@link #showSoftInput}的标志：表示需要用户明确指定输入法显示。
+     * 如果未设置，由系统决定，基于UI的导航操作来决定显示与否，这也许是个好办法。
      */
     public static final int SHOW_EXPLICIT = 0x00001;
     
     /**
-     * Flag for {@link #showSoftInput}: this show has been forced to
-     * happen by the user.  If set, the input method should remain visible
-     * until deliberated dismissed by the user in its UI.
+     * 用于{@link #showSoftInput}的标志：表示由用户指定强制显示。如果设置，
+     * 意味着输入法将一直处于可视状态，直到用户在UI上将其关闭。
      */
     public static final int SHOW_FORCED = 0x00002;
     
     /**
-     * Request that any soft input part of the input method be shown to the user.
+     * 请求为用户显示输入法的软键盘。
      * 
-     * @param flags Provides additional information about the show request.
-     * Currently may be 0 or have the bit {@link #SHOW_EXPLICIT} set.
-     * @param resultReceiver The client requesting the show may wish to
-     * be told the impact of their request, which should be supplied here.
-     * The result code should be
-     * {@link InputMethodManager#RESULT_UNCHANGED_SHOWN InputMethodManager.RESULT_UNCHANGED_SHOWN},
-     * {@link InputMethodManager#RESULT_UNCHANGED_HIDDEN InputMethodManager.RESULT_UNCHANGED_HIDDEN},
-     * {@link InputMethodManager#RESULT_SHOWN InputMethodManager.RESULT_SHOWN}, or
-     * {@link InputMethodManager#RESULT_HIDDEN InputMethodManager.RESULT_HIDDEN}.
+     * @param flags 提供关于显示请求的附加信息。当前应该是0或者设置了
+     * {@link #SHOW_EXPLICIT}标志。
+     * @param resultReceiver 请求显示操作的客户端，可能想知道的其请求有什么影响，
+     * 通过该参数提供。结果代码为
+     * {@link InputMethodManager#RESULT_UNCHANGED_SHOWN InputMethodManager.RESULT_UNCHANGED_SHOWN}、
+     * {@link InputMethodManager#RESULT_UNCHANGED_HIDDEN InputMethodManager.RESULT_UNCHANGED_HIDDEN}、
+     * {@link InputMethodManager#RESULT_SHOWN InputMethodManager.RESULT_SHOWN}或
+     * {@link InputMethodManager#RESULT_HIDDEN InputMethodManager.RESULT_HIDDEN}。
      */
     public void showSoftInput(int flags, ResultReceiver resultReceiver);
     
     /**
-     * Request that any soft input part of the input method be hidden from the user.
-     * @param flags Provides additional information about the show request.
-     * Currently always 0.
-     * @param resultReceiver The client requesting the show may wish to
-     * be told the impact of their request, which should be supplied here.
-     * The result code should be
-     * {@link InputMethodManager#RESULT_UNCHANGED_SHOWN InputMethodManager.RESULT_UNCHANGED_SHOWN},
-     * {@link InputMethodManager#RESULT_UNCHANGED_HIDDEN InputMethodManager.RESULT_UNCHANGED_HIDDEN},
-     * {@link InputMethodManager#RESULT_SHOWN InputMethodManager.RESULT_SHOWN}, or
-     * {@link InputMethodManager#RESULT_HIDDEN InputMethodManager.RESULT_HIDDEN}.
+     * 请求为用户隐藏输入法的软键盘。
+     * @param flags 提供关于显示请求的附加信息。当前总是0。
+     * @param resultReceiver 请求显示操作的客户端，可能想知道的其请求有什么影响，
+     * 通过该参数提供。结果代码为
+     * {@link InputMethodManager#RESULT_UNCHANGED_SHOWN InputMethodManager.RESULT_UNCHANGED_SHOWN}、
+     * {@link InputMethodManager#RESULT_UNCHANGED_HIDDEN InputMethodManager.RESULT_UNCHANGED_HIDDEN}、
+     * {@link InputMethodManager#RESULT_SHOWN InputMethodManager.RESULT_SHOWN}或
+     * {@link InputMethodManager#RESULT_HIDDEN InputMethodManager.RESULT_HIDDEN}。
      */
     public void hideSoftInput(int flags, ResultReceiver resultReceiver);
 }
