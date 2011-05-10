@@ -266,11 +266,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Register a callback to be invoked when the focus state within the view tree changes.
+     * 注册在视图树焦点状态变化时执行的回调函数。
      *
-     * @param listener The callback to add
+     * @param listener 添加的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      */
     public void addOnGlobalFocusChangeListener(OnGlobalFocusChangeListener listener) {
         checkIsAlive();
@@ -283,11 +283,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Remove a previously installed focus change callback.
+     * 移除之前注册的焦点变更回调函数。
      *
-     * @param victim The callback to remove
+     * @param victim 要移除的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      *
      * @see #addOnGlobalFocusChangeListener(OnGlobalFocusChangeListener)
      */
@@ -300,12 +300,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Register a callback to be invoked when the global layout state or the visibility of views
-     * within the view tree changes
+     * 注册视图树中的视图可视状态或全局布局状态发生变化时执行的回调函数。
      *
-     * @param listener The callback to add
+     * @param listener 添加的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      */
     public void addOnGlobalLayoutListener(OnGlobalLayoutListener listener) {
         checkIsAlive();
@@ -318,11 +317,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Remove a previously installed global layout callback
+     * 移除之前注册的全局布局变更用回调函数。
      *
-     * @param victim The callback to remove
+     * @param victim 要移除的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      *
      * @see #addOnGlobalLayoutListener(OnGlobalLayoutListener)
      */
@@ -335,11 +334,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Register a callback to be invoked when the view tree is about to be drawn
+     * 注册在绘制视图树之前执行的回调函数。
      *
-     * @param listener The callback to add
+     * @param listener 添加的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      */
     public void addOnPreDrawListener(OnPreDrawListener listener) {
         checkIsAlive();
@@ -352,11 +351,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Remove a previously installed pre-draw callback
+     * 移除之前注册的在绘制视图树之前执行的回调函数。
      *
-     * @param victim The callback to remove
+     * @param victim 要移除的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      *
      * @see #addOnPreDrawListener(OnPreDrawListener)
      */
@@ -369,11 +368,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Register a callback to be invoked when a view has been scrolled.
+     * 注册在视图滚动时调用的回调函数。
      *
-     * @param listener The callback to add
+     * @param listener 添加的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      */
     public void addOnScrollChangedListener(OnScrollChangedListener listener) {
         checkIsAlive();
@@ -386,11 +385,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Remove a previously installed scroll-changed callback
+     * 移除之前注册的视图滚动回调函数。
      *
-     * @param victim The callback to remove
+     * @param victim 要移除的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      *
      * @see #addOnScrollChangedListener(OnScrollChangedListener)
      */
@@ -403,11 +402,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Register a callback to be invoked when the invoked when the touch mode changes.
+     * 注册在触控模式变更时调用的回调函数。
      *
-     * @param listener The callback to add
+     * @param listener 添加的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      */
     public void addOnTouchModeChangeListener(OnTouchModeChangeListener listener) {
         checkIsAlive();
@@ -420,11 +419,11 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Remove a previously installed touch mode change callback
+     * 移除之前注册的触控模式变更回调函数。
      *
-     * @param victim The callback to remove
+     * @param victim 要移除的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      *
      * @see #addOnTouchModeChangeListener(OnTouchModeChangeListener)
      */
@@ -440,9 +439,9 @@ public final class ViewTreeObserver {
      * Register a callback to be invoked when the invoked when it is time to
      * compute the window's internal insets.
      *
-     * @param listener The callback to add
+     * @param listener 添加的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      * 
      * We are not yet ready to commit to this API and support it, so
      * @hide
@@ -461,9 +460,9 @@ public final class ViewTreeObserver {
     /**
      * Remove a previously installed internal insets computation callback
      *
-     * @param victim The callback to remove
+     * @param victim 要移除的回调函数。
      *
-     * @throws IllegalStateException If {@link #isAlive()} returns false
+     * @throws IllegalStateException 如果{@link #isAlive()}返回假。
      *
      * @see #addOnComputeInternalInsetsListener(OnComputeInternalInsetsListener)
      * 
@@ -486,13 +485,12 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Indicates whether this ViewTreeObserver is alive. When an observer is not alive,
-     * any call to a method (except this one) will throw an exception.
+     * 指示该ViewTreeObserver对象是否可用。不可用时调用任何方法（除本方法以外）都会抛出异常。
      *
-     * If an application keeps a long-lived reference to this ViewTreeObserver, it should
-     * always check for the result of this method before calling any other method.
+     * 如果应用程序长时间保持该ViewTreeObserver对象，那么应该在每次调用其方法前，
+     * 通过调用该方法，查询对象是否可用。
      *
-     * @return True if this object is alive and be used, false otherwise.
+     * @return 如果对象可用返回真；否则返回假。
      */
     public boolean isAlive() {
         return mAlive;
@@ -525,9 +523,8 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Notifies registered listeners that a global layout happened. This can be called
-     * manually if you are forcing a layout on a View or a hierarchy of Views that are
-     * not attached to a Window or in the GONE state.
+     * 通知已注册的监听器，发生了全局布局事件。该方法可以在你要强制为没有关联到窗口或处于GONE
+     * 状态的视图或视图层次布局时，由你的程序调用。
      */
     public final void dispatchOnGlobalLayout() {
         // NOTE: because of the use of CopyOnWriteArrayList, we *must* use an iterator to
@@ -543,12 +540,10 @@ public final class ViewTreeObserver {
     }
 
     /**
-     * Notifies registered listeners that the drawing pass is about to start. If a
-     * listener returns true, then the drawing pass is canceled and rescheduled. This can
-     * be called manually if you are forcing the drawing on a View or a hierarchy of Views
-     * that are not attached to a Window or in the GONE state.
+     * 通知已注册的监听器，绘制操作即将开始。如果返回真，则该绘制操作会取消或重新计划。
+     * 该方法可以在你要强制为没有关联到窗口或处于GONE状态的视图或视图层次布局时，由你的程序调用。
      *
-     * @return True if the current draw should be canceled and resceduled, false otherwise.
+     * @return 返回真，则该绘制操作会取消或重新计划；否则会返回假。
      */
     public final boolean dispatchOnPreDraw() {
         // NOTE: because of the use of CopyOnWriteArrayList, we *must* use an iterator to

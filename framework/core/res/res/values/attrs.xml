@@ -814,11 +814,11 @@
         <flag name="clip_horizontal" value="0x08" />
     </attr>
 
-    <!-- 标准方向常量. -->
+    <!-- Standard orientation constant. -->
     <attr name="orientation">
-        <!-- 定义为横向小部件. -->
+        <!-- Defines an horizontal widget. -->
         <enum name="horizontal" value="0" />
-        <!-- 定义为纵向小部件. -->
+        <!-- Defines a vertical widget. -->
         <enum name="vertical" value="1" />
     </attr>
 
@@ -1380,14 +1380,11 @@
 
     </declare-styleable>
 
-    <!-- A {@link android.view.ViewStub} lets you lazily include other XML layouts
-         inside your application at runtime. -->
+    <!-- {@link android.view.ViewStub}用于在应用程序运行时延迟加载布局资源. -->
     <declare-styleable name="ViewStub">
-        <!-- Supply an identifier for the layout resource to inflate when the ViewStub
-             becomes visible or when forced to do so. The layout resource must be a
-             valid reference to a layout. -->
+        <!-- 提供在 ViewStub 可见或强制其载入时使用的布局资源. 该布局ID必须是对可用的布局资源的引用. -->
         <attr name="layout" format="reference" />
-        <!-- Overrides the id of the inflated View with this value. -->
+        <!-- 用该值覆盖载入视图的ID. -->
         <attr name="inflatedId" format="reference" />
     </declare-styleable>
 
@@ -2180,22 +2177,25 @@
         </attr>
     </declare-styleable>
 
-    <!-- SlidingDrawer的特定属性. 这些属性用于在XML中配置SlidingDrawer. -->
+    <!-- SlidingDrawer specific attributes. These attributes are used to configure
+         a SlidingDrawer from XML. -->
     <declare-styleable name="SlidingDrawer">
-        <!-- 用于呈现抽屉把手的子视图的标识. -->
+        <!-- Identifier for the child that represents the drawer's handle. -->
         <attr name="handle" format="reference" />
-        <!-- 用于呈现抽屉内容的子视图的标识. -->
+        <!-- Identifier for the child that represents the drawer's content. -->
         <attr name="content" format="reference" />
-        <!-- SlidingDrawer的方向. -->
+        <!-- Orientation of the SlidingDrawer. -->
         <attr name="orientation" />
-        <!-- 把手与SlidingDrawer底边的额外偏移量. -->
+        <!-- Extra offset for the handle at the bottom of the SlidingDrawer. -->
         <attr name="bottomOffset" format="dimension"  />
-        <!-- 把手与SlidingDrawer顶边的额外偏移量. -->
+        <!-- Extra offset for the handle at the top of the SlidingDrawer. -->
         <attr name="topOffset" format="dimension"  />
-        <!-- 指示抽屉是否可以通过轻触把手来开闭. (如果为假，用户必须通过拖拽、
-             快速滑动或者用轨迹球单击才能实现抽屉的开闭操作.)默认为真. -->
+        <!-- Indicates whether the drawer can be opened/closed by a single tap
+             on the handle.  (If false, the user must drag or fling, or click
+             using the trackball, to open/close the drawer.)  Default is true. -->
         <attr name="allowSingleTap" format="boolean" />
-        <!-- 指示用户单击把手时，是否已动画的形式执行抽屉的开闭操作. 默认为真. -->
+        <!-- Indicates whether the drawer should be opened/closed with an animation
+             when the user clicks the handle. Default is true. -->
         <attr name="animateOnClick" format="boolean" />
     </declare-styleable>
 
