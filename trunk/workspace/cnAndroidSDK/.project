@@ -18,17 +18,17 @@
 		<link>
 			<name>docs</name>
 			<type>2</type>
-			<location>C:/dev/toolib/trunk/framework/docs</location>
+			<locationURI>trunk/frameworks/base/docs</locationURI>
 		</link>
 		<link>
 			<name>java</name>
 			<type>2</type>
-			<location>C:/dev/toolib/trunk/framework/core/java</location>
+			<locationURI>trunk/frameworks/base/core/java</locationURI>
 		</link>
 		<link>
 			<name>values</name>
 			<type>2</type>
-			<location>C:/dev/toolib/trunk/framework/core/res/res/values</location>
+			<locationURI>trunk/frameworks/base/core/res/res/values</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
