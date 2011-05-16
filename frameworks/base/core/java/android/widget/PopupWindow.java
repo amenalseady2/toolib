@@ -1365,11 +1365,11 @@ public class PopupWindow {
     }
 
     /**
-     * Listener that is called when this popup window is dismissed.
+     * 当弹出窗口被屏蔽时调用的监听器.
      */
     public interface OnDismissListener {
         /**
-         * Called when this popup window is dismissed.
+         * 弹出窗口被屏蔽时调用。
          */
         public void onDismiss();
     }
