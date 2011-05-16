@@ -19,24 +19,19 @@ package android.widget;
 import android.database.Cursor;
 
 /**
- * This class can be used by external clients of CursorAdapter and
- * CursorTreeAdapter to define how the content of the adapter should be
- * filtered.
+ * 该类可用于扩展 CursorAdapter 和 CursorTreeAdapter 的客户端，来定义如何过滤适配器的内容.
  * 
  * @see #runQuery(CharSequence)
  */
 public interface FilterQueryProvider {
     /**
-     * Runs a query with the specified constraint. This query is requested
-     * by the filter attached to this adapter.
+     * 使用指定的约束条件执行查询。该查询请求由关联到该适配器的过滤器发出。
+     * 
+     * 约定：当约束条件为null或者空串时，必须返回过滤前的原始结果。
+     * 
+     * @param constraint 过滤查询用的约束条件
      *
-     * Contract: when constraint is null or empty, the original results,
-     * prior to any filtering, must be returned.
-     *
-     * @param constraint the constraint with which the query must
-     *        be filtered
-     *
-     * @return a Cursor representing the results of the new query
+     * @return 代表新的查询结果的游标
      */
     Cursor runQuery(CharSequence constraint);
 }
