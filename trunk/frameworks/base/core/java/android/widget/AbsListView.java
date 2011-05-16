@@ -4275,7 +4275,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * AbsListView extends LayoutParams to provide a place to hold the view type.
+     * AbsListView 扩展了 LayoutParams 以提供空间来保存试图类型.
      */
     public static class LayoutParams extends ViewGroup.LayoutParams {
         /**
