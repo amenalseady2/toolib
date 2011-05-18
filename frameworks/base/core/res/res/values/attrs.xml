@@ -1482,48 +1482,38 @@
     <eat-comment />
 
     <declare-styleable name="AbsListView">
-         <!-- Drawable used to indicate the currently selected item in the list. -->
+        <!-- 用于在列表中指示当前选中条目的可绘制对象. -->
         <attr name="listSelector" format="color|reference" />
-        <!-- When set to true, the selector will be drawn over the selected item.
-             Otherwise the selector is drawn behind the selected item. The default
-             value is false. -->
+        <!-- 如果设为真，选择器将绘制在选中条目的上层。否则绘制在下层。默认为假. -->
         <attr name="drawSelectorOnTop" format="boolean" />
-        <!-- Used by ListView and GridView to stack their content from the bottom. -->
+        <!-- 用于 ListView 和 GridView，指示他们的内容栈从底部开始. -->
         <attr name="stackFromBottom" format="boolean" />
-        <!-- When set to true, the list uses a drawing cache during scrolling.
-             This makes the rendering faster but uses more memory. The default
-             value is true. -->
+        <!-- 当为真时，列表滚动使用绘图缓存。该选项使渲染更快，但占用更多的内存。
+             默认值为真. -->
         <attr name="scrollingCache" format="boolean" />
-        <!-- When set to true, the list will filter results as the user types. The
-             List's adapter must support the Filterable interface for this to work. -->
+        <!-- 设为真时，列表会过滤根据用户的要求，过滤结果集。列表的适配器必须实现了
+             Filterable 接口，才能使其可用. -->
         <attr name="textFilterEnabled" format="boolean" />
-        <!-- Sets the transcript mode for the list. In transcript mode, the list
-             scrolls to the bottom to make new items visible when they are added. -->
+        <!-- 设置列表的跳转模式。在跳转模式下，当加入新条目时，列表会滚动到底部，
+             使新条目可见. -->
         <attr name="transcriptMode">
-            <!-- Disables transcript mode. This is the default value. -->
+            <!-- 停用跳转模式。默认值. -->
             <enum name="disabled" value="0"/>
-            <!-- The list will automatically scroll to the bottom when
-                 a data set change notification is received and only if the last item is
-                 already visible on screen. -->
+            <!-- 仅当最后一个条目在屏幕上可见时，并收到数据集变更通知时，列表自动
+                 滚动到底部. -->
             <enum name="normal" value="1" />
-            <!-- The list will automatically scroll to the bottom, no matter what items
-                 are currently visible. -->
+            <!-- 无论条目当前是否可见，列表都会自动滚动到底部. -->
             <enum name="alwaysScroll" value="2" />
         </attr>
-        <!-- Indicates that this list will always be drawn on top of solid, single-color
-             opaque background. This allows the list to optimize drawing. -->
+        <!-- 指示该列表总是在固定的单色、不透明的背景下绘制。这允许列表优化其绘制过程. -->
         <attr name="cacheColorHint" format="color" />
-        <!-- Enables the fast scroll thumb that can be dragged to quickly scroll through
-             the list. -->
+        <!-- 允许使用快速滚动手柄，可以通过拖动该手柄在列表中快速滚动. -->
         <attr name="fastScrollEnabled" format="boolean" />
-        <!-- When set to true, the list will use a more refined calculation
-             method based on the pixels height of the items visible on screen. This
-             property is set to true by default but should be set to false if your adapter
-             will display items of varying heights. When this property is set to true and
-             your adapter displays items of varying heights, the scrollbar thumb will
-             change size as the user scrolls through the list. When set to fale, the list
-             will use only the number of items in the adapter and the number of items visible
-             on screen to determine the scrollbar's properties. -->
+        <!-- 为真时，列表会使用更精确的基于条目在屏幕上的可见像素高度的计算方法。
+             默认该属性为真，如果你的适配器需要绘制可变高的条目，他应该设为假。
+             当该属性为真时，你在适配器在显示变高条目时，滚动条的把手会在滚动的
+             过程中改变大小。当设为假时，列表只使用适配器中的条目数和屏幕上的
+             可见条目来决定滚动条的属性. -->
         <attr name="smoothScrollbar" format="boolean" />
     </declare-styleable>
     <declare-styleable name="AbsSpinner">

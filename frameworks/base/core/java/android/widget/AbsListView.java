@@ -57,6 +57,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 用于实现条目的虚拟列表的基类. 这里的列表没有空间的定义。
  * Base class that can be used to implement virtualized lists of items. A list does
  * not have a spatial definition here. For instance, subclases of this class can
  * display the content of the list in a grid, in a carousel, as stack, etc.
@@ -526,49 +527,44 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     private int mDirection = 0;
 
     /**
-     * Interface definition for a callback to be invoked when the list or grid
-     * has been scrolled.
+     * 为了在列表或网格滚动时执行回调函数而定义的接口.
      */
     public interface OnScrollListener {
 
         /**
-         * The view is not scrolling. Note navigating the list using the trackball counts as
-         * being in the idle state since these transitions are not animated.
+         * 视图没有滚动。注意，使用轨迹球滚动时，在滚动停止之前，一直处于空闲状态。
          */
         public static int SCROLL_STATE_IDLE = 0;
 
         /**
-         * The user is scrolling using touch, and their finger is still on the screen
+         * 用户通过触控滚动，并且手指没有离开屏幕。
          */
         public static int SCROLL_STATE_TOUCH_SCROLL = 1;
 
         /**
-         * The user had previously been scrolling using touch and had performed a fling. The
-         * animation is now coasting to a stop
+         * 用户之前通过触控滚动并执行了快速滚动。滚动动画正滑向停止点。
          */
         public static int SCROLL_STATE_FLING = 2;
 
         /**
-         * Callback method to be invoked while the list view or grid view is being scrolled. If the
-         * view is being scrolled, this method will be called before the next frame of the scroll is
-         * rendered. In particular, it will be called before any calls to
-         * {@link Adapter#getView(int, View, ViewGroup)}.
+         * 当列表视图或网格视图正在滚动是执行的回调函数。如果视图正在滚动，
+         * 该方法会在渲染下一帧之前调用该方法。就是说，会在调用任何
+         * {@link Adapter#getView(int, View, ViewGroup)}方法之前调用。
          *
-         * @param view The view whose scroll state is being reported
+         * @param view 报告滚动状态的对象视图。
          *
-         * @param scrollState The current scroll state. One of {@link #SCROLL_STATE_IDLE},
-         * {@link #SCROLL_STATE_TOUCH_SCROLL} or {@link #SCROLL_STATE_IDLE}.
+         * @param scrollState 当前滚动状态。值为 {@link #SCROLL_STATE_IDLE}、
+         * {@link #SCROLL_STATE_TOUCH_SCROLL}或{@link #SCROLL_STATE_IDLE}。
          */
         public void onScrollStateChanged(AbsListView view, int scrollState);
 
         /**
-         * Callback method to be invoked when the list or grid has been scrolled. This will be
-         * called after the scroll has completed
-         * @param view The view whose scroll state is being reported
-         * @param firstVisibleItem the index of the first visible cell (ignore if
-         *        visibleItemCount == 0)
-         * @param visibleItemCount the number of visible cells
-         * @param totalItemCount the number of items in the list adaptor
+         * 当列表或网格的滚动已经完成时调用的回调函数。会在滚动完成后调用。
+         * @param view 报告滚动状态的对象视图。
+         * @param firstVisibleItem 第一个可见单元格的索引（如果
+         * visibleItemCount == 0 则忽略该参数）。
+         * @param visibleItemCount 可见单元格数。
+         * @param totalItemCount 列表适配器中的条目数。
          */
         public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
                 int totalItemCount);
@@ -4327,18 +4323,16 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * A RecyclerListener is used to receive a notification whenever a View is placed
-     * inside the RecycleBin's scrap heap. This listener is used to free resources
-     * associated to Views placed in the RecycleBin.
+     * RecyclerListener 是用于接收视图被移动到待回收堆中时的消息的监听器.
+     * 该监听器用于释放分配到被放入回收站的视图的资源。
      *
      * @see android.widget.AbsListView.RecycleBin
      * @see android.widget.AbsListView#setRecyclerListener(android.widget.AbsListView.RecyclerListener)
      */
     public static interface RecyclerListener {
         /**
-         * Indicates that the specified View was moved into the recycler's scrap heap.
-         * The view is not displayed on screen any more and any expensive resource
-         * associated with the view should be discarded.
+         * 指示指定的视图被移动到待回收堆中。
+         * 视图不再显示在屏幕上，关联到该视图的贵重的资源应该被释放。
          *
          * @param view
          */
