@@ -58,9 +58,7 @@ import java.util.List;
 
 /**
  * 用于实现条目的虚拟列表的基类. 这里的列表没有空间的定义。
- * Base class that can be used to implement virtualized lists of items. A list does
- * not have a spatial definition here. For instance, subclases of this class can
- * display the content of the list in a grid, in a carousel, as stack, etc.
+ * 例如，该类的子类可以以网格的形式、走马灯的形式显示，或者作为堆栈等等。
  *
  * @attr ref android.R.styleable#AbsListView_listSelector
  * @attr ref android.R.styleable#AbsListView_drawSelectorOnTop
@@ -77,22 +75,19 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         ViewTreeObserver.OnTouchModeChangeListener {
 
     /**
-     * Disables the transcript mode.
+     * 禁用跳转模式。
      *
      * @see #setTranscriptMode(int)
      */
     public static final int TRANSCRIPT_MODE_DISABLED = 0;
     /**
-     * The list will automatically scroll to the bottom when a data set change
-     * notification is received and only if the last item is already visible
-     * on screen.
+     * 仅当最后的条目在屏幕上可见，并且收到数据集变更消息时列表将自动滚动到底部。
      *
      * @see #setTranscriptMode(int)
      */
     public static final int TRANSCRIPT_MODE_NORMAL = 1;
     /**
-     * The list will automatically scroll to the bottom, no matter what items
-     * are currently visible.
+     * 无视当前可见条目，总是自动滚动到列表的底部。
      *
      * @see #setTranscriptMode(int)
      */
@@ -672,13 +667,13 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Enables fast scrolling by letting the user quickly scroll through lists by
-     * dragging the fast scroll thumb. The adapter attached to the list may want
-     * to implement {@link SectionIndexer} if it wishes to display alphabet preview and
-     * jump between sections of the list.
+     * 允许使用快速滚动手柄，可以通过拖动该手柄在列表中快速滚动。
+     * 若要显示字母预览并在其间跳转，与列表关联的适配器应该实现
+     *  {@link SectionIndexer} 接口。
+     *  
      * @see SectionIndexer
      * @see #isFastScrollEnabled()
-     * @param enabled whether or not to enable fast scrolling
+     * @param enabled 是否允许快速滚动。
      */
     public void setFastScrollEnabled(boolean enabled) {
         mFastScrollEnabled = enabled;
@@ -695,9 +690,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Returns the current state of the fast scroll feature.
+     * 返回当前快速滚动特性的状态。
      * @see #setFastScrollEnabled(boolean)
-     * @return true if fast scroll is enabled, false otherwise
+     * @return 如果快速滚动已启用返回真，否则返回假。
      */
     @ViewDebug.ExportedProperty
     public boolean isFastScrollEnabled() {
@@ -714,19 +709,15 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * When smooth scrollbar is enabled, the position and size of the scrollbar thumb
-     * is computed based on the number of visible pixels in the visible items. This
-     * however assumes that all list items have the same height. If you use a list in
-     * which items have different heights, the scrollbar will change appearance as the
-     * user scrolls through the list. To avoid this issue, you need to disable this
-     * property.
+     * 当平滑滚动启用时，滚动条把手的位置和大小基于可见条目的可见像素数来计算。
+     * 该处里假定所有列表条目具有相同的高度。如果你使用条目高度不同的类表，
+     * 滚动条会在用户滚动过程中改变大小。为了避免这种情况，应该禁用该特性。
      *
-     * When smooth scrollbar is disabled, the position and size of the scrollbar thumb
-     * is based solely on the number of items in the adapter and the position of the
-     * visible items inside the adapter. This provides a stable scrollbar as the user
-     * navigates through a list of items with varying heights.
+     * 当平滑滚动被禁用后，滚动条把手的大小和位置只是基于适配器中的条目数，
+     * 以及适配器中的可见条目来确定。这样可以为使用可变高条目列表的用户，
+     * 提供稳定的滚动条。
      *
-     * @param enabled Whether or not to enable smooth scrollbar.
+     * @param enabled 是否启用平滑滚动。
      *
      * @see #setSmoothScrollbarEnabled(boolean)
      * @attr ref android.R.styleable#AbsListView_smoothScrollbar
@@ -736,9 +727,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Returns the current state of the fast scroll feature.
+     * 返回平滑滚动特性的当前状态。
      *
-     * @return True if smooth scrollbar is enabled is enabled, false otherwise.
+     * @return 如果平滑滚动启用返回真，否则返回假。
      *
      * @see #setSmoothScrollbarEnabled(boolean)
      */
@@ -748,9 +739,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Set the listener that will receive notifications every time the list scrolls.
+     * 设置每次列表滚动时收到消息的监听器。
      *
-     * @param l the scroll listener
+     * @param l 滚动监听器。
      */
     public void setOnScrollListener(OnScrollListener l) {
         mOnScrollListener = l;
@@ -770,10 +761,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Indicates whether the children's drawing cache is used during a scroll.
-     * By default, the drawing cache is enabled but this will consume more memory.
+     * 指示滚动时是否使用子视图的绘图缓存。默认为使用绘图缓存，这会占用更多的内存。
      *
-     * @return true if the scrolling cache is enabled, false otherwise
+     * @return 如果启用了滚动缓存返回真，否则返回假。
      *
      * @see #setScrollingCacheEnabled(boolean)
      * @see View#setDrawingCacheEnabled(boolean)
@@ -784,8 +774,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Enables or disables the children's drawing cache during a scroll.
-     * By default, the drawing cache is enabled but this will use more memory.
+     * 启用或停止在滚动时使用子视图的绘制缓存。默认为使用绘图缓存，这会占用更多的内存。
      *
      * When the scrolling cache is enabled, the caches are kept after the
      * first scrolling. You can manually clear the cache by calling
