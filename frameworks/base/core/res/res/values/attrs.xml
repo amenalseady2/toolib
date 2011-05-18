@@ -1854,19 +1854,19 @@
 
     </declare-styleable>
     <declare-styleable name="TableRow_Cell">
-        <!-- The index of the column in which this child should be. -->
+        <!-- 定义该子元素所属的列的索引. -->
         <attr name="layout_column" format="integer" />
-        <!-- Defines how many columns this child should span.  Must be >= 1.-->
+        <!-- 定义该元素跨越多少列。必须大于等于1.-->
         <attr name="layout_span" format="integer" />
     </declare-styleable>
     <declare-styleable name="TabWidget">
-        <!-- Drawable used to draw the divider between tabs. -->
+        <!-- 在选项卡标签之间显示的可绘制对象. -->
         <attr name="divider" />
-        <!-- Determines whether the strip under the tab indicators is drawn or not. -->
+        <!-- 决定是否在选项卡标签下面显示分隔线. -->
         <attr name="tabStripEnabled" format="boolean" />
-        <!-- Drawable used to draw the left part of the strip underneath the tabs. -->
+        <!-- 用于显示在选项卡标签下方的分隔线左侧部分的可绘制对象. -->
         <attr name="tabStripLeft" format="reference" />
-        <!-- Drawable used to draw the right part of the strip underneath the tabs. -->
+        <!-- 用于显示在选项卡标签下方的分隔线右侧部分的可绘制对象. -->
         <attr name="tabStripRight" format="reference" />
     </declare-styleable>
     <declare-styleable name="TextAppearance">
