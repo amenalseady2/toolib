@@ -3557,11 +3557,11 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         }
 
         /**
-         * Extracts the layout parameters from the supplied attributes.
+         * 从提供的属性中提取布局参数。
          *
-         * @param a the style attributes to extract the parameters from
-         * @param widthAttr the identifier of the width attribute
-         * @param heightAttr the identifier of the height attribute
+         * @param a 用于提取布局参数的样式属性
+         * @param widthAttr 宽度属性的标识
+         * @param heightAttr 高度属性的标识
          */
         protected void setBaseAttributes(TypedArray a, int widthAttr, int heightAttr) {
             width = a.getLayoutDimension(widthAttr, "layout_width");

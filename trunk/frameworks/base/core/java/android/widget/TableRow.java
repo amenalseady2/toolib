@@ -27,20 +27,20 @@ import android.view.ViewGroup;
 
 
 /**
- * <p>A layout that arranges its children horizontally. A TableRow should
- * always be used as a child of a {@link android.widget.TableLayout}. If a
- * TableRow's parent is not a TableLayout, the TableRow will behave as
- * an horizontal {@link android.widget.LinearLayout}.</p>
+ * <p>按照水平方向来组织子视图的布局。TableRow应该总是作为
+ * {@link android.widget.TableLayout}. 如果TableRow的父视图不是
+ * TableLayout，那么TableRow将相当于一个水平方向布局的 
+ * {@link android.widget.LinearLayout}。</p>
  *
- * <p>The children of a TableRow do not need to specify the
- * <code>layout_width</code> and <code>layout_height</code> attributes in the
- * XML file. TableRow always enforces those values to be respectively
- * {@link android.widget.TableLayout.LayoutParams#MATCH_PARENT} and
- * {@link android.widget.TableLayout.LayoutParams#WRAP_CONTENT}.</p>
+ * <p>TableRow 的子视图不需要在 XML 布局文件中指定其
+ * <code>layout_width</code> 和 <code>layout_height</code>
+ * 属性。 TableRow 总是分别将这两个属性值设置为
+ * {@link android.widget.TableLayout.LayoutParams#MATCH_PARENT} 和
+ * {@link android.widget.TableLayout.LayoutParams#WRAP_CONTENT}。</p>
  *
  * <p>
- * Also see {@link TableRow.LayoutParams android.widget.TableRow.LayoutParams}
- * for layout attributes </p>
+ * 关于布局属性，请参考
+ * {@link TableRow.LayoutParams android.widget.TableRow.LayoutParams}。</p>
  */
 public class TableRow extends LinearLayout {
     private int mNumColumns = 0;
@@ -51,9 +51,9 @@ public class TableRow extends LinearLayout {
     private ChildrenTracker mChildrenTracker;
 
     /**
-     * <p>Creates a new TableRow for the given context.</p>
+     * <p>使用给定的应用程序上下文创建新的 TableRow 对象。</p>
      *
-     * @param context the application environment
+     * @param context 应用程序上下文。
      */
     public TableRow(Context context) {
         super(context);
@@ -61,11 +61,10 @@ public class TableRow extends LinearLayout {
     }
 
     /**
-     * <p>Creates a new TableRow for the given context and with the
-     * specified set attributes.</p>
+     * <p>使用给定的应用程序上下文和属性集合创建新的 TableRow 对象。</p>
      *
-     * @param context the application environment
-     * @param attrs a collection of attributes
+     * @param context 应用程序上下文。
+     * @param attrs 属性集合。
      */
     public TableRow(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -350,9 +349,9 @@ public class TableRow extends LinearLayout {
     }
 
     /**
-     * Returns a set of layout parameters with a width of
-     * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT},
-     * a height of {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT} and no spanning.
+     * 返回布局参数集合，将宽度设置为
+     * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}、高度设置为
+     * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}并且不跨列。
      */
     @Override
     protected LinearLayout.LayoutParams generateDefaultLayoutParams() {
@@ -376,7 +375,7 @@ public class TableRow extends LinearLayout {
     }
 
     /**
-     * <p>Set of layout parameters used in table rows.</p>
+     * <p>用于设置表格行的布局参数.</p>
      *
      * @see android.widget.TableLayout.LayoutParams
      * 
@@ -385,13 +384,13 @@ public class TableRow extends LinearLayout {
      */
     public static class LayoutParams extends LinearLayout.LayoutParams {
         /**
-         * <p>The column index of the cell represented by the widget.</p>
+         * <p>该小部件代表的单元格的列索引。</p>
          */
         @ViewDebug.ExportedProperty(category = "layout")
         public int column;
 
         /**
-         * <p>The number of columns the widgets spans over.</p>
+         * <p>该小部件跨越的列数。</p>
          */
         @ViewDebug.ExportedProperty(category = "layout")
         public int span;
@@ -421,10 +420,10 @@ public class TableRow extends LinearLayout {
         }
 
         /**
-         * <p>Sets the child width and the child height.</p>
+         * <p>设置子对象的高度和宽度。</p>
          *
-         * @param w the desired width
-         * @param h the desired height
+         * @param w 需要的宽度
+         * @param h 需要的高度
          */
         public LayoutParams(int w, int h) {
             super(w, h);
@@ -433,11 +432,11 @@ public class TableRow extends LinearLayout {
         }
 
         /**
-         * <p>Sets the child width, height and weight.</p>
+         * <p>设置子对象的高度、宽度和权重。</p>
          *
-         * @param w the desired width
-         * @param h the desired height
-         * @param initWeight the desired weight
+         * @param w 需要的宽度
+         * @param h 需要的高度
+         * @param initWeight 需要的权重
          */
         public LayoutParams(int w, int h, float initWeight) {
             super(w, h, initWeight);
@@ -446,9 +445,8 @@ public class TableRow extends LinearLayout {
         }
 
         /**
-         * <p>Sets the child width to {@link android.view.ViewGroup.LayoutParams}
-         * and the child height to
-         * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.</p>
+         * <p>将宽度设置为 {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}、
+         * 高度设置为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。</p>
          */
         public LayoutParams() {
             super(MATCH_PARENT, WRAP_CONTENT);
@@ -457,13 +455,12 @@ public class TableRow extends LinearLayout {
         }
 
         /**
-         * <p>Puts the view in the specified column.</p>
+         * <p>将视图放入指定列</p>
          *
-         * <p>Sets the child width to {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
-         * and the child height to
-         * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.</p>
+         * <p>将宽度设置为 {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}、
+         * 高度设置为 {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}。</p>
          *
-         * @param column the column index for the view
+         * @param column 该视图的列索引
          */
         public LayoutParams(int column) {
             this();

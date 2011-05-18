@@ -251,13 +251,12 @@ public class LinearLayout extends ViewGroup {
     }
 
     /**
-     * <p>Returns the view at the specified index. This method can be overriden
-     * to take into account virtual children. Refer to
-     * {@link android.widget.TableLayout} and {@link android.widget.TableRow}
-     * for an example.</p>
+     * <p>返回指定索引对应的视图。该方法可以重载，以提供正确的视图。
+     * 可以参考 {@link android.widget.TableLayout} 和
+     * {@link android.widget.TableRow}。</p>
      *
-     * @param index the child's index
-     * @return the child at the specified index
+     * @param index 视图的索引。
+     * @return 指定索引处的视图。
      */
     View getVirtualChildAt(int index) {
         return getChildAt(index);
