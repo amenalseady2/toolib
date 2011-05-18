@@ -30,22 +30,17 @@ import android.view.ViewGroup;
 import android.view.View.OnFocusChangeListener;
 
 /**
+ * 显示代表父选项卡集合中的选项卡的标签列表.
+ * 该小部件的容器是{@link android.widget.TabHost TabHost}。当用户选中一个选项卡时，
+ * 该对象向父容器 TabHost 发送一条消息，通知父容器切换显示的页面。一般你不会直接用到
+ * 该对象的方法。由容器 TabHost 来添加标签、添加并管理回调函数。你可以调用该对象
+ * 来遍历选项卡列表，或者调整选项卡列表的布局，但大多数方法应该在容器 TabHost 上调用。
  *
- * Displays a list of tab labels representing each page in the parent's tab
- * collection. The container object for this widget is
- * {@link android.widget.TabHost TabHost}. When the user selects a tab, this
- * object sends a message to the parent container, TabHost, to tell it to switch
- * the displayed page. You typically won't use many methods directly on this
- * object. The container TabHost is used to add labels, add the callback
- * handler, and manage callbacks. You might call this object to iterate the list
- * of tabs, or to tweak the layout of the tab list, but most methods should be
- * called on the containing TabHost object.
- *
- * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-tabwidget.html">Tab Layout
- * tutorial</a>.</p>
+ * <p>参见<a href="{@docRoot}resources/tutorials/views/hello-tabwidget.html">
+ * 选项卡布局教程</a>。</p>
  * 
  * @attr ref android.R.styleable#TabWidget_divider
- * @attr ref android.R.styleable#TabWidget_tabStripEnabled
+ * @attr ref android.R.styleable#TabWidget_tabStripEnabled 
  * @attr ref android.R.styleable#TabWidget_tabStripLeft
  * @attr ref android.R.styleable#TabWidget_tabStripRight
  */
@@ -144,10 +139,10 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Returns the tab indicator view at the given index.
+     * 返回指定索引的选项卡标签的视图。
      *
-     * @param index the zero-based index of the tab indicator view to return
-     * @return the tab indicator view at the given index
+     * @param index 要取得的选项卡标签视图索引
+     * @return 指定索引的选项卡标签的视图
      */
     public View getChildTabViewAt(int index) {
         // If we are using dividers, then instead of tab views at 0, 1, 2, ...
@@ -159,8 +154,8 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Returns the number of tab indicator views.
-     * @return the number of tab indicator views.
+     * 返回选项卡标签视图的数目。
+     * @return 选项卡标签视图的数目
      */
     public int getTabCount() {
         int children = getChildCount();
@@ -175,8 +170,8 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Sets the drawable to use as a divider between the tab indicators.
-     * @param drawable the divider drawable
+     * 设置显示在选项卡标签之间的分隔符的可绘制对象。
+     * @param drawable 分隔符的可绘制对象
      */
     public void setDividerDrawable(Drawable drawable) {
         mDividerDrawable = drawable;
@@ -185,9 +180,8 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Sets the drawable to use as a divider between the tab indicators.
-     * @param resId the resource identifier of the drawable to use as a
-     * divider.
+     * 设置显示在选项卡标签之间的分隔符的可绘制对象。
+     * @param resId 作为分隔符的可绘制对象的资源标识。
      */
     public void setDividerDrawable(int resId) {
         mDividerDrawable = mContext.getResources().getDrawable(resId);
@@ -196,9 +190,8 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
     
     /**
-     * Sets the drawable to use as the left part of the strip below the
-     * tab indicators.
-     * @param drawable the left strip drawable
+     * 设置用于显示选项卡标签下面的分隔线左侧部分的可绘制对象。
+     * @param drawable 分隔线左侧部分的可绘制对象。
      */
     public void setLeftStripDrawable(Drawable drawable) {
         mLeftStrip = drawable;
@@ -207,10 +200,8 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Sets the drawable to use as the left part of the strip below the
-     * tab indicators.
-     * @param resId the resource identifier of the drawable to use as the
-     * left strip drawable
+     * 设置用于显示选项卡标签下面的分隔线左侧部分的可绘制对象。
+     * @param resId 分隔线左侧部分的可绘制对象的资源标识。
      */
     public void setLeftStripDrawable(int resId) {
         mLeftStrip = mContext.getResources().getDrawable(resId);
@@ -219,9 +210,8 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Sets the drawable to use as the right part of the strip below the
-     * tab indicators.
-     * @param drawable the right strip drawable
+     * 设置用于显示选项卡标签下面的分隔线右侧部分的可绘制对象。
+     * @param drawable 分隔线右侧部分的可绘制对象。
      */
     public void setRightStripDrawable(Drawable drawable) {
         mRightStrip = drawable;
@@ -229,10 +219,8 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
         invalidate();    }
 
     /**
-     * Sets the drawable to use as the right part of the strip below the
-     * tab indicators.
-     * @param resId the resource identifier of the drawable to use as the
-     * right strip drawable
+     * 设置用于显示选项卡标签下面的分隔线右侧部分的可绘制对象。
+     * @param resId 分隔线右侧部分的可绘制对象的资源标识。
      */
     public void setRightStripDrawable(int resId) {
         mRightStrip = mContext.getResources().getDrawable(resId);
@@ -241,11 +229,9 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
     
     /**
-     * Controls whether the bottom strips on the tab indicators are drawn or
-     * not.  The default is to draw them.  If the user specifies a custom
-     * view for the tab indicators, then the TabHost class calls this method
-     * to disable drawing of the bottom strips.
-     * @param stripEnabled true if the bottom strips should be drawn.
+     * 设置是否绘制选项卡标签下面的分隔线。默认是绘制的。如果用户为选项卡标签指定了
+     * 定制的视图，TabHost类会调用该方法，禁止绘制下面的分隔线。
+     * @param stripEnabled 真表示绘制底部的分隔线。
      */
     public void setStripEnabled(boolean stripEnabled) {
         mDrawBottomStrips = stripEnabled;
@@ -253,8 +239,7 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Indicates whether the bottom strips on the tab indicators are drawn
-     * or not.
+     * 指示是否绘制选项卡标签底部的分隔线。
      */
     public boolean isStripEnabled() {
         return mDrawBottomStrips;
@@ -308,29 +293,21 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Sets the current tab.
-     * This method is used to bring a tab to the front of the Widget,
-     * and is used to post to the rest of the UI that a different tab
-     * has been brought to the foreground.
+     * 设置当前选项卡。该方法用于将选项卡移动到小部件的前台，并且通知其它的
+     * UI元素，一个不同的选项卡被调整到了前台。
      *
-     * Note, this is separate from the traditional "focus" that is
-     * employed from the view logic.
+     * 注意，这不同于传统的“焦点”，只是视图逻辑上的变化。
      *
-     * For instance, if we have a list in a tabbed view, a user may be
-     * navigating up and down the list, moving the UI focus (orange
-     * highlighting) through the list items.  The cursor movement does
-     * not effect the "selected" tab though, because what is being
-     * scrolled through is all on the same tab.  The selected tab only
-     * changes when we navigate between tabs (moving from the list view
-     * to the next tabbed view, in this example).
+     * 例如，如果我们在选项卡视图中有一个列表，用户可能会在列表项直接移动UI
+     * 焦点（高亮的橙色区域）来上下浏览列表。光标的移动并不影响选项卡的选中
+     * 状态，因为滚动是在同一个选项卡上进行的。只有当我们在选项卡间移动时，
+     * 选中的选项卡才会发生变化（在此例中是由列表视图变为下一个选项卡的视图）。
      *
-     * To move both the focus AND the selected tab at once, please use
-     * {@link #setCurrentTab}. Normally, the view logic takes care of
-     * adjusting the focus, so unless you're circumventing the UI,
-     * you'll probably just focus your interest here.
+     * 如果想要即设置焦点又选中选项卡，请使用 {@link #setCurrentTab} 方法。
+     * 一般情况下，视图的处理逻辑会维护焦点状态，如果你避开UI，则可以只将焦点
+     * 设置到感兴趣的项目上。
      *
-     *  @param index The tab that you want to indicate as the selected
-     *  tab (tab brought to the front of the widget)
+     *  @param index 要选中（将选项卡移动到小部件的前台）的选项卡的索引。
      *
      *  @see #focusCurrentTab
      */
@@ -346,16 +323,13 @@ public class TabWidget extends LinearLayout implements OnFocusChangeListener {
     }
 
     /**
-     * Sets the current tab and focuses the UI on it.
-     * This method makes sure that the focused tab matches the selected
-     * tab, normally at {@link #setCurrentTab}.  Normally this would not
-     * be an issue if we go through the UI, since the UI is responsible
-     * for calling TabWidget.onFocusChanged(), but in the case where we
-     * are selecting the tab programmatically, we'll need to make sure
-     * focus keeps up.
+     * 设置当前选项卡并使其得到焦点。该方法确保获得焦点的选项卡与选中的选项卡
+     * （一般用{@link #setCurrentTab}选择）相匹配。通常当我们通过操作UI实现时，
+     * 这些都不是问题，因为UI负责调用 TabWidget.onFocusChanged()，但如果我们
+     * 通过程序来选中选项卡，我们就要确保选择的选项卡获得了焦点。
      *
-     *  @param index The tab that you want focused (highlighted in orange)
-     *  and selected (tab brought to the front of the widget)
+     *  @param index 要得到焦点（高亮的橙色）并选中（选项卡处于小部件的前台）
+     *  的选项卡的索引。 
      *
      *  @see #setCurrentTab
      */
