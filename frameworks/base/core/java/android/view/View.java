@@ -9004,15 +9004,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Interface definition for a callback to be invoked when the focus state of
-     * a view changed.
+     * 为焦点变更时执行的回调函数定义的接口.
      */
     public interface OnFocusChangeListener {
         /**
-         * Called when the focus state of a view has changed.
+         * 当视图的焦点状态发生变化是调用给函数。
          *
-         * @param v The view whose state has changed.
-         * @param hasFocus The new focus state of v.
+         * @param v 发生状态变化的视图。
+         * @param hasFocus 视图 v 的新的焦点状态。
          */
         void onFocusChange(View v, boolean hasFocus);
     }
