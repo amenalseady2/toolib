@@ -3399,8 +3399,8 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 
     /**
-     * If {link #addStatesFromChildren} is true, refreshes this group's
-     * drawable state (to include the states from its children).
+     * 如果 {link #addStatesFromChildren} 为真，刷新该试图组的可绘制状态
+     * （包括其子元素的状态）。
      */
     public void childDrawableStateChanged(View child) {
         if ((mGroupFlags & FLAG_ADD_STATES_FROM_CHILDREN) != 0) {
