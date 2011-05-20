@@ -774,13 +774,13 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * 启用或停止在滚动时使用子视图的绘制缓存。默认为使用绘图缓存，这会占用更多的内存。
+     * 启用或停止在滚动时使用子视图的绘图缓存。默认为使用绘图缓存，这会占用更多的内存。
      *
-     * When the scrolling cache is enabled, the caches are kept after the
-     * first scrolling. You can manually clear the cache by calling
-     * {@link android.view.ViewGroup#setChildrenDrawingCacheEnabled(boolean)}.
+     * 当启用滚动缓存时，首次滚动后会保留缓存。你可以通过调用
+     * {@link android.view.ViewGroup#setChildrenDrawingCacheEnabled(boolean)}
+     * 手动清除缓存。
      *
-     * @param enabled true to enable the scroll cache, false otherwise
+     * @param enabled 启用滚动缓存时为真，否则为假。
      *
      * @see #isScrollingCacheEnabled()
      * @see View#setDrawingCacheEnabled(boolean)
@@ -793,12 +793,10 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Enables or disables the type filter window. If enabled, typing when
-     * this view has focus will filter the children to match the users input.
-     * Note that the {@link Adapter} used by this view must implement the
-     * {@link Filterable} interface.
+     * 启用或禁用输入过滤窗口。如启用，在视图具有焦点时，将会过滤子对象，以匹配用户输入。
+     * 注意，视图使用的{@link Adapter 适配器}必须实现了{@link Filterable}接口。
      *
-     * @param textFilterEnabled true to enable type filtering, false otherwise
+     * @param textFilterEnabled 为真表示启用输入过滤，反之则为假。
      *
      * @see Filterable
      */
@@ -807,9 +805,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Indicates whether type filtering is enabled for this view
+     * 指示该视图是否启用了输入过滤。
      *
-     * @return true if type filtering is enabled, false otherwise
+     * @return 如启用了输入过滤则为真，否则为假。
      *
      * @see #setTextFilterEnabled(boolean)
      * @see Filterable
@@ -839,10 +837,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Indicates whether the content of this view is pinned to, or stacked from,
-     * the bottom edge.
+     * 指示该视图的内容是否为向上插入，或者说栈底在底边。
      *
-     * @return true if the content is stacked from the bottom edge, false otherwise
+     * @return 如果该视图内容以底边为栈底返回真，否则返回假。
      */
     @ViewDebug.ExportedProperty
     public boolean isStackFromBottom() {
@@ -850,11 +847,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * When stack from bottom is set to true, the list fills its content starting from
-     * the bottom of the view.
+     * 当栈从底部开始设置为真时，列表从底部开始向上填充视图。
      *
-     * @param stackFromBottom true to pin the view's content to the bottom edge,
-     *        false to pin the view's content to the top edge
+     * @param stackFromBottom 为真时，视图内容固定于底部；为假时，固定在顶部。
      */
     public void setStackFromBottom(boolean stackFromBottom) {
         if (mStackFromBottom != stackFromBottom) {
@@ -1035,8 +1030,8 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Sets the initial value for the text filter.
-     * @param filterText The text to use for the filter.
+     * 为文本过滤器设置初始值。
+     * @param filterText 过滤器使用的文本。
      *
      * @see #setTextFilterEnabled
      */
@@ -1063,8 +1058,8 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Returns the list's text filter, if available.
-     * @return the list's text filter or null if filtering isn't enabled
+     * 如果存在，则返回列表的文本过滤器。
+     * @return 文本的列表过滤器；如果过滤器未启用返回空。
      */
     public CharSequence getTextFilter() {
         if (mTextFilterEnabled && mTextFilter != null) {
@@ -1227,8 +1222,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Subclasses should NOT override this method but
-     *  {@link #layoutChildren()} instead.
+     * 子类不要重载此方法，如需要请重载 {@link #layoutChildren()} 来代替。
      */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {

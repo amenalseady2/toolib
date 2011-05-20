@@ -4848,14 +4848,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * When a view has focus and the user navigates away from it, the next view is searched for
-     * starting from the rectangle filled in by this method.
+     * 在视图拥有焦点时，用户将焦点移向其他视图，可以使用该方法取得下一个视图的
+     * 矩形填充区域。
      *
-     * By default, the rectange is the {@link #getDrawingRect})of the view.  However, if your
-     * view maintains some idea of internal selection, such as a cursor, or a selected row
-     * or column, you should override this method and fill in a more specific rectangle.
+     * 默认情况，该矩形为视图的 {@link #getDrawingRect}。当然，如果你的视图维护着
+     * 内部选中状态，比如游标、选中的行或列，你应该重写该方法，并返回特定的矩形。
      *
-     * @param r The rectangle to fill in, in this view's coordinates.
+     * @param r 要填充的矩形，使用视图的坐标系。
      */
     public void getFocusedRect(Rect r) {
         getDrawingRect(r);
