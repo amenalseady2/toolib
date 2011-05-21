@@ -26,7 +26,7 @@ public interface Checkable {
     /**
      * 设置当前视图控件的选中状态.
      * 
-     * @param checked The new checked state
+     * @param checked 要设置的新的勾选状态。
      */
     void setChecked(boolean checked);
         
