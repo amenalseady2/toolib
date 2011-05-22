@@ -1313,48 +1313,48 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * List padding is the maximum of the normal view's padding and the padding of the selector.
+     * 列表内边距是普通视图内边距和选择器内边距的最大值。
      *
      * @see android.view.View#getPaddingTop()
      * @see #getSelector()
      *
-     * @return The top list padding.
+     * @return 列表顶部的内边距。
      */
     public int getListPaddingTop() {
         return mListPadding.top;
     }
 
     /**
-     * List padding is the maximum of the normal view's padding and the padding of the selector.
+     * 列表内边距是普通视图内边距和选择器内边距的最大值。
      *
      * @see android.view.View#getPaddingBottom()
      * @see #getSelector()
      *
-     * @return The bottom list padding.
+     * @return 列表底部的内边距。
      */
     public int getListPaddingBottom() {
         return mListPadding.bottom;
     }
 
     /**
-     * List padding is the maximum of the normal view's padding and the padding of the selector.
+     * 列表内边距是普通视图内边距和选择器内边距的最大值。
      *
      * @see android.view.View#getPaddingLeft()
      * @see #getSelector()
      *
-     * @return The left list padding.
+     * @return 列表左侧的内边距。
      */
     public int getListPaddingLeft() {
         return mListPadding.left;
     }
 
     /**
-     * List padding is the maximum of the normal view's padding and the padding of the selector.
+     * 列表内边距是普通视图内边距和选择器内边距的最大值。
      *
      * @see android.view.View#getPaddingRight()
      * @see #getSelector()
      *
-     * @return The right list padding.
+     * @return 列表右侧的内边距。
      */
     public int getListPaddingRight() {
         return mListPadding.right;
@@ -1515,11 +1515,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Controls whether the selection highlight drawable should be drawn on top of the item or
-     * behind it.
+     * 控制选择高亮可绘制对象应该在条目的前面绘制还是在后面绘制。
      *
-     * @param onTop If true, the selector will be drawn on the item it is highlighting. The default
-     *        is false.
+     * @param onTop 如果为真，选择器的高亮在条目上面显示。默认值为假。
      *
      * @attr ref android.R.styleable#AbsListView_drawSelectorOnTop
      */
@@ -1528,9 +1526,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Set a Drawable that should be used to highlight the currently selected item.
+     * 设置用于将当前选择条目设置为高亮的可绘制对象。
      *
-     * @param resID A Drawable resource to use as the selection highlight.
+     * @param resID 作为选择高亮的可绘制对象资源。
      *
      * @attr ref android.R.styleable#AbsListView_listSelector
      */
@@ -1555,10 +1553,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Returns the selector {@link android.graphics.drawable.Drawable} that is used to draw the
-     * selection in the list.
+     * 返回用于在列表中绘制选择器的 {@link android.graphics.drawable.Drawable 可绘制对象}。
      *
-     * @return the drawable used to display the selector
+     * @return 用于显示选择器的可绘制对象。
      */
     public Drawable getSelector() {
         return mSelector;
@@ -1923,12 +1920,12 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Maps a point to a position in the list.
+     * 将坐标点转换为列表中的位置。
      *
-     * @param x X in local coordinate
-     * @param y Y in local coordinate
-     * @return The position of the item which contains the specified point, or
-     *         {@link #INVALID_POSITION} if the point does not intersect an item.
+     * @param x 本地坐标系的 X。
+     * @param y 本地坐标系的 Y。
+     * @return 包含指定点的条目的位置，如果点不再任何条目上返回
+     * {@link #INVALID_POSITION}。
      */
     public int pointToPosition(int x, int y) {
         Rect frame = mTouchFrame;
@@ -1952,12 +1949,12 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
 
 
     /**
-     * Maps a point to a the rowId of the item which intersects that point.
+     * 将坐标点转换为列表条目的行ID。
      *
-     * @param x X in local coordinate
-     * @param y Y in local coordinate
-     * @return The rowId of the item which contains the specified point, or {@link #INVALID_ROW_ID}
-     *         if the point does not intersect an item.
+     * @param x 本地坐标系的 X。
+     * @param y 本地坐标系的 Y。
+     * @return 包含指定点的条目的条目的行ID；如果点不再任何条目上返回
+     *  {@link #INVALID_ROW_ID}。
      */
     public long pointToRowId(int x, int y) {
         int position = pointToPosition(x, y);
@@ -3169,9 +3166,8 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
     
     /**
-     * Smoothly scroll to the specified adapter position. The view will
-     * scroll such that the indicated position is displayed.
-     * @param position Scroll to this adapter position.
+     * 平滑滚动到指定的适配器位置。视图会滚动到指定位置显示出来。
+     * @param position 要滚动到的适配器位置。
      */
     public void smoothScrollToPosition(int position) {
         if (mPositionScroller == null) {
@@ -3181,13 +3177,10 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
     
     /**
-     * Smoothly scroll to the specified adapter position. The view will
-     * scroll such that the indicated position is displayed, but it will
-     * stop early if scrolling further would scroll boundPosition out of
-     * view. 
-     * @param position Scroll to this adapter position.
-     * @param boundPosition Do not scroll if it would move this adapter
-     *          position out of view.
+     * 平滑滚动到指定的适配器位置。视图会滚动到指定位置显示出来，如果滚动会使
+     * boundPosition 滚动到视图外，滚动会先被停止。
+     * @param position 要滚动到的适配器位置。
+     * @param boundPosition 如果要将这个适配器位置移出视图，滚动会停止。
      */
     public void smoothScrollToPosition(int position, int boundPosition) {
         if (mPositionScroller == null) {
@@ -3197,9 +3190,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
     
     /**
-     * Smoothly scroll by distance pixels over duration milliseconds.
-     * @param distance Distance to scroll in pixels.
-     * @param duration Duration of the scroll animation in milliseconds.
+     * 平滑滚动 distance 个像素，持续 duration 毫秒。
+     * @param distance 滚动的距离，像素数。
+     * @param duration 滚动动画持续的时间，毫秒。
      */
     public void smoothScrollBy(int distance, int duration) {
         if (mFlingRunnable == null) {
@@ -3476,7 +3469,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Causes all the views to be rebuilt and redrawn.
+     * 使所有的视图重新构建并重绘。
      */
     public void invalidateViews() {
         mDataChanged = true;
@@ -3888,7 +3881,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Return an InputConnection for editing of the filter text.
+     * 返回用于编辑过滤文本的 InputConnection 对象。
      */
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
@@ -3942,8 +3935,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * For filtering we proxy an input connection to an internal text editor,
-     * and this allows the proxying to happen.
+     * 测试是否为了过滤信息，为文本编辑器使用了输入连接代理，该操作允许使用代理。
      */
     @Override
     public boolean checkInputConnectionProxy(View view) {
@@ -3989,7 +3981,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Clear the text filter.
+     * 清楚文本过滤器。
      */
     public void clearTextFilter() {
         if (mFiltered) {
@@ -4002,7 +3994,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Returns if the ListView currently has a text filter.
+     * 返回列表视图是否具有文本过滤器。
      */
     public boolean hasTextFilter() {
         return mFiltered;
@@ -4024,16 +4016,14 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * For our text watcher that is associated with the text filter.  Does
-     * nothing.
+     * 为关联到文本过滤器的文本监视器准备的。什么也不做。
      */
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }
 
     /**
-     * For our text watcher that is associated with the text filter. Performs
-     * the actual filtering as the text changes, and takes care of hiding and
-     * showing the popup displaying the currently entered filter text.
+     * 为关联到文本过滤器的文本监视器准备的。当文本变更时，执行实际的过滤操作，
+     * 并维护弹出显示中的当前输入的过滤文本隐藏和显示。
      */
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         if (mPopup != null && isTextFilterEnabled()) {
@@ -4062,8 +4052,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * For our text watcher that is associated with the text filter.  Does
-     * nothing.
+     * 为关联到文本过滤器的文本监视器准备的。什么也不做。
      */
     public void afterTextChanged(Editable s) {
     }

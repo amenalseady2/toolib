@@ -3581,10 +3581,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Add any touchable views that are descendants of this view (possibly
-     * including this view if it is touchable itself) to views.
+     * 想views添加可触控视图，该可触控视图是该视图的后代（如果该视图可触控，
+     * 也可以添加该视图）。
      *
-     * @param views Touchable views found so far
+     * @param views 现在为止的可触控视图。
      */
     public void addTouchables(ArrayList<View> views) {
         final int viewFlags = mViewFlags;
@@ -3888,14 +3888,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called when the window containing this view gains or loses focus.  Note
-     * that this is separate from view focus: to receive key events, both
-     * your view and its window must have focus.  If a window is displayed
-     * on top of yours that takes input focus, then your own window will lose
-     * focus but the view focus will remain unchanged.
+     * 包含该视图的窗体获得或失去焦点时调用该函数。注意，该动作是与视图的焦点
+     * 分开的：为了受到键盘事件，你的视图及其窗口都必须拥有焦点。如果有窗口
+     * 覆盖在你的窗口上方并得到输入焦点，你的窗口会失去焦点，但是视图的焦点
+     * 保持不变。
      *
-     * @param hasWindowFocus True if the window containing this view now has
-     *        focus, false otherwise.
+     * @param hasWindowFocus 如果包含该视图的窗口拥有焦点，值为真；否则为假。
      */
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         InputMethodManager imm = InputMethodManager.peekInstance();
@@ -3967,13 +3965,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Gives this view a hint about whether is displayed or not. For instance, when
-     * a View moves out of the screen, it might receives a display hint indicating
-     * the view is not displayed. Applications should not <em>rely</em> on this hint
-     * as there is no guarantee that they will receive one.
+     * 得到视图是否处于显示状态的提示信息。例如，当视图移出屏幕时，他收到视图没有显示的提示
+     * 信息。应用程序不应该<em>依靠</em>该回调函数，不保证一定会收到该提示。
      * 
-     * @param hint A hint about whether or not this view is displayed:
-     * {@link #VISIBLE} or {@link #INVISIBLE}.
+     * @param hint 关于视图是否处于显示状态：{@link #VISIBLE} 或 {@link #INVISIBLE}。
      */
     protected void onDisplayHint(int hint) {
     }
@@ -4276,7 +4271,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * {@link #onCheckIsTextEditor()} to indicate you will return a
      * non-null InputConnection.
      *
-     * @param outAttrs Fill in with attribute information about the connection.
+     * @param outAttrs 链接使用的属性信息。
      */
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
         return null;
