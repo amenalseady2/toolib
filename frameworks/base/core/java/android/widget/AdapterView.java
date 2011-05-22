@@ -616,10 +616,9 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * Indicates whether this view is in filter mode. Filter mode can for instance
-     * be enabled by a user when typing on the keyboard.
+     * 指示视图是否处于过滤状态。过滤状态在用户在键盘上输入信息时启动。
      *
-     * @return True if the view is in filter mode, false otherwise.
+     * @return 如果视图处于过滤状态，返回真；否则返回假。
      */
     boolean isInFilterMode() {
         return false;
