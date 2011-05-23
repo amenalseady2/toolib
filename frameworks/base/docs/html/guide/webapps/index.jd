@@ -1,17 +1,17 @@
-page.title=Web Apps Overview
+page.title=Web 应用程序概述
 @jd:body
 
 <div class="figure" style="width:327px">
   <img src="{@docRoot}images/webapps/webapps.png" alt="" />
-  <p class="img-caption"><strong>Figure 1.</strong> You can make your web content available to
-users in two ways: in a traditional web browser and in an Android application, by
-including a WebView in the layout.</p>
+  <p class="img-caption"><strong>图 1.</strong> 你可以通过两种方式向用户提供你的web内容：
+  一种是通过传统的浏览器的方式，另一种是通过一个 Android 的应用程序，这个 Android
+  应用程序需要在布局中包含一个 WebView 组件。</p>
 </div>
 
-<p>There are essentially two ways to deliver an application on Android: as a
-client-side application (developed using the Android SDK and installed on user devices as an {@code
-.apk}) or as a web application (developed using web standards and accessed through a web
-browser&mdash;there's nothing to install on user devices).</p>
+<p>如果你想在 Android 上发布应用程序，一般有两种方式：
+一种是客户端应用程序（使用 Android SDK 开发，并安装到用户设备上的
+{@code.apk} 文件），另一种是web应用程序（遵循 web 标准开发，并通过
+web 浏览器来访问————不需要在用户的设备上安装）。</p>
 
 <p>The approach you choose for your application could depend on several factors, but Android makes
 the decision to develop a web application easier by providing:</p>

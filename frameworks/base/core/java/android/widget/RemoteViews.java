@@ -84,8 +84,7 @@ public class RemoteViews implements Parcelable, Filter {
     }
 
     /**
-     * Exception to send when something goes wrong executing an action
-     *
+     * 执行了错误的动作时抛出的异常.
      */
     public static class ActionException extends RuntimeException {
         public ActionException(Exception ex) {
