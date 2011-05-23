@@ -6939,15 +6939,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Override this if your view is known to always be drawn on top of a solid color background,
-     * and needs to draw fading edges. Returning a non-zero color enables the view system to
-     * optimize the drawing of the fading edges. If you do return a non-zero color, the alpha
-     * should be set to 0xFF.
+     * 如果你的视图总是在单色背景上绘制，并且需要渐变的边时，重载该函数。
+     * 返回非零的颜色值，使视图系统可以优化渐进边的绘制。返回非零颜色值时，
+     * 阿尔法通道应设为 0xFF。
      *
      * @see #setVerticalFadingEdgeEnabled
      * @see #setHorizontalFadingEdgeEnabled
      *
-     * @return The known solid color background for this view, or 0 if the color may vary
+     * @return 该视图的单色背景色；为零表示不是单色。
      */
     public int getSolidColor() {
         return 0;

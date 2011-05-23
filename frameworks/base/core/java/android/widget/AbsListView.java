@@ -4080,10 +4080,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Puts the list or grid into transcript mode. In this mode the list or grid will always scroll
-     * to the bottom to show new items.
+     * 将列表或网格设置为跳转模式。该模式下，列表或网格总是滚动到底部，以显示新条目。
      *
-     * @param mode the transcript mode to set
+     * @param mode 设置的跳转模式。
      *
      * @see #TRANSCRIPT_MODE_DISABLED
      * @see #TRANSCRIPT_MODE_NORMAL
@@ -4094,9 +4093,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Returns the current transcript mode.
+     * 返回当前跳转模式。
      *
-     * @return {@link #TRANSCRIPT_MODE_DISABLED}, {@link #TRANSCRIPT_MODE_NORMAL} or
+     * @return {@link #TRANSCRIPT_MODE_DISABLED}、{@link #TRANSCRIPT_MODE_NORMAL}或者
      *         {@link #TRANSCRIPT_MODE_ALWAYS_SCROLL}
      */
     public int getTranscriptMode() {
@@ -4109,10 +4108,10 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * 当color的值不为0时，此值表示的颜色将提示使用者，列表正在一片单色不透明的背景上被画出.
-     * 当 color 的值非零时，示意该列表使用实心、单色不透明的背景，可以缓存背景色.
+     * 当color的值不为0时，此值表示的颜色将提示使用者，列表正在一片单色不透明的背景上被画出。
+     * 当 color 的值非零时，示意该列表使用实心、单色不透明的背景，可以缓存背景色。
      *
-     * @param color 背景色.
+     * @param color 背景色。
      */
     public void setCacheColorHint(int color) {
         if (color != mCacheColorHint) {
@@ -4126,21 +4125,19 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * When set to a non-zero value, the cache color hint indicates that this list is always drawn
-     * on top of a solid, single-color, opaque background
+     * 如果该值为非零，表示该视图总是在固定的、单色、不透明的背景上绘制。
      *
-     * @return The cache color hint
+     * @return 缓存颜色。
      */
     public int getCacheColorHint() {
         return mCacheColorHint;
     }
 
     /**
-     * Move all views (excluding headers and footers) held by this AbsListView into the supplied
-     * List. This includes views displayed on the screen as well as views stored in AbsListView's
-     * internal view recycler.
+     * 将该 AbsListView 中的所有视图（不包含头尾视图）移到提供的列表中。
+     * 这些视图包括显示在屏幕上的以及放入 AbsListView 内部视图回收器的视图。
      *
-     * @param views A list into which to put the reclaimed views
+     * @param views 用于填充视图的列表。
      */
     public void reclaimViews(List<View> views) {
         int childCount = getChildCount();
@@ -4228,12 +4225,10 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     /**
-     * Sets the recycler listener to be notified whenever a View is set aside in
-     * the recycler for later reuse. This listener can be used to free resources
-     * associated to the View.
+     * 设置当视图被放入回收器等待被重用时得到通知的回收监听器。
+     * 该监听器用于释放关联到视图的资源。
      *
-     * @param listener The recycler listener to be notified of views set aside
-     *        in the recycler.
+     * @param listener 视图被放入回收器时收到通知的回收监听器。
      *
      * @see android.widget.AbsListView.RecycleBin
      * @see android.widget.AbsListView.RecyclerListener
