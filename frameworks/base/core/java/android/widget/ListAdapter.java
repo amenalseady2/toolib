@@ -17,7 +17,7 @@
 package android.widget;
 
 /**
- * 扩展自 {@link Adapter}.是在 {@link ListView} 与数据之间的一座桥梁.
+ * 扩展自 {@link Adapter}. 是 {@link ListView} 与数据之间的一座桥梁.
  * 大多数情况，数据来自于游标，但不是必须的.列表视图可以显示经过
  * ListAdapter 封包的任何数据.
  * 

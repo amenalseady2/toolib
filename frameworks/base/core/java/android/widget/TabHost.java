@@ -365,7 +365,7 @@ mTabHost.addTab(TAB_TAG_1, "Hello, world!", "Tab 1");</pre>
 
 
     /**
-     * 当某一选项卡被选中时生成选项卡的内容.如果你的选项卡的内容按某些条件来生成，
+     * 当某一选项卡被选中时生成选项卡的内容. 如果你的选项卡的内容按某些条件来生成，
      * 请使用该接口.例如：不显示既存的视图而是启动活动.
      */
     public interface TabContentFactory {

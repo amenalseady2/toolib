@@ -17,7 +17,7 @@
 package android.widget;
 
 /**
- * 封装了另一个列表适配器的列表适配器.调用 {@link #getWrappedAdapter()}
+ * 封装了另一个列表适配器的列表适配器. 调用 {@link #getWrappedAdapter()}
  * 可以取得封装在其中的适配器.
  *
  * @see ListView
