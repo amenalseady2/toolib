@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * <p>
- * 显示一个可以被用户点击的图片按钮.默认情况下，ImageButton 看起来像一个普通的
+ * 显示一个可以被用户点击的图片按钮. 默认情况下，ImageButton 看起来像一个普通的
  * {@link android.widget.Button 按钮}，拥有标准的背景色，并在不同状态时变更颜色.
  * 按钮上的图片可用通过 XML 布局文件的 {@code &lt;ImageButton&gt;} XML 元素的
  * {@code android:src} 属性或这代码中的 {@link #setImageResource(int)} 方法指定.

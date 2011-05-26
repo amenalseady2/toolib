@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * {@link ViewAnimator} 在两个视图间切换，并包含创建这些视图的工厂类.
+ * 用于在两个视图间切换的{@link ViewAnimator}，并包含创建这些视图的工厂类.
  * 你可以用工厂类来创建这些视图，也可以自己添加视图.
  * ViewSwitcher 只允许包含两个子视图，且一次仅能显示其中一个.
  * @author translate by ivanlee

@@ -25,7 +25,7 @@ import android.widget.RemoteViews.RemoteView;
 
 
 /**
- * 让你指定其子元素的精确位置（x/y坐标）的布局.绝对布局缺乏灵活性，
+ * 让你指定其子元素的精确位置（x/y坐标）的布局. 绝对布局缺乏灵活性，
  * 相比其他不指定绝对位置的布局更难于维护.
  *
  * <p><strong>XML 属性</strong></p> <p> 参见 {@link
