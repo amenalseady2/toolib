@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 
 /**
  * 扩展自 {@link Adapter} 的适配器，是 {@link android.widget.Spinner}
- * 与数据之间的一座桥梁.Spinner 适配器允许定义两个不同的视图：
+ * 与数据之间的一座桥梁. Spinner 适配器允许定义两个不同的视图：
  * 一个是在 Spinner 上显示数据，另一个是按下 Spinner 时在下拉列表里显示数据.
  * @author translate by 德罗德（Android中文翻译组）
  * @author convert by cnmahj
