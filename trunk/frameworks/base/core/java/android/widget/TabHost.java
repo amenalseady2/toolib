@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 提供选项卡（Tab页）的窗口视图容器.此对象包含两个子对象：
+ * 提供选项卡（Tab页）的窗口视图容器. 此对象包含两个子对象：
  * 一个是使用户可以选择指定标签页的标签的集合；另一个是用于显示标签页内容的 FrameLayout.
  * 选项卡中的个别元素一般通过其容器对象来控制，而不是直接设置子元素本身的值.
  * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-tabwidget.html">Tab Layout

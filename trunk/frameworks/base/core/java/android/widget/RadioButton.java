@@ -21,7 +21,7 @@ import android.util.AttributeSet;
 
 
 /**
- * <p>单选按钮是有选中和未选中两种状态的按钮.当其未选中时，用户可以通过按下或点击来选中它.
+ * <p>单选按钮是有选中和未选中两种状态的按钮. 当其未选中时，用户可以通过按下或点击来选中它.
  * 然而，与 {@link android.widget.CheckBox} 不同，用户一旦选中了单选按钮就不能够取消选中.</p>
  *
  * <p>单选按钮通常与 {@link android.widget.RadioGroup} 同时使用.

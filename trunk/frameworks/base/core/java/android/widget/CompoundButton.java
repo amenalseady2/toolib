@@ -31,7 +31,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 /**
  * <p>
- * 一个包含选中/未选中两个状态的按钮.当按钮按下或单击时自动改变状态.
+ * 一个包含选中/未选中两个状态的按钮. 当按钮按下或单击时自动改变状态.
  * </p>
  *
  * <p><strong>XML 属性</strong></p>

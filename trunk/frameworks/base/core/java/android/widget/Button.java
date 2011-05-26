@@ -26,7 +26,7 @@ import android.widget.RemoteViews.RemoteView;
 
 /**
  * <p>
- * <code>Button</code> 代表按钮小部件.用户通过按下按钮，或者点击按钮来执行一个动作.
+ * <code>Button</code> 代表按钮小部件. 用户通过按下按钮，或者点击按钮来执行一个动作.
  * 以下是一个按钮在活动中典型的应用：
  * </p>
  *
