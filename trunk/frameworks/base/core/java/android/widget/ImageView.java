@@ -40,11 +40,9 @@ import android.widget.RemoteViews.RemoteView;
 
 
 /**
- * Displays an arbitrary image, such as an icon.  The ImageView class
- * can load images from various sources (such as resources or content
- * providers), takes care of computing its measurement from the image so that
- * it can be used in any layout manager, and provides various display options
- * such as scaling and tinting.
+ * 显示任意图像，例如图标. ImageView 类可以加载各种来源的图片（如资源或图片库），
+ * 需要计算图像的尺寸，比便它可以在其他布局中使用，并提供例如缩放和着色（渲染）
+ * 各种显示选项。
  *
  * @attr ref android.R.styleable#ImageView_adjustViewBounds
  * @attr ref android.R.styleable#ImageView_src
@@ -192,10 +190,9 @@ public class ImageView extends View {
     }
     
     /**
-     * Set this to true if you want the ImageView to adjust its bounds
-     * to preserve the aspect ratio of its drawable.
-     * @param adjustViewBounds Whether to adjust the bounds of this view
-     * to presrve the original aspect ratio of the drawable
+     * 当你需要在 ImageView 调整边框时保持可绘制对象的比例时，将该值设为真。
+     * 
+     * @param adjustViewBounds 是否调整边框，以保持可绘制对象的原始比例。
      * 
      * @attr ref android.R.styleable#ImageView_adjustViewBounds
      */
@@ -208,19 +205,18 @@ public class ImageView extends View {
     }
     
     /**
-     * An optional argument to supply a maximum width for this view. Only valid if
-     * {@link #setAdjustViewBounds} has been set to true. To set an image to be a maximum of 100 x
-     * 100 while preserving the original aspect ratio, do the following: 1) set adjustViewBounds to
-     * true 2) set maxWidth and maxHeight to 100 3) set the height and width layout params to
-     * WRAP_CONTENT.
+     * 用于设置该视图支持的最大宽度的可选参数。只有 {@link #setAdjustViewBounds} 
+     * 为真时有效。要设置图像最大尺寸为 100×100，并保持原始比率，做法如下：
+     * <ol><li>设置 adjustViewBounds 为真；</li><li>设置 maxWidth 和 maxHeight 为 100；</li>
+     * <li>设置宽、高的布局参数为 WRAP_CONTENT。</li></ol>
      * 
      * <p>
-     * Note that this view could be still smaller than 100 x 100 using this approach if the original
-     * image is small. To set an image to a fixed size, specify that size in the layout params and
-     * then use {@link #setScaleType} to determine how to fit the image within the bounds.
+     * 注意，如果原始图像较小，即使设置了该参数，图像仍然要比 100×100 小。如果要设置图片为
+     * 固定大小，需要在布局参数中指定大小，并使用 {@link #setScaleType} 函数来检测，如何
+     * 将其调整到适当的大小。
      * </p>
      * 
-     * @param maxWidth maximum width for this view
+     * @param maxWidth 该视图的最大宽度。
      * 
      * @attr ref android.R.styleable#ImageView_maxWidth
      */
@@ -230,19 +226,18 @@ public class ImageView extends View {
     }
     
     /**
-     * An optional argument to supply a maximum height for this view. Only valid if
-     * {@link #setAdjustViewBounds} has been set to true. To set an image to be a maximum of 100 x
-     * 100 while preserving the original aspect ratio, do the following: 1) set adjustViewBounds to
-     * true 2) set maxWidth and maxHeight to 100 3) set the height and width layout params to
-     * WRAP_CONTENT.
+     * 用于设置该视图支持的最大高度的可选参数。只有 {@link #setAdjustViewBounds} 
+     * 为真时有效。要设置图像最大尺寸为 100×100，并保持原始比率，做法如下：
+     * <ol><li>设置 adjustViewBounds 为真；</li><li>设置 maxWidth 和 maxHeight 为 100；</li>
+     * <li>设置宽、高的布局参数为 WRAP_CONTENT。</li></ol>
      * 
      * <p>
-     * Note that this view could be still smaller than 100 x 100 using this approach if the original
-     * image is small. To set an image to a fixed size, specify that size in the layout params and
-     * then use {@link #setScaleType} to determine how to fit the image within the bounds.
+     * 注意，如果原始图像较小，即使设置了该参数，图像仍然要比 100×100 小。如果要设置图片为
+     * 固定大小，需要在布局参数中指定大小，并使用 {@link #setScaleType} 函数来检测，如何
+     * 将其调整到适当的大小。
      * </p>
      * 
-     * @param maxHeight maximum height for this view
+     * @param maxHeight 该视图的最大高度。
      * 
      * @attr ref android.R.styleable#ImageView_maxHeight
      */
@@ -251,23 +246,22 @@ public class ImageView extends View {
         mMaxHeight = maxHeight;
     }
 
-    /** Return the view's drawable, or null if no drawable has been
-        assigned.
-    */
+    /**
+     *  返回视图的可绘制对象；如果没有关联可绘制对象，返回空。
+     */
     public Drawable getDrawable() {
         return mDrawable;
     }
 
     /**
-     * Sets a drawable as the content of this ImageView.
+     * 通过资源ID设置可绘制对象为该 ImageView 显示的内容。
      *
-     * <p class="note">This does Bitmap reading and decoding on the UI
-     * thread, which can cause a latency hiccup.  If that's a concern,
-     * consider using {@link #setImageDrawable} or
-     * {@link #setImageBitmap} and
-     * {@link android.graphics.BitmapFactory} instead.</p>
+     * <p class="note">该操作读取位图，并在 UI 线程中解码，因此可能导致反应迟缓。
+     * 如果反应迟缓，可以考虑用 {@link #setImageDrawable}、
+     * {@link #setImageBitmap} 或者 {@link android.graphics.BitmapFactory}
+     * 代替。</p>
      *
-     * @param resId the resource identifier of the the drawable
+     * @param resId 可绘制对象的资源标识。
      *
      * @attr ref android.R.styleable#ImageView_src
      */
@@ -284,15 +278,14 @@ public class ImageView extends View {
     }
 
     /**
-     * Sets the content of this ImageView to the specified Uri.
+     * 设置指定的 URI 为该 ImageView 显示的内容。
      *
-     * <p class="note">This does Bitmap reading and decoding on the UI
-     * thread, which can cause a latency hiccup.  If that's a concern,
-     * consider using {@link #setImageDrawable} or
-     * {@link #setImageBitmap} and
-     * {@link android.graphics.BitmapFactory} instead.</p>
+     * <p class="note">该操作读取位图，并在 UI 线程中解码，因此可能导致反应迟缓。
+     * 如果反应迟缓，可以考虑用 {@link #setImageDrawable}、
+     * {@link #setImageBitmap} 或者 {@link android.graphics.BitmapFactory}
+     * 代替。</p>
      *
-     * @param uri The Uri of an image
+     * @param uri 图像的 URI。
      */
     @android.view.RemotableViewMethod
     public void setImageURI(Uri uri) {
@@ -310,9 +303,9 @@ public class ImageView extends View {
 
     
     /**
-     * Sets a drawable as the content of this ImageView.
+     * 设置可绘制对象为该 ImageView 显示的内容。
      * 
-     * @param drawable The drawable to set
+     * @param drawable 设置的可绘制对象。
      */
     public void setImageDrawable(Drawable drawable) {
         if (mDrawable != drawable) {
@@ -325,9 +318,9 @@ public class ImageView extends View {
     }
 
     /**
-     * Sets a Bitmap as the content of this ImageView.
+     * 设置位图作为该 ImageView 的内容。
      * 
-     * @param bm The bitmap to set
+     * @param bm 设置的位图。
      */
     @android.view.RemotableViewMethod
     public void setImageBitmap(Bitmap bm) {
@@ -352,10 +345,10 @@ public class ImageView extends View {
     }
 
     /**
-     * Sets the image level, when it is constructed from a 
-     * {@link android.graphics.drawable.LevelListDrawable}.
+     * 设置图片的等级，当图片来自于 
+     * {@link android.graphics.drawable.LevelListDrawable} 时。
      *
-     * @param level The new level for the image.
+     * @param level 图片的新的等级。
      */
     @android.view.RemotableViewMethod
     public void setImageLevel(int level) {
@@ -367,55 +360,51 @@ public class ImageView extends View {
     }
 
     /**
-     * Options for scaling the bounds of an image to the bounds of this view.
+     * 将图片边界缩放，以适应视图边界时的可选项.
      */
     public enum ScaleType {
         /**
-         * Scale using the image matrix when drawing. The image matrix can be set using
-         * {@link ImageView#setImageMatrix(Matrix)}. From XML, use this syntax:
-         * <code>android:scaleType="matrix"</code>.
+         * 绘制时，使用图像矩阵方式缩放。图像矩阵可以通过
+         * {@link ImageView#setImageMatrix(Matrix)} 设置。在 XML 中可以使用的语法：
+         * <code>android:scaleType="matrix"</code>。
          */
         MATRIX      (0),
         /**
-         * Scale the image using {@link Matrix.ScaleToFit#FILL}.
-         * From XML, use this syntax: <code>android:scaleType="fitXY"</code>.
+         * 使用 {@link Matrix.ScaleToFit#FILL} 方式缩放图像。
+         * 在 XML 中可以使用的语法： <code>android:scaleType="fitXY"</code>。
          */
         FIT_XY      (1),
         /**
-         * Scale the image using {@link Matrix.ScaleToFit#START}.
-         * From XML, use this syntax: <code>android:scaleType="fitStart"</code>.
+         * 使用 {@link Matrix.ScaleToFit#START} 方式缩放图像。
+         * 在 XML 中可以使用的语法：<code>android:scaleType="fitStart"</code>。
          */
         FIT_START   (2),
         /**
-         * Scale the image using {@link Matrix.ScaleToFit#CENTER}.
-         * From XML, use this syntax:
-         * <code>android:scaleType="fitCenter"</code>.
+         * 使用 {@link Matrix.ScaleToFit#CENTER} 方式缩放图像。
+         * 在 XML 中可以使用的语法：
+         * <code>android:scaleType="fitCenter"</code>。
          */
         FIT_CENTER  (3),
         /**
-         * Scale the image using {@link Matrix.ScaleToFit#END}.
-         * From XML, use this syntax: <code>android:scaleType="fitEnd"</code>.
+         * 使用 {@link Matrix.ScaleToFit#END} 方式缩放图像。
+         * 在 XML 中可以使用的语法： <code>android:scaleType="fitEnd"</code>。
          */
         FIT_END     (4),
         /**
-         * Center the image in the view, but perform no scaling.
-         * From XML, use this syntax: <code>android:scaleType="center"</code>.
+         * 在视图中使图像居中，不执行缩放。
+         * 在 XML 中可以使用的语法： <code>android:scaleType="center"</code>。
          */
         CENTER      (5),
         /**
-         * Scale the image uniformly (maintain the image's aspect ratio) so
-         * that both dimensions (width and height) of the image will be equal
-         * to or larger than the corresponding dimension of the view
-         * (minus padding). The image is then centered in the view.
-         * From XML, use this syntax: <code>android:scaleType="centerCrop"</code>.
+         * 均衡的缩放图像（保持图像原始比例），使图片的两个坐标（宽、高）都大于等于
+         * 相应的视图坐标（负的内边距）。图像则位于视图的中央。
+         * 在 XML 中可以使用的语法：<code>android:scaleType="centerCrop"</code>。
          */
         CENTER_CROP (6),
         /**
-         * Scale the image uniformly (maintain the image's aspect ratio) so
-         * that both dimensions (width and height) of the image will be equal
-         * to or less than the corresponding dimension of the view
-         * (minus padding). The image is then centered in the view.
-         * From XML, use this syntax: <code>android:scaleType="centerInside"</code>.
+         * 均衡的缩放图像（保持图像原始比例），使图片的两个坐标（宽、高）都小于等于
+         * 相应的视图坐标（负的内边距）。图像则位于视图的中央。
+         * 在 XML 中可以使用的语法：<code>android:scaleType="centerInside"</code>。
          */
         CENTER_INSIDE (7);
         
@@ -426,10 +415,9 @@ public class ImageView extends View {
     }
 
     /**
-     * Controls how the image should be resized or moved to match the size
-     * of this ImageView.
+     * 控制图像应该如何缩放和移动，以使图像与 ImageView 一致。
      * 
-     * @param scaleType The desired scaling mode.
+     * @param scaleType 需要的缩放方式。
      * 
      * @attr ref android.R.styleable#ImageView_scaleType
      */
@@ -449,7 +437,7 @@ public class ImageView extends View {
     }
     
     /**
-     * Return the current scale type in use by this ImageView.
+     * 返回当前 ImageView 使用的缩放类型。
      *
      * @see ImageView.ScaleType
      *
@@ -459,12 +447,11 @@ public class ImageView extends View {
         return mScaleType;
     }
 
-    /** Return the view's optional matrix. This is applied to the
-        view's drawable when it is drawn. If there is not matrix,
-        this method will return null.
-        Do not change this matrix in place. If you want a different matrix
-        applied to the drawable, be sure to call setImageMatrix().
-    */
+    /** 
+     * 返回视图的选项矩阵。当绘制时，应用于视图的可绘制对象。如果没有矩阵，
+     * 函数返回空。不要更改这个矩阵。如果你要为可绘制对象设置不同的矩阵，
+     * 请调用 setImageMatrix()。
+     */
     public Matrix getImageMatrix() {
         return mMatrix;
     }
@@ -880,11 +867,10 @@ public class ImageView extends View {
     }
 
     /**
-     * Set a tinting option for the image.
+     * 为图片设置着色选项。
      * 
-     * @param color Color tint to apply.
-     * @param mode How to apply the color.  The standard mode is
-     * {@link PorterDuff.Mode#SRC_ATOP}
+     * @param color 应用的着色颜色。
+     * @param mode 如何着色。标准模式为 {@link PorterDuff.Mode#SRC_ATOP}。
      * 
      * @attr ref android.R.styleable#ImageView_tint
      */
@@ -893,10 +879,9 @@ public class ImageView extends View {
     }
 
     /**
-     * Set a tinting option for the image. Assumes
-     * {@link PorterDuff.Mode#SRC_ATOP} blending mode.
+     * 为图片设置着色选项。采用{@link PorterDuff.Mode#SRC_ATOP}合成模式。
      *
-     * @param color Color tint to apply.
+     * @param color 应用的着色颜色。
      * @attr ref android.R.styleable#ImageView_tint
      */
     @RemotableViewMethod
@@ -909,9 +894,9 @@ public class ImageView extends View {
     }
     
     /**
-     * Apply an arbitrary colorfilter to the image.
+     * 为图片应用任意颜色滤镜。
      *
-     * @param cf the colorfilter to apply (may be null)
+     * @param cf 要应用的颜色滤镜（可能为空） 
      */
     public void setColorFilter(ColorFilter cf) {
         if (mColorFilter != cf) {

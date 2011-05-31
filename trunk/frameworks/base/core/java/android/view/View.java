@@ -7099,16 +7099,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Assign a size and position to this view.
+     * 为视图指定大小和位置。
      *
-     * This is called from layout.
+     * 该方法有布局调用。
      *
-     * @param left Left position, relative to parent
-     * @param top Top position, relative to parent
-     * @param right Right position, relative to parent
-     * @param bottom Bottom position, relative to parent
-     * @return true if the new size and position are different than the
-     *         previous ones
+     * @param left 左侧位置，相对于父容器。
+     * @param top 顶部位置，相对于父容器。
+     * @param right 右侧位置，相对于父容器。
+     * @param bottom 底部位置，相对于父容器。
+     * @return true 如果新的大小和位置与之前的不同，返回真。
      * {@hide}
      */
     protected boolean setFrame(int left, int top, int right, int bottom) {
@@ -7182,9 +7181,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Invalidates the specified Drawable.
+     * 使指定的可绘制对象失效。
      *
-     * @param drawable the drawable to invalidate
+     * @param drawable 要设为失效的可绘制对象。
      */
     public void invalidateDrawable(Drawable drawable) {
         if (verifyDrawable(drawable)) {
@@ -7622,12 +7621,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Changes the selection state of this view. A view can be selected or not.
-     * Note that selection is not the same as focus. Views are typically
-     * selected in the context of an AdapterView like ListView or GridView;
-     * the selected view is the view that is highlighted.
+     * 改变视图的选中状态。视图有选中和未选中两个状态。注意，选择状态不同于焦点。
+     * 典型的选中的视图是象 ListView 和 GridView 这样的 AdapterView 中显示的
+     * 内容；选中的内容会显示为高亮。
      *
-     * @param selected true if the view must be selected, false otherwise
+     * @param selected 为真，将视图设为选中状态；否则为假。
      */
     public void setSelected(boolean selected) {
         if (((mPrivateFlags & SELECTED) != 0) != selected) {
@@ -7650,9 +7648,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Indicates the selection state of this view.
+     * 指出该视图的选中状态。
      *
-     * @return true if the view is selected, false otherwise
+     * @return 如果视图处于选中状态，返回真；否则返回假。
      */
     @ViewDebug.ExportedProperty
     public boolean isSelected() {
@@ -7660,7 +7658,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Returns the ViewTreeObserver for this view's hierarchy. The view tree
+     * 为该视图层次返回 ViewTreeObserver 对象。The view tree
      * observer can be used to get notifications when global events, like
      * layout, happen.
      *
