@@ -528,122 +528,112 @@
          一般使用单一的值，也可以使用组合值来指定.
          设置 <var>none</var> 以外的值同时意味着文本可编辑. -->
     <attr name="inputType">
-        <!-- There is no content type.  The text is not editable. -->
+        <!-- 无内容类型。文本不可编辑. -->
         <flag name="none" value="0x00000000" />
-        <!-- Just plain old text.  Corresponds to
+        <!-- 旧的文本类型，相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_NORMAL}. -->
         <flag name="text" value="0x00000001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             request capitalization of all characters.  Corresponds to
+        <!-- 可以与<var>text</var>结合，使所有字母变为大写。相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_CHARACTERS}. -->
         <flag name="textCapCharacters" value="0x00001001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             request capitalization of the first character of every word.  Corresponds to
+        <!-- 可以与<var>text</var>结合，使每个单词的首字母大写。相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_WORDS}. -->
         <flag name="textCapWords" value="0x00002001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             request capitalization of the first character of every sentence.  Corresponds to
+        <!-- 可以与<var>text</var>结合，使每个句子的首字母大写。相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_SENTENCES}. -->
         <flag name="textCapSentences" value="0x00004001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             request auto-correction of text being input.  Corresponds to
+        <!-- 可以与<var>text</var>结合，对输入的文本应用自动纠正。相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_AUTO_CORRECT}. -->
         <flag name="textAutoCorrect" value="0x00008001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             specify that this field will be doing its own auto-completion and
-             talking with the input method appropriately.  Corresponds to
+        <!-- 可以与<var>text</var>结合，该域有自己的自动完成功能，
+             并可以与输入法交互。相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_AUTO_COMPLETE}. -->
         <flag name="textAutoComplete" value="0x00010001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             allow multiple lines of text in the field.  If this flag is not set,
-             the text field will be constrained to a single line.  Corresponds to
+        <!-- 可以与<var>text</var>结合，表示该域允许多行文本。如果设置了该标志，
+             该文本域会强制变为单行。相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_MULTI_LINE}. -->
         <flag name="textMultiLine" value="0x00020001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             indicate that though the regular text view should not be multiple
-             lines, the IME should provide multiple lines if it can.  Corresponds to
+        <!-- 可以与<var>text</var>结合，表示正常的文本视图应该不提供多行支持，
+             如果 IME 支持，它可以使用多行。相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_IME_MULTI_LINE}. -->
         <flag name="textImeMultiLine" value="0x00040001" />
-        <!-- Can be combined with <var>text</var> and its variations to
-             indicate that the IME should not show any
-             dictionary-based word suggestions.  Corresponds to
+        <!-- 可以与<var>text</var>结合，表示 IME 不应该显示任何基于字典的单词建议。
+             相当于
              {@link android.text.InputType#TYPE_TEXT_FLAG_NO_SUGGESTIONS}. -->
         <flag name="textNoSuggestions" value="0x00080001" />
-        <!-- Text that will be used as a URI.  Corresponds to
+        <!-- 文本作为 URI 使用。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_URI}. -->
         <flag name="textUri" value="0x00000011" />
-        <!-- Text that will be used as an e-mail address.  Corresponds to
+        <!-- 文本作为邮件地址使用。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_EMAIL_ADDRESS}. -->
         <flag name="textEmailAddress" value="0x00000021" />
-        <!-- Text that is being supplied as the subject of an e-mail.  Corresponds to
+        <!-- 文本作为邮件标题使用。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_EMAIL_SUBJECT}. -->
         <flag name="textEmailSubject" value="0x00000031" />
-        <!-- Text that is the content of a short message.  Corresponds to
+        <!-- 文本作为短消息使用。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_SHORT_MESSAGE}. -->
         <flag name="textShortMessage" value="0x00000041" />
-        <!-- Text that is the content of a long message.  Corresponds to
+        <!-- 文本包含较长的消息内容。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_LONG_MESSAGE}. -->
         <flag name="textLongMessage" value="0x00000051" />
-        <!-- Text that is the name of a person.  Corresponds to
+        <!-- 文本是人的名字。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_PERSON_NAME}. -->
         <flag name="textPersonName" value="0x00000061" />
-        <!-- Text that is being supplied as a postal mailing address.  Corresponds to
+        <!-- 文本作为邮寄地址对待。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_POSTAL_ADDRESS}. -->
         <flag name="textPostalAddress" value="0x00000071" />
-        <!-- Text that is a password.  Corresponds to
+        <!-- 文本是密码。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_PASSWORD}. -->
         <flag name="textPassword" value="0x00000081" />
-        <!-- Text that is a password that should be visible.  Corresponds to
+        <!-- 文本是可见的密码。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_VISIBLE_PASSWORD}. -->
         <flag name="textVisiblePassword" value="0x00000091" />
-        <!-- Text that is being supplied as text in a web form.  Corresponds to
+        <!-- 文本作为 web 表单对待。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_WEB_EDIT_TEXT}. -->
         <flag name="textWebEditText" value="0x000000a1" />
-        <!-- Text that is filtering some other data.  Corresponds to
+        <!-- 文本用于过滤其他数据。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_FILTER}. -->
         <flag name="textFilter" value="0x000000b1" />
-        <!-- Text that is for phonetic pronunciation, such as a phonetic name
-             field in a contact entry.  Corresponds to
+        <!-- 文本作为拼音，就像联系人的名字读音字段。相当于
              {@link android.text.InputType#TYPE_CLASS_TEXT} |
              {@link android.text.InputType#TYPE_TEXT_VARIATION_PHONETIC}. -->
         <flag name="textPhonetic" value="0x000000c1" />
-        <!-- A numeric only field.  Corresponds to
+        <!-- 只是数字域。相当于
              {@link android.text.InputType#TYPE_CLASS_NUMBER}. -->
         <flag name="number" value="0x00000002" />
-        <!-- Can be combined with <var>number</var> and its other options to
-             allow a signed number.  Corresponds to
+        <!-- 可以与<var>number</var>结合，是允许带符号数的选项。相当于
              {@link android.text.InputType#TYPE_CLASS_NUMBER} |
              {@link android.text.InputType#TYPE_NUMBER_FLAG_SIGNED}. -->
         <flag name="numberSigned" value="0x00001002" />
-        <!-- Can be combined with <var>number</var> and its other options to
-             allow a decimal (fractional) number.  Corresponds to
+        <!-- 可以与<var>number</var>结合，是允许十进制数（小数）的选项。
+             相当于
              {@link android.text.InputType#TYPE_CLASS_NUMBER} |
              {@link android.text.InputType#TYPE_NUMBER_FLAG_DECIMAL}. -->
         <flag name="numberDecimal" value="0x00002002" />
-        <!-- For entering a phone number.  Corresponds to
+        <!-- 用于输入电话号码。相当于
              {@link android.text.InputType#TYPE_CLASS_PHONE}. -->
         <flag name="phone" value="0x00000003" />
-        <!-- For entering a date and time.  Corresponds to
+        <!-- 用于输入日期和时间。相当于
              {@link android.text.InputType#TYPE_CLASS_DATETIME} |
              {@link android.text.InputType#TYPE_DATETIME_VARIATION_NORMAL}. -->
         <flag name="datetime" value="0x00000004" />
-        <!-- For entering a date.  Corresponds to
+        <!-- 用于输入日期。相当于
              {@link android.text.InputType#TYPE_CLASS_DATETIME} |
              {@link android.text.InputType#TYPE_DATETIME_VARIATION_DATE}. -->
         <flag name="date" value="0x00000014" />
-        <!-- For entering a time.  Corresponds to
+        <!-- 用于输入时间。相当于
              {@link android.text.InputType#TYPE_CLASS_DATETIME} |
              {@link android.text.InputType#TYPE_DATETIME_VARIATION_TIME}. -->
         <flag name="time" value="0x00000024" />
@@ -762,17 +752,17 @@
 
     <!-- 控制是否自动查找并转换 URL、邮箱地址等链接为可点击链接.默认值为"none"，禁止该属性. -->
     <attr name="autoLink">
-        <!-- Match no patterns (default). -->
+        <!-- 不匹配 (默认值). -->
         <flag name="none" value="0x00" />
-        <!-- Match Web URLs. -->
+        <!-- 匹配 URL. -->
         <flag name="web" value="0x01" />
-        <!-- Match email addresses. -->
+        <!-- 匹配邮件地址. -->
         <flag name="email" value="0x02" />
-        <!-- Match phone numbers. -->
+        <!-- 匹配电话号码. -->
         <flag name="phone" value="0x04" />
-        <!-- Match map addresses. -->
+        <!-- 匹配地图坐标. -->
         <flag name="map" value="0x08" />
-        <!-- Match all patterns (equivalent to web|email|phone|map). -->
+        <!-- 匹配所有 (相当于 web|email|phone|map). -->
         <flag name="all" value="0x0f" />
     </attr>
 
