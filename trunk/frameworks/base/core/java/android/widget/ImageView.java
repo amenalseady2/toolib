@@ -41,7 +41,7 @@ import android.widget.RemoteViews.RemoteView;
 
 /**
  * 显示任意图像，例如图标. ImageView 类可以加载各种来源的图片（如资源或图片库），
- * 需要计算图像的尺寸，比便它可以在其他布局中使用，并提供例如缩放和着色（渲染）
+ * 需要计算图像的尺寸，以便它可以在其他布局中使用，并提供例如缩放和着色（渲染）
  * 各种显示选项。
  *
  * @attr ref android.R.styleable#ImageView_adjustViewBounds

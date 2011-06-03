@@ -116,16 +116,15 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
- * Displays text to the user and optionally allows them to edit it.  A TextView
- * is a complete text editor, however the basic class is configured to not
- * allow editing; see {@link EditText} for a subclass that configures the text
- * view for editing.
+ * 为用户显示文本内容，通过可选项为用户提供编辑功能. 虽然基类被配置为
+ * 不允许编辑，但 TextView 是完整的文本编辑器。配置为可编辑的子类，
+ * 参见 {@link EditText}。
  *
  * <p>
- * <b>XML attributes</b>
+ * <b>XML 属性</b>
  * <p>
- * See {@link android.R.styleable#TextView TextView Attributes},
- * {@link android.R.styleable#View View Attributes}
+ * 参见 {@link android.R.styleable#TextView TextView Attributes}、
+ * {@link android.R.styleable#View View Attributes}。
  *
  * @attr ref android.R.styleable#TextView_text
  * @attr ref android.R.styleable#TextView_bufferType
@@ -315,21 +314,17 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Interface definition for a callback to be invoked when an action is
-     * performed on the editor.
+     * 定义了用于在编辑器执行动作时调用的回调函数的接口.
      */
     public interface OnEditorActionListener {
         /**
-         * Called when an action is being performed.
+         * 当动作执行时调用。
          *
-         * @param v The view that was clicked.
-         * @param actionId Identifier of the action.  This will be either the
-         * identifier you supplied, or {@link EditorInfo#IME_NULL
-         * EditorInfo.IME_NULL} if being called due to the enter key
-         * being pressed.
-         * @param event If triggered by an enter key, this is the event;
-         * otherwise, this is null.
-         * @return Return true if you have consumed the action, else false.
+         * @param v 点击的视图。
+         * @param actionId 动作标识。该值可以是有你提供的标识，或在回车按下时的
+         * {@link EditorInfo#IME_NULL EditorInfo.IME_NULL}。
+         * @param event 如果有回车键触发，该值为对应的事件；否则为空。
+         * @return 如果你处理了该事件，返回真；否则返回假。
          */
         boolean onEditorAction(TextView v, int actionId, KeyEvent event);
     }
@@ -983,10 +978,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the typeface and style in which the text should be displayed,
-     * and turns on the fake bold and italic bits in the Paint if the
-     * Typeface that you provided does not have all the bits in the
-     * style that you specified.
+     * 设置文本显示时的字体和样式，如果你没有指定任何样式位，系统在
+     * 绘制时自动设置模拟粗体和斜体位。
      *
      * @attr ref android.R.styleable#TextView_typeface
      * @attr ref android.R.styleable#TextView_textStyle
@@ -1038,15 +1031,14 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns the length, in characters, of the text managed by this TextView
+     * 返回在本 TextView 管理下的文本长度（字符数）。
      */
     public int length() {
         return mText.length();
     }
 
     /**
-     * Return the text the TextView is displaying as an Editable object.  If
-     * the text is not editable, null is returned.
+     * 返回 TextView 中显示为可编辑对象的文本。如果文本不可编辑，返回空。
      *
      * @see #getText
      */
@@ -1055,10 +1047,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * @return the height of one standard line in pixels.  Note that markup
-     * within the text can cause individual lines to be taller or shorter
-     * than this height, and the layout may contain additional first-
-     * or last-line padding.
+     * @return 返回标准行的高度的像素数。注意，文本中的标记会导致个别行
+     * 高于或低于该高度。布局可能包含额外的首行或尾行内边距。
      */
     public int getLineHeight() {
         return FastMath.round(mTextPaint.getFontMetricsInt(null) * mSpacingMult
@@ -6737,9 +6727,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Use {@link BaseInputConnection#removeComposingSpans
-     * BaseInputConnection.removeComposingSpans()} to remove any IME composing
-     * state from this text view.
+     * 使用 {@link BaseInputConnection#removeComposingSpans
+     * BaseInputConnection.removeComposingSpans()} 从该文本视图中移除输入法的
+     * 编辑状态。
      */
     public void clearComposingText() {
         if (mText instanceof Spannable) {
@@ -6928,10 +6918,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns true, only while processing a touch gesture, if the initial
-     * touch down event caused focus to move to the text view and as a result
-     * its selection changed.  Only valid while processing the touch gesture
-     * of interest.
+     * 仅当处理触控手势时，如果最初的按下事件导致焦点移动到文本视图，
+     * 并导致文本视图被选中，则返回真。只有处理触控手势时有效。
      */
     public boolean didTouchFocusSelect() {
         return mTouchFocusSelected;
@@ -7079,10 +7067,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns the TextView_textColor attribute from the
-     * Resources.StyledAttributes, if set, or the TextAppearance_textColor
-     * from the TextView_textAppearance attribute, if TextView_textColor
-     * was not set directly.
+     * 如果设置了，则从 Resources.StyledAttributes 中返回 TextView_textColor
+     * 属性。如果没有直接设置 TextView_textColor，则返回
+     * TextView_textAppearance 属性中的 TextAppearance_textColor。
      */
     public static ColorStateList getTextColors(Context context, TypedArray attrs) {
         ColorStateList colors;
@@ -7106,10 +7093,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns the default color from the TextView_textColor attribute
-     * from the AttributeSet, if set, or the default color from the
-     * TextAppearance_textColor from the TextView_textAppearance attribute,
-     * if TextView_textColor was not set directly.
+     * 如果设置了，则返回 AttributeSet 中 TextView_textColor 属性中
+     * 设置的默认颜色。如果没有直接设置 TextView_textColor，则默认颜色
+     * 为 TextView_textAppearance 属性中的 TextAppearance_textColor。
      */
     public static int getTextColor(Context context,
                                    TypedArray attrs,
@@ -7494,8 +7480,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns whether this text view is a current input method target.  The
-     * default implementation just checks with {@link InputMethodManager}.
+     * 返回该文本视图是否是当前输入法的目标对象。默认实现只检查
+     * {@link InputMethodManager}。
      */
     public boolean isInputMethodTarget() {
         InputMethodManager imm = InputMethodManager.peekInstance();
@@ -7519,12 +7505,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Called when a context menu option for the text view is selected.  Currently
-     * this will be one of: {@link android.R.id#selectAll},
-     * {@link android.R.id#startSelectingText},
-     * {@link android.R.id#cut}, {@link android.R.id#copy},
-     * {@link android.R.id#paste}, {@link android.R.id#copyUrl},
-     * or {@link android.R.id#switchInputMethod}.
+     * 选择了用于文本视图的上下文菜单选项时调用。当前选项为
+     * {@link android.R.id#selectAll}、{@link android.R.id#startSelectingText}、
+     * {@link android.R.id#cut}、{@link android.R.id#copy}、
+     * {@link android.R.id#paste}、{@link android.R.id#copyUrl}、
+     * {@link android.R.id#switchInputMethod} 其中之一。
      */
     public boolean onTextContextMenuItem(int id) {
         int min = 0;
