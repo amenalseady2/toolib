@@ -5769,12 +5769,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Move the cursor, if needed, so that it is at an offset that is visible
-     * to the user.  This will not move the cursor if it represents more than
-     * one character (a selection range).  This will only work if the
-     * TextView contains spannable text; otherwise it will do nothing.
+     * 如果需要，将光标移动到用户可见的某个位置。如果选中了一个以上字符，
+     * 该移动不会发生。只有当 TextView 包含 spannable 文本时可用；
+     * 否则什么都不做。
      *
-     * @return True if the cursor was actually moved, false otherwise.
+     * @return 如果移动了光标返回真；否则返回假。
      */
     public boolean moveCursorToVisibleOffset() {
         if (!(mText instanceof Spannable)) {
@@ -5892,7 +5891,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Convenience for {@link Selection#getSelectionStart}.
+     * 为了方便的调用 {@link Selection#getSelectionStart}。
      */
     @ViewDebug.ExportedProperty(category = "text")
     public int getSelectionStart() {
@@ -5900,7 +5899,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Convenience for {@link Selection#getSelectionEnd}.
+     * 为了方便的调用 {@link Selection#getSelectionEnd}。
      */
     @ViewDebug.ExportedProperty(category = "text")
     public int getSelectionEnd() {
@@ -5908,7 +5907,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Return true iff there is a selection inside this text view.
+     * 如果该文本视图中有选中部分则返回真。
      */
     public boolean hasSelection() {
         final int selectionStart = getSelectionStart();
@@ -5918,8 +5917,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the properties of this field (lines, horizontally scrolling,
-     * transformation method) to be for a single-line input.
+     * 设置该项目（行类型、横向滚动、变换方法）为单行输入形式。
      *
      * @attr ref android.R.styleable#TextView_singleLine
      */
@@ -5928,12 +5926,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * If true, sets the properties of this field (lines, horizontally
-     * scrolling, transformation method) to be for a single-line input;
-     * if false, restores these to the default conditions.
-     * Note that calling this with false restores default conditions,
-     * not necessarily those that were in effect prior to calling
-     * it with true.
+     * 如果为真，则设置该项目（行类型、横向滚动、变换方法）为单行输入形式；
+     * 如果为假，恢复为默认条件。注意，使用“假”来调用该函数，恢复默认形式，
+     * 而不是使用“真”调用该函数时的效果。
      *
      * @attr ref android.R.styleable#TextView_singleLine
      */
@@ -5986,8 +5981,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets how many times to repeat the marquee animation. Only applied if the
-     * TextView has marquee enabled. Set to -1 to repeat indefinitely.
+     * 设置走马灯动画重复显示的次数。只有当 TextView 允许走马灯动画时。
+     * 设置为 -1 为无穷多次。
      *
      * @attr ref android.R.styleable#TextView_marqueeRepeatLimit
      */
@@ -5996,8 +5991,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns where, if anywhere, words that are longer than the view
-     * is wide should be ellipsized.
+     * 返回由于单词长度超过视图宽度被省略的地方。
      */
     @ViewDebug.ExportedProperty
     public TextUtils.TruncateAt getEllipsize() {
@@ -6005,8 +5999,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Set the TextView so that when it takes focus, all the text is
-     * selected.
+     * 设置在视图得到焦点时全选与否。
      *
      * @attr ref android.R.styleable#TextView_selectAllOnFocus
      */
@@ -6020,7 +6013,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Set whether the cursor is visible.  The default is true.
+     * 设置光标是否可见。默认值为真（可见）。
      *
      * @attr ref android.R.styleable#TextView_cursorVisible
      */
@@ -6213,45 +6206,37 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * This method is called when the text is changed, in case any
-     * subclasses would like to know.
+     * 在文本变更时调用该方法，任何子类都应该知道该事件发生了。
      *
-     * @param text The text the TextView is displaying.
-     * @param start The offset of the start of the range of the text
-     *              that was modified.
-     * @param before The offset of the former end of the range of the
-     *               text that was modified.  If text was simply inserted,
-     *               this will be the same as <code>start</code>.
-     *               If text was replaced with new text or deleted, the
-     *               length of the old text was <code>before-start</code>.
-     * @param after The offset of the end of the range of the text
-     *              that was modified.  If text was simply deleted,
-     *              this will be the same as <code>start</code>.
-     *              If text was replaced with new text or inserted,
-     *              the length of the new text is <code>after-start</code>.
+     * @param text TextView 显示的文本。
+     * @param start 被编辑文本的起始位置。
+     * @param before 变更前被编辑文本的结束位置。如果指示插入，该值与
+     *               <code>start</code>相同。如果是用新文本替换或删除，
+     *               旧文本的长度为<code>before-start</code>的结果。
+     * @param after 变更后被编辑文本的结束位置。如果只是删除，该值与
+     *              <code>start</code>相同。如果是用新文本替换或插入，
+     *              新文本的长度为<code>after-start</code>的结果。
      */
     protected void onTextChanged(CharSequence text,
                                  int start, int before, int after) {
     }
 
     /**
-     * This method is called when the selection has changed, in case any
-     * subclasses would like to know.
+     * 在选择状态变更时调用该方法，任何子类都应该知道该事件发生了。
      * 
-     * @param selStart The new selection start location.
-     * @param selEnd The new selection end location.
+     * @param selStart 新选择的起始位置。
+     * @param selEnd 新选择的结束位置。
      */
     protected void onSelectionChanged(int selStart, int selEnd) {
     }
     
     /**
-     * Adds a TextWatcher to the list of those whose methods are called
-     * whenever this TextView's text changes.
+     * 向在 TextView 文本变更时调用的方法列表中添加一个 TextWatcher 对象。
      * <p>
-     * In 1.0, the {@link TextWatcher#afterTextChanged} method was erroneously
-     * not called after {@link #setText} calls.  Now, doing {@link #setText}
-     * if there are any text changed listeners forces the buffer type to
-     * Editable if it would not otherwise be and does call this method.
+     * 在 1.0 版时，在调用 {@link #setText} 之后，错误的没有调用
+     * {@link TextWatcher#afterTextChanged} 方法。现在，在调用 {@link #setText}
+     * 时，如果变更了任何文本，会强制将缓存类型改为可编辑并调用
+     * {@link TextWatcher#afterTextChanged} 方法。
      */
     public void addTextChangedListener(TextWatcher watcher) {
         if (mListeners == null) {
@@ -6262,9 +6247,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Removes the specified TextWatcher from the list of those whose
-     * methods are called
-     * whenever this TextView's text changes.
+     * 从用于在 TextView 文本变更时调用的放列表中，移除指定的 TextWatcher。
      */
     public void removeTextChangedListener(TextWatcher watcher) {
         if (mListeners != null) {
