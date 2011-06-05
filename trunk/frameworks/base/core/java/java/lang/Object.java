@@ -311,16 +311,15 @@ public class Object {
     public final native void notifyAll();
 
     /**
-     * Returns a string containing a concise, human-readable description of this
-     * object. Subclasses are encouraged to override this method and provide an
-     * implementation that takes into account the object's type and data. The
-     * default implementation is equivalent to the following expression:
+     * 返回一个简明但易于读懂的该对象的描述. 建议所有子类都重写此方法，
+     * 实现时要注意对象的类型和数据。默认实现返回如下类型的字符串：
      * <pre>
      *   getClass().getName() + '@' + Integer.toHexString(hashCode())</pre>
-     * <p>See <a href="{@docRoot}/reference/java/lang/Object.html#writing_toString">Writing a useful {@code toString} method</a>
-     * if you intend implementing your own {@code toString} method.
+     * <p>如果你打算实现自己的{@code toString}方法，参见
+     * <a href="{@docRoot}/reference/java/lang/Object.html#writing_toString">
+     * 写出有用的{@code toString}方法</a>。
      *
-     * @return a printable representation of this object.
+     * @return 返回该对象的字符串表示。
      */
     public String toString() {
         return getClass().getName() + '@' + Integer.toHexString(hashCode());

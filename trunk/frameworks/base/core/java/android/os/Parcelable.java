@@ -81,11 +81,10 @@ public interface Parcelable {
     public int describeContents();
     
     /**
-     * Flatten this object in to a Parcel.
+     * 将本对象放入包裹中。
      * 
-     * @param dest The Parcel in which the object should be written.
-     * @param flags Additional flags about how the object should be written.
-     * May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+     * @param dest 对象将放入的包裹。
+     * @param flags 对象放入包裹的方法。可以是 0 或{@link #PARCELABLE_WRITE_RETURN_VALUE}.
      */
     public void writeToParcel(Parcel dest, int flags);
 
