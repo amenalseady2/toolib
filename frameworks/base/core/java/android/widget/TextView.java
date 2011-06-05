@@ -2174,8 +2174,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
 
     /**
-     * Sets line spacing for this TextView.  Each line will have its height
-     * multiplied by <code>mult</code> and have <code>add</code> added to it.
+     * 设置 TextView 的行间距。每行的高度包含 <code>mult</code> 和 <code>add</code>
+     * 的乘积的高度的空白。
      *
      * @attr ref android.R.styleable#TextView_lineSpacingExtra
      * @attr ref android.R.styleable#TextView_lineSpacingMultiplier
@@ -2192,18 +2192,16 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Convenience method: Append the specified text to the TextView's
-     * display buffer, upgrading it to BufferType.EDITABLE if it was
-     * not already editable.
+     * 用于方便的将指定文本放入 TextView 的显示缓冲区，如果不是可编辑状态，
+     * 将其转换为 BufferType.EDITABLE 的函数。
      */
     public final void append(CharSequence text) {
         append(text, 0, text.length());
     }
 
     /**
-     * Convenience method: Append the specified text slice to the TextView's
-     * display buffer, upgrading it to BufferType.EDITABLE if it was
-     * not already editable.
+     * 用于方便的将指定文本替换 TextView 的显示缓冲区的指定内容，如果不是
+     * 可编辑状态，将其转换为 BufferType.EDITABLE 的函数。
      */
     public void append(CharSequence text, int start, int end) {
         if (!(mText instanceof Editable)) {
@@ -2267,8 +2265,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * User interface state that is stored by TextView for implementing
-     * {@link View#onSaveInstanceState}.
+     * 实现了 {@link View#onSaveInstanceState}，用户保存 TextView 状态的用户接口.
      */
     public static class SavedState extends BaseSavedState {
         int selStart;
@@ -2442,6 +2439,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
+     * 控制该文本视图是否在冻结时保存象游标位置这样的动态状态以外，
+     * 还要保存全部文本内容。
      * Control whether this text view saves its entire text contents when
      * freezing to an icicle, in addition to dynamic state such as cursor
      * position.  By default this is false, not saving the text.  Set to true
