@@ -1,15 +1,17 @@
-page.title=Notepad Exercise 1
-parent.title=Notepad Tutorial
+page.title=记事本练习1
+parent.title=记事本教程
 parent.link=index.html
 @jd:body
 
 
-<p><em>在这个练习中，你将要创建一个简单的记事本列表，用户可以添加新的记事但是不能编辑他们。这个练习示范了如下内容：</em></p>
+<p><em>在这个练习中，你将要创建一个简单的记事本列表，用户可以添加新的记事但是不能编辑他们。
+这个练习示范了如下内容：</em></p>
 <ul>
 	<li><em><code>ListActivities</code>的基础知识以及创建和处理菜单选项。</em></li>
 	<li><em>如何使用 SQLite 数据库存储记事。</em></li>
 	<li><em>如何使用 SimpleCursorAdapter 把数据库的游标绑定到 ListView。</em></li>
-	<li><em>屏幕布局的基础知识，包括如何摆放列表视图、如何为活动菜单添加菜单项和活动如何处理这些菜单的选中操作。</em></li>
+	<li><em>屏幕布局的基础知识，包括如何摆放列表视图、
+	如何为活动菜单添加菜单项和活动如何处理这些菜单的选中操作。</em></li>
 </ul>
 
 <div style="float:right;white-space:nowrap">
@@ -24,15 +26,18 @@ parent.link=index.html
 
 	<p>在 Eclipse 中打开<code>Notepadv1</code>项目。</p>
     
-    <p><code>Notepadv1</code>作为起始项目，它象你在<a href="{@docRoot}resources/tutorials/hello-world.html">Hello World</a>
+    <p><code>Notepadv1</code>作为起始项目，它象你在
+    <a href="{@docRoot}resources/tutorials/hello-world.html">Hello World</a>
 中看到的一样，做了一些准备模板的工作。</p>
     
   <ol>
-	<li>通过单击<strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Android Project</strong> 创建新的 Android 项目。</li>
-	<li>在新 Android 项目对话框中选择<strong>Create project from existing source</strong>。</li>
+	<li>通过单击<strong>File</strong> &gt; <strong>New</strong> &gt; 
+	<strong>Android Project</strong> 创建新的 Android 项目。</li>
+	<li>在新 Android 项目对话框中选择
+	<strong>Create project from existing source</strong>。</li>
 	<li>单击<strong>Browse</strong>并定位到<code>NotepadCodeLab</code>文件夹（在
-	<a href="{@docRoot}resources/tutorials/notepad/index.html#preparing">事前准备</a>
-	时下载的），选择<code>Notepadv1</code>。</li>
+	<a href="{@docRoot}resources/tutorials/notepad/index.html#preparing">
+	事前准备</a>时下载的），选择<code>Notepadv1</code>。</li>
 
     <li>
       The Project Name and other properties should be automatically filled for you. 
@@ -40,92 +45,110 @@ parent.link=index.html
       lowest platform version available. Also add an integer to the Min SDK Version field 
       that matches the API Level of the selected Build Target.</li>
 
-	<li>单击<strong>Finish</strong>按钮。<code>Notepadv1</code>项目会被打开，并且可以在Eclipse的
-	Package Explorer中看到它。</li>
+	<li>单击<strong>Finish</strong>按钮。<code>Notepadv1</code>项目会被打开，
+	并且可以在Eclipse的 Package Explorer中看到它。</li>
   </ol>
   
-    <p>如果你看到了关于<code>AndroidManifest.xml</code>的错误，或者与Android的zip文件有关的问题，在项目上单击右键，
-选择<strong>Android Tools</strong> &gt; <strong>Fix Project Properties</strong>。
-（项目在错误的位置查找了库文件，该操作将为你修复它。）</p>
+    <p>如果你看到了关于<code>AndroidManifest.xml</code>的错误，或者与 Android
+    的zip文件有关的问题，在项目上单击右键，选择<strong>Android Tools</strong> &gt; 
+    <strong>Fix Project Properties</strong>。（项目在错误的位置查找了库文件，
+    该操作将为你修复它。）</p>
   <h2>第二步</h2>
 
   <div class="sidebox-wrapper">
   <div class="sidebox">
     <h2>访问和修改数据</h2>
-    <p>在这个练习中，我们使用 SQLite 数据库来存储我们的数据。这在只有<em>你的</em>应用程序需要访问或修改数据的时候是有用的。
-如果你希望其他的活动访问或修改数据，你必须使用 {@link android.content.ContentProvider ContentProvider} 来提供数据。</p>
-<p>如果你对此感兴趣的话，可以找到更多的<a href="{@docRoot}guide/topics/providers/content-providers.html">内容提供者</a>或者整个
-<a href="{@docRoot}guide/topics/data/data-storage.html">数据存储</a>主题。SDK 的<code>samples/</code>文件夹中的记事本示例
-包含一个如何创建 ContentProvider 的例子。
+    <p>在这个练习中，我们使用 SQLite 数据库来存储我们的数据。这在只有<em>你的</em>
+    应用程序需要访问或修改数据的时候是有用的。如果你希望其他的活动访问或修改数据，你必须使用
+    {@link android.content.ContentProvider ContentProvider} 来提供数据。</p>
+<p>如果你对此感兴趣的话，可以找到更多的
+<a href="{@docRoot}guide/topics/providers/content-providers.html">内容提供者
+</a>或者整个<a href="{@docRoot}guide/topics/data/data-storage.html">数据存储
+</a>主题。SDK 的<code>samples/</code>文件夹中的记事本示例包含一个如何创建
+ContentProvider 的例子。
   </div>
   </div>
 
-<p>来看一下<code>NotesDbAdapter</code>类&mdash;它用来封装对 SQLite 数据库的数据访问，
-这个数据库将保存我们的记事本的数据并允许我们更新它。</p>
-<p>在该类的顶部是一些常量定义，这些常量将在应用程序需要从数据库中的适当字段名中查找数据时使用。
+<p>来看一下<code>NotesDbAdapter</code>类&mdash;它用来封装对 SQLite 
+数据库的数据访问，这个数据库将保存我们的记事本的数据并允许我们更新它。</p>
+<p>在该类的顶部是一些常量定义，
+这些常量将在应用程序需要从数据库中的适当字段名中查找数据时使用。
 这里定义了创建数据库的字符串，用于在没有数据库时创建新数据库的约束。</p>
-<p>我们的数据苦名字是<code>data</code>，只有一个叫<code>notes</code>的表，他包含三个字段：<code>_id</code>、
-<code>title</code>和<code>body</code>。<code>_id</code>使用下划线惯例命名，在 Android SDK 中表示一个数值，
-为了跟踪记录状态。<code>_id</code>一般在查询或者更新数据库的时候必须指定（当列明确的时候）。另外两个字段是简单的
-文本字段，用于存储数据。</p>
-<p><code>NotesDbAdapter</code>构造函数取得一个 Context，使他可以于 Android 操作系统通讯。这对于需要通过什么方法来
-访问系统的类来说，太常用了。Activity类实现了 Context 类，所以一般当你需要 Context 的时候，只要从你的 Activity 传递
-<code>this</code>即可。</p>
-<p><code>open()</code>方法打开一个内部类实现的DatabaseHelper类的一个实例，
-他通过调用<code>getWritableDatabase()</code>函数来为我们建立或打开数据库。</p>
+<p>我们的数据苦名字是<code>data</code>，只有一个叫<code>notes</code>的表，
+他包含三个字段：<code>_id</code>、<code>title</code>和<code>body</code>。
+<code>_id</code>使用下划线惯例命名，在 Android SDK 中表示一个数值，
+为了跟踪记录状态。<code>_id</code>一般在查询或者更新数据库的时候必须指定
+（当列明确的时候）。另外两个字段是简单的文本字段，用于存储数据。</p>
+<p><code>NotesDbAdapter</code>构造函数取得一个 Context，使他可以于
+Android 操作系统通讯。这对于需要通过什么方法来访问系统的类来说，太常用了。
+Activity类实现了 Context 类，所以一般当你需要 Context 的时候，只要从你的
+Activity 传递<code>this</code>即可。</p>
+<p><code>open()</code>方法打开一个内部类实现的DatabaseHelper
+类的一个实例，他通过调用<code>getWritableDatabase()</code>
+函数来为我们建立或打开数据库。</p>
 <p><code>close()</code>方法只是关闭数据库并释放与连接相关的资源。</p>
-<p><code>createNote()</code>方法接收新记事的标题和内容两个字符串，在数据库中建立记事。
-成功时返回新建的记事的<code>_id</code>字段的值。</p>
-<p><code>deleteNote()</code>方法接收一个即存记事的<var>rowId</var>，并从数据库中删除该记事。</p>
+<p><code>createNote()</code>方法接收新记事的标题和内容两个字符串，
+在数据库中建立记事。成功时返回新建的记事的<code>_id</code>字段的值。</p>
+<p><code>deleteNote()</code>方法接收一个即存记事的<var>rowId</var>，
+并从数据库中删除该记事。</p>
 
-<p><code>fetchAllNotes()</code>方法执行一个查询并返回可操作数据库中所以记事的 {@link android.database.Cursor}。
-	对<code>query()</code>方法的调用要好好理解一下。第一个参数是要查询的数据库表名
-	（这里的<code>DATABASE_TABLE</code>是“notes”）。下一个参数是我们要查询的字段列表，<code>_id</code>、
-	<code>title</code>和<code>body</code>被放在了字符串数组中。剩下的字段依次是：<code>selection</code>、
-	<code>selectionArgs</code>、<code>groupBy</code>、<code>having</code>、<code>orderBy</code>。
-	这些都设成<code>null</code>意味着我们想取得所有数据，不需要分组、使用默认顺序。
-	更多信息参见 {@link android.database.sqlite.SQLiteDatabase SQLiteDatabase}。</p>
-<p class="note"><b>注意：</b>返回的是游标而不是行的集合。这样可以使Android更有效率的使用资源－－代替在内存中
-直接存放大量数据，游标可以在需要的时候取得或释放数据，对于存有大量数据的表来说更有效率。</p>
+<p><code>fetchAllNotes()</code>方法执行一个查询并返回可操作数据库中所以记事的
+{@link android.database.Cursor}。对<code>query()</code>方法的调用要好好理解一下。
+第一个参数是要查询的数据库表名（这里的<code>DATABASE_TABLE</code>是“notes”）。
+下一个参数是我们要查询的字段列表，<code>_id</code>、<code>title</code>和
+<code>body</code>被放在了字符串数组中。剩下的字段依次是：<code>selection</code>、
+<code>selectionArgs</code>、<code>groupBy</code>、<code>having</code>、
+<code>orderBy</code>。这些都设成<code>null</code>意味着我们想取得所有数据，
+不需要分组、使用默认顺序。	更多信息参见 
+{@link android.database.sqlite.SQLiteDatabase SQLiteDatabase}。</p>
+<p class="note"><b>注意：</b>返回的是游标而不是行的集合。这样可以使
+Android更有效率的使用资源－－代替在内存中直接存放大量数据，
+游标可以在需要的时候取得或释放数据，对于存有大量数据的表来说更有效率。</p>
 
-<p><code>fetchNote()</code>函数与<code>fetchAllNotes()</code>相似，只是他只取得由<var>rowId</var>
-指定的一条记事。他使用了稍有不同的 {@link android.database.sqlite.SQLiteDatabase}
-的<code>query()</code>方法。第一个参数（设成<em>true</em>）表示我们需要不冗余的结果。
-<var>selection</var>参数（第四个参数）设为只检索“where _id =”等于我们传入的<var>rowId</var>的列。
+<p><code>fetchNote()</code>函数与<code>fetchAllNotes()</code>相似，
+只是他只取得由<var>rowId</var>指定的一条记事。他使用了稍有不同的 
+{@link android.database.sqlite.SQLiteDatabase}的<code>query()</code>方法。
+第一个参数（设成<em>true</em>）表示我们需要不冗余的结果。<var>selection</var>
+参数（第四个参数）设为只检索“where _id =”等于我们传入的<var>rowId</var>的列。
 返回结果是只有一行的游标。</p>
-<p>最后，<code>updateNote()</code>方法传入<var>rowId</var>、<var>title</var>和<var>body</var>，
-并使用{@link android.content.ContentValues ContentValues}实例更新
-<var>rowId</var>指定的记事。</p>
+<p>最后，<code>updateNote()</code>方法传入<var>rowId</var>、<var>title</var>
+和<var>body</var>，并使用{@link android.content.ContentValues ContentValues}
+实例更新<var>rowId</var>指定的记事。</p>
 
 <h2 style="clear:right;">第三步</h2>
 
 	<div class="sidebox-wrapper">
   <div class="sidebox">
     <h2>布局和活动</h2>
-      <p>大多数的活动类
-都会有布局与之关联。布局是活动呈现给用户的“脸面”。现在，我们的布局将占据整个屏幕，提供一个记事的列表。</p>
-    <p>全屏显示并不是
-活动的唯一选项。你可能想使用<a href="{@docRoot}resources/faq/commontasks.html#floatingorfull">浮动布局</a>
-（例如，一个<a href="{@docRoot}resources/faq/commontasks.html#dialogsandalerts">对话框或警告</a>），
-或者你不需要布局（活动对用户来说不可见，除非你为他使用了某种形式的布局）。</p>
+      <p>大多数的活动类都会有布局与之关联。布局是活动呈现给用户的“脸面”。
+      现在，我们的布局将占据整个屏幕，提供一个记事的列表。</p>
+    <p>全屏显示并不是活动的唯一选项。你可能想使用
+    <a href="{@docRoot}resources/faq/commontasks.html#floatingorfull">
+    浮动布局</a>（例如，一个
+    <a href="{@docRoot}resources/faq/commontasks.html#dialogsandalerts">
+    对话框或警告</a>），或者你不需要布局（活动对用户来说不可见，
+    除非你为他使用了某种形式的布局）。</p>
   </div>
   </div>
     
-    <p>从<code>res/layout</code>打开<code>notepad_list.xml</code>文件看一下。（你可以按一下底部的带有<em>xml</em>的
-选项卡，查看XML的标记。）</p>
+    <p>从<code>res/layout</code>打开<code>notepad_list.xml</code>
+    文件看一下。（你可以按一下底部的带有<em>xml</em>的选项卡，查看XML的标记。）</p>
      
     <p>这是一个近乎空的布局定义文件。你应该知道关于布局文件的如下信息：</p>
    
   <ul>
-	<li>所有的Android布局文件必须以XML定义为第一行：<code>&lt;?xml	version="1.0" encoding="utf-8"?&gt;</code>。</li>
+	<li>所有的Android布局文件必须以XML定义为第一行：
+	<code>&lt;?xml	version="1.0" encoding="utf-8"?&gt;</code>。</li>
 	<li>接下来的定义一般（不总是）是某种布局定义，本例为<code>LinearLayout</code>。</li>
-	<li>Android的XML命名空间应该定义在最顶级的组件或布局中，以便于在后面的文件中使用<code>android:</code>标签。
+	<li>Android的XML命名空间应该定义在最顶级的组件或布局中，以便于在后面的文件中使用
+	<code>android:</code>标签。
 	<p><code>xmlns:android="http://schemas.android.com/apk/res/android"</code></p>
 	</li>
   </ul>
 
   <h2 style="clear:right;">第四步</h2>
-    <p>我们需要建立布局，显示我们的记事列表。在<code>LinearLayout</code>元素中加入代码，是文件看起来想这样：</p>
+    <p>我们需要建立布局，显示我们的记事列表。在<code>LinearLayout</code>元素中加入代码，
+    使文件看起来像这样：</p>
     <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -143,18 +166,20 @@ parent.link=index.html
 &lt;/LinearLayout&gt;
 </pre>
   <ul>
-	<li><code>ListView</code>和<code>TextView</code>标签的id字符串中的<strong>&#64;</strong>符号的意思是，
-	XML解析器将把他后面的字符串解析为使用该ID的资源。</li>
-	<li><code>ListView</code>和<code>TextView</code>可以是二选一的视图，一次只能显示他们中的一个。ListView
-	用于有记事显示的时候，TextView（有一个缺省值“还没有记事！”，在<code>res/values/strings.xml</code>
-	中定义的字符串资源）在没有任何记事时显示。</li>
-	<li><code>list</code>和<code>empty</code>ID由Android平台提供，我们必须在<code>id</code>前面写上
-	<code>android:</code>（例如，<code>@android:id/list</code>）。</li>
+	<li><code>ListView</code>和<code>TextView</code>标签的id字符串中的
+	<strong>&#64;</strong>符号的意思是，	XML解析器将把他后面的字符串解析为使用该ID的资源。</li>
+	<li><code>ListView</code>和<code>TextView</code>可以是二选一的视图，
+	一次只能显示他们中的一个。ListView	用于有记事显示的时候，TextView（有一个缺省值
+	“还没有记事！”，在<code>res/values/strings.xml</code>中定义的字符串资源）
+	在没有任何记事时显示。</li>
+	<li><code>list</code>和<code>empty</code>ID由Android平台提供，我们必须在
+	<code>id</code>前面写上<code>android:</code>（例如，<code>@android:id/list</code>）。</li>
 	<li>包含<code>empty</code>id的视图会自动使用，当{@link android.widget.ListAdapter}
   没有用于ListView的数据时。默认情况，ListAdapter知道去查找这个id。另外，你可以在ListView上使用
   {@link android.widget.AdapterView#setEmptyView(View)}	来改变默认的空视图。
-	<p>更广泛的说，<code>android.R</code>类是平台为你预先定义的一套资源，你的项目的<code>R</code>类是你项目的资源的集合。
-	在<code>android.R</code>资源类中资源可以在XML文件中使用，以<code>android:</code>命名空间前缀开始（象在这里看到的）。</p>
+	<p>更广泛的说，<code>android.R</code>类是平台为你预先定义的一套资源，你的项目的
+	<code>R</code>类是你项目的资源的集合。	在<code>android.R</code>资源类中资源可以在
+	XML文件中使用，以<code>android:</code>命名空间前缀开始（象在这里看到的）。</p>
 	</li>
   </ul>
 
@@ -164,11 +189,12 @@ parent.link=index.html
   <div class="sidebox">
     <h2>资源和R类</h2>
     <p>Eclipse项目的
-res/下的文件夹用于存放资源。 在res/下有<a href="{@docRoot}resources/faq/commontasks.html#filelist">固定结构</a>的文件夹和文件。</p>
+res/下的文件夹用于存放资源。 在res/下有
+<a href="{@docRoot}resources/faq/commontasks.html#filelist">固定结构</a>的文件夹和文件。</p>
 <p >在这些文件夹和文件中
-定义的资源，在R类中有固定的项目，从你的应用程序中可以简单的访问它们。R类是Eclipse插件根据res/文件夹中的内容自动生成的
-（如果你使用命令行工具，由aapt生成）。而且，他们会被打包并作为你的应用程序的一部分来部署。
-    </p>
+定义的资源，在R类中有固定的项目，从你的应用程序中可以简单的访问它们。R类是Eclipse插件根据
+res/文件夹中的内容自动生成的（如果你使用命令行工具，由aapt生成）。而且，
+他们会被打包并作为你的应用程序的一部分来部署。</p>
   </div>
   </div>
 
@@ -183,30 +209,31 @@ res/下的文件夹用于存放资源。 在res/下有<a href="{@docRoot}resourc
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;/&gt;</pre>
 	<p>这是用于每个记事标题行的视图&mdash;他只有一个文本字段。</p>
-	<p>本例中我们建立了一个叫<code>text1</code>的新id。id字符串中<strong>@</strong>后面的<strong>+</strong>
-	意思是，如果该id不存在的话，自动创建一个资源。那么，我们动态的定义并使用<code>text1</code>。</p>
+	<p>本例中我们建立了一个叫<code>text1</code>的新id。id字符串中<strong>@</strong>后面的
+	<strong>+</strong>意思是，如果该id不存在的话，自动创建一个资源。那么，我们动态的定义并使用
+	<code>text1</code>。</p>
 	</li>
 	<li>保存文件。</li>
   </ol>
-      <p>在项目中打开<code>R.java</code>类看一下，你会看到新的定义<code>notes_row</code>和<code>text1</code>
-（我们新定义的），这意味着我们能够通过我们的代码访问他们。</p>
+      <p>在项目中打开<code>R.java</code>类看一下，你会看到新的定义<code>notes_row</code>
+      和<code>text1</code>（我们新定义的），这意味着我们能够通过我们的代码访问他们。</p>
 
   <h2 style="clear:right;">第六步</h2>
-<p>接下来打开<code>Notepadv1</code>类的源代码。下面步骤，我们要修改该类，使其成为列表适配器，显示我们的记事并
-允许我们添加新记事。</p>
+<p>接下来打开<code>Notepadv1</code>类的源代码。下面步骤，我们要修改该类，使其成为列表适配器，
+显示我们的记事并允许我们添加新记事。</p>
 
-<p><code>Notepadv1</code>继承自<code>Activity</code>的子类<code>ListActivity</code>，他扩展了一些用于
-列表的功能。例如：在屏幕上显示任意数量的列表项、在列表项目间移动和允许选择列表项。</p>
-<p>看一下<code>Notepadv1</code>类的既存代码。有一个当前未使用的成员变量<code>mNoteNumber</code>，我们将用他
-来建立编了号的记事标题。</p>
+<p><code>Notepadv1</code>继承自<code>Activity</code>的子类<code>ListActivity</code>，
+他扩展了一些用于列表的功能。例如：在屏幕上显示任意数量的列表项、在列表项目间移动和允许选择列表项。</p>
+<p>看一下<code>Notepadv1</code>类的既存代码。有一个当前未使用的成员变量
+<code>mNoteNumber</code>，我们将用他来建立编了号的记事标题。</p>
 <p>有三个已定义的覆盖方法：<code>onCreate</code>、<code>onCreateOptionsMenu</code>和
 <code>onOptionsItemSelected</code>；我们需要为他们填写代码：</p>
 
     <ul>
 	<li><code>onCreate()</code>在活动被启动是调用&mdash;有点儿象活动的“main”方法。
 	当他运行时，我们使用该方法设置资源和活动的状态。</li>
-	<li><code>onCreateOptionsMenu()</code>用于为活动建立菜单。该菜单在用户按下menu按钮时显示用户可选择的选项列表
-	（比如“添加记事”）。</li>
+	<li><code>onCreateOptionsMenu()</code>用于为活动建立菜单。该菜单在用户按下menu
+	按钮时显示用户可选择的选项列表（比如“添加记事”）。</li>
 	<li><code>onOptionsItemSelected()</code>是菜单处理的另一半，它用于处理菜单的事件
 	（例如，当用户选择“添加记事”时的事件）。</li>
       </li>
