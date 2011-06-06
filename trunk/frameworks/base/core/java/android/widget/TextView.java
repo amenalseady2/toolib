@@ -2440,16 +2440,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     /**
      * 控制该文本视图是否在冻结时保存象游标位置这样的动态状态以外，
-     * 还要保存全部文本内容。
-     * Control whether this text view saves its entire text contents when
-     * freezing to an icicle, in addition to dynamic state such as cursor
-     * position.  By default this is false, not saving the text.  Set to true
-     * if the text in the text view is not being saved somewhere else in
-     * persistent storage (such as in a content provider) so that if the
-     * view is later thawed the user will not lose their data.
+     * 还要保存全部文本内容。默认该值为假，不保存文本。如果视图中的文本
+     * 没有保存到持久存储器（比如内容提供者）中，设为真可以使视图恢复后
+     * 保持用户数据不丢失。
      *
-     * @param freezesText Controls whether a frozen icicle should include the
-     * entire text data: true to include it, false to not.
+     * @param freezesText 控制冻结时是否保存全部文本数据：为真则包含，为假则不包含。
      *
      * @attr ref android.R.styleable#TextView_freezesText
      */
@@ -2459,10 +2454,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Return whether this text view is including its entire text contents
-     * in frozen icicles.
+     * 返回文本视图是否在冻结时包含整个文本数据。
      *
-     * @return Returns true if text is included, false if it isn't.
+     * @return 如果包含文本数据则返回真；否则返回假。
      *
      * @see #setFreezesText
      */
@@ -2473,7 +2467,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * Sets the Factory used to create new Editables.
+     * 设置用于生成新的可编辑对象的工厂类。
      */
     public final void setEditableFactory(Editable.Factory factory) {
         mEditableFactory = factory;
@@ -2481,7 +2475,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the Factory used to create new Spannables.
+     * 设置用于生成新的Spannables的工厂类。 
      */
     public final void setSpannableFactory(Spannable.Factory factory) {
         mSpannableFactory = factory;
@@ -2489,13 +2483,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the string value of the TextView. TextView <em>does not</em> accept
-     * HTML-like formatting, which you can do with text strings in XML resource files.
-     * To style your strings, attach android.text.style.* objects to a
-     * {@link android.text.SpannableString SpannableString}, or see the
+     * 设置 TextView 的字符串值。TextView <em>不</em> 接受类 HTML 格式，
+     * 你可以在 XML 资源文件中设置字符串文本。设置字符串风格可以将
+     * android.text.style.* 对象关联到
+     * {@link android.text.SpannableString SpannableString}，或者参考
      * <a href="{@docRoot}guide/topics/resources/available-resources.html#stringresources">
-     * Available Resource Types</a> documentation for an example of setting 
-     * formatted text in the XML resource file.
+     * 既存资源类型</a> 文档中在 XML 资源文件中设置文本格式的示例。
      *
      * @attr ref android.R.styleable#TextView_text
      */
@@ -2505,10 +2498,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Like {@link #setText(CharSequence)},
-     * except that the cursor position (if any) is retained in the new text.
+     * 类似 {@link #setText(CharSequence)}，只是在新的文本中保持光标位置（如果有）。
      *
-     * @param text The new text to place in the text view.
+     * @param text 放入 TextView 中的新文本。
      *
      * @see #setText(CharSequence)
      */
@@ -2672,11 +2664,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the TextView to display the specified slice of the specified
-     * char array.  You must promise that you will not change the contents
-     * of the array except for right before another call to setText(),
-     * since the TextView has no way to know that the text
-     * has changed and that it needs to invalidate and re-layout.
+     * 设置 TextView 显示字符数组中的指定片段。你必须保证不去更改数组的内容，
+     * 除非在调用下一个 setText() 之前，因为 TextView 无从知道文本发生了变更，
+     * 不能更新其内容。
      */
     public final void setText(char[] text, int start, int len) {
         int oldlen = 0;
@@ -2767,8 +2757,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Like {@link #setText(CharSequence, android.widget.TextView.BufferType)},
-     * except that the cursor position (if any) is retained in the new text.
+     * 类似 {@link #setText(CharSequence, android.widget.TextView.BufferType)}，
+     * 只是在新的文本中保持光标位置（如果有）。
      *
      * @see #setText(CharSequence, android.widget.TextView.BufferType)
      */
@@ -2798,9 +2788,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the text to be displayed when the text of the TextView is empty.
-     * Null means to use the normal empty text. The hint does not currently
-     * participate in determining the size of the view.
+     * 设置 TextView 为空时显示的文本。null意味着使用正常的空文本。
+     * 提示文字影响对视图大小的检测。
      *
      * @attr ref android.R.styleable#TextView_hint
      */
@@ -2818,8 +2807,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the text to be displayed when the text of the TextView is empty,
-     * from a resource.
+     * 用资源来设置 TextView 为空时显示的提示文本。
      *
      * @attr ref android.R.styleable#TextView_hint
      */
@@ -2829,8 +2817,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns the hint that is displayed when the text of the TextView
-     * is empty.
+     * 返回  TextView 为空时显示的提示文本
+     * 
+     * @return 返回  TextView 为空时显示的提示文本。
      *
      * @attr ref android.R.styleable#TextView_hint
      */
@@ -2840,12 +2829,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Set the type of the content with a constant as defined for
-     * {@link EditorInfo#inputType}.  This will take care of changing
-     * the key listener, by calling {@link #setKeyListener(KeyListener)}, to
-     * match the given content type.  If the given content type is
-     * {@link EditorInfo#TYPE_NULL} then a soft keyboard will
-     * not be displayed for this text view.
+     * 用{@link EditorInfo#inputType}中的常量设置内容的类型。
+     * 设置了该值就要注意，在使用 {@link #setKeyListener(KeyListener)}
+     * 设置键盘监听器时使用匹配的内容类型。如果设置的内容类型为
+     * {@link EditorInfo#TYPE_NULL}，系统将不为该文本视图显示软键盘。
      *
      * @see #getInputType()
      * @see #setRawInputType(int)
@@ -2928,8 +2915,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Directly change the content type integer of the text view, without
-     * modifying any other state.
+     * 不更改其他状态，直接变更文本视图的内容类型。
      * @see #setInputType(int)
      * @see android.text.InputType
      * @attr ref android.R.styleable#TextView_inputType
@@ -2983,7 +2969,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Get the type of the content.
+     * 取得内容类型。
      *
      * @see #setInputType(int)
      * @see android.text.InputType
@@ -2993,9 +2979,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Change the editor type integer associated with the text view, which
-     * will be reported to an IME with {@link EditorInfo#imeOptions} when it
-     * has focus.
+     * 更改关联到文本视图的编辑器类型，有焦点时传给 IME 的
+     * {@link EditorInfo#imeOptions}。
+     * 
      * @see #getImeOptions
      * @see android.view.inputmethod.EditorInfo
      * @attr ref android.R.styleable#TextView_imeOptions
@@ -3008,7 +2994,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Get the type of the IME editor.
+     * 取得 IME 编辑器类型。
      *
      * @see #setImeOptions(int)
      * @see android.view.inputmethod.EditorInfo
@@ -3019,9 +3005,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Change the custom IME action associated with the text view, which
-     * will be reported to an IME with {@link EditorInfo#actionLabel}
-     * and {@link EditorInfo#actionId} when it has focus.
+     * 更改关联到文本视图的可定制 IME 动作，当视图得焦点时通过
+     * {@link EditorInfo#actionLabel} 和 {@link EditorInfo#actionId}
+     * 通知 IME。
      * @see #getImeActionLabel
      * @see #getImeActionId
      * @see android.view.inputmethod.EditorInfo
@@ -3037,7 +3023,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Get the IME action label previous set with {@link #setImeActionLabel}.
+     * 取得之前通过{@link #setImeActionLabel}设置的 IME 动作标签。
      *
      * @see #setImeActionLabel
      * @see android.view.inputmethod.EditorInfo
@@ -3048,7 +3034,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Get the IME action ID previous set with {@link #setImeActionLabel}.
+     * 取得之前通过 {@link #setImeActionLabel} 设置的 IME 动作ID。
      *
      * @see #setImeActionLabel
      * @see android.view.inputmethod.EditorInfo
@@ -3059,12 +3045,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Set a special listener to be called when an action is performed
-     * on the text view.  This will be called when the enter key is pressed,
-     * or when an action supplied to the IME is selected by the user.  Setting
-     * this means that the normal hard key event will not insert a newline
-     * into the text view, even if it is multi-line; holding down the ALT
-     * modifier will, however, allow the user to insert a newline character.
+     * 设置在文本视图执行动作时执行指定的监听器。当按下回车键或用户选择了
+     * IME 支持的动作时，会调用该监听器。设置该监听器意味着，即使文本视图
+     * 支持多行，正常的键盘事件也不会使文本视图添加新行。不过，通过按住
+     * ALT 键，可以添加新行。
      */
     public void setOnEditorActionListener(OnEditorActionListener l) {
         if (mInputContentType == null) {
@@ -3074,21 +3058,16 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
     
     /**
-     * Called when an attached input method calls
-     * {@link InputConnection#performEditorAction(int)
-     * InputConnection.performEditorAction()}
-     * for this text view.  The default implementation will call your action
-     * listener supplied to {@link #setOnEditorActionListener}, or perform
-     * a standard operation for {@link EditorInfo#IME_ACTION_NEXT
-     * EditorInfo.IME_ACTION_NEXT} or {@link EditorInfo#IME_ACTION_DONE
-     * EditorInfo.IME_ACTION_DONE}.
+     * 当关联的输入法为该视图调用了{@link InputConnection#performEditorAction(int)
+     * InputConnection.performEditorAction()} 方法时调用。默认实现会调用你通过
+     * {@link #setOnEditorActionListener}提供的监听器，或者执行标准操作
+     * {@link EditorInfo#IME_ACTION_NEXT EditorInfo.IME_ACTION_NEXT}
+     * 或者 {@link EditorInfo#IME_ACTION_DONE EditorInfo.IME_ACTION_DONE}。
      * 
-     * <p>For backwards compatibility, if no IME options have been set and the
-     * text view would not normally advance focus on enter, then
-     * the NEXT and DONE actions received here will be turned into an enter
-     * key down/up pair to go through the normal key handling.
+     * <p>为了向后兼容，如果没有设置 IME 选项，文本视图不会在回车时移动焦点，
+     * 当收到 NEXT 或 DONE 动作时，会通过正常的键盘事情处理，转换为回车键的按下/抬起事件。
      * 
-     * @param actionCode The code of the action being performed.
+     * @param actionCode 执行的动作代码。
      * 
      * @see #setOnEditorActionListener
      */
@@ -3143,9 +3122,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
     
     /**
-     * Set the private content type of the text, which is the
-     * {@link EditorInfo#privateImeOptions EditorInfo.privateImeOptions}
-     * field that will be filled in when creating an input connection.
+     * 设置文本的私有内容类型，创建输入连接时，会填充
+     * {@link EditorInfo#privateImeOptions EditorInfo.privateImeOptions}。
      *
      * @see #getPrivateImeOptions()
      * @see EditorInfo#privateImeOptions
@@ -3157,7 +3135,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Get the private type of the content.
+     * 取得私有内容类型。
      *
      * @see #setPrivateImeOptions(String)
      * @see EditorInfo#privateImeOptions
@@ -3168,11 +3146,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Set the extra input data of the text, which is the
-     * {@link EditorInfo#extras TextBoxAttribute.extras}
-     * Bundle that will be filled in when creating an input connection.  The
-     * given integer is the resource ID of an XML resource holding an
-     * {@link android.R.styleable#InputExtras &lt;input-extras&gt;} XML tree.
+     * 设置文本的额外输入数据，创建输入连接时，会填充
+     * {@link EditorInfo#extras TextBoxAttribute.extras} 包。
+     * 给定的整数是 XML 树中
+     * {@link android.R.styleable#InputExtras &lt;input-extras&gt;}
+     * 对应的资源 ID。
      *
      * @see #getInputExtras(boolean) 
      * @see EditorInfo#extras
@@ -3187,11 +3165,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Retrieve the input extras currently associated with the text view, which
-     * can be viewed as well as modified.
+     * 取得当前关联到文本视图的额外输入数据。该数据可以查看并修改。
      *
-     * @param create If true, the extras will be created if they don't already
-     * exist.  Otherwise, null will be returned if none have been created.
+     * @param create 如果为真，当额外数据不存在时会创建它。否则，如果没有会返回null。
      * @see #setInputExtras(int)
      * @see EditorInfo#extras
      * @attr ref android.R.styleable#TextView_editorExtras
@@ -3209,21 +3185,18 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns the error message that was set to be displayed with
-     * {@link #setError}, or <code>null</code> if no error was set
-     * or if it the error was cleared by the widget after user input.
+     * 返回用 {@link #setError}设置的用于显示的错误信息；如果没有设置错误信息，
+     * 或者用户输入后错误信息已被小部件清除，则返回<code>null</code>。
      */
     public CharSequence getError() {
         return mError;
     }
 
     /**
-     * Sets the right-hand compound drawable of the TextView to the "error"
-     * icon and sets an error message that will be displayed in a popup when
-     * the TextView has focus.  The icon and error message will be reset to
-     * null when any key events cause changes to the TextView's text.  If the
-     * <code>error</code> is <code>null</code>, the error message and icon
-     * will be cleared.
+     * 设置 TextView 右侧的复合可绘制对象为“错误”图标，并设置 TextView
+     * 得到焦点时弹出显示的错误信息。当任何键盘事件导致 TextView 文本变更时，
+     * 图标和错误信息会重置为null。如果 <code>error</code> 为 <code>null</code>，
+     * 错误信息和图标会被清空。
      */
     @android.view.RemotableViewMethod
     public void setError(CharSequence error) {
@@ -3240,13 +3213,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the right-hand compound drawable of the TextView to the specified
-     * icon and sets an error message that will be displayed in a popup when
-     * the TextView has focus.  The icon and error message will be reset to
-     * null when any key events cause changes to the TextView's text.  The
-     * drawable must already have had {@link Drawable#setBounds} set on it.
-     * If the <code>error</code> is <code>null</code>, the error message will
-     * be cleared (and you should provide a <code>null</code> icon as well).
+     * 设置 TextView 右侧的复合可绘制对象为“错误”图标，并设置 TextView
+     * 得到焦点时弹出显示的错误信息。当任何键盘事件导致 TextView 文本变更时，
+     * 图标和错误信息会重置为null。该可绘制对象必须已经使用
+     * {@link Drawable#setBounds}设置了边界。如果 <code>error</code>
+     * 为 <code>null</code>，错误信息和图标会被清空（同时你应该将图标也
+     * 设为<code>null</code>）。
      */
     public void setError(CharSequence error, Drawable icon) {
         error = TextUtils.stringOrSpannedString(error);
@@ -3438,8 +3410,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the list of input filters that will be used if the buffer is
-     * Editable.  Has no effect otherwise.
+     * 设置在缓存区可编辑时的输入过滤器的列表。不可编辑时无影响。
      *
      * @attr ref android.R.styleable#TextView_maxLength
      */
@@ -3456,8 +3427,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Sets the list of input filters on the specified Editable,
-     * and includes mInput in the list if it is an InputFilter.
+     * 为指定的可编辑对象设置输入过滤器，如果 mInput 是 InputFilter，
+     * 列表中也包括他。
      */
     private void setFilters(Editable e, InputFilter[] filters) {
         if (mInput instanceof InputFilter) {
@@ -3473,7 +3444,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Returns the current list of input filters.
+     * 返回当前输入过滤器的列表。
      */
     public InputFilter[] getFilters() {
         return mFilters;
@@ -4162,8 +4133,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Return the number of lines of text, or 0 if the internal Layout has not
-     * been built.
+     * 返回文本行数。如果还没有构建内部布局，将返回 0。
      */
     public int getLineCount() {
         return mLayout != null ? mLayout.getLineCount() : 0;
