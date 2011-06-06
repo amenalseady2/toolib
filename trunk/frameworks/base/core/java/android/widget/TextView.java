@@ -4140,13 +4140,13 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Return the baseline for the specified line (0...getLineCount() - 1)
-     * If bounds is not null, return the top, left, right, bottom extents
-     * of the specified line in it. If the internal Layout has not been built,
-     * return 0 and set bounds to (0, 0, 0, 0)
-     * @param line which line to examine (0..getLineCount() - 1)
-     * @param bounds Optional. If not null, it returns the extent of the line
-     * @return the Y-coordinate of the baseline
+     * 返回指定行（0〜getLineCount() - 1）的基线值。如果 bounds 参数不为
+     * null，则返回指定行的上下左右的范围。如果内部布局还没有构建，返回
+     * 0，并将 bounds 设置为 (0, 0, 0, 0)。
+     *
+     * @param line 要取得的行号 (0〜getLineCount() - 1)
+     * @param bounds 如果不为空，返回指定行的范围坐标。
+     * @return 基线的纵坐标。
      */
     public int getLineBounds(int line, Rect bounds) {
         if (mLayout == null) {
@@ -4541,9 +4541,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * If this TextView contains editable content, extract a portion of it
-     * based on the information in <var>request</var> in to <var>outText</var>.
-     * @return Returns true if the text was successfully extracted, else false.
+     * 如果该 TextView 包含可编辑内容，基于<var>request</var>中的信息，
+     * 将一部分信息写入<var>outText</var>。
+     * @return 如果文本成功写入，返回真；否则返回假。
      */
     public boolean extractText(ExtractedTextRequest request,
             ExtractedText outText) {
@@ -4672,8 +4672,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
     
     /**
-     * Apply to this text view the given extracted text, as previously
-     * returned by {@link #extractText(ExtractedTextRequest, ExtractedText)}.
+     * 将给定的文本应用到文本视图中，之前由
+     * {@link #extractText(ExtractedTextRequest, ExtractedText)} 返回的部分中。
      */
     public void setExtractedText(ExtractedText text) {
         Editable content = getEditableText();
@@ -4727,14 +4727,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
     
     /**
-     * Called by the framework in response to a text completion from
-     * the current input method, provided by it calling
+     * 由框架调用，用于相应当前输入法的完成事件。由输入法调用
      * {@link InputConnection#commitCompletion
-     * InputConnection.commitCompletion()}.  The default implementation does
-     * nothing; text views that are supporting auto-completion should override
-     * this to do their desired behavior.
+     * InputConnection.commitCompletion()} 触发该事件。默认实现什么都不做。
+     * 支持自动完成的文本视图应该重写该方法实现所需的行为。
      *
-     * @param text The auto complete text the user has selected.
+     * @param text 用户选择的自动完成文本。
      */
     public void onCommitCompletion(CompletionInfo text) {
     }
@@ -4815,28 +4813,27 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
     
     /**
-     * Called by the framework in response to a request to begin a batch
-     * of edit operations through a call to link {@link #beginBatchEdit()}.
+     * 由框架调用，用于响应由调用 {@link #beginBatchEdit()}
+     * 开始的批处理编辑操作的请求。
      */
     public void onBeginBatchEdit() {
     }
     
     /**
-     * Called by the framework in response to a request to end a batch
-     * of edit operations through a call to link {@link #endBatchEdit}.
+     * 由框架调用，用于响应由调用 {@link #endBatchEdit()}
+     * 结束的批处理编辑操作的请求。
      */
     public void onEndBatchEdit() {
     }
     
     /**
-     * Called by the framework in response to a private command from the
-     * current method, provided by it calling
+     * 由框架调用，用于响应当前方法调用
      * {@link InputConnection#performPrivateCommand
-     * InputConnection.performPrivateCommand()}.
+     * InputConnection.performPrivateCommand()} 方法发出的私有命令。
      *
-     * @param action The action name of the command.
-     * @param data Any additional data for the command.  This may be null.
-     * @return Return true if you handled the command, else false.
+     * @param action 命令的动作名。
+     * @param data 命令的附加数据。该值可能为 null。
+     * @return 如果处理了命令返回真；否则返回假。
      */
     public boolean onPrivateIMECommand(String action, Bundle data) {
         return false;
@@ -5105,9 +5102,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * Set whether the TextView includes extra top and bottom padding to make
-     * room for accents that go above the normal ascent and descent.
-     * The default is true.
+     * 设置 TextView 是否包含额外的顶部和底部内边距，用于显示普通
+     * 升降调以外的音调。默认为真。
      *
      * @attr ref android.R.styleable#TextView_includeFontPadding
      */
