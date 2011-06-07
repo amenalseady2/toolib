@@ -1813,21 +1813,16 @@
         <attr name="orientation" />
     </declare-styleable>
     <declare-styleable name="TableLayout">
-        <!-- The zero-based index of the columns to stretch. The column indices
-             must be separated by a comma: 1, 2, 5. Illegal and duplicate
-             indices are ignored. You can stretch all columns by using the
-             value "*" instead. Note that a column can be marked stretchable
-             and shrinkable at the same time. -->
+        <!-- 要拉伸的列的索引，从 0 开始. 列索引必须用逗号分割：1, 2, 5。
+             忽略无效和重复的索引。你可以使用“*”来拉伸所有列。
+             注意，拉伸的列同时被标记为可伸缩。 -->
         <attr name="stretchColumns" format="string" />
-       <!-- The zero-based index of the columns to shrink. The column indices
-             must be separated by a comma: 1, 2, 5. Illegal and duplicate
-             indices are ignored. You can shrink all columns by using the
-             value "*" instead. Note that a column can be marked stretchable
-             and shrinkable at the same time. -->
+        <!-- 要收缩的列的索引，从 0 开始. 列索引必须用逗号分割：1, 2, 5。
+             忽略无效和重复的索引。你可以使用“*”来收缩所有列。
+             注意，收缩的列同时被标记为可伸缩。 -->
         <attr name="shrinkColumns" format="string" />
-        <!-- The zero-based index of the columns to collapse. The column indices
-             must be separated by a comma: 1, 2, 5. Illegal and duplicate
-             indices are ignored. -->
+        <!-- 要折叠的列的索引，从 0 开始. 列索引必须用逗号分割：1, 2, 5。
+             忽略无效和重复的索引。 -->
         <attr name="collapseColumns" format="string" />
     </declare-styleable>
     <declare-styleable name="TableRow">
