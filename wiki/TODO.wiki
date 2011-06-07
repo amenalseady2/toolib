@@ -2,7 +2,6 @@
 
 = 目前要进行的工作一览 =
 
- * 翻译并整理 [http://android.toolib.net/reference/android/widget/TableLayout.html TableLayout] 的属性；
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/SlidingDrawer.html SlidingDrawer] 的属性；
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/TableRow.html TableRow] 中未翻译完全的函数；
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/ResourceCursorTreeAdapter.html ResourceCursorTreeAdapter] 中未翻译完全的函数；
