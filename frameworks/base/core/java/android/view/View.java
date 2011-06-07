@@ -4262,16 +4262,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Create a new InputConnection for an InputMethod to interact
-     * with the view.  The default implementation returns null, since it doesn't
-     * support input methods.  You can override this to implement such support.
-     * This is only needed for views that take focus and text input.
+     * 为 InputMethod 创建一个新的用于与视图交互的 InputConnection。默认实现返回null
+     * 因为他不支持输入法。你能够重写该函数来支持输入法功能。只有在视图需要得到焦点，
+     * 并允许输入文本时才有用。
      *
-     * <p>When implementing this, you probably also want to implement
-     * {@link #onCheckIsTextEditor()} to indicate you will return a
-     * non-null InputConnection.
+     * <p>如果实现了该方法，你还应该实现 {@link #onCheckIsTextEditor()}，
+     * 用于返回一个非空的 InputConnection。
      *
-     * @param outAttrs 链接使用的属性信息。
+     * @param outAttrs 使用的属性信息。
      */
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
         return null;
@@ -8036,11 +8034,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Prints information about this view in the log output, with the tag
-     * {@link #VIEW_LOG_TAG}. Each line in the output is preceded with an
-     * indentation defined by the <code>depth</code>.
+     * 在日志文件中使用{@link #VIEW_LOG_TAG}标签输出关于该视图的信息。
+     * 每行输出都包含有<code>depth</code>指定的缩进。
      *
-     * @param depth the indentation level
+     * @param depth 缩进级别
      *
      * @hide
      */
