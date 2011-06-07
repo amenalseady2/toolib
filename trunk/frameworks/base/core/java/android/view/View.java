@@ -4241,9 +4241,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Check whether the called view is a text editor, in which case it
-     * would make sense to automatically display a soft input window for
-     * it.  Subclasses should override this if they implement
+     * 检查调用的视图是否是文本编辑器，如果是可以自动为它显示软键盘窗口。
+     * 如果子类应该重写该方法，  Subclasses should override this if they implement
      * {@link #onCreateInputConnection(EditorInfo)} to return true if
      * a call on that method would return a non-null InputConnection, and
      * they are really a first-class editor that the user would normally
@@ -6649,15 +6648,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * If the View draws content inside its padding and enables fading edges,
-     * it needs to support padding offsets. Padding offsets are added to the
-     * fading edges to extend the length of the fade so that it covers pixels
-     * drawn inside the padding.
+     * 如果视图在内边距内绘制内容，并且启用了渐近边，他需要支持内边距位移。
+     * 内边距位移是叠加到渐近边上，扩展渐近的长度，以便包含在内边距内绘制的像素。
      *
-     * Subclasses of this class should override this method if they need
-     * to draw content inside the padding.
+     * 该类的子类如果需要在内边距中绘制内容，就应该重写该方法。
      *
-     * @return True if padding offset must be applied, false otherwise.
+     * @return 如果需要应用内边距位移，返回真；否则返回假。
      *
      * @see #getLeftPaddingOffset()
      * @see #getRightPaddingOffset()
@@ -6671,10 +6667,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Amount by which to extend the left fading region. Called only when
-     * {@link #isPaddingOffsetRequired()} returns true.
+     * 扩展的左侧渐近区域量。只有当 {@link #isPaddingOffsetRequired()}
+     * 返回真时会调用该函数。
      *
-     * @return The left padding offset in pixels.
+     * @return 左侧内边距位移，以像素为单位。
      *
      * @see #isPaddingOffsetRequired()
      *
@@ -6685,10 +6681,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Amount by which to extend the right fading region. Called only when
-     * {@link #isPaddingOffsetRequired()} returns true.
+     * 扩展的右侧渐近区域量。只有当 {@link #isPaddingOffsetRequired()}
+     * 返回真时会调用该函数。
      *
-     * @return The right padding offset in pixels.
+     * @return 右侧内边距位移，以像素为单位。
      *
      * @see #isPaddingOffsetRequired()
      *
@@ -6699,10 +6695,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Amount by which to extend the top fading region. Called only when
-     * {@link #isPaddingOffsetRequired()} returns true.
+     * 扩展的顶部渐近区域量。只有当 {@link #isPaddingOffsetRequired()}
+     * 返回真时会调用该函数。
      *
-     * @return The top padding offset in pixels.
+     * @return 顶部内边距位移，以像素为单位。
      *
      * @see #isPaddingOffsetRequired()
      *
@@ -6713,10 +6709,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Amount by which to extend the bottom fading region. Called only when
-     * {@link #isPaddingOffsetRequired()} returns true.
+     * 扩展的底部渐近区域量。只有当 {@link #isPaddingOffsetRequired()}
+     * 返回真时会调用该函数。
      *
-     * @return The bottom padding offset in pixels.
+     * @return 底部内边距位移，以像素为单位。
      *
      * @see #isPaddingOffsetRequired()
      *
