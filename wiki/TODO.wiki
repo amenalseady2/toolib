@@ -1,0 +1,8 @@
+#summary todo list
+
+= 目前要进行的工作一览 =
+
+ * 翻译并整理 TableLayout 的属性；
+ * 翻译并整理 SlidingDrawer 的属性；
+ * 翻译并整理 TableRow 中未翻译完全的函数；
+ * 翻译并整理 ResourceCursorTreeAdapter 中未翻译完全的函数；
