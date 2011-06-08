@@ -263,13 +263,12 @@ public class LinearLayout extends ViewGroup {
     }
 
     /**
-     * <p>Returns the virtual number of children. This number might be different
-     * than the actual number of children if the layout can hold virtual
-     * children. Refer to
-     * {@link android.widget.TableLayout} and {@link android.widget.TableRow}
-     * for an example.</p>
+     * <p>返回子对象的虚拟编号。如果布局可以保存虚拟子对象，
+     * 该编号可能与子对象的实际编号不同。示例参见
+     * {@link android.widget.TableLayout} 和 {@link android.widget.TableRow}。
+     * </p>
      *
-     * @return the virtual number of children
+     * @return 返回子对象的虚拟编号。
      */
     int getVirtualChildCount() {
         return getChildCount();

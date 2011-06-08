@@ -23,8 +23,8 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
 /**
- * A fairly simple ExpandableListAdapter that creates views defined in an XML
- * file. You can specify the XML file that defines the appearance of the views.
+ * 一个通过 XML 定义创建视图的相当简单的 ExpandableListAdapter 的实现. 
+ * 你可以指定 XML 文件来定义视图的显示。
  */
 public abstract class ResourceCursorTreeAdapter extends CursorTreeAdapter {
     private int mCollapsedGroupLayout;
@@ -34,19 +34,14 @@ public abstract class ResourceCursorTreeAdapter extends CursorTreeAdapter {
     private LayoutInflater mInflater;
     
     /**
-     * Constructor.
+     * 构造函数。
      * 
-     * @param context The context where the ListView associated with this
-     *            SimpleListItemFactory is running
-     * @param cursor The database cursor
-     * @param collapsedGroupLayout resource identifier of a layout file that
-     *            defines the views for collapsed groups.
-     * @param expandedGroupLayout resource identifier of a layout file that
-     *            defines the views for expanded groups.
-     * @param childLayout resource identifier of a layout file that defines the
-     *            views for all children but the last..
-     * @param lastChildLayout resource identifier of a layout file that defines
-     *            the views for the last child of a group.
+     * @param context 和正在运行的SimpleListItemFactory关联的ListView的上下文。
+     * @param cursor 数据库游标。
+     * @param collapsedGroupLayout 定义了收缩组的视图布局的布局文件的资源标识。
+     * @param expandedGroupLayout 定义了展开组的视图布局的布局文件的资源标识。
+     * @param childLayout 定义了所有子视图布局（除了最后一个）的布局文件的资源标识。
+     * @param lastChildLayout 定义了组中最后一个子视图的布局文件的资源标识。
      */
     public ResourceCursorTreeAdapter(Context context, Cursor cursor, int collapsedGroupLayout,
             int expandedGroupLayout, int childLayout, int lastChildLayout) {
@@ -61,17 +56,13 @@ public abstract class ResourceCursorTreeAdapter extends CursorTreeAdapter {
     }
 
     /**
-     * Constructor.
+     * 构造函数。
      * 
-     * @param context The context where the ListView associated with this
-     *            SimpleListItemFactory is running
-     * @param cursor The database cursor
-     * @param collapsedGroupLayout resource identifier of a layout file that
-     *            defines the views for collapsed groups.
-     * @param expandedGroupLayout resource identifier of a layout file that
-     *            defines the views for expanded groups.
-     * @param childLayout resource identifier of a layout file that defines the
-     *            views for all children.
+     * @param context 和正在运行的SimpleListItemFactory关联的ListView的上下文。
+     * @param cursor 数据库游标。
+     * @param collapsedGroupLayout 定义了收缩组的视图布局的布局文件的资源标识。
+     * @param expandedGroupLayout 定义了展开组的视图布局的布局文件的资源标识。
+     * @param childLayout 定义了所有子视图布局的布局文件的资源标识。
      */
     public ResourceCursorTreeAdapter(Context context, Cursor cursor, int collapsedGroupLayout,
             int expandedGroupLayout, int childLayout) {
@@ -79,15 +70,12 @@ public abstract class ResourceCursorTreeAdapter extends CursorTreeAdapter {
     }
 
     /**
-     * Constructor.
+     * 构造函数。
      * 
-     * @param context The context where the ListView associated with this
-     *            SimpleListItemFactory is running
-     * @param cursor The database cursor
-     * @param groupLayout resource identifier of a layout file that defines the
-     *            views for all groups.
-     * @param childLayout resource identifier of a layout file that defines the
-     *            views for all children.
+     * @param context 和正在运行的SimpleListItemFactory关联的ListView的上下文。
+     * @param cursor 数据库游标。
+     * @param groupLayout 为所有组视图定义了布局的布局文件的资源标识。
+     * @param childLayout 定义了所有子视图布局的布局文件的资源标识。
      */
     public ResourceCursorTreeAdapter(Context context, Cursor cursor, int groupLayout,
             int childLayout) {
