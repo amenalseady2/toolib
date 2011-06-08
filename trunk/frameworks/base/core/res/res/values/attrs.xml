@@ -2152,25 +2152,22 @@
         </attr>
     </declare-styleable>
 
-    <!-- SlidingDrawer specific attributes. These attributes are used to configure
-         a SlidingDrawer from XML. -->
+    <!-- SlidingDrawer 特定属性. 这些属性用于从 XML 中配置 SlidingDrawer. -->
     <declare-styleable name="SlidingDrawer">
-        <!-- Identifier for the child that represents the drawer's handle. -->
+        <!-- 标识用于显示抽屉把手的子视图. -->
         <attr name="handle" format="reference" />
-        <!-- Identifier for the child that represents the drawer's content. -->
+        <!-- 标识用于显示抽屉内容的子视图. -->
         <attr name="content" format="reference" />
-        <!-- Orientation of the SlidingDrawer. -->
+        <!-- SlidingDrawer 的抽出方向. -->
         <attr name="orientation" />
-        <!-- Extra offset for the handle at the bottom of the SlidingDrawer. -->
+        <!-- SlidingDrawer 的把手距离底边的额外距离. -->
         <attr name="bottomOffset" format="dimension"  />
-        <!-- Extra offset for the handle at the top of the SlidingDrawer. -->
+        <!-- SlidingDrawer 的把手距离顶边的额外距离. -->
         <attr name="topOffset" format="dimension"  />
-        <!-- Indicates whether the drawer can be opened/closed by a single tap
-             on the handle.  (If false, the user must drag or fling, or click
-             using the trackball, to open/close the drawer.)  Default is true. -->
+        <!-- 指示是否可以通过点击抽屉把手来开闭抽屉. （如果为假，用户必须通过
+             拖动或快速滑动把手，或通过单击轨迹球来开闭抽屉。）默认值为真. -->
         <attr name="allowSingleTap" format="boolean" />
-        <!-- Indicates whether the drawer should be opened/closed with an animation
-             when the user clicks the handle. Default is true. -->
+        <!-- 指示用户单击把手时是否显示抽屉的开闭动画。默认值为真. -->
         <attr name="animateOnClick" format="boolean" />
     </declare-styleable>
 
@@ -2561,16 +2558,16 @@
     </declare-styleable>
 
     <declare-styleable name="ClipDrawable">
-        <!-- The orientation for the clip. -->
+        <!-- 夹子的方向. -->
         <attr name="clipOrientation">
-            <!-- Clip the drawable horizontally. -->
+            <!-- 横向绘制夹子. -->
             <flag name="horizontal" value="1" />
-            <!-- Clip the drawable vertically. -->
+            <!-- 纵向绘制夹子. -->
             <flag name="vertical" value="2" />
         </attr>
         <!-- 指定切掉可绘制对象的那部分. 默认为左侧. -->
         <attr name="gravity" />
-        <!-- Reference to a drawable resource to draw with the specified scale. -->
+        <!-- 对使用指定的伸缩比例绘制的可绘制对象资源的引用. -->
         <attr name="drawable" />
     </declare-styleable>
 
