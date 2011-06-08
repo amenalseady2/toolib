@@ -5,3 +5,39 @@
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/SlidingDrawer.html SlidingDrawer] 的属性；
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/TableRow.html TableRow] 中未翻译完全的函数；
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/ResourceCursorTreeAdapter.html ResourceCursorTreeAdapter] 中未翻译完全的函数；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/AudioRecord.html AudioRecord] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/AudioFormat.html AudioFormat] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/ThumbnailUtils.html ThumbnailUtils] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/AsyncPlayer.html AsyncPlayer] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.html Manifest] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.permission.html Manifest.permission] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.permission_group.html Manifest.permission_group] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/accessibilityservice/AccessibilityService.html AccessibilityService] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothAdapter.html BluetoothAdapter] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothClass.html BluetoothClass] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothClass.Device.html BluetoothClass.Device] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothClass.Device.Major.html BluetoothClass.Device.Major] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothClass.Service.html BluetoothClass.Service] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothDevice.html BluetoothDevice] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothServerSocket.html BluetoothServerSocket] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothSocket.html BluetoothSocket] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/content/SharedPreferences.html SharedPreferences] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/net/TrafficStats.html TrafficStats] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/net/MailTo.html MailTo] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/os/AsyncTask.html AsyncTask] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/view/View.html View] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/view/ScaleGestureDetector.SimpleOnScaleGestureListener.html ScaleGestureDetector.SimpleOnScaleGestureListener] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/view/inputmethod/InputMethodSession.html InputMethodSession] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/view/inputmethod/InputMethodManager.html InputMethodManager] ；
+ * 翻译并整理 [http://android.toolib.net/guide/developing/tools/adb.html adb] ；
+ * 翻译并整理 [http://android.toolib.net/guide/developing/tools/aidl.html aidl] ；
+ * 翻译并整理 [http://android.toolib.net/guide/topics/fundamentals.html fundamentals] ；
+ * 翻译并整理 [http://android.toolib.net/guide/developing/tools/monkeyrunner_concepts.html monkeyrunner_concepts] ；
+ * 翻译并整理 [http://android.toolib.net/guide/appendix/api-levels.html api-levels] ；
+ * 翻译并整理 [http://android.toolib.net/guide/appendix/install-location.html install-location] ；
+ * 翻译并整理 [http://android.toolib.net/guide/basics/what-is-android.html what-is-android] ；
+ * 翻译并整理 [http://android.toolib.net/guide/appendix/media-formats.html media-formats] ；
+
+= 需要确认的项目 =
+Android 3.0 r1开发者指南——Optimizing Apps for Android 3.0（移动云_文斌）.doc
+Android 2.3 r1开发者指南——Other Tools（移动云_文斌）.doc
