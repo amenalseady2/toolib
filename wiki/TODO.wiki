@@ -1,4 +1,5 @@
 #summary todo list
+#labels Featured
 
 = 目前要进行的工作一览 =
 
