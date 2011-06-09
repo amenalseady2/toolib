@@ -40,11 +40,9 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Displays a video file.  The VideoView class
- * can load images from various sources (such as resources or content
- * providers), takes care of computing its measurement from the video so that
- * it can be used in any layout manager, and provides various display options
- * such as scaling and tinting.
+ * 用于播放视频文件. VideoView 类可以从不同的来源（例如资源文件或内容提供器）
+ * 读取图像，计算和维护视频的画面尺寸以使其适用于任何布局管理器，
+ * 并提供一些诸如缩放、着色之类的显示选项。
  */
 public class VideoView extends SurfaceView implements MediaPlayerControl {
     private String TAG = "VideoView";
@@ -91,16 +89,32 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
     private boolean     mCanSeekForward;
     private int         mStateWhenSuspended;  //state before calling suspend()
 
+    /**
+     * 构造函数。
+     * @param context 视图运行的应用程序上下文，通过它可以访问当前主题、资源等等。
+     */
     public VideoView(Context context) {
         super(context);
         initVideoView();
     }
 
+    /**
+     * 构造函数。
+     * @param context 视图运行的应用程序上下文，通过它可以访问当前主题、资源等等。
+     * @param attrs 用于视图的 XML 标签属性集合。
+     */
     public VideoView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         initVideoView();
     }
 
+    /**
+     * 构造函数。
+     * @param context 视图运行的应用程序上下文，通过它可以访问当前主题、资源等等。
+     * @param attrs 用于视图的 XML 标签属性集合。
+     * @param defStyle 应用到视图的默认风格。如果为 0 则不应用（包括当前主题中的）风格。
+     *        该值可以是当前主题中的属性资源，或者是明确的风格资源 ID。
+     */
     public VideoView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initVideoView();
@@ -128,6 +142,12 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         setMeasuredDimension(width, height);
     }
 
+    /**
+     * 取得调整后的尺寸。
+     * @param desiredSize 希望显示的尺寸。
+     * @param measureSpec 父类的要求。
+     * @return 满足父类要求的尺寸。
+     */
     public int resolveAdjustedSize(int desiredSize, int measureSpec) {
         int result = desiredSize;
         int specMode = MeasureSpec.getMode(measureSpec);
@@ -169,10 +189,18 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         mTargetState  = STATE_IDLE;
     }
 
+    /**
+     * 设置视频文件路径。
+     * @param path 视频文件路径。
+     */
     public void setVideoPath(String path) {
         setVideoURI(Uri.parse(path));
     }
 
+    /**
+     * 设置视频文件URI。
+     * @param uri 视频文件URI。
+     */
     public void setVideoURI(Uri uri) {
         setVideoURI(uri, null);
     }
@@ -189,6 +217,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         invalidate();
     }
 
+    /**
+     * 停止视频播放。
+     */
     public void stopPlayback() {
         if (mMediaPlayer != null) {
             mMediaPlayer.stop();
@@ -246,6 +277,10 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         }
     }
 
+    /**
+     * 设置媒体控制器。
+     * @param controller 
+     */
     public void setMediaController(MediaController controller) {
         if (mMediaController != null) {
             mMediaController.hide();
@@ -412,10 +447,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
     };
 
     /**
-     * Register a callback to be invoked when the media file
-     * is loaded and ready to go.
+     * 注册在媒体文件加载完毕，可以播放时调用的回调函数。
      *
-     * @param l The callback that will be run
+     * @param l 要执行的回调函数。
      */
     public void setOnPreparedListener(MediaPlayer.OnPreparedListener l)
     {
@@ -423,10 +457,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
     }
 
     /**
-     * Register a callback to be invoked when the end of a media file
-     * has been reached during playback.
+     * 注册在媒体文件播放完毕时调用的回调函数。
      *
-     * @param l The callback that will be run
+     * @param l 要执行的回调函数。
      */
     public void setOnCompletionListener(OnCompletionListener l)
     {
@@ -434,12 +467,10 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
     }
 
     /**
-     * Register a callback to be invoked when an error occurs
-     * during playback or setup.  If no listener is specified,
-     * or if the listener returned false, VideoView will inform
-     * the user of any errors.
+     * 注册在设置或播放过程中发生错误时调用的回调函数。如果未指定回调函数，
+     * 或回调函数返回假，VideoView 会通知用户发生了错误。
      *
-     * @param l The callback that will be run
+     * @param l 要执行的回调函数。
      */
     public void setOnErrorListener(OnErrorListener l)
     {
@@ -565,6 +596,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         }
     }
 
+    /**
+     * 开始播放。
+     */
     public void start() {
         if (isInPlaybackState()) {
             mMediaPlayer.start();
@@ -573,6 +607,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         mTargetState = STATE_PLAYING;
     }
 
+    /**
+     * 暂停播放。
+     */
     public void pause() {
         if (isInPlaybackState()) {
             if (mMediaPlayer.isPlaying()) {
@@ -583,6 +620,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         mTargetState = STATE_PAUSED;
     }
 
+    /**
+     * 挂起播放器。
+     */
     public void suspend() {
         if (isInPlaybackState()) {
             if (mMediaPlayer.suspend()) {
@@ -597,6 +637,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         }
     }
 
+    /**
+     * 恢复挂起的播放器。
+     */
     public void resume() {
         if (mSurfaceHolder == null && mCurrentState == STATE_SUSPEND){
             mTargetState = STATE_RESUME;
@@ -617,6 +660,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
     }
 
    // cache duration as mDuration for faster access
+    /**
+     * 获得所播放视频的总时间。
+     */
     public int getDuration() {
         if (isInPlaybackState()) {
             if (mDuration > 0) {
@@ -629,6 +675,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         return mDuration;
     }
 
+    /**
+     * 获得当前播放位置。
+     */
     public int getCurrentPosition() {
         if (isInPlaybackState()) {
             return mMediaPlayer.getCurrentPosition();
@@ -636,6 +685,9 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         return 0;
     }
 
+    /**
+     * 设置播放位置。
+     */
     public void seekTo(int msec) {
         if (isInPlaybackState()) {
             mMediaPlayer.seekTo(msec);
@@ -645,10 +697,16 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
         }
     }
 
+    /**
+     * 判断是否正在播放视频。
+     */
     public boolean isPlaying() {
         return isInPlaybackState() && mMediaPlayer.isPlaying();
     }
 
+    /**
+     * 获得缓冲区的百分比。
+     */
     public int getBufferPercentage() {
         if (mMediaPlayer != null) {
             return mCurrentBufferPercentage;
@@ -663,14 +721,23 @@ public class VideoView extends SurfaceView implements MediaPlayerControl {
                 mCurrentState != STATE_PREPARING);
     }
 
+    /**
+     * 判断是否能够暂停播放视频。
+     */
     public boolean canPause() {
         return mCanPause;
     }
 
+    /**
+     * 判断是否能够倒退。
+     */
     public boolean canSeekBackward() {
         return mCanSeekBack;
     }
-
+    
+    /**
+     * 判断是否能够快进。
+     */
     public boolean canSeekForward() {
         return mCanSeekForward;
     }
