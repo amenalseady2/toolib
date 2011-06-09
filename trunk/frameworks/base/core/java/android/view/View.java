@@ -4137,13 +4137,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 如果视图可用并可按，
-     * 当按下 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
-     * 时执行视图的按下事件.
+     * 对{@link KeyEvent.Callback#onKeyDown(int, KeyEvent)
+     * KeyEvent.Callback.onKeyDown()} 的默认实现. 如果视图可用并可响应单击事件，
+     * 当释放 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
+     * 时执行视图的单击事件.
      *
-     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
-     * @param event   KeyEvent 对象，定义了按钮动作.
+     * @param keyCode 代表按钮按下的、在 {@link KeyEvent} 中定义的键盘代码.
+     * @param event   KeyEvent 对象，定义了按键动作.
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         boolean result = false;
@@ -4171,21 +4171,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Default implementation of {@link KeyEvent.Callback#onKeyLongPress(int, KeyEvent)
-     * KeyEvent.Callback.onKeyLongPress()}: always returns false (doesn't handle
-     * the event).
+     * {@link KeyEvent.Callback#onKeyLongPress(int, KeyEvent)
+     * KeyEvent.Callback.onKeyLongPress()} 的默认实现：总是返回假（不处理事件）。
      */
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
         return false;
     }
 
     /**
-     * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
-     * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 
+     * {@link KeyEvent.Callback#onKeyUp(int, KeyEvent)
+     * KeyEvent.Callback.onKeyUp()} 的默认实现. 
      * 当释放 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
      * 时执行视图的单击事件.
      *
-     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
+     * @param keyCode 表示按下的键的、在 {@link KeyEvent} 中定义的键盘代码.
      * @param event   KeyEvent 对象，定义了按钮动作.
      */
     public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -4217,7 +4216,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
      * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 不处理该事件，总是返回假.
      *
-     * @param keyCode     表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
+     * @param keyCode     表示按下的键的、在 {@link KeyEvent} 中定义的键盘代码.
      * @param repeatCount 按键次数.
      * @param event       KeyEvent 对象，定义了按钮动作.
      */
@@ -4226,12 +4225,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called when an unhandled key shortcut event occurs.
+     * 当未处理的键盘快捷键事件发生时调用。
      *
-     * @param keyCode The value in event.getKeyCode().
-     * @param event Description of the key event.
-     * @return If you handled the event, return true. If you want to allow the
-     *         event to be handled by the next receiver, return false.
+     * @param keyCode 由 event.getKeyCode() 取得的键值。
+     * @param event 键盘事件的描述。
+     * @return 如果你处理了事件，返回真；如果你允许下一个接收者来处理该事件，返回假。
      */
     public boolean onKeyShortcut(int keyCode, KeyEvent event) {
         return false;
@@ -4339,8 +4337,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     /**
      * 实现该方法来处理轨迹球动作事件。轨迹球<em>相对</em>于上次移动的位置可以通过
      * {@link MotionEvent#getX MotionEvent.getX()} 和
-     * {@link MotionEvent#getY MotionEvent.getY()} 取得。对应用户按下一次方向键，
-     * 他们通常作为一次移动处理（为了表现来自轨迹球的更小粒度的移动信息，他们返回小数）。
+     * {@link MotionEvent#getY MotionEvent.getY()} 取得。用户按下一次方向键，
+     * 通常作为一次移动处理（为了表现来自轨迹球的更小粒度的移动信息，他们返回小数）。
      *
      * @param event 动作事件。
      * @return 如果处理了事件，返回真；否则返回假。
@@ -8192,24 +8190,24 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * <p>
-     * 评估视图及其内容，以决定其宽度和高度.此方法由 {@link #measure(int, int)}
-     * 调用，子类可以重载以提供更精确、更有效率的衡量其内容尺寸的方法.
+     * 测量视图及其内容，以决定其宽度和高度。此方法由 {@link #measure(int, int)}
+     * 调用，子类可以重写该方法以提供更精确、更有效率的测量其内容尺寸的方法。
      * </p>
      *
      * <p>
-     * <strong>约定：</strong> 覆盖该方法时，<em>必须</em>调用 {@link #setMeasuredDimension(int, int)}
-     * 方法来保存评估结果的视图的宽度和高度.如果忘记将导致 {@link #measure(int, int)}
-     * 方法抛出<code>IllegalStateException</code>异常.要有效的利用父类的
-     * {@link #onMeasure(int, int)}方法.
+     * <strong>约定：</strong> 重写该方法时，<em>必须</em>调用 {@link #setMeasuredDimension(int, int)}
+     * 方法来保存测量结果的宽度和高度.如果忘记将导致 {@link #measure(int, int)}
+     * 方法抛出<code>IllegalStateException</code>异常。调用父类的
+     * {@link #onMeasure(int, int)}是个有效的方法。
      * </p>
      *
      * <p>
-     * 基类测量的是背景的大小，除非 MeasureSpec 允许超过背景.子类应该重写
-     * {@link #onMeasure(int, int)} 方法，以为其内容提供更适合的大小.
+     * 基类测量的是背景的大小，除非 MeasureSpec 允许超过背景。子类应该重写
+     * {@link #onMeasure(int, int)} 方法，以为其内容提供更适合的大小。
      * </p>
      *
      * <p>
-     * 如果重写了该方法，子类要确保其高度和宽度大于等于视图的最小高度和宽度.
+     * 如果重写了该方法，子类要确保其高度和宽度大于等于视图的最小高度和宽度。
      * （{@link #getSuggestedMinimumHeight()} 和 {@link #getSuggestedMinimumWidth()}）
      * </p>
      *

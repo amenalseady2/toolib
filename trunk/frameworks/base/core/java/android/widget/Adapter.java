@@ -22,10 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * An Adapter object acts as a bridge between an {@link AdapterView} and the
- * underlying data for that view. The Adapter provides access to the data items.
- * The Adapter is also responsible for making a {@link android.view.View} for
- * each item in the data set.
+ * Adapter 对象是{@link AdapterView}和视图的底层数据之间的桥梁. 
+ * Adapter 提供了访问数据项的功能。另外，Adapter 也负责为数据集中的每一项创建
+ * {@link android.view.View 视图}。
  * 
  * @see android.widget.ArrayAdapter
  * @see android.widget.CursorAdapter
@@ -77,26 +76,23 @@ public interface Adapter {
     boolean hasStableIds();
     
     /**
-     * Get a View that displays the data at the specified position in the data set. You can either
-     * create a View manually or inflate it from an XML layout file. When the View is inflated, the
-     * parent View (GridView, ListView...) will apply default layout parameters unless you use
-     * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
-     * to specify a root view and to prevent attachment to the root.
+     * 获取用于显示数据集中指定位置上的数据的视图。你可以手工创建一个视图，
+     * 也可以从 XML 布局文件中展开视图。展开视图时，父视图（GridView、ListView 等）
+     * 将应用默认的布局参数，除非你使用{@link 
+     * android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
+     * inflate(int, android.view.ViewGroup, boolean)指定根视图，并指定附加到根元素。
      * 
      * @param position 要从适配器中取得的视图的位置.
-     * @param convertView The old view to reuse, if possible. Note: You should check that this view
-     *        is non-null and of an appropriate type before using. If it is not possible to convert
-     *        this view to display the correct data, this method can create a new view.
-     * @param parent The parent that this view will eventually be attached to
-     * @return A View corresponding to the data at the specified position.
+     * @param convertView 要重用的旧视图，如果可能。注意，在使用之前你应该检查该视图是否非空，
+     *        并且是适当的类型。如果不能转化该视图来正确显示数据，该方法将创建新视图。
+     * @param parent 该视图最终关联到的父视图。
+     * @return 指定位置的数据对应的视图。
      */
     View getView(int position, View convertView, ViewGroup parent);
 
     /**
-     * An item view type that causes the {@link AdapterView} to ignore the item
-     * view. For example, this can be used if the client does not want a
-     * particular view to be given for conversion in
-     * {@link #getView(int, View, ViewGroup)}.
+     * 使{@link AdapterView}忽略视图条目的视图类型。例如，当客户端不希望特定视图被
+     * {@link #getView(int, View, ViewGroup)}转换时，可以使用该类型。
      * 
      * @see #getItemViewType(int)
      * @see #getViewTypeCount()

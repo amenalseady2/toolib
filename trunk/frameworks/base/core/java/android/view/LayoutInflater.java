@@ -297,21 +297,16 @@ public abstract class LayoutInflater {
     }
 
     /**
-     * Inflate a new view hierarchy from the specified xml resource. Throws
-     * {@link InflateException} if there is an error.
+     * 根据指定的 XML 资源展开新视图树。如果发生错误，抛出{@link InflateException}异常。
      * 
-     * @param resource ID for an XML layout resource to load (e.g.,
-     *        <code>R.layout.main_page</code>)
-     * @param root Optional view to be the parent of the generated hierarchy (if
-     *        <em>attachToRoot</em> is true), or else simply an object that
-     *        provides a set of LayoutParams values for root of the returned
-     *        hierarchy (if <em>attachToRoot</em> is false.)
-     * @param attachToRoot Whether the inflated hierarchy should be attached to
-     *        the root parameter? If false, root is only used to create the
-     *        correct subclass of LayoutParams for the root view in the XML.
-     * @return The root View of the inflated hierarchy. If root was supplied and
-     *         attachToRoot is true, this is root; otherwise it is the root of
-     *         the inflated XML file.
+     * @param resource 要载入的 XML 布局资源ID（例：<code>R.layout.main_page</code>）。
+     * @param root 可以作为生成的视图树的父视图（如果<em>attachToRoot</em>为真），
+     *        或者是简单的提供用于视图树根视图的 LayoutParams 值的对象
+     *        （如果<em>attachToRoot</em>为假）。
+     * @param attachToRoot 是否将展开的视图加入根视图树。如果为假，
+     *        root 仅用于为 XML 中的跟视图提供正确的 LayoutParams 的子类。
+     * @return 展开的视图树的根视图。如果提供了 root，并且 attachToRoot 为真，则为 root；
+     *         否则为展开的 XML 文件中的根视图。
      */
     public View inflate(int resource, ViewGroup root, boolean attachToRoot) {
         if (DEBUG) System.out.println("INFLATING from resource: " + resource);
