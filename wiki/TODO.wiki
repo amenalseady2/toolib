@@ -3,7 +3,6 @@
 
 = 目前要进行的工作一览 =
 
- * 翻译并整理 [http://android.toolib.net/reference/android/widget/Adapter.html Adapter]
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/AutoCompleteTextView.Validator.html AutoCompleteTextView.Validator]
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/HeterogeneousExpandableList.html HeterogeneousExpandableList]
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/SectionIndexer.html SectionIndexer]
