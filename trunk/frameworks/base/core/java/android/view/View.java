@@ -1887,13 +1887,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * the theme's button style to modify all of the base view attributes (in
      * particular its background) as well as the Button class's attributes.
      *
-     * @param context The Context the view is running in, through which it can
-     *        access the current theme, resources, etc.
-     * @param attrs The attributes of the XML tag that is inflating the view.
-     * @param defStyle The default style to apply to this view. If 0, no style
-     *        will be applied (beyond what is included in the theme). This may
-     *        either be an attribute resource, whose value will be retrieved
-     *        from the current theme, or an explicit style resource.
+     * @param context 视图运行的应用程序上下文，通过它可以访问当前主题、资源等等。
+     * @param attrs 用于视图的 XML 标签属性集合。
+     * @param defStyle 应用到视图的默认风格。如果为 0 则不应用（包括当前主题中的）风格。
+     *        该值可以是当前主题中的属性资源，或者是明确的风格资源 ID。
      * @see #View(Context, AttributeSet)
      */
     public View(Context context, AttributeSet attrs, int defStyle) {
@@ -4340,16 +4337,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Implement this method to handle trackball motion events.  The
-     * <em>relative</em> movement of the trackball since the last event
-     * can be retrieve with {@link MotionEvent#getX MotionEvent.getX()} and
-     * {@link MotionEvent#getY MotionEvent.getY()}.  These are normalized so
-     * that a movement of 1 corresponds to the user pressing one DPAD key (so
-     * they will often be fractional values, representing the more fine-grained
-     * movement information available from a trackball).
+     * 实现该方法来处理轨迹球动作事件。轨迹球<em>相对</em>于上次移动的位置可以通过
+     * {@link MotionEvent#getX MotionEvent.getX()} 和
+     * {@link MotionEvent#getY MotionEvent.getY()} 取得。对应用户按下一次方向键，
+     * 他们通常作为一次移动处理（为了表现来自轨迹球的更小粒度的移动信息，他们返回小数）。
      *
-     * @param event The motion event.
-     * @return True if the event was handled, false otherwise.
+     * @param event 动作事件。
+     * @return 如果处理了事件，返回真；否则返回假。
      */
     public boolean onTrackballEvent(MotionEvent event) {
         return false;
@@ -8785,31 +8779,27 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * A MeasureSpec encapsulates the layout requirements passed from parent to child.
-     * Each MeasureSpec represents a requirement for either the width or the height.
-     * A MeasureSpec is comprised of a size and a mode. There are three possible
-     * modes:
+     * MeasureSpec 封装了从父类传入子类的布局要求. 每个 MeasureSpec 
+     * 代表一个对高度或宽度的要求。MeasureSpec 有大小和模式组成。它有三种模式：
      * <dl>
      * <dt>UNSPECIFIED</dt>
      * <dd>
-     * The parent has not imposed any constraint on the child. It can be whatever size
-     * it wants.
+     * 父类不对子类附件任何限制。子类可以任意设置其大小。
      * </dd>
      *
      * <dt>EXACTLY</dt>
      * <dd>
-     * The parent has determined an exact size for the child. The child is going to be
-     * given those bounds regardless of how big it wants to be.
+     * 父类为子类计算了精确的尺寸。不论子类要使用多大的空间。
      * </dd>
      *
      * <dt>AT_MOST</dt>
      * <dd>
-     * The child can be as large as it wants up to the specified size.
+     * 子类可以使用不超过指定尺寸的任何大小。
      * </dd>
      * </dl>
      *
-     * MeasureSpecs are implemented as ints to reduce object allocation. This class
-     * is provided to pack and unpack the &lt;size, mode&gt; tuple into the int.
+     * 为了降低对象使用的空间，MeasureSpecs 通过整数类型实现。
+     * 该类提供了 &lt;size, mode&gt; 到整数的封开包处理。
      */
     public static class MeasureSpec {
         private static final int MODE_SHIFT = 30;
