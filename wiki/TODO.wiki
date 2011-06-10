@@ -11,7 +11,6 @@
  * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.html Manifest] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.permission.html Manifest.permission] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.permission_group.html Manifest.permission_group] ；
- * 翻译并整理 [http://android.toolib.net/reference/android/accessibilityservice/AccessibilityService.html AccessibilityService] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothAdapter.html BluetoothAdapter] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothClass.html BluetoothClass] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/bluetooth/BluetoothClass.Device.html BluetoothClass.Device] ；
