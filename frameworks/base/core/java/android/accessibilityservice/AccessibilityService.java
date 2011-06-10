@@ -27,15 +27,12 @@ import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
 /**
- * An accessibility service runs in the background and receives callbacks by the system
- * when {@link AccessibilityEvent}s are fired. Such events denote some state transition
- * in the user interface, for example, the focus has changed, a button has been clicked,
- * etc.
+ * 在后台运行的无障碍服务，当发生{@link AccessibilityEvent}事件时，接受系统的回调.
+ * 这类事件是在用户界面的某些状态改变引起，例如，焦点发生了变化、按钮按下等等。
  * <p>
- * An accessibility service extends this class and implements its abstract methods. Such
- * a service is declared as any other service in an AndroidManifest.xml but it must also
- * specify that it handles the "android.accessibilityservice.AccessibilityService"
- * {@link android.content.Intent}. Following is an example of such a declaration:
+ * 无障碍服务应该扩展该类并实现它的抽象方法。该服务与其他服务一样，在 AndroidManifest.xml
+ * 文件中声明，另外，它必须声明为用于处理“android.accessibilityservice.AccessibilityService”
+ * 的{@link android.content.Intent意图 }。以下就是一个声明的例子：
  * <p>
  * <code>
  * &lt;service android:name=".MyAccessibilityService"&gt;<br>
@@ -45,33 +42,28 @@ import android.view.accessibility.AccessibilityEvent;
  * &lt;/service&gt;<br>
  * </code>
  * <p>
- * The lifecycle of an accessibility service is managed exclusively by the system. Starting
- * or stopping an accessibility service is triggered by an explicit user action through
- * enabling or disabling it in the device settings. After the system binds to a service it
- * calls {@link AccessibilityService#onServiceConnected()}. This method can be
- * overriden by clients that want to perform post binding setup. An accessibility service
- * is configured though setting an {@link AccessibilityServiceInfo} by calling
- * {@link AccessibilityService#setServiceInfo(AccessibilityServiceInfo)}. You can call this
- * method any time to change the service configuration but it is good practice to do that
- * in the overriden {@link AccessibilityService#onServiceConnected()}.
+ * 无障碍服务的生命周期完全由系统来管理。启动或停止无障碍服务是由用户明确的在设备设置中，
+ * 启用或禁用该功能来实现的。当系统绑定到服务后，它会调用
+ * {@link AccessibilityService#onServiceConnected()}方法。在需要执行绑定后设置时，
+ * 该方法可以由客户端重写。无障碍服务可以通过调用
+ * {@link AccessibilityService#setServiceInfo(AccessibilityServiceInfo)}方法时传入的
+ * {@link AccessibilityServiceInfo}对象来配置。你可以多次调用该方法来改变服务的配置，
+ * 但好的做法是重写{@link AccessibilityService#onServiceConnected()}函数。
  * <p>
- * An accessibility service can be registered for events in specific packages to provide a
- * specific type of feedback and is notified with a certain timeout after the last event
- * of interest has been fired.
+ * 无障碍服务可以注册特定包中的事件，以提供特定类型的反馈，并可以基于上次事件后事件，发出超时通知。
  * <p>
- * <b>Notification strategy</b>
+ * <b>通知策略</b>
  * <p>
- * For each feedback type only one accessibility service is notified. Services are notified
- * in the order of registration. Hence, if two services are registered for the same
- * feedback type in the same package the first one wins. It is possible however, to
- * register a service as the default one for a given feedback type. In such a case this
- * service is invoked if no other service was interested in the event. In other words, default
- * services do not compete with other services and are notified last regardless of the
- * registration order. This enables "generic" accessibility services that work reasonably
- * well with most applications to coexist with "polished" ones that are targeted for
- * specific applications.
+ * 对于每一个反馈信息的类型，只有一个无障碍服务可以得到通知。服务按照登记的顺序得到通知。
+ * 因此，如果在相同的包中有两个服务都注册为处理相同的反馈类型，第一个注册的将收到通知。
+ * 这是可能的，用于为给定的反馈类型提供默认服务。在没有其他服务对此事件感兴趣时，默认服务被调用。
+ * 换句话说，默认服务不与其他服务竞争，不论以什么顺序登录，都最后执行。这使得“通用”无障碍服务，
+ * 可以很好地与大多数针对特定应用程序“优化”过的无障碍服务并存。
  * <p>
- * <b>Event types</b>
+ * 注意：事件通知超时对于避免频繁的向客户端发送事件是非常有用，因为这是昂贵的进程间调用。
+ *      我们可以把超时作为确定事件何时产生的标准。
+ * <p>
+ * <b>事件类型</b>
  * <p>
  * {@link AccessibilityEvent#TYPE_VIEW_CLICKED}
  * {@link AccessibilityEvent#TYPE_VIEW_LONG_CLICKED}
@@ -81,7 +73,7 @@ import android.view.accessibility.AccessibilityEvent;
  * {@link AccessibilityEvent#TYPE_WINDOW_STATE_CHANGED}
  * {@link AccessibilityEvent#TYPE_NOTIFICATION_STATE_CHANGED}
  *  <p>
- *  <b>Feedback types</b>
+ *  <b>反馈类型</b>
  *  <p>
  * {@link AccessibilityServiceInfo#FEEDBACK_AUDIBLE}
  * {@link AccessibilityServiceInfo#FEEDBACK_HAPTIC}
@@ -93,14 +85,10 @@ import android.view.accessibility.AccessibilityEvent;
  * @see AccessibilityServiceInfo
  * @see android.view.accessibility.AccessibilityManager
  *
- * Note: The event notification timeout is useful to avoid propagating events to the client
- *       too frequently since this is accomplished via an expensive interprocess call.
- *       One can think of the timeout as a criteria to determine when event generation has
- *       settled down.
  */
 public abstract class AccessibilityService extends Service {
     /**
-     * The {@link Intent} that must be declared as handled by the service.
+     * 必须声明的，由该类处理的{@link Intent 意图}。
      */
     public static final String SERVICE_INTERFACE =
         "android.accessibilityservice.AccessibilityService";
@@ -112,21 +100,20 @@ public abstract class AccessibilityService extends Service {
     IAccessibilityServiceConnection mConnection;
 
     /**
-     * Callback for {@link android.view.accessibility.AccessibilityEvent}s.
+     * 用于处理{@link android.view.accessibility.AccessibilityEvent}事件的回调函数。
      *
-     * @param event An event.
+     * @param 发生的事件。
      */
     public abstract void onAccessibilityEvent(AccessibilityEvent event);
 
     /**
-     * Callback for interrupting the accessibility feedback.
+     * 中断无障碍反馈的回调函数。
      */
     public abstract void onInterrupt();
 
     /**
-     * This method is a part of the {@link AccessibilityService} lifecycle and is
-     * called after the system has successfully bound to the service. If is
-     * convenient to use this method for setting the {@link AccessibilityServiceInfo}.
+     * 该方法是{@link AccessibilityService}的生命周期的一部分。在系统成功绑定到服务后调用。
+     * 使用该方法可以方便的设置{@link AccessibilityServiceInfo}。
      *
      * @see AccessibilityServiceInfo
      * @see #setServiceInfo(AccessibilityServiceInfo)
@@ -136,12 +123,11 @@ public abstract class AccessibilityService extends Service {
     }
 
     /**
-     * Sets the {@link AccessibilityServiceInfo} that describes this service.
+     * 设置描述该服务的{@link AccessibilityServiceInfo}。
      * <p>
-     * Note: You can call this method any time but the info will be picked up after
-     *       the system has bound to this service and when this method is called thereafter.
+     * 注意：您可以随时调用这个方法，调用该方法后，只有系统绑定到服务之后，才使用该信息。
      *
-     * @param info The info.
+     * @param info 设置信息。
      */
     public final void setServiceInfo(AccessibilityServiceInfo info) {
         mInfo = info;
@@ -164,8 +150,7 @@ public abstract class AccessibilityService extends Service {
     }
 
     /**
-     * Implement to return the implementation of the internal accessibility
-     * service interface.  Subclasses should not override.
+     * 返回内部无障碍服务接口实例的方法。子类不能覆盖该方法。
      */
     @Override
     public final IBinder onBind(Intent intent) {
