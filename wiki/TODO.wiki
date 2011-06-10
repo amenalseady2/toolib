@@ -8,10 +8,6 @@
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/SectionIndexer.html SectionIndexer]
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/ArrayAdapter.html ArrayAdapter<T>]
  * 翻译并整理 [http://android.toolib.net/reference/android/widget/AutoCompleteTextView.html AutoCompleteTextView]
- * 翻译并整理 [http://android.toolib.net/reference/android/media/AudioRecord.html AudioRecord] ；
- * 翻译并整理 [http://android.toolib.net/reference/android/media/AudioFormat.html AudioFormat] ；
- * 翻译并整理 [http://android.toolib.net/reference/android/media/ThumbnailUtils.html ThumbnailUtils] ；
- * 翻译并整理 [http://android.toolib.net/reference/android/media/AsyncPlayer.html AsyncPlayer] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.html Manifest] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.permission.html Manifest.permission] ；
  * 翻译并整理 [http://android.toolib.net/reference/android/Manifest.permission_group.html Manifest.permission_group] ；
@@ -40,6 +36,10 @@
  * 翻译并整理 [http://android.toolib.net/guide/appendix/install-location.html install-location] ；
  * 翻译并整理 [http://android.toolib.net/guide/basics/what-is-android.html what-is-android] ；
  * 翻译并整理 [http://android.toolib.net/guide/appendix/media-formats.html media-formats] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/AudioRecord.html AudioRecord] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/AudioFormat.html AudioFormat] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/ThumbnailUtils.html ThumbnailUtils] ；
+ * 翻译并整理 [http://android.toolib.net/reference/android/media/AsyncPlayer.html AsyncPlayer] ；
 
 = 需要确认的项目 =
  * Android 3.0 r1开发者指南——Optimizing Apps for Android 3.0（移动云_文斌）.doc
