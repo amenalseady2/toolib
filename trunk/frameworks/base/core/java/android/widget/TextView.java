@@ -1529,7 +1529,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /**
-     * @returns 返回可绘制对象组合与文本之间的内边距。
+     * @return 返回可绘制对象组合与文本之间的内边距。
      */
     public int getCompoundDrawablePadding() {
         final Drawables dr = mDrawables;

@@ -2464,10 +2464,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Call this view's OnLongClickListener, if it is defined. Invokes the context menu if the
-     * OnLongClickListener did not consume the event.
+     * 如果该视图的长按事件监听器，则调用它。如果 OnLongClickListener 未处理该事件则调用上下文菜单。
      *
-     * @return True if one of the above receivers consumed the event, false otherwise.
+     * @return 如果上述任何监听器处理了该事件返回真；否则返回假。
      */
     public boolean performLongClick() {
         sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
@@ -3732,10 +3731,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * This is called when a container is going to temporarily detach a child, with
-     * {@link ViewGroup#detachViewFromParent(View) ViewGroup.detachViewFromParent}.
-     * It will either be followed by {@link #onFinishTemporaryDetach()} or
-     * {@link #onDetachedFromWindow()} when the container is done.
+     * 当容器使用{@link ViewGroup#detachViewFromParent(View)
+     * ViewGroup.detachViewFromParent}临时移除一个子视图时调用该方法。
+     * 当容器的操作完成时会调用 {@link #onFinishTemporaryDetach()} 或
+     * {@link #onDetachedFromWindow()} 方法。
      */
     public void onStartTemporaryDetach() {
         removeUnsetPressCallback();
@@ -3750,8 +3749,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called after {@link #onStartTemporaryDetach} when the container is done
-     * changing the view.
+     * 在{@link #onStartTemporaryDetach}之后，当容器调整完该视图时调用。
      */
     public void onFinishTemporaryDetach() {
     }
@@ -3932,11 +3930,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Called when the visibility of the view or an ancestor of the view is changed.
-     * @param changedView The view whose visibility changed. Could be 'this' or
-     * an ancestor view.
-     * @param visibility The new visibility of changedView: {@link #VISIBLE},
-     * {@link #INVISIBLE} or {@link #GONE}.
+     * 当视图或其祖先容器的可视状态发生变化时调用该函数。
+     * 
+     * @param changedView 可视状态发生变化的视图。可以时该视图或其祖先容器。
+     * @param visibility 变更的视图的新的可视状态：{@link #VISIBLE}、
+     * {@link #INVISIBLE}或者{@link #GONE}之一。
      */
     protected void onVisibilityChanged(View changedView, int visibility) {
         if (visibility == VISIBLE) {
@@ -4137,13 +4135,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 对{@link KeyEvent.Callback#onKeyDown(int, KeyEvent)
-     * KeyEvent.Callback.onKeyDown()} 的默认实现. 如果视图可用并可响应单击事件，
-     * 当释放 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
-     * 时执行视图的单击事件.
+     * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 如果视图可用并可按，
+     * 当按下 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
+     * 时执行视图的按下事件.
      *
-     * @param keyCode 代表按钮按下的、在 {@link KeyEvent} 中定义的键盘代码.
-     * @param event   KeyEvent 对象，定义了按键动作.
+     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
+     * @param event   KeyEvent 对象，定义了按钮动作.
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         boolean result = false;
@@ -4171,20 +4169,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * {@link KeyEvent.Callback#onKeyLongPress(int, KeyEvent)
-     * KeyEvent.Callback.onKeyLongPress()} 的默认实现：总是返回假（不处理事件）。
+     * Default implementation of {@link KeyEvent.Callback#onKeyLongPress(int, KeyEvent)
+     * KeyEvent.Callback.onKeyLongPress()}: always returns false (doesn't handle
+     * the event).
      */
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
         return false;
     }
 
     /**
-     * {@link KeyEvent.Callback#onKeyUp(int, KeyEvent)
-     * KeyEvent.Callback.onKeyUp()} 的默认实现. 
+     * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
+     * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 
      * 当释放 {@link KeyEvent#KEYCODE_DPAD_CENTER} 或 {@link KeyEvent#KEYCODE_ENTER}
      * 时执行视图的单击事件.
      *
-     * @param keyCode 表示按下的键的、在 {@link KeyEvent} 中定义的键盘代码.
+     * @param keyCode 表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
      * @param event   KeyEvent 对象，定义了按钮动作.
      */
     public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -4216,7 +4215,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
      * {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
      * KeyEvent.Callback.onKeyMultiple()} 的默认实现. 不处理该事件，总是返回假.
      *
-     * @param keyCode     表示按下的键的、在 {@link KeyEvent} 中定义的键盘代码.
+     * @param keyCode     表示按下的键的、在 {@link KeyEvent#KEYCODE_ENTER} 中定义的键盘代码.
      * @param repeatCount 按键次数.
      * @param event       KeyEvent 对象，定义了按钮动作.
      */
@@ -4225,11 +4224,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * 当未处理的键盘快捷键事件发生时调用。
+     * 当有未处理的键盘快捷键事件发生时调用。
      *
      * @param keyCode 由 event.getKeyCode() 取得的键值。
      * @param event 键盘事件的描述。
-     * @return 如果你处理了事件，返回真；如果你允许下一个接收者来处理该事件，返回假。
+     * @return 如果处理了该事件，返回真。如果你希望下一个事件处理器处理该事件，返回假。
      */
     public boolean onKeyShortcut(int keyCode, KeyEvent event) {
         return false;
@@ -4237,19 +4236,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * 检查调用的视图是否是文本编辑器，如果是可以自动为它显示软键盘窗口。
-     * 如果子类应该重写该方法，  Subclasses should override this if they implement
-     * {@link #onCreateInputConnection(EditorInfo)} to return true if
-     * a call on that method would return a non-null InputConnection, and
-     * they are really a first-class editor that the user would normally
-     * start typing on when the go into a window containing your view.
+     * 如果子类实现了{@link #onCreateInputConnection(EditorInfo)}方法，
+     * 当调用时可以返回非空的 InputConnection，子类应该重写该方法，并返回真。
+     * 如果该类时真正的编辑器，当焦点进入你的视图窗口时，用户即可以正常输入。
      *
-     * <p>The default implementation always returns false.  This does
-     * <em>not</em> mean that its {@link #onCreateInputConnection(EditorInfo)}
-     * will not be called or the user can not otherwise perform edits on your
-     * view; it is just a hint to the system that this is not the primary
-     * purpose of this view.
+     * <p>默认实现总返回假。这<em>不</em>意味着{@link #onCreateInputConnection(EditorInfo)}
+     * 不被调用；或者用户不能在你的视图上执行编辑操作。这只是告诉系统，编辑操作不是该视图的主要目的。
      *
-     * @return Returns true if this view is a text editor, else false.
+     * @return 如果视图时文本编辑器，则返回真；否则返回假。
      */
     public boolean onCheckIsTextEditor() {
         return false;
@@ -4326,10 +4320,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Views should implement this if the view itself is going to add items to
-     * the context menu.
+     * 如果视图要向上下文菜单中添加条目，应该实现该方法。
      *
-     * @param menu the context menu to populate
+     * @param menu 用于填充的上下文菜单。
      */
     protected void onCreateContextMenu(ContextMenu menu) {
     }
@@ -4337,8 +4330,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     /**
      * 实现该方法来处理轨迹球动作事件。轨迹球<em>相对</em>于上次移动的位置可以通过
      * {@link MotionEvent#getX MotionEvent.getX()} 和
-     * {@link MotionEvent#getY MotionEvent.getY()} 取得。用户按下一次方向键，
-     * 通常作为一次移动处理（为了表现来自轨迹球的更小粒度的移动信息，他们返回小数）。
+     * {@link MotionEvent#getY MotionEvent.getY()} 取得。对应用户按下一次方向键，
+     * 他们通常作为一次移动处理（为了表现来自轨迹球的更小粒度的移动信息，他们返回小数）。
      *
      * @param event 动作事件。
      * @return 如果处理了事件，返回真；否则返回假。
@@ -4489,10 +4482,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /**
-     * Cancels a pending long press.  Your subclass can use this if you
-     * want the context menu to come up if the user presses and holds
-     * at the same place, but you don't want it to come up if they press
-     * and then move around enough to cause scrolling.
+     * 取消对长按时间的监听。如果你希望用户在长按相同位置时显示上下文菜单，
+     * 你的子类可以调用该方法。但是当用户按下后移动了足够产生滚动位移时，
+     * 不会显示上下文菜单。
      */
     public void cancelLongPress() {
         removeLongPressCallback();
@@ -8190,24 +8182,24 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /**
      * <p>
-     * 测量视图及其内容，以决定其宽度和高度。此方法由 {@link #measure(int, int)}
-     * 调用，子类可以重写该方法以提供更精确、更有效率的测量其内容尺寸的方法。
+     * 评估视图及其内容，以决定其宽度和高度.此方法由 {@link #measure(int, int)}
+     * 调用，子类可以重载以提供更精确、更有效率的衡量其内容尺寸的方法.
      * </p>
      *
      * <p>
-     * <strong>约定：</strong> 重写该方法时，<em>必须</em>调用 {@link #setMeasuredDimension(int, int)}
-     * 方法来保存测量结果的宽度和高度.如果忘记将导致 {@link #measure(int, int)}
-     * 方法抛出<code>IllegalStateException</code>异常。调用父类的
-     * {@link #onMeasure(int, int)}是个有效的方法。
+     * <strong>约定：</strong> 覆盖该方法时，<em>必须</em>调用 {@link #setMeasuredDimension(int, int)}
+     * 方法来保存评估结果的视图的宽度和高度.如果忘记将导致 {@link #measure(int, int)}
+     * 方法抛出<code>IllegalStateException</code>异常.要有效的利用父类的
+     * {@link #onMeasure(int, int)}方法.
      * </p>
      *
      * <p>
-     * 基类测量的是背景的大小，除非 MeasureSpec 允许超过背景。子类应该重写
-     * {@link #onMeasure(int, int)} 方法，以为其内容提供更适合的大小。
+     * 基类测量的是背景的大小，除非 MeasureSpec 允许超过背景.子类应该重写
+     * {@link #onMeasure(int, int)} 方法，以为其内容提供更适合的大小.
      * </p>
      *
      * <p>
-     * 如果重写了该方法，子类要确保其高度和宽度大于等于视图的最小高度和宽度。
+     * 如果重写了该方法，子类要确保其高度和宽度大于等于视图的最小高度和宽度.
      * （{@link #getSuggestedMinimumHeight()} 和 {@link #getSuggestedMinimumWidth()}）
      * </p>
      *

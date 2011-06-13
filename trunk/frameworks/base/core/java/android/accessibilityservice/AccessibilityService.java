@@ -32,7 +32,7 @@ import android.view.accessibility.AccessibilityEvent;
  * <p>
  * 无障碍服务应该扩展该类并实现它的抽象方法。该服务与其他服务一样，在 AndroidManifest.xml
  * 文件中声明，另外，它必须声明为用于处理“android.accessibilityservice.AccessibilityService”
- * 的{@link android.content.Intent意图 }。以下就是一个声明的例子：
+ * 的{@link android.content.Intent 意图 }。以下就是一个声明的例子：
  * <p>
  * <code>
  * &lt;service android:name=".MyAccessibilityService"&gt;<br>
@@ -102,7 +102,7 @@ public abstract class AccessibilityService extends Service {
     /**
      * 用于处理{@link android.view.accessibility.AccessibilityEvent}事件的回调函数。
      *
-     * @param 发生的事件。
+     * @param event 发生的事件。
      */
     public abstract void onAccessibilityEvent(AccessibilityEvent event);
 
