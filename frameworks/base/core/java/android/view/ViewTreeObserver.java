@@ -21,7 +21,7 @@ import android.graphics.Rect;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
-ViewTreeObserver不能够被应用程序实例化，因为它是由视图提供，参照getViewTreeObserver()以查看更多信息.
+ * ViewTreeObserver不能够被应用程序实例化，因为它是由视图提供，参照getViewTreeObserver()以查看更多信息.
  * 视图树监视器用于向视图树中注册在视图树发生全局变更时可以发出通知的监听器.
  * 这些全局事件包括但不限于整个树的布局事件、开始绘制事件、触控模式变更事件。
  *

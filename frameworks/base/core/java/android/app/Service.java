@@ -445,25 +445,20 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
     }
     
     /**
-     * Return the communication channel to the service.  May return null if 
-     * clients can not bind to the service.  The returned
-     * {@link android.os.IBinder} is usually for a complex interface
-     * that has been <a href="{@docRoot}guide/developing/tools/aidl.html">described using
-     * aidl</a>.
+     * 返回用于与服务通信的通道。如果客户端不能绑定到服务，可能返回空。返回的
+     * {@link android.os.IBinder}对象通常包含
+     * <a href="{@docRoot}guide/developing/tools/aidl.html">用 aidl 描述</a>
+     * 的复杂的接口。
      * 
-     * <p><em>Note that unlike other application components, calls on to the
-     * IBinder interface returned here may not happen on the main thread
-     * of the process</em>.  More information about this can be found
-     * in <a href="{@docRoot}guide/topics/fundamentals.html#procthread">Application Fundamentals:
-     * Processes and Threads</a>.</p>
+     * <p><em>注意，与其他的应用程序组件不同，从调用 IBinder 接口到返回的过程可能不由主线程处理</em>。
+     * 关于该问题，详细的内容参见<a href="{@docRoot}guide/topics/fundamentals.html#procthread">
+     * 应用程序基础：进程与线程</a>。</p>
      * 
-     * @param intent The Intent that was used to bind to this service,
-     * as given to {@link android.content.Context#bindService
-     * Context.bindService}.  Note that any extras that were included with
-     * the Intent at that point will <em>not</em> be seen here.
+     * @param intent 传入函数{@link android.content.Context#bindService
+     * Context.bindService}的，用于绑定到该服务的意图。注意，任何对意图的扩展，
+     * 在此处都<em>不</em>可见。
      * 
-     * @return Return an IBinder through which clients can call on to the 
-     *         service.
+     * @return 返回客户端用于调用该服务的 IBinder 对象。
      */
     public abstract IBinder onBind(Intent intent);
 
