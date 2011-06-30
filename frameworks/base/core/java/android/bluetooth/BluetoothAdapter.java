@@ -38,27 +38,22 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Represents the local device Bluetooth adapter. The {@link BluetoothAdapter}
- * lets you perform fundamental Bluetooth tasks, such as initiate
- * device discovery, query a list of bonded (paired) devices,
- * instantiate a {@link BluetoothDevice} using a known MAC address, and create
- * a {@link BluetoothServerSocket} to listen for connection requests from other
- * devices.
- *
- * <p>To get a {@link BluetoothAdapter} representing the local Bluetooth
- * adapter, call the static {@link #getDefaultAdapter} method.
- * Fundamentally, this is your starting point for all
- * Bluetooth actions. Once you have the local adapter, you can get a set of
- * {@link BluetoothDevice} objects representing all paired devices with
- * {@link #getBondedDevices()}; start device discovery with
- * {@link #startDiscovery()}; or create a {@link BluetoothServerSocket} to
- * listen for incoming connection requests with
- * {@link #listenUsingRfcommWithServiceRecord(String,UUID)}.
- *
- * <p class="note"><strong>Note:</strong>
- * Most methods require the {@link android.Manifest.permission#BLUETOOTH}
- * permission and some also require the
- * {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+ * 代表本地的蓝牙适配器设备. {@link BluetoothAdapter}让用户能执行基本的蓝牙任务。
+ * 例如： 初始化设备的搜索，查询已登录的设备列表，使用一个已知的 MAC 地址来初始化
+ * {@link BluetoothDevice}类，创建{@link BluetoothServerSocket}类，
+ * 以监听其它设备对本机的连接请求等。
+ * 
+ * <p>为了得到这个代表本地蓝牙适配器的{@link BluetoothAdapter}，需要调用
+ * {@link #getDefaultAdapter}静态方法。这是所有蓝牙动作使用的第一步。
+ * 拥有本地适配器以后，你可以通过{@link #getBondedDevices()}
+ * 方法取得代表所有已认证设备的{@link BluetoothDevice}对象集合；
+ * 通过{@link #startDiscovery()}方法来开始设备的搜寻；或者通过
+ * {@link BluetoothServerSocket}方法来监听来自
+ * {@link #listenUsingRfcommWithServiceRecord(String,UUID)}方法的连接请求。
+ * 
+ * <p class="note"><strong>注意：</strong>大部分方法需要
+ * {@link android.Manifest.permission#BLUETOOTH}权限，一些方法同时需要
+ * {@link android.Manifest.permission#BLUETOOTH_ADMIN}权限。
  *
  * {@see BluetoothDevice}
  * {@see BluetoothServerSocket}
@@ -68,90 +63,79 @@ public final class BluetoothAdapter {
     private static final boolean DBG = false;
 
     /**
-     * Sentinel error value for this class. Guaranteed to not equal any other
-     * integer constant in this class. Provided as a convenience for functions
-     * that require a sentinel error value, for example:
+     * 在该类中表示出错的值. 确保和该类中的任意其它整数常量不相等。
+     * 它为需要返回错误值的函数提供了便利。例如：
      * <p><code>Intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
      * BluetoothAdapter.ERROR)</code>
      */
     public static final int ERROR = Integer.MIN_VALUE;
 
     /**
-     * Broadcast Action: The state of the local Bluetooth adapter has been
-     * changed.
-     * <p>For example, Bluetooth has been turned on or off.
-     * <p>Always contains the extra fields {@link #EXTRA_STATE} and {@link
-     * #EXTRA_PREVIOUS_STATE} containing the new and old states
-     * respectively.
-     * <p>Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+     * 广播的动作：表示本地的蓝牙适配器的状态发生了改变。
+     * <p>例如：打开或者关闭了蓝牙模块。
+     * <p>它总是包含扩展信息{@link #EXTRA_STATE}和{@link#EXTRA_PREVIOUS_STATE}，
+     * 用于表示新旧状态。
+     * <p>接收该通知需要{@link android.Manifest.permission#BLUETOOTH}权限。
      */
     @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
     public static final String ACTION_STATE_CHANGED =
             "android.bluetooth.adapter.action.STATE_CHANGED";
 
     /**
-     * Used as an int extra field in {@link #ACTION_STATE_CHANGED}
-     * intents to request the current power state. Possible values are:
-     * {@link #STATE_OFF},
-     * {@link #STATE_TURNING_ON},
-     * {@link #STATE_ON},
-     * {@link #STATE_TURNING_OFF},
+     * 用于{@link #ACTION_STATE_CHANGED}意图的整型附加信息字段，
+     * 用于表示适配器的当前电源状态。可能的值为：
+     * {@link #STATE_OFF}、
+     * {@link #STATE_TURNING_ON}、
+     * {@link #STATE_ON}、
+     * {@link #STATE_TURNING_OFF}。
      */
     public static final String EXTRA_STATE =
             "android.bluetooth.adapter.extra.STATE";
     /**
-     * Used as an int extra field in {@link #ACTION_STATE_CHANGED}
-     * intents to request the previous power state. Possible values are:
-     * {@link #STATE_OFF},
-     * {@link #STATE_TURNING_ON},
-     * {@link #STATE_ON},
-     * {@link #STATE_TURNING_OFF},
+     * 用于{@link #ACTION_STATE_CHANGED}意图的整型附加信息字段，
+     * 用于表示适配器的之前的电源状态。可能的值为：
+     * {@link #STATE_OFF}、
+     * {@link #STATE_TURNING_ON}、
+     * {@link #STATE_ON}、
+     * {@link #STATE_TURNING_OFF}。
      */
     public static final String EXTRA_PREVIOUS_STATE =
             "android.bluetooth.adapter.extra.PREVIOUS_STATE";
 
     /**
-     * Indicates the local Bluetooth adapter is off.
+     * 表示本地蓝牙适配器已经关闭。
      */
     public static final int STATE_OFF = 10;
     /**
-     * Indicates the local Bluetooth adapter is turning on. However local
-     * clients should wait for {@link #STATE_ON} before attempting to
-     * use the adapter.
+     * 表示本地蓝牙适配器正在开启。但是本地客户端需要在状态变为 
+     * {@link #STATE_ON}时，才可以使用该适配器。
      */
     public static final int STATE_TURNING_ON = 11;
     /**
-     * Indicates the local Bluetooth adapter is on, and ready for use.
+     * 表示本地蓝牙适配器处于开启状态，可以使用。
      */
     public static final int STATE_ON = 12;
     /**
-     * Indicates the local Bluetooth adapter is turning off. Local clients
-     * should immediately attempt graceful disconnection of any remote links.
+     * 表示本地蓝牙适配器正在开启。本地客户端需要立即尝试正常的关闭所有远程连接。
      */
     public static final int STATE_TURNING_OFF = 13;
 
     /**
-     * Activity Action: Show a system activity that requests discoverable mode.
-     * This activity will also request the user to turn on Bluetooth if it
-     * is not currently enabled.
-     * <p>Discoverable mode is equivalent to {@link
-     * #SCAN_MODE_CONNECTABLE_DISCOVERABLE}. It allows remote devices to see
-     * this Bluetooth adapter when they perform a discovery.
-     * <p>For privacy, Android is not discoverable by default.
-     * <p>The sender of this Intent can optionally use extra field {@link
-     * #EXTRA_DISCOVERABLE_DURATION} to request the duration of
-     * discoverability. Currently the default duration is 120 seconds, and
-     * maximum duration is capped at 300 seconds for each request.
-     * <p>Notification of the result of this activity is posted using the
-     * {@link android.app.Activity#onActivityResult} callback. The
-     * <code>resultCode</code>
-     * will be the duration (in seconds) of discoverability or
-     * {@link android.app.Activity#RESULT_CANCELED} if the user rejected
-     * discoverability or an error has occurred.
-     * <p>Applications can also listen for {@link #ACTION_SCAN_MODE_CHANGED}
-     * for global notification whenever the scan mode changes. For example, an
-     * application can be notified when the device has ended discoverability.
-     * <p>Requires {@link android.Manifest.permission#BLUETOOTH}
+     * 该活动的行为：显示请求启动可发现模式的系统活动。如果蓝牙模块当前未打开，
+     * 该活动也将请求用户打开蓝牙模块。
+     * <p>可发现模式和{@link #SCAN_MODE_CONNECTABLE_DISCOVERABLE}等价。
+     * 它允许在远程设备执行查找操作时，发现该蓝牙适配器。
+     * <p>从隐私安全考虑，Android 默认为不可发现状态。
+     * <p>该意图的发送者可以使用扩展选项{@link #EXTRA_DISCOVERABLE_DURATION}
+     * 来设置可发现状态持续的时间。当前默认的持续时间为120秒，
+     * 每次请求的持续时间最大值为300秒。
+     * <p>该活动的执行结果通过{@link android.app.Activity#onActivityResult}
+     * 回调函数通知程序。<code>resultCode</code>保存了可发现模式的持续时间，
+     * 如果用户拒绝了可发现服务或者发生错误，该值为
+     * {@link android.app.Activity#RESULT_CANCELED}
+     * <p>应用程序也可以监听可发现模式变更时的{@link #ACTION_SCAN_MODE_CHANGED}
+     * 全局通知。例如，当设备结束了可发现状态时，会通知应用程序。
+     * <p>需要{@link android.Manifest.permission#BLUETOOTH}权限。
      */
     @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
     public static final String ACTION_REQUEST_DISCOVERABLE =
