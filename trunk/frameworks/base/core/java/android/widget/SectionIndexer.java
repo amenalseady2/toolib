@@ -17,36 +17,30 @@
 package android.widget;
 
 /**
- * Interface that should be implemented on Adapters to enable fast scrolling 
- * in an {@link AbsListView} between sections of the list. A section is a group of list items
- * to jump to that have something in common. For example, they may begin with the
- * same letter or they may be songs from the same artist. 
+ * 应该由适配器类实现的，可以使{@link AbsListView}在列表的节之间快速滚动的接口.
+ * 节是用于跳转的列表项目的分组，他们的元素拥有一些共同的特征。例如，以相同的首字母，
+ * 同一艺术家的歌曲。
  */
 public interface SectionIndexer {
     /**
-     * This provides the list view with an array of section objects. In the simplest
-     * case these are Strings, each containing one letter of the alphabet.
-     * They could be more complex objects that indicate the grouping for the adapter's
-     * consumption. The list view will call toString() on the objects to get the
-     * preview letter to display while scrolling.
-     * @return the array of objects that indicate the different sections of the list.
+     * 该函数提供包含节对象数组的视图列表。最简单的方式是字符串数组，每个元素包含一个字母。
+     * 他们可以是更复杂的对象，指明适配器的分组方法。列表视图为了在滚动时显示字母，
+     * 会调用对象的 toString() 方法。
+     * @return 指明区分不同列表节的对象的数组。
      */
     Object[] getSections();
     
     /**
-     * Provides the starting index in the list for a given section.
-     * @param section the index of the section to jump to.
-     * @return the starting position of that section. If the section is out of bounds, the
-     * position must be clipped to fall within the size of the list.
+     * 提供给定节在列表中的起始索引。
+     * @param section 用于跳转的节的索引。
+     * @return 节的开始位置。如果节索引越界，返回的位置也必须保证在列表范围内。
      */
     int getPositionForSection(int section);
     
     /**
-     * This is a reverse mapping to fetch the section index for a given position
-     * in the list.
-     * @param position the position for which to return the section
-     * @return the section index. If the position is out of bounds, the section index
-     * must be clipped to fall within the size of the section array.
+     * 这是一个反向映射函数，用于根据指定的列表位置来取得节的索引。
+     * @param position 要取得节索引的列表位置。
+     * @return 节索引。如果位置越界，返回的节索引也必须在节数组大小范围内。
      */
     int getSectionForPosition(int position);    
 }
